@@ -1,0 +1,1787 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rusty Minecraft collision geometry · Rusty Minecraft docs</title>
+<meta name="description" content="Rusty Minecraft collision geometry: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details open><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html" aria-current="page">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="rusty-minecraft-collision-geometry">Rusty Minecraft collision geometry</h1>
+<p>The version target is Minecraft Java Edition <strong>26.3</strong>. Geometry is a simulation
+foundation; Rusty Minecraft has a native client for inspecting a controlled block scene.
+Live gameplay and entity simulation remain unfinished.</p>
+<p><code>horizon-core::geometry</code> provides <code>Vec3</code>, <code>Aabb</code>, <code>Axis</code>, <code>Direction</code>, <code>BlockHit</code>,
+and immutable <code>VoxelShape</code> values. Coordinates are doubles. Arithmetic keeps
+vanilla's operation order, signed zero, NaN comparisons, normalization threshold,
+and collision epsilon. It does not enable approximate or fused simulation math.</p>
+<p>Implemented vector operations include addition/subtraction, vector-to, component
+products, scaling, normalization, dot/cross products, interpolation, projection,
+distance/length, horizontal vectors and finite/equality checks. Rotations, look
+directions, alignment, axis replacement, direction offsets, and pitch/yaw extraction
+are also implemented. The full Vec3 API and entity integration remain absent.</p>
+<p>Trig uses vanilla's 65,536-entry float sine table with double angle scaling and
+Java long narrowing. The table is generated from the pinned formula in Rust;
+the geometry suite compares every generated entry against the runtime table.
+Inverse trig narrows to float at vanilla's conversion points. These comparisons
+validate the tested platform; other platforms need the same bit comparisons.</p>
+<p>Bounding boxes normalize endpoints with Java-compatible min/max. Queries include
+half-open containment, strict intersection, transforms, distances, ray clipping,
+block-coordinate construction with wrapping integer endpoints, setters, next-value
+deflation, and swept-box collision tests. A disjoint <code>intersect</code> preserves vanilla's
+constructor normalization rather than introducing a different empty-box rule.</p>
+<p>Shapes keep exact coordinate arrays and a packed occupancy grid. Greedy boxes are
+cached once in vanilla order. Collision-distance queries use occupied grid cells;
+ray and closest-point queries reuse the cached boxes. Column minima/maxima use
+vanilla's cyclic perpendicular coordinates and infinity for empty/outside cells.
+Cube shapes retain arithmetic
+lookup; moved shapes use array lookup even for a zero offset. Ray hits preserve
+face tie ordering, endpoint exclusion, tolerances, and the 0.001 inside-hit nudge.
+Boolean shape joins and overlap predicates preserve cube, identical,
+disjoint and epsilon-merger behavior. Shape operations reject truth tables that
+fill two empty cells, as vanilla does. Per-axis cube-coordinate metadata survives
+partial merges and is checked when importing cached shapes. Box construction
+preserves thin-box rejection and up to 1/8 cube quantization. Optimized joins
+reconstruct greedy boxes in vanilla order. Face extraction is implemented; edge extraction and shape rotations remain absent.</p>
+<p>Discrete axis extrema are retained separately from occupied cells. A box can
+quantize to no occupied cells while retaining a finite minimum/maximum on other
+axes. That state affects vanilla's lower-block floor-height lookup. Empty joins
+also preserve their integer sentinel extrema; optimization and moving an empty
+shape return the canonical empty shape.</p>
+<p>Shape clones preserve identity and share immutable coordinate, occupancy and box
+storage. New shapes keep separate identities even when their grids are equal.
+This preserves alias-sensitive join shortcuts and avoids copying large grids
+when an operation returns an existing shape. The cache importer shares equal
+grid storage while retaining the distinct vanilla shape identities.</p>
+<p><code>resolve_shape_movement</code> ports vanilla's movement resolver over a supplied shape
+list: Y first, then horizontal axes in movement-magnitude order, translating the
+box by resolved motion before each axis query. <code>candidate_step_heights</code> preserves
+float narrowing, duplicate identity, current-Y exclusion, and sorted candidate
+heights. <code>resolve_step_movement</code> adds the initial collision and step-up decision,
+including landing-height adjustment, a second collider query, and the first
+candidate improving horizontal movement. <code>entity_collision_bounds</code> preserves
+the initial entity query bounds. These helpers take caller-selected colliders;
+they do not choose world/entity shapes, set grounding, change velocity, or apply
+inside-block effects.</p>
+<p>The step-up corpus calls the actual private <code>Entity.collide</code> method for <strong>17,680
+cases</strong> per JAR. Reference fixtures supply entity inputs and controlled
+block/entity/border shape lists; vanilla performs the movement decisions. Query
+bounds and results are compared bit for bit. This verifies the decision with
+those inputs, not live world selection or entity state transitions.</p>
+<p><code>block_floor_height</code> returns the selected shape's maximum Y, or lazily queries
+the lower shape only when the current one is empty. Its 12,000-case corpus also
+checks the lower supplier's invocation count against <code>BlockGetter</code>.</p>
+<p><code>traverse_blocks</code> visits blocks in vanilla ray order, including its endpoint nudge,
+strict corner comparisons, early callback return, integer wrap and signed-zero
+endpoint equality. It accepts finite rays and an explicit visit budget. Invalid
+geometry or exceeding that budget returns a typed error; earlier callbacks remain
+applied. Actual block/fluid ray selection is a separate integration task.</p>
+<p>Inclusive block-box iterators preserve X/Y/Z order, while directional iterators
+preserve vanilla's movement-dependent axis order and corner signs. AABB iteration
+includes floored maximum faces. They return independent position values and
+reject true volumes above the positive Java-int domain, instead of reproducing
+overflowed Java iteration counts.</p>
+<p><code>sweep_intersected_blocks</code> ports movement-path visits from
+<code>BlockGetter.forEachBlockIntersectedBetween</code>: tiny movement, the initial box,
+ray-clipped footprints, packed-position deduplication, final box, step indices,
+and early callback stops. Stationary/tiny movement avoids a deduplication-set
+allocation. Inputs and computed geometry must be finite; a caller-selected work
+budget counts ray steps and iterator candidates, including suppressed duplicates.
+Earlier callbacks are not rolled back on an error. Block effects still need
+their own implementations and integration with entity movement.</p>
+<p><code>horizon-world::collision::CachedCollisionRegistry</code> imports a private local export
+of vanilla cache data. The export includes DataVersion, all state descriptors,
+deduplicated shapes, coordinate-kind metadata, discrete extrema, and a per-state
+cache index. Import verifies every state ID
+against the block registry. Section lookup also requires the same borrowed registry.
+Imported nonempty extrema must agree with occupancy; empty extrema must be in
+the grid's domain or match vanilla's empty-join sentinel triple. Extrema form part
+of the grid-sharing key, so equal occupancy does not erase different metadata.
+There is no fallback shape for an unsupported state: <code>None</code> means block behavior
+must select it, while a cached empty shape is a valid <code>Some</code> value.</p>
+<p>This covers the cached branch of the <strong>no-context</strong> <code>BlockState.getCollisionShape</code>
+method. Vanilla's overload taking <code>CollisionContext</code> always calls block behavior;
+the cache cannot establish entity collision parity. Dynamic and ordinary entity-context selection are implemented as described below.
+Experimental minecart contexts, world borders, movement integration, fluid
+simulation, block effects and live collision broad-phase queries remain pending.</p>
+<p>Run the comparisons after preparing the pinned artifacts:</p>
+<pre><code class="language-sh">python3 tools/test_geometry_parity.py
+python3 tools/test_collision_parity.py
+</code></pre>
+<p>Both suites invoke actual vanilla methods from the authenticated client and server
+JARs. They compare canonical double bits, including infinities/NaNs, rather than
+using a numerical tolerance. The geometry corpus includes empty and sparse grids,
+greedy decomposition, overlapping boxes, rays, tiny movements and IEEE boundaries.
+It compares <strong>1,320,187 output lines per JAR</strong>, including <strong>2,400 integer-box
+iterator cases</strong>, <strong>2,400 AABB iterator cases</strong>, and <strong>9,022 movement-path traces</strong>.
+The registry suite exercises cached shape queries through resident section IDs,
+translation at negative and world-border coordinates, and invalid import rejection.
+Its export records <strong>35,524 cached states</strong>, <strong>199 uncached states</strong>, <strong>6,093
+shape identities</strong>, and <strong>330 distinct grids</strong>. The comparison runs <strong>213,144 queries</strong> plus state/box/identity checks,
+producing <strong>1,097,456 matching output lines per JAR</strong>. These counts describe this
+branch and corpus; they are not a gameplay coverage percentage.</p>
+<p>Raw grids admit at most 1,048,576 cells with strictly increasing, non-NaN
+coordinates. Oversized or malformed imports/joins return typed errors. This
+bounded library API does not reproduce Java's complete exception/object surface.</p>
+<p>All exported data, test inputs, reference output, and compiled adapters remain
+under gitignored <code>.local/</code>. Success reports record exact sources, inputs, outputs,
+and reference hashes. A runner removes its prior success report before running
+and rejects edits to the captured sources during validation. Passing these suites
+does not prove whole-game parity or any FPS/render-distance improvement.</p>
+<p>Checked-in <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-geometry-2026-10-05/scoped-parity.json">geometry metadata</a>
+and <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-collision-2026-10-05/scoped-parity.json">cached-collision metadata</a>
+identify their tested source versions. Reports cover their recorded snapshots;
+later changes require fresh validation.</p>
+<p>Entity obstruction now evaluates ordered candidate snapshots, excluded entity
+identity, spectator/removal/building flags, shared root-vehicle identity and
+voxel-shape intersection. Empty shapes skip the query; candidate collection
+finishes before obstruction evaluation. Unit-block queries translate in floating
+point, including integer-coordinate boundaries. Run
+<code>python3 tools/test_entity_obstruction_parity.py</code> to compare against the actual
+vanilla <code>EntityGetter</code> default methods and entity metadata queries.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-entity-obstruction-2026-10-06/scoped-parity.json">entity-obstruction report</a>
+records <strong>15,121 matching output lines per JAR</strong> over composite shapes, boundary
+contacts, thin boxes, metadata filters, vehicle roots and injected query failures.
+The Java fixture privately allocates entity snapshots without running their
+constructors. Entity lifecycle, spatial indexing and vehicle-tree maintenance
+remain separate implementation work. Workspace tests, warning-free Clippy and
+<strong>138 Python tests</strong> passed at this snapshot.</p>
+<p>Legacy block solidity now uses explicit definition overrides and cached collision
+bounds, with force-on precedence and native mean-size/height thresholds. The
+no-context replaceable and liquid flags are kept independently. Solid rendering
+uses the occlusion definition flag and a full-shape test over imported raw
+occlusion geometry. Import validates the pinned
+DataVersion, full state identities and complete block definitions before building
+a shared property table. Predicates query this table in constant time.</p>
+<p><code>python3 tools/test_block_properties_parity.py</code> compares all <strong>35,723 states</strong> and
+<strong>18,096 synthetic cache/flag/shape cases</strong>, including adjacent floating-point values
+around solidity thresholds and both occlusion flag values. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-block-properties-2026-10-06/scoped-parity.json">block-properties report</a>
+records <strong>197,180 matching lines per JAR</strong>. Definition flags, collision and raw
+occlusion data are private runtime inputs; Rust calculates solidity and solid
+rendering and caches full-face occlusion masks. Every state and synthetic shape
+is compared on all six faces; source and fixture hashes are recorded.
+Item/fluid-context replacement and collision with live entities remain separate work.</p>
+<p>Face selection now preserves native cube-axis shortcuts, epsilon sample points,
+slice coordinates and clamped parent extrema, including sparse slices whose
+native bounds differ from occupied boxes. Repeated queries share face identities.
+The FULL, CENTER and RIGID support tests execute against the selected shape.
+<code>python3 tools/test_face_support_parity.py</code> compares <strong>1,615 input shapes</strong> and
+nested faces, producing <strong>595,686 matching lines per JAR</strong> in the
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-face-support-2026-10-06/scoped-parity.json">face-support report</a>.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-geometry-2026-10-06/scoped-parity.json">refreshed geometry report</a>
+also retains <strong>1,320,187 matching lines per JAR</strong> after face slicing was added.
+Block-specific support-shape selection is a separate layer.</p>
+<p>Registered support caches now derive FULL/CENTER/RIGID masks from privately
+imported support geometry and share results by shape identity. The importer
+checks the data kind and full state identities. <code>None</code> explicitly requests
+uncached behavior; it never becomes an assumed unsupported face.
+<code>python3 tools/test_block_support_parity.py</code> compares <strong>35,524 cached states</strong>
+across six directions and three support kinds, while retaining <strong>199 uncached
+states</strong>. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-block-support-2026-10-06/scoped-parity.json">cached-support report</a>
+records <strong>248,867 matching lines per JAR</strong>.</p>
+<p>Face-cache storage is now lazy and attached to shape identity. Clones share it;
+new identities and moved shapes start with an empty cache. A regression test
+checks that cached faces do not retain their parent after it is dropped. The
+face and geometry differential suites passed again after this allocation change,
+as did workspace tests, Clippy and <strong>140 Python tests</strong>. No FPS claim is inferred
+from these library checks.</p>
+<p>Dynamic support selection now handles bamboo collision offsets, dripstone and
+sulfur-spike thickness/direction, the empty-context scaffolding support shape,
+powder snow, and shulker animation-state support faces. Moving-piston lookup
+preserves missing/wrong block-entity behavior and delegates active entity shape
+calculation to the world. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-dynamic-support-2026-10-06/scoped-parity.json">dynamic-support report</a>
+records <strong>4,867,780 matching lines per JAR</strong> over <strong>107,308 fixtures</strong> covering all
+<strong>199 uncached states</strong>, coordinate boundaries, block-entity snapshots and query
+failures. Run <code>python3 tools/test_dynamic_support_parity.py</code> to reproduce it.
+The current suite also compares no-entity-context collision geometry in <strong>60,161
+fixtures</strong>, including <strong>13,014 shulker progress fixtures</strong>. Shulker collision
+bounds retain native float interpolation and differ from animation-state support
+faces. <code>BlockCollisionRegistry</code> dispatches cached and dynamic collision queries;
+entity movement contexts and block-entity lifecycle remain separate work.
+Workspace tests, warning-free Clippy and seven focused Python tests passed.</p>
+<p>Moving-piston collision now selects stationary extended bases and moving heads,
+translates shapes using native float progress arithmetic, and honors the
+movement-direction collision exclusion. Interpolation preserves float operation
+order, including negative partial ticks and IEEE edge cases. The separate
+collision-related state used for entity pushing retains its own sticky/head
+rules; entity pushing itself is not implemented by this module.</p>
+<p><code>python3 tools/test_piston_shape_parity.py</code> compares <strong>102,315 fixtures</strong>,
+including every registered moved state and <strong>10,000 raw float interpolation
+cases</strong>. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-piston-shape-2026-10-06/scoped-parity.json">piston-shape report</a>
+records <strong>1,096,811 matching lines per JAR</strong>. This corpus uses absent block
+entities for moved-block collision selection. Workspace tests, warning-free
+Clippy and <strong>142 Python tests</strong> passed. Tick progression and live world mutation
+remain separate work.</p>
+<p>The refreshed dynamic-support corpus also includes <strong>9,216 active piston
+snapshots</strong>, composing block-entity lookup with piston collision generation and
+all support tests. It compares extension/retraction, source heads, progress
+boundaries, collision exclusions and query failures. These snapshots do not
+exercise piston ticks, pushed entities or chunk updates.</p>
+<p>The archived block-survival snapshot executes 51 rule kinds with 63 distinct rule/tag
+bindings over registry-bound solid flags, air identity, support tags and
+FULL/CENTER/RIGID geometry and empty-context collision. The verified snapshot covers
+<strong>all 1,286 pinned block definitions and 35,723 states</strong>. Candidate
+properties select attachment direction, hanging state, door/plant halves and
+pale moss carpet's serialized <code>bottom</code> property. Pressure plates and cactus
+flowers preserve repeated neighbor reads. Downward center support applies the
+unstable-bottom-center tag only where native helpers do. Upper doors require the
+same block below; upper double plants also require its lower half. Crop survival
+checks brightness against 8 before querying support; farmland preserves its
+conditional second read above, and dripleaf stems read both neighbors. Sugar cane,
+lily pads, frogspawn, spore blossoms, small dripleaves and tall seagrass preserve
+their independent fluid queries, source/full-water requirements and tag checks.
+Growing plants preserve head/body identity and kelp support restrictions.
+Scaffolding recomputes neighbor distance in native order; chorus plants and flowers
+preserve branching reads and early exits. Piston heads validate base type, facing
+and extension. Mangrove propagules, speleothems, pitcher crops, bells and shelf
+mushrooms use their version-specific attachment rules. Multiface blocks, vines,
+hanging moss, snow layers and sea pickles preserve support/collision query order.
+Fire uses imported ignition odds and waterlogging; cactus checks horizontal solids
+and lava before its support and upper liquid state. Paths recognize fence gates,
+and mushrooms preserve the light-override tag and solid-render requirement.</p>
+<p>Interrupted runs can be resumed with <code>python3 tools/test_block_survival_parity.py --resume</code>.
+The runner verifies source, environment, fixture and compiled-artifact hashes
+before reusing completed stages. A changed output is regenerated; changed inputs
+require a fresh run without <code>--resume</code>. Checkpoints stay under <code>.local</code>, and
+a parity report is written only after both native comparisons pass.</p>
+<p><code>python3 tools/test_block_survival_parity.py</code> compares actual native <code>canSurvive</code>
+calls in both pinned JARs. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-block-survival-2026-10-06/scoped-parity.json">block-survival report</a>
+records <strong>35,998,488 matching output lines per JAR</strong> across <strong>9,229,463 fixtures</strong>.
+Each supported candidate state is exercised; behavior representatives are tested
+against every neighbor state, changing repeated reads, integer-coordinate
+wrapping, absent/closed/open shulker snapshots and injected block/entity query
+failures, plus light thresholds, independent fluid sequences and fluid-query
+failures. Native method ownership
+and support-tag fields supply private
+definition metadata; survival results are calculated in Rust. Workspace tests,
+Clippy and the <strong>147-test Python suite</strong> passed. This establishes the recorded
+survival scope; full placement, neighbor updates, scheduled behavior and complete
+block gameplay remain pending.</p>
+<p>Collision contexts now preserve empty-context fallback heights, position-only
+queries, and captured entity position, descending, main-hand and placement flags.
+Height comparisons retain the native float epsilon widened to double. Null
+placement factories use <code>-Double.MAX_VALUE</code>; <code>withPosition</code> sets the placement
+flag and ignores the supplied height when the entity is absent. Empty item stacks
+match AIR in entity/empty contexts, while position-only contexts never report a
+held item. Living-entity fluid callbacks run before the same-family exclusion,
+with the second fluid as their argument, and propagate failures.</p>
+<p><code>python3 tools/test_collision_context_parity.py</code> exercises actual native factories
+and queries over <strong>8,338 context snapshots</strong>, comparing <strong>225,126 output lines per
+JAR</strong>. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-collision-context-2026-10-06/scoped-parity.json">context report</a>
+records the pinned artifacts and exact source/input/output hashes. The corpus
+includes adjacent representable values around height thresholds, empty shapes,
+integer-coordinate extremes, NaN/infinity, null entities, item count boundaries,
+all five fluid types and callback failures. Native entity and stack snapshots are
+allocated privately without their constructors; this checks query behavior, not
+entity construction or inventory lifecycle. Inventory changes after context
+capture, experimental minecart contexts and live movement integration remain
+pending. Contextual block-shape selection is being added separately.</p>
+<p><code>ScaffoldingCollision</code> now selects stable scaffold geometry, the unstable bottom
+platform, or an empty shape using the collision context. Placement contexts are
+always empty. Descending affects the top surface check; the bottom platform also
+requires nonzero support distance, the bottom flag and the lower height check.
+No-context support and contextual collision share the same immutable stable shape.</p>
+<p><code>python3 tools/test_scaffolding_collision_parity.py</code> compares all <strong>32 states</strong>
+across <strong>56,448 fixtures</strong>, producing <strong>524,300 matching lines per JAR</strong> in the
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-scaffolding-collision-2026-10-06/scoped-parity.json">scaffolding report</a>.
+The native context dispatch executes against a world proxy that rejects all
+queries. Full shape coordinates, bounds, ordered boxes and cube metadata match
+for empty, position, entity and placement contexts, including adjacent doubles
+at both height thresholds. Block placement, distance updates, collapse and live
+entity motion through scaffolding are separate work.</p>
+<p><code>LiquidCollision</code> implements contextual water/lava collision selection. The
+always-fluid flag returns a full cube before querying entities or neighbors.
+Otherwise, flowing block levels and nonliving contexts return empty. Source
+blocks request the living entity's standing shape, check its height, then read the
+fluid above and invoke the entity's standing predicate. Empty candidate shapes
+still follow those query rules. Above-block coordinates wrap as Java integers.</p>
+<p><code>python3 tools/test_liquid_collision_parity.py</code> compares all <strong>32 water/lava block
+states</strong>, all <strong>33 possible above-block liquid/empty states</strong>, full selected shape
+data and ordered callback traces, including failures at each query. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-liquid-collision-2026-10-06/scoped-parity.json">liquid-collision report</a>
+records <strong>571,179 matching lines per JAR</strong>. Standing shapes and fluid abilities are
+controlled inputs in this suite; each entity type still needs its implementation.
+Fluid spreading, swimming, drowning and live movement remain pending.</p>
+<p>Powder snow now selects the native <code>0.9f</code>-high falling shape when fall distance
+exceeds 2.5, a full cube for falling-block entities, and a full cube for entities
+that can walk on it, are above it and are not descending. Placement and absent
+entity contexts are empty. Walkability checks the entity-type tag first, then
+leather boots only for living entities; successful tags skip equipment queries.
+The API takes current entity metadata and lazy tag/equipment providers.</p>
+<p><code>python3 tools/test_powder_snow_collision_parity.py</code> compares <strong>63,336 fixtures</strong>
+and <strong>599,180 matching lines per JAR</strong> in the
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-powder-snow-collision-2026-10-06/scoped-parity.json">powder-snow report</a>.
+The native block method and walkability predicate execute over controlled entity
+snapshots. The corpus covers fall-distance and top-height boundaries, nonfinite
+values, falling-block instances, item counts, query failures and skipped queries.
+Entity tag loading, freezing, sinking and live movement remain separate work.</p>
+<p><code>BlockCollisionRegistry::collision_shape_with_context</code> now combines the contextual
+scaffolding, liquid and powder-snow rules with the existing cached/dynamic paths.
+It dispatches these overrides before consulting cached geometry. The pinned
+native audit checks <strong>35,492 context-independent cached states</strong> at seven positions
+with both interface and entity contexts that reject every query: each returns the
+identical cache object without world reads. The <strong>32 cached liquid states</strong> query
+the context and take their separate behavior path. The <strong>199 uncached states</strong>
+continue through explicit behavior implementations.</p>
+<p><code>python3 tools/test_contextual_collision_parity.py</code> validates integrated dispatch
+for all <strong>35,723 states</strong>, <strong>11 contexts</strong> and both fluid-flag inputs:
+<strong>785,906 fixtures</strong> and <strong>2,391,334 matching output lines per JAR</strong> in the
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-contextual-collision-2026-10-06/scoped-parity.json">contextual-registry report</a>.
+Outputs compare cache-relative shape equality or full uncached geometry, plus
+ordered world/entity callbacks. This integration corpus supplies missing block
+entities; active shulker and piston snapshots retain their separate suites.
+These checks establish the recorded collision-query scope, not entity movement
+or whole-game parity.</p>
+<p>Private shape exports now carry explicit canonical-identity markers. The importer
+restores the global empty/full-block shapes only when their complete grid metadata
+matches, and rejects duplicate or malformed canonical claims. Equal unmarked
+shapes keep distinct identities. Older exports remain readable and report
+<code>has_canonical_identities() == false</code>; they cannot establish the canonical identity
+needed by vanilla's block-collision iterator fast path.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-canonical-collision-2026-10-06/scoped-parity.json">canonical-identity report</a>
+adds identity checks for every cached state: <strong>5,566 canonical empty</strong>, <strong>3,348
+canonical full-block</strong> and <strong>26,610 other cached states</strong>, with <strong>1,132,980 matching
+output lines per JAR</strong>. The integrated contextual comparison also passes again
+with <strong>2,391,334 lines per JAR</strong> in its
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-canonical-collision-2026-10-06/contextual-regression.json">regression report</a>.
+Five import tests cover legacy data, equal-but-distinct grids, canonical restoration
+and malformed identity metadata. Workspace Clippy passes without warnings.</p>
+<p><code>BlockCollisionScan</code> now implements lazy cursor selection around entity bounds.
+It retains the native epsilon-expanded cursor, X/Y/Z visit order, skipped corners,
+large-shape face filtering, moving-piston edge filtering and suffocation-before-
+shape query order. Only successful chunk lookups are reused; absent chunks are
+queried again. Shape selection uses the global collision world, while suffocation
+uses the selected chunk. Canonical full blocks use native AABB intersection;
+other shapes use moved voxel intersection. Returned positions are independent
+values. Providers supply current block metadata and contextual shape selection.</p>
+<p><code>python3 tools/test_block_collision_scan_parity.py</code> compares <strong>4,176 fixtures</strong>
+and <strong>517,820 matching lines per JAR</strong> in the
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-block-collision-scan-2026-10-06/scoped-parity.json">collision-scan report</a>.
+The native iterator runs over controlled metadata, shapes and chunk availability;
+traces cover early termination, missing chunks, query failures, thin/zero-width
+bounds, integer-coordinate wrapping and equal shapes with different canonical
+identities. Two Rust API tests cover finite/bounded input requirements, cursor
+visit budgets and termination after errors. Unsupported cursor volumes return
+errors; Java's overflowing iteration counts are outside this bounded API.
+Registry/world integration and live movement still need implementation.</p>
+<p><code>BlockCollisionRegistry</code> now prepares native cursor-filter flags for every state:
+uncached shapes are large, while cached shapes are large when any axis extends
+outside the unit block. Moving-piston identity is bound to the same registry.
+<code>SuffocationRegistry</code> binds the native predicate definitions and resolved
+<code>causes_suffocation</code> tag. Default predicates combine tag membership with full
+collision geometry; overrides preserve piston extension, constant predicates and
+lazy shulker block-entity checks. Missing or wrong-type shulker block entities
+count as suffocating. Tag changes require rebinding the suffocation registry.</p>
+<p><code>python3 tools/test_suffocation_parity.py</code> checks all <strong>35,723 states</strong> with natural,
+empty and all-block tag bindings at four positions, including integer extremes.
+Every shulker state also covers absent/wrong block entities, all animation states
+and query failures. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-suffocation-2026-10-06/scoped-parity.json">suffocation report</a>
+records <strong>1,697,193 matching lines per JAR</strong>, including scan flags and query traces.
+These are registry predicates; live collision-world binding, movement and
+suffocation damage remain separate integration work.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-suffocation-2026-10-06/contextual-regression.json">contextual regression</a>
+also passes again with <strong>2,391,334 lines per JAR</strong>, and its all-state native audit
+now compares large-shape and moving-piston flags. Workspace Clippy passes.</p>
+<p><code>RegistryCollisionWorld</code> now binds <code>BlockCollisionScan</code> directly to registered
+metadata, contextual shapes and suffocation rules. Chunk providers return current
+state IDs and a chunk-local block-entity provider; contextual collision uses the
+global world. Construction rejects legacy collision exports without complete
+canonical identity metadata, because their unit-block fast paths can differ.</p>
+<p><code>python3 tools/test_registry_collision_scan_parity.py</code> compares native
+<code>BlockCollisions</code> over resident <code>ProtoChunk</code> sections with the Rust binding over
+<code>TerrainChunk</code> sections. All registered states cover ordinary and suffocating-only
+selection. Additional scenes cover partial/dynamic blocks, chunk and build-height
+boundaries, missing chunks, replacements, early termination and query failures.
+Shulker fixtures deliberately give the chunk and global providers different
+entities to check routing. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-resident-collision-scan-2026-10-06/scoped-parity.json">resident collision report</a>
+records <strong>3,046,929 matching output lines per JAR</strong>. Six collision import/binding
+tests pass, including legacy-metadata rejection; workspace Clippy passes.
+Live chunk loading, entity lifecycle, movement and the playable client remain
+separate integration work.</p>
+<p><code>resolve_world_movement</code> now joins registry-backed block scanning to the native
+step-up decision. It selects entity colliders once, including for zero/underflow
+movement, then collects applicable border and block shapes in native order for
+the initial and optional step query. <code>try_resolve_step_movement</code> accepts owned or
+borrowed collider lists and propagates provider failures without returning a
+partial displacement. The shared implementation avoids allocating reference
+lists for owned shapes; existing borrowed callers retain the same API.</p>
+<p><code>python3 tools/test_world_movement_parity.py</code> runs actual <code>Entity.collide</code> over
+registered blocks and resident Java sections, comparing the Rust world collector
+and step solver. Every registered state appears as an obstacle; additional cases
+cover step heights, grounded/falling motion, ceilings, partial/dynamic blocks,
+chunk boundaries, zero/underflow motion and failures during collection. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-world-movement-2026-10-07/scoped-parity.json">world movement report</a>
+records <strong>7,062,798 matching lines per JAR</strong>. Entity collider lists, border
+proximity/shapes and collision contexts are controlled fixture inputs. Actual
+entity selection, border state, travel/gravity/velocity, grounded side effects
+and playable integration remain pending.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-world-movement-2026-10-07/geometry-regression.json">geometry regression</a>
+passes again with <strong>1,320,187 lines per JAR</strong>, including the existing native step
+fixtures. All six movement unit tests and workspace Clippy pass. New tests cover
+owned-query failures during both initial and step collection and signed zero
+preservation when collection is skipped.</p>
+<p><code>entity_collision_shapes</code> now implements <code>EntityGetter.getEntityCollisions</code>
+selection over ordered entity snapshots: average-size short circuit, epsilon
+inflation, exact bounds/excluded-identity filtering, spectator suppression and
+lazy collision-policy callbacks. With a source entity it invokes that entity's
+<code>canCollideWith</code>; without one it invokes each candidate's
+<code>canBeCollidedWith(null)</code>. Selected bounds become shapes after policy evaluation.
+Providers retain responsibility for live storage and each entity type's policy.</p>
+<p><code>python3 tools/test_entity_collision_parity.py</code> compares the actual native getter,
+default vehicle-root checks and controlled policy overrides, including failures
+at query/callback boundaries. Tiny/zero-width and nonfinite query boxes, inflated
+boundary contacts, spectators, shared vehicles, null sources and ordered shape
+outputs are covered. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-entity-collision-2026-10-07/scoped-parity.json">entity collision report</a>
+records <strong>158,558 matching lines per JAR</strong>. Workspace Clippy passes. This adds the
+selection helper needed by movement; live entity indexing, lifecycle and
+entity-type policy implementations remain pending.</p>
+<p><code>BorderGeometry</code> now models stationary and moving world-border extents, cached
+stationary collision geometry, center/absolute-limit changes, tick progression,
+partial-tick bounds and movement proximity. The pinned version decrements size
+transition progress once per tick. Ordinary bounds and collision shapes use the
+previous size while moving; completing the transition installs a stationary
+extent at the target. Collision geometry subtracts the floor/ceil-rounded inner
+column from the infinite outer shape. Boundary predicates retain their asymmetric
+inclusive minimum/exclusive maximum tests and native floating-point order.</p>
+<p><code>python3 tools/test_world_border_parity.py</code> compares actual <code>WorldBorder</code> mutation
+sequences, extent metadata, complete shape geometry and proximity predicates.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-world-border-2026-10-07/scoped-parity.json">border report</a>
+records <strong>1,138,830 matching lines per JAR</strong>, including zero/large durations,
+wrapping start timestamps, completion, retargeting, signed zero, extreme finite
+centers/sizes and nonfinite query/interpolation inputs. The supported construction
+and mutation domain requires finite nonnegative sizes, finite centers and
+nonnegative absolute limits/durations. A unit test verifies invalid parameters
+leave the existing extent unchanged; workspace Clippy passes. Saved-data codecs,
+listeners, dirty-state events, damage, synchronization and live movement binding
+remain separate work.</p>
+<p><code>restitute_movement</code> now implements the pinned post-collision velocity calculation
+with lazy entity/block bounce queries, gravity thresholds, nonliving float
+scaling and air-drag interpolation. It preserves horizontal/vertical collision
+branches, callback ordering, the position-sync field write and final velocity
+assignment. Errors retain already performed effects instead of rolling back the
+world or returning a fabricated successful velocity.</p>
+<p><code>python3 tools/test_restitution_parity.py</code> executes actual
+<code>Entity.restituteMovementAfterCollisions</code> on living and nonliving snapshots with
+controlled block restitution and suppression tags. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-restitution-2026-10-07/scoped-parity.json">restitution report</a>
+records <strong>177,090 matching lines per JAR</strong>. Fixtures cover changing lazy getter
+values, signed zero/nonfinite arithmetic, bounce callbacks that alter velocity,
+and failures before/after each side effect. Workspace Clippy passes. Registered
+block property/tag provisioning, actual bounce sounds/events, <code>Entity.move</code>
+guards, fall damage, grounding and full player simulation remain pending.</p>
+<p><code>find_supporting_block</code> now selects the nearest colliding block center using the
+native distance arithmetic and wrapping Y/Z/X position tie-break. <code>GroundState</code>
+implements the thin foot query, previous-horizontal-footprint fallback and both
+ground/collision flag updates. Null movement preserves the prior support in the
+native branch where no fallback query can run; query failures retain preceding
+flag writes.</p>
+<p><code>python3 tools/test_ground_support_parity.py</code> compares actual
+<code>CollisionGetter.findSupportingBlock</code>, <code>Entity.checkSupportingBlock</code> and both
+<code>setOnGroundWithMovement</code> overloads. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-ground-support-2026-10-07/scoped-parity.json">ground support report</a>
+records <strong>342,709 selection lines and 151,444 state-transition lines per JAR</strong>,
+covering ties, nonfinite entity positions, missing chunks, query errors, nullable
+movement and sequential changes of support. Shape/context snapshots are controlled;
+registry-backed scanning has separate integration coverage. Workspace Clippy
+passes. Full live entity movement, support-dependent effects and gameplay remain
+pending.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-ground-support-2026-10-07/scan-regression.json">shared scanner regression</a>
+also passes with <strong>517,820 matching lines per JAR</strong> after extending its fixtures.</p>
+<p><code>movement_support</code> now implements support-dependent positions, the three public
+offset variants and base-entity block jump/speed factors. It preserves the support
+X/Z coordinates, conditional fence/wall/gate lookup, float-to-double offset
+widening, cached entity block position and lazy block queries. Jump-factor lookup
+always reads the lower block; speed lookup can short-circuit for water, bubble
+columns or a non-unit current factor.</p>
+<p><code>python3 tools/test_movement_support_parity.py</code> compares the actual native methods
+with controlled state/tag/property snapshots. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-movement-support-2026-10-07/scoped-parity.json">movement support report</a>
+records <strong>51,572 matching lines per JAR</strong>, including float boundaries, nonfinite
+positions/offsets/factors, tag/type short circuits and errors at every query.
+Workspace Clippy passes. Registered movement-property provisioning, living-entity
+efficiency and the full movement lifecycle remain pending.</p>
+<p><code>MovementProperties</code> imports version-bound raw friction, speed, jump, bounce and
+fall-distance-reduction fields plus fence-gate type. <code>BoundMovementProperties</code>
+binds resolved fence/wall/bounce-suppression tags; rebinding leaves previous
+snapshots unchanged. <code>RegistryMovementWorld</code> connects real state IDs from a block
+provider to the support-position and factor calculations, rejecting unknown IDs.</p>
+<p><code>python3 tools/test_movement_registry_parity.py</code> independently checks native
+property getters for every state, then runs actual entity support/factor queries
+over all <strong>35,723 states / 1,286 blocks</strong> under normal, empty and universal tags.
+Mixed-block scenes and failing providers check query order. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-movement-registry-2026-10-07/scoped-parity.json">registered movement report</a>
+records <strong>2,300,888 matching lines per JAR</strong>. Three import/binding tests and
+workspace Clippy pass. This provisions movement data; full player travel, live
+entity state and block bounce effects remain separate integration work.</p>
+<p><code>PistonMovement</code> now accumulates displacement per axis and resets it when the
+game tick changes. It preserves the initial squared-length short circuit, lazy
+time lookup, first nonzero axis, the +/-0.51 cumulative clamp and float-derived
+small-displacement threshold. A failed time lookup leaves the accumulator intact.</p>
+<p><code>python3 tools/test_piston_movement_parity.py</code> runs actual
+<code>Entity.limitPistonMovement</code> across sequential tick/push inputs. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-piston-movement-2026-10-07/scoped-parity.json">piston movement report</a>
+records <strong>325,197 matching lines per JAR</strong>, including repeated/opposing pushes,
+threshold neighbors, signed zero, nonfinite inputs and injected failures.
+Workspace Clippy passes. Piston block events, entity pushing and the surrounding
+<code>Entity.move</code> lifecycle remain pending.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-piston-movement-2026-10-07/movement-registry-regression.json">registered movement regression</a>
+passes again with <strong>2,300,888 lines per JAR</strong> on the integrated sources.</p>
+<p><code>no_world_collision</code> implements the entity-bearing collision-free query over the
+registry-bound world. It consumes block collisions lazily, then checks whether
+the selected entity list is empty, then tests applicable border geometry. Each
+stage short-circuits the later providers; a nonempty entity list blocks the query
+even if its supplied shape is empty. Collision contexts are supplied explicitly.</p>
+<p><code>python3 tools/test_world_collision_check_parity.py</code> executes native
+<code>CollisionGetter.noCollision</code> over registered blocks and resident Java sections.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-world-collision-check-2026-10-07/scoped-parity.json">world collision-check report</a>
+records <strong>4,793,095 matching lines per JAR</strong>. All states, context variants, empty
+and disjoint controlled entity/border shapes, missing chunks, boundaries and
+provider failures are covered. Workspace Clippy passes. Null-entity overloads,
+actual entity-list/border providers and live player ledge behavior remain pending.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-world-collision-check-2026-10-07/movement-regression.json">shared movement regression</a>
+also passes with <strong>7,062,798 matching lines per JAR</strong>.</p>
+<p><code>back_off_from_edge</code> implements the player ledge guards, above-ground test and
+X/Z/diagonal displacement reductions. It retains lazy step/staying/grounded
+queries, float step widening, signed-zero behavior and the exact thin collision
+probe arithmetic. A caller-supplied query budget bounds nonconverging inputs and
+returns an error without fabricating a successful displacement.</p>
+<p><code>python3 tools/test_edge_backoff_parity.py</code> executes actual player methods with
+controlled collision-free query results. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-edge-backoff-2026-10-07/scoped-parity.json">edge backoff report</a>
+records <strong>46,578 matching lines per JAR</strong>, covering all mover types, flight/crouch
+guards, fall/step and 0.05 thresholds, nonfinite values and query failures. Two
+query-budget unit tests and workspace Clippy pass. Registered-world ledge probes,
+live crouching/attribute state and the complete player movement loop are separate
+integration work.</p>
+<p>Registered-world ledge integration now runs <code>back_off_from_edge</code> through
+<code>no_world_collision</code> and registry-bound resident chunk scans. The native side
+executes actual <code>Player.maybeBackOffFromEdge</code> and its collision probes over
+<code>ProtoChunk</code> sections. Every state is used as a supporting block, with additional
+falling, step-height, chunk-edge, diagonal, dynamic-block and guard/error cases.</p>
+<p><code>python3 tools/test_world_edge_backoff_parity.py</code> passes with
+<strong>27,109,699 matching lines per JAR</strong> in the
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-world-edge-backoff-2026-10-07/scoped-parity.json">world ledge report</a>.
+The shared fixture now supports player probes alongside direct movement and
+collision checks; workspace Clippy passes. Entity lists, border applicability and
+collision contexts remain controlled snapshots. A complete player movement/travel
+loop and playable client remain pending.</p>
+<p><code>check_fall_damage</code> now implements base-entity fall-distance accumulation and
+landing order. Downward displacement narrows to float before being subtracted
+from the double fall distance. Grounded landings call the block, read the
+possibly changed position/support, emit the ground event and reset fall distance.
+Errors preserve completed field writes and callback effects.</p>
+<p><code>python3 tools/test_fall_damage_parity.py</code> runs actual <code>Entity.checkFallDamage</code>
+with controlled water, landing and event providers. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-fall-damage-2026-10-07/scoped-parity.json">base fall report</a>
+records <strong>44,566 matching lines per JAR</strong>, including nonfinite arithmetic, float
+underflow, callback mutations and failures at every boundary. Workspace Clippy
+passes. Living-entity fluid/particle behavior, registered block landing effects,
+health/damage and full movement remain pending.</p>
+<p><code>living_fall</code> implements default living-entity fall power/damage calculation,
+impulse-height exemption and landing damage callback order. It retains separate
+immunity checks for passenger propagation and damage calculation, double/float
+arithmetic and saturating floor-to-int conversion. Positive damage resets the
+impulse context, selects the fall sound, plays block landing sound and dispatches
+hurt. A rejected hurt callback does not change the native positive-damage result.
+<code>ImpulseContext</code> also models setter, grace-extension and reset behavior; disabling
+ignore clears grace time while retaining the impact position until a later reset.</p>
+<p><code>python3 tools/test_living_fall_parity.py</code> compares actual living methods and
+sequential impulse changes. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-living-fall-2026-10-07/scoped-parity.json">living fall report</a>
+records <strong>153,025 matching lines per JAR</strong>, including changing immunity, passenger
+callback mutations, nonfinite arithmetic, sound threshold selection and failures
+after partial state changes. Workspace Clippy passes. Attribute provisioning,
+passenger storage/recursion, actual health processing, tick/save/network behavior
+and the complete movement lifecycle remain pending.</p>
+<p><code>push_entities_up</code> implements the block-replacement push: query old/new shapes,
+subtract old occupied space without optimizing the join, translate to world
+coordinates and select entities using the added shape's bounds. It reads each
+current entity box before calculating its upward displacement and invokes a
+relative teleport even when that displacement is zero.</p>
+<p><code>python3 tools/test_block_push_parity.py</code> compares actual <code>Block.pushEntitiesUp</code>
+with controlled shapes and selected entity lists. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-block-push-2026-10-07/scoped-parity.json">block push report</a>
+records <strong>101,006 matching lines per JAR</strong>, including empty/redundant geometry,
+partial shapes, large coordinates, nonfinite entity boxes, mutations of later
+entities and failures after partial effects. Workspace Clippy passes. Registered
+replacement dispatch, actual entity selection and teleport/network semantics
+remain separate integration work.</p>
+<p><code>block_landing</code> binds audited native landing/bounce families to every registered
+state. It implements fall-distance reduction, hay/honey damage multipliers,
+slime suppression, powder-snow fall sounds, upward dripstone tips, farmland
+replacement with occupant pushes, turtle-egg destruction/decrement and shelf
+mushroom bounce sounds. Random draws, server-class checks, client flags, spawn
+protection, mob griefing, sounds, writes and events retain native order.</p>
+<p><code>python3 tools/test_block_landing_parity.py</code> invokes registered native methods for
+all <strong>35,723 states / 1,286 blocks</strong> with eight entity class families. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-block-landing-2026-10-07/scoped-parity.json">registered landing report</a>
+records <strong>3,524,267 matching lines per JAR</strong>, including float/double boundaries,
+NaN/infinity, failed writes, callback failures, egg hatch preservation and
+farmland collision pushes. Targeted Clippy passes. Actual health, live entity
+selection/storage, teleport/network behavior, audio playback and full movement
+lifecycle integration remain separate work.</p>
+<p><code>movement_emission</code> accumulates native movement/flight distances, evaluates
+climbable and powder-snow states, and dispatches step/swim/flap effects. Legacy
+and current support blocks retain their separate sound/event rules. Threshold
+updates use Java float-to-int saturation and wrapping integer addition, and
+sound/event callbacks can change fields observed by subsequent operations.</p>
+<p><code>python3 tools/test_movement_emission_parity.py</code> compares actual native movement
+emission, block vibration dispatch, flapping and next-step arithmetic. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-movement-emission-2026-10-07/scoped-parity.json">movement emission report</a>
+records <strong>598,611 matching lines per JAR</strong> across <strong>53,036 fixtures</strong>, including
+predicate combinations, sound/event modes, differing support blocks, nonfinite
+numbers, mutations and provider failures. Targeted Clippy passes. Sound callbacks
+are controlled and the crystal-sound predicate is false in this gate; registered
+sound selection, audio playback and full movement integration remain pending.</p>
+<p><code>entity_move</code> sequences native movement phases: no-physics/piston early exits,
+stuck multiplier reset, edge backoff, collision resolution, fall-reset clipping,
+position/recording writes, collision/ground flags, landing, removal, restitution,
+movement emission and block speed multiplication. <code>MovementHistory</code> retains at
+most 100 records by merging the oldest pair and dropping their original-axis
+movement metadata. Callbacks can change fields read by later phases.</p>
+<p><code>python3 tools/test_entity_move_parity.py</code> invokes actual <code>Entity.move</code> with native
+shape resolution and zero restitution. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-entity-move-2026-10-07/scoped-parity.json">movement lifecycle report</a>
+records <strong>543,653 matching lines per JAR</strong>, covering signed zero, tiny/nonfinite
+movement, collisions, early exits, recording cap, authority guards, landing
+mutations/removal and failures after partial writes. Targeted Clippy passes.
+This gate controls piston/edge decisions, ground support, ray hits and landing
+callbacks; step height is zero and non-passenger emission is tested separately.
+Binding all phases to a live entity/world and player travel remains pending.</p>
+<p><code>world_ray</code> implements ordered block/fluid ray clipping, nearest-hit selection
+with block precedence on ties, and interaction-shape overrides that replace only
+the hit face. It also implements native fluid pick modes and fall-reset shape
+selection, including player type identity, end portals/gateways and server-side
+zero-delay Nether portals. Traversal limits and invalid geometry return errors.</p>
+<p><code>python3 tools/test_world_ray_parity.py</code> compares actual <code>BlockGetter.clip</code> and
+native <code>ClipContext</code> modes. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-world-ray-2026-10-07/scoped-parity.json">world ray report</a>
+records <strong>248,725 matching lines per JAR</strong>, including inside hits, ties, misses,
+interaction geometry, short/signed-zero rays, lazy predicates/rules and provider
+failures. Targeted Clippy passes. Separate limit tests distinguish a miss from
+nonfinite geometry, exhausted traversal budget and failed world reads. Shapes
+and state predicates are controlled; registered shape binding, actual fluid
+shape caching and full entity/world integration remain pending.</p>
+<p><code>FluidShapeCache</code> matches native registered-fluid shape caching. The first
+successful lookup of a nonempty fluid state samples the fluid above and retains
+its resulting shape across later positions/world views. Failed reads leave the
+state uncached. Empty and full cube shapes preserve canonical identity; distinct
+noncanonical cached shapes retain their own identities.</p>
+<p><code>python3 tools/test_fluid_shape_parity.py</code> runs every registered native fluid state
+in changing query sequences. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-fluid-shape-2026-10-07/scoped-parity.json">fluid shape report</a>
+records <strong>387,950 matching lines per JAR</strong> across <strong>5,181 sequences</strong>, comparing
+geometry, cache population, canonical/alias identities, query suppression and
+failures. Targeted Clippy passes. The pinned registry has no amount-nine state;
+unsupported custom fluid definitions are outside this module. Fluid propagation,
+entity immersion and live world/ray integration remain pending.</p>
+<p><code>InteractionShapes</code> imports a complete state-bound table with a distinct table
+kind and mandatory canonical identity metadata. The pinned owner audit finds
+only default empty, cauldron, composter, hopper and scaffolding implementations;
+all are static per state. Geometry uses the existing validated discrete shape
+importer while preserving eight native shape identities.</p>
+<p><code>python3 tools/test_interaction_shape_parity.py</code> compares every registered state
+and actual native interaction-face overrides with supplied collision geometry.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-interaction-shape-2026-10-07/scoped-parity.json">interaction shape report</a>
+records <strong>188,682 matching lines per JAR</strong> across all <strong>35,723 states</strong>. Native
+interaction-shape world queries are rejected by the fixture. Import checks reject
+wrong table kind, partial mappings, missing canonical metadata, foreign state
+ordering and invalid IDs. Targeted Clippy passes. Registered outline/visual
+shapes, complete ray-world binding and gameplay integration remain pending.</p>
+<p><code>FallRayRegistry</code> binds fall-reset tags, portal identities, interaction geometry
+and fluid states to the complete registered block-state table. <code>fall_reset_ray</code>
+uses that binding with the shared fluid-shape cache and native water selection.
+Tag reloads produce new validated registry snapshots; unknown tag members and
+invalid state IDs are rejected.</p>
+<p><code>python3 tools/test_registry_fall_ray_parity.py</code> compares actual registered
+<code>BlockGetter.clip</code> behavior with native block/fluid tags and shape getters. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-registry-fall-ray-2026-10-07/scoped-parity.json">registered fall-ray report</a>
+records <strong>3,024,623 matching lines per JAR</strong> across <strong>120,297 fixtures</strong>, including
+all <strong>35,723 states</strong>, tag reloads, server/client distinctions, player type checks,
+portal delays, changing above-fluid states, shared cache reuse and failures.
+Targeted Clippy passes. World storage is controlled; live entity movement and
+complete player/world gameplay integration remain pending.</p>
+<p><code>living_landing</code> wraps base fall handling with fluid refresh, server-only changed
+block notification and landing particles, followed by climbing-position cleanup.
+Particle positions preserve the native support-block edge projection and capture
+entity coordinates before later callbacks. Attribute, fluid, particle and block
+callbacks can mutate fields; failures retain preceding writes.</p>
+<p><code>python3 tools/test_living_landing_parity.py</code> invokes actual
+<code>LivingEntity.checkFallDamage</code> and its base implementation. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-living-landing-2026-10-07/scoped-parity.json">living landing report</a>
+records <strong>244,844 matching lines per JAR</strong>, including server/nonserver levels,
+water changes, numeric boundaries, particle locations/counts, callback failures,
+field mutations and climbing cleanup. Targeted Clippy passes. Fluid immersion,
+changed-block enchantments, particle rendering and live gameplay binding remain
+pending; those providers are controlled by this gate.</p>
+<p><code>living_air</code> implements input normalization/rotation, friction-influenced speed,
+ladder/scaffolding limits, relative movement, collision-triggered climbing and
+air travel. Ground friction is captured before movement while levitation,
+gravity and drag are sampled afterwards. Player class identity controls ladder
+slide suppression. Native float arithmetic and quantized trigonometry are kept.</p>
+<p><code>python3 tools/test_living_air_parity.py</code> invokes the actual native private air,
+relative movement, climbing, speed, friction and input-vector methods. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-living-air-2026-10-07/scoped-parity.json">air travel report</a>
+records <strong>443,554 matching lines per JAR</strong>, including both player/nonplayer
+classes, changed ground/climbing predicates, missing client chunks, levitation,
+nonfinite boundaries, callback mutations and failures. Targeted Clippy passes.
+Extreme effect amplifiers are injected directly for integer-boundary checks;
+normal constructor clamping is outside this gate. Collision movement, gravity,
+attributes and immersion remain controlled providers; live gameplay binding and
+complete player travel are pending.</p>
+<p><code>living_fluid</code> adds native water/lava acceleration, slowdown, falling adjustment,
+shallow-lava handling, collision escape and ridden buoyancy. It shares input
+rotation with air movement. Fluid heights and escape queries remain lazy, with
+movement mutations visible to subsequent velocity updates.</p>
+<p><code>python3 tools/test_living_fluid_parity.py</code> compares the actual native travel and
+fluid helper methods. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-living-fluid-2026-10-07/scoped-parity.json">fluid travel report</a>
+records <strong>265,100 matching lines per JAR</strong>, including sprint changes, movement
+efficiency, dolphin effects, shallow-fluid boundaries, escape probes, ridden
+float guards, nonfinite values, callback mutations and failures. Targeted Clippy
+passes. Collision movement, immersion depths, free-space queries, attributes and
+gravity are controlled; live fluid propagation and gameplay binding remain
+pending.</p>
+<p><code>living_motion</code> implements default living jump strength/boost, sprint jump
+impulses, gravity and slow falling, vertical liquid input, rider flight speed
+and air drag. Native finite-addition filtering and delayed synchronization flags
+preserve partial writes when providers fail.</p>
+<p><code>python3 tools/test_living_motion_parity.py</code> compares the corresponding actual
+living methods plus <code>Entity.applyGravity</code> and <code>addDeltaMovement</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-living-motion-2026-10-07/scoped-parity.json">jump and gravity report</a>
+records <strong>113,623 matching lines per JAR</strong>, including float thresholds, extreme
+raw effect amplifiers, signed zero/nonfinite values, rider classes, callback
+mutations and failures. Targeted Clippy passes. Entity-type jump/flight overrides,
+effect and attribute storage, registered jump-factor binding and live gameplay
+integration remain pending.</p>
+<p><code>player_travel</code> wraps living travel with passenger bypass, swimming pitch
+adjustment, head-fluid checks and preservation of creative-flight vertical
+velocity. It also binds player flight speed to sprint/passenger/ability rules
+and implements the flying ability's fluid-affection predicate.</p>
+<p><code>python3 tools/test_player_travel_parity.py</code> invokes actual <code>Player.travel</code>,
+<code>getFlyingSpeed</code> and <code>isAffectedByFluids</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-player-travel-2026-10-07/scoped-parity.json">player travel report</a>
+records <strong>120,933 matching lines per JAR</strong>, including ability and velocity
+mutations, callback failures, signed zero/nonfinite positions and the distinction
+between direct ability fields and virtual ability access. Targeted Clippy passes.
+Parent travel is selected through a controlled fluid callback; connecting the
+verified living phases and collision movement to the live player/world remains
+pending.</p>
+<p><code>ClimbingRegistry</code> binds resolved climbing/glide-through tags and actual trapdoor
+class identities to all registered states. <code>on_climbable</code> preserves spectator
+and gliding guards, open-trapdoor/ladder facing checks, wrapping below-position
+arithmetic and last-climbable position writes. Negative or failed checks retain
+the previous climbing position. Unknown members/properties and IDs are rejected.</p>
+<p><code>python3 tools/test_climbing_parity.py</code> invokes actual registered
+<code>LivingEntity.onClimbable</code> and trapdoor support checks. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-climbing-2026-10-07/scoped-parity.json">climbing report</a>
+records <strong>3,820,054 matching lines per JAR</strong> across all <strong>35,723 states</strong>, including
+all trapdoor states against every registered ladder facing, tag reloads,
+spectator/gliding guards, captured positions, mutations and failures. Targeted
+Clippy passes. Entity/world storage is controlled; live movement binding and
+equipment-based glide eligibility remain pending.</p>
+<p><code>fluid_occupancy</code> implements section-ordered liquid checks over resident block
+sections with a complete registered fluid-presence table. <code>BlockSection.any_state</code>
+checks active palette entries so dry sections skip cell unpacking. Bounds use
+inclusive floored endpoints, and chunk requests retain native behavior even when
+no requested vertical section is within world height. Invalid geometry, foreign
+registries and query-budget exhaustion return explicit errors.</p>
+<p><code>python3 tools/test_fluid_occupancy_parity.py</code> compares actual
+<code>LevelReader.containsAnyLiquid</code>, <code>BoxBlockMatcher</code> and <code>BlockScanUtils</code> with
+native ProtoChunk sections. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-fluid-occupancy-2026-10-07/scoped-parity.json">liquid occupancy report</a>
+records <strong>116,664 matching lines per JAR</strong>, including fluid presence for all
+<strong>35,723 states</strong>, public chunk/section query order, height boundaries, palette
+changes/compaction and failures. Rust-only checks verify typed budget, nonfinite
+and registry errors. Targeted Clippy passes. Chunk snapshots repeat controlled
+resident data; collision composition for <code>Entity.isFree</code> and live world binding
+remain pending. No performance gain is claimed without measurement.</p>
+<p><code>free_space.offset_is_free</code> composes native offset bounds, registry-bound
+block/entity/border collision clearance and resident liquid occupancy. The
+liquid scan runs only after collision clearance succeeds. Both phases share
+resident TerrainChunk storage through <code>RegistryCollisionWorld</code>; their typed
+errors and separate query budgets remain visible to the caller.</p>
+<p><code>python3 tools/test_free_space_parity.py</code> invokes actual <code>Entity.isFree</code>, native
+collision iteration and liquid scanning on the corresponding resident ProtoChunk
+storage. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-free-space-2026-10-07/scoped-parity.json">free-space report</a>
+records <strong>5,764,046 matching lines per JAR</strong> across all <strong>35,723 states</strong>, offsets,
+fluid/context variants, height boundaries, required missing chunks and failures.
+Targeted Clippy passes. Entity lists, border applicability and collision contexts
+are controlled; chunk generation, live entity indexing and full playable
+integration remain pending.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-free-space-2026-10-07/collision-regression.json">collision-only regression</a>
+also passes <strong>4,793,095 matching lines per JAR</strong> after extending the shared
+fixture and registry binding.</p>
+<p><code>entity_fluid</code> tracks body depth, eye immersion and current accumulation across
+updates. It preserves one-tick tracker retention, missing-chunk preflight,
+ordered cell scans, the first matching current tag, camera support checks and
+partial writes on query failure. Current application distinguishes player
+averaging from other entities' normalization and dispatches the final velocity
+addition with its finite-input filter and fresh velocity read.</p>
+<p><code>python3 tools/test_entity_fluid_parity.py</code> invokes actual
+<code>EntityFluidInteraction</code> and <code>Entity.addDeltaMovement</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-entity-fluid-2026-10-07/scoped-parity.json">entity fluid report</a>
+records <strong>607,338 matching lines per JAR</strong> with real ProtoChunk fluid-presence
+sections, ordered/reloaded overlapping tags, wet/dry sequences, eye boundaries,
+nonfinite heights/current arithmetic, mutations and injected failures. Rust-only
+checks cover explicit query-budget/nonfinite errors and reset-before-error
+behavior. Targeted Clippy passes. Fluid heights/flows and entity fields are
+controlled here; neighboring-cell flow calculation, live world/entity binding
+and full playable integration remain pending. Extreme-coordinate Java scans are
+bounded by injected callback failures rather than allowed to traverse billions
+of cells.</p>
+<p><code>fluid_flow</code> computes water/lava current vectors from ordered horizontal and
+lower neighbors, preserving f32 height subtraction before f64 accumulation.
+Falling fluids apply the native wall deflection, including the same-family,
+upward-face and IceBlock guards, then normalize the resulting vector.</p>
+<p><code>python3 tools/test_fluid_flow_parity.py</code> invokes actual registered
+<code>FluidState.getFlow</code>, <code>FlowingFluid.getFlow</code> and its solid-face helper. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-fluid-flow-2026-10-07/scoped-parity.json">fluid flow report</a>
+records <strong>1,051,071 matching lines per JAR</strong> from <strong>51,846 fixtures</strong> covering all
+registered fluid states, neighboring families/heights, per-face wall flags,
+falling deflection, wrapping coordinates and query failures. Targeted Clippy
+passes. Block tag/class flags and face support are controlled in this comparison;
+binding those to registered block storage and support shapes, fluid spreading
+and complete gameplay remain pending.</p>
+<p><code>registry_fluid</code> now binds contained fluid states, resolved flow-blocking tags and
+actual IceBlock class membership to the full block registry. Its world adapter
+composes current/height/camera queries with cached and dynamic support shapes.
+Foreign registry identities, unknown tag members and invalid state IDs are
+rejected explicitly; tag reloads use a new immutable binding.</p>
+<p><code>python3 tools/test_registry_fluid_parity.py</code> compares actual registered height,
+camera immersion, current vectors and solid-face queries. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-registry-fluid-2026-10-07/scoped-parity.json">registered fluid report</a>
+records <strong>2,446,969 matching lines per JAR</strong> from <strong>409,389 fixtures</strong>, covering all
+<strong>35,723 block states</strong>, waterlogged contents, cached/dynamic support, natural and
+reloaded tags, neighboring fluid families, coordinate wrapping and failures.
+Targeted Clippy passes, including checks for typed invalid-ID and foreign-registry
+errors. World cells are controlled and block entities are absent in this suite;
+active block-entity lifecycle, live entity binding, fluid spreading and complete
+playable integration remain pending.</p>
+<p><code>entity_fluid_tick</code> composes immersion updates with entity water-entry behavior
+and current application. It captures water/lava membership before effects,
+resets fall distance in water, dispatches a splash after the first tick when
+newly entering water, updates the touching-water flag and queries the push
+predicate again before applying forces. Lava uses the dimension's FAST_LAVA
+attribute to select its current coefficient.</p>
+<p><code>python3 tools/test_entity_fluid_tick_parity.py</code> invokes actual
+<code>Entity.updateFluidInteraction</code> with native immersion and current application.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-entity-fluid-tick-2026-10-07/scoped-parity.json">entity fluid tick report</a>
+records <strong>953,830 matching lines per JAR</strong>, including changing push predicates,
+first-tick/entry flags, simultaneous water/lava, attribute selection, nonfinite
+arithmetic, callback mutations and failures around partial writes. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-entity-fluid-tick-2026-10-07/immersion-regression.json">immersion regression</a>
+also passes <strong>607,338 lines per JAR</strong> after extending the shared fixtures.
+Targeted Clippy passes. Splash dispatch is controlled; audio/particle generation,
+full live entity/world binding and playable integration remain pending.</p>
+<p><code>RegistryFluidWorld</code> now implements entity immersion queries through the bound
+fluid contents, height calculations, camera support and neighbor-derived current
+vectors. Entity fields and loaded chunk/section views remain supplied by the
+world provider, preserving captured positions and partial-write order.</p>
+<p><code>python3 tools/test_registered_entity_fluid_parity.py</code> invokes actual
+<code>EntityFluidInteraction</code> with registered fluid and support behavior. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-registered-entity-fluid-2026-10-07/scoped-parity.json">registered immersion report</a>
+records <strong>6,550,126 matching lines per JAR</strong>, including all <strong>35,723 states</strong> in
+immersed and above-eye cells, mixed water/lava neighborhoods, waterlogged blocks,
+ordered/reloaded tags, current velocities, tracker retention and query failures.
+Targeted Clippy passes. Shared-fixture regressions also pass:
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-registered-entity-fluid-2026-10-07/tick-regression.json">tick composition</a>
+(<strong>953,830 lines per JAR</strong>) and
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-registered-entity-fluid-2026-10-07/immersion-regression.json">controlled immersion</a>
+(<strong>607,338 lines per JAR</strong>). Chunk presence and section wet flags are controlled,
+and block entities are absent here; full live chunk/entity lifecycle, fluid
+propagation and playable gameplay remain pending.</p>
+<p><code>swimming</code> implements entity/player swimming transitions, underwater/shallow-water
+predicates and the fluid jump threshold. The player flying ability disables
+swimming directly. Other transitions preserve short-circuit query order, prior
+eye-in-water state, passenger guards, captured block position and final state
+writes only after all required queries succeed.</p>
+<p><code>python3 tools/test_swimming_parity.py</code> compares actual Entity/Player methods.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-swimming-2026-10-07/scoped-parity.json">swimming report</a>
+records <strong>191,142 matching lines per JAR</strong>, including flag combinations, native
+fluid tag membership, failures/mutations, and f32 eye-height boundaries/nonfinite
+values. Targeted Clippy passes. Synchronized entity storage, full input/tick
+integration and playable gameplay remain pending.</p>
+<p><code>fluid_box</code> implements default entity immersion bounds and boat passenger
+waterline clipping. Entity bounds are deflated and captured before vehicle
+lookup. Submerged boats retain those bounds; other boats restrict immersion to
+the portion strictly above their top, returning no box when none remains.</p>
+<p><code>python3 tools/test_fluid_box_parity.py</code> compares actual entity/boat methods. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-fluid-box-2026-10-07/scoped-parity.json">fluid box report</a>
+records <strong>92,822 matching lines per JAR</strong>, including actual boat status values,
+virtual modifier dispatch, thin/inverted bounds, waterline boundaries, signed
+zero/nonfinite values and mutations/failures. Targeted Clippy passes. Vehicle
+snapshots are controlled; live passenger lifecycle and full gameplay remain
+pending.</p>
+<p><code>water_splash</code> generates native water-entry sound, bubble/splash particle and game
+event requests. It preserves controlling-passenger identity, captured velocity,
+f32 volume/pitch arithmetic, float-rounded surface height, changing entity width,
+and random draws before each emitted effect. A particle budget returns an
+explicit error after preserving preceding effects and RNG consumption.</p>
+<p><code>python3 tools/test_water_splash_parity.py</code> invokes actual
+<code>Entity.doWaterSplashEffect</code> with native legacy and xoroshiro random generators.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-water-splash-2026-10-07/scoped-parity.json">water splash report</a>
+records <strong>192,506 matching lines per JAR</strong> across <strong>7,840 fixtures</strong>, including
+sound thresholds, self/other passengers, particle positions/velocities, callback
+mutations/failures, nonfinite arithmetic and the next RNG value after the effect.
+A Rust-only budget check verifies that exhaustion preserves the two sound-pitch
+random draws. Targeted Clippy passes. Sound identities and effect sinks are
+controlled; audio playback, particle simulation/rendering and full gameplay
+integration remain pending.</p>
+<p><code>attributes</code> implements basic/ranged attribute instances, ordered modifiers,
+three-stage value calculation, cache invalidation and permanent-state packing.
+Modifier clones retain reference identity for transient-update notifications.
+Per-operation maps preserve native hash-table iteration, growth and deletion
+order because modifier arithmetic is sensitive to floating-point association.
+The implementation also retains native partial writes when a dirty observer
+fails, stale operation entries after operation-changing updates, merge-on-apply
+semantics and self-replacement behavior.</p>
+<p><code>python3 tools/test_attribute_parity.py</code> compares actual <code>AttributeInstance</code>
+methods using every registered attribute definition. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-attributes-2026-10-07/scoped-parity.json">attribute report</a>
+records <strong>1,404,798 matching lines per JAR</strong> across <strong>2,391 fixtures</strong>, including
+collision clusters, resize/shrink boundaries, seeded operation sequences,
+reference identity, observer cache reads/failures, nonfinite values and signed
+zero. The adapter observes iterator order, as native calculation does; Java
+stream traversal can differ. Targeted Clippy passes. Registry/entity/equipment
+binding, packed data/network codecs and full gameplay integration remain pending.</p>
+<p><code>attributes::entity</code> imports version-checked attribute definitions and entity
+supplier bases, and composes them with the attribute engine. Reads fall back to
+the supplier without creating instances; first instance access schedules an
+update and a sync for client-syncable attributes. Mutations retain those set
+memberships until individually acknowledged. Base resets use the entity's
+supplier value and do not instantiate absent entries. Missing attributes and
+missing modifiers remain distinguishable, including lookup after instantiation.</p>
+<p><code>python3 tools/test_entity_attribute_parity.py</code> compares actual <code>AttributeMap</code>
+operations with <strong>40 registered attributes</strong> and <strong>93 entity suppliers</strong>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-entity-attributes-2026-10-07/scoped-parity.json">entity attribute report</a>
+records <strong>1,771,555 matching lines per JAR</strong> across <strong>4,720 fixtures</strong>. Targeted
+Clippy passes. The exporter asserts that registered default suppliers contain no
+modifiers. Set membership is observed in registry order: this does not establish
+JVM identity-hash collection order, cross-attribute bulk assignment/serialization,
+custom suppliers, equipment integration or a live entity tick.</p>
+<p><code>food</code> implements eating, saturation, exhaustion, hunger predicates and the
+server hunger tick. It retains the captured level/difficulty, short-circuit
+player queries, fast/slow regeneration timers, starvation health/difficulty
+guards, wrapping integer arithmetic, Java float edge behavior and partial state
+writes when callbacks fail. Heal and starvation requests use explicit world
+hooks, which can mutate food state before subsequent tick work.</p>
+<p><code>python3 tools/test_food_parity.py</code> compares actual <code>FoodData</code> methods. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-food-2026-10-07/scoped-parity.json">food report</a> records
+<strong>180,878 matching lines per JAR</strong> across <strong>15,211 fixtures</strong>, including 240-tick
+sequences, threshold boundaries, all difficulties, callback mutation/failure,
+signed zero and nonfinite arithmetic. Targeted Clippy passes. World rules,
+player health/healing and damage delivery are controlled; consumables, saved
+hunger data and live survival gameplay integration remain pending.</p>
+<p><code>food_storage</code> reads/writes hunger state in player NBT compounds. Missing and
+nonnumeric fields use native defaults; numeric tags retain vanilla coercions,
+including floor-to-int for floats/doubles, truncation of long integer bits and
+no post-load clamping. Writes replace the four hunger fields with native int/
+float types, normalize float signed zero and preserve unrelated player fields.</p>
+<p><code>python3 tools/test_food_storage_parity.py</code> compares actual <code>FoodData</code> persistence
+through <code>TagValueInput</code>/<code>TagValueOutput</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-food-storage-2026-10-07/scoped-parity.json">food storage report</a>
+records <strong>45,955 matching lines per JAR</strong>, covering every NBT numeric type,
+missing/wrong-type fields, conversion boundaries, nonfinite values and save/load
+round trips. Targeted Clippy passes. ProblemReporter diagnostics and the complete
+player save lifecycle remain pending; these results establish the four hunger
+fields, not a playable save/load implementation.</p>
+<p><code>living_health</code> implements health/absorption clamping, healing dispatch, player
+hurt and living dead-or-dying predicates. Health writes capture synchronized
+storage before attribute lookup. <code>SyncedFloat</code> preserves Java boxed-float
+equality, writes the value before the update callback, and marks dirty only
+after that callback succeeds; it also supports default/dirty extraction for a
+single float item.</p>
+<p><code>python3 tools/test_living_health_parity.py</code> compares actual LivingEntity/Player
+methods and actual <code>SynchedEntityData</code> float items. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-living-health-2026-10-07/scoped-parity.json">living health report</a>
+records <strong>442,007 matching lines per JAR</strong>, covering nonfinite values, signed
+zeros/NaN equality, forced updates, dirty extraction, health-data replacement
+during callbacks and partial effects after exceptions. Targeted Clippy passes.
+Attribute values and the internal absorption sink are controlled. Player-specific
+absorption synchronization, multiple synchronized items, registered attribute
+binding, full damage processing and playable entities remain pending.</p>
+<p><code>attribute_health</code> binds the health engine to registered entity attributes and
+mutable synchronized health. <code>AttributeHealth</code> borrows existing state, queries
+actual modified MAX_HEALTH/MAX_ABSORPTION values and propagates observer errors
+without losing partial health writes. Base living absorption uses field storage.</p>
+<p><code>python3 tools/test_attribute_health_parity.py</code> composes actual registered
+<code>AttributeMap</code>, LivingEntity/Player health methods, <code>SynchedEntityData</code> and
+<code>FoodData</code>. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-attribute-health-2026-10-07/scoped-parity.json">composition report</a>
+records <strong>666,082 matching lines per JAR</strong>, including all <strong>93 entity suppliers</strong>,
+attribute base/modifier changes, real regeneration health writes, 100-tick hunger
+sequences and failed synchronization callbacks. Targeted Clippy passes. The
+internal absorption sink and starvation damage delivery are controlled;
+player absorption synchronization, attribute-change refresh, full damage and
+live gameplay integration remain pending.</p>
+<p>Entity attribute storage now shares immutable supplier bases and allocates each
+mutable instance only on first access. This retains dense lookup indices while
+avoiding space for unused instance objects in every entity.</p>
+<p><code>python3 tools/measure_attribute_memory.py --phase before|after</code> measures a Linux
+release-process workload of 20,000 held-live zombie attribute maps, using five
+fresh processes per case. Median process RSS changed from <strong>175,820 to 12,848
+KiB</strong> with defaults only, and <strong>175,800 to 29,076 KiB</strong> with four active attributes
+per entity. Both cases retain the same health-read checksum. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-attribute-memory-2026-10-07/before.json">before</a> and
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-attribute-memory-2026-10-07/after.json">after</a> reports record
+samples and source hashes; the baseline entity implementation is <code>fd185a6</code>.
+RSS includes runtime, catalog and allocator overhead. This is not whole-game
+memory, a timing benchmark or evidence of an FPS improvement.</p>
+<p>The optimized implementation passes both pinned JAR comparisons again:
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-attribute-memory-2026-10-07/entity-regression.json">entity attributes</a>
+(<strong>1,771,555 lines per JAR</strong>) and
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-attribute-memory-2026-10-07/health-regression.json">health/hunger composition</a>
+(<strong>666,082 lines per JAR</strong>). Targeted Clippy passes.</p>
+<p><code>combat_rules</code> implements armor/toughness and magic-protection damage arithmetic.
+It preserves the nonnull-weapon/server-level guards and clamps modified armor
+effectiveness only after the server enchantment hook.</p>
+<p><code>python3 tools/test_combat_rules_parity.py</code> compares actual <code>CombatRules</code> methods.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-combat-rules-2026-10-07/scoped-parity.json">combat rules report</a>
+records <strong>184,248 matching lines per JAR</strong>, including armor/toughness boundaries,
+random float bit patterns, nonfinite/signed-zero values, query mutations/failures,
+null/empty/unenchanted weapons and server/nonserver branches. Native unenchanted
+stacks have explicitly empty components. Targeted Clippy passes. Enchanted item
+components, damage tags, armor durability and the complete damage pipeline remain
+pending; the exposed enchantment hook is not an enchantment implementation.</p>
+<p><code>living_damage</code> implements the inner <code>actuallyHurt</code> sequence for base living
+entities and players. It preserves invulnerability/armor/magic dispatch, both
+absorption reads before the first write, guarded absorbed statistics, Java float
+rounding, player exhaustion/taken statistics, base-living second absorption
+writes, and combat/health/game-event ordering. Callback failures retain preceding
+writes and effects.</p>
+<p><code>python3 tools/test_living_damage_parity.py</code> compares actual LivingEntity/Player
+methods with real final absorption clamping and controlled phase/storage sinks.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-living-damage-2026-10-07/scoped-parity.json">living damage report</a>
+records <strong>161,198 matching lines per JAR</strong>, including entity/player paths, attacker
+types, stat limits/rounding, nonfinite values, mutations and failures at query
+boundaries. Targeted Clippy passes. Armor/magic results, health storage, combat/
+stat sinks and exhaustion delivery are controlled. Outer hurt gates, resistance/
+equipment binding, combat tracking and playable damage integration remain pending.</p>
+<p><code>player_food</code> implements player exhaustion, eating eligibility and the hunger
+threshold for exhaustive manoeuvres. Invulnerability reads the abilities field
+directly. Exhaustion additionally checks the client/server side before updating
+direct food storage; manoeuvre eligibility uses virtual food and ability lookups.
+<code>StoredPlayerFood</code> binds these operations to ordinary mutable <code>FoodData</code> state.</p>
+<p><code>python3 tools/test_player_food_parity.py</code> compares actual Player methods and
+native FoodData. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-player-food-2026-10-07/scoped-parity.json">player food report</a>
+records <strong>32,723 matching lines per JAR</strong>, covering direct/virtual distinctions,
+captured food identity during mutations, guard short-circuiting, injected failures,
+nonfinite exhaustion and integer hunger boundaries. The stored-state binding is
+also compared. Targeted Clippy passes. Consumable components, full ability storage
+and live player tick integration remain pending.</p>
+<p><code>damage_reduction</code> composes native armor/toughness arithmetic with living damage
+bypass checks and armor-durability dispatch. Its magic-reduction path preserves
+resistance amplifier overflow, reduced-damage clamping, resisted statistics,
+repeated attacker lookup and the server-only enchantment protection query.
+Armor attributes floor to Java's saturated integer range before float conversion.</p>
+<p><code>python3 tools/test_damage_reduction_parity.py</code> compares actual living methods
+for base entities and ServerPlayer receivers. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-damage-reduction-2026-10-07/scoped-parity.json">damage reduction report</a>
+records <strong>78,069 matching lines per JAR</strong>, covering bypass combinations,
+resistance/stat boundaries, numeric edges, query failures/mutations and actual
+empty-equipment protection iteration. Targeted Clippy passes. Equipment is empty;
+enchanted components, actual armor durability, registered damage/effect bindings
+and the full hurt sequence remain pending.</p>
+<p><code>synced_floats</code> stores multiple synchronized float fields. It preserves boxed
+float equality, per-field/global dirty state, ascending-ID dirty/default lists,
+received assignment without newly marking dirty, per-entry and batch callbacks,
+and prefix effects when an observer or field lookup fails. Callbacks may reenter
+the table to set/assign fields or drain existing dirty values.</p>
+<p><code>python3 tools/test_synced_floats_parity.py</code> compares actual <code>SynchedEntityData</code>.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-synced-floats-2026-10-07/scoped-parity.json">synchronized float report</a>
+records <strong>554,909 matching lines per JAR</strong>, including forced/equal updates,
+received duplicates, reentrant operations, missing IDs, callback failures and
+NaN/signed-zero equality. Native gaps are untouched default float items; observed
+keys are explicit configured IDs. Targeted Clippy passes. Other serializers,
+serializer-mismatch errors, wire codecs and player absorption binding remain
+pending.</p>
+<p><code>player_health</code> binds ordinary registered player attributes to health and
+absorption in one synchronized float table. The player absorption getter and
+internal setter use virtual data access; health retains its direct data access.
+The final absorption setter still applies the registered maximum before writing.</p>
+<p><code>python3 tools/test_player_health_parity.py</code> compares actual Player methods,
+registered player attributes and <code>SynchedEntityData</code>, exporting the actual pinned
+health/absorption field IDs. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-player-health-2026-10-07/scoped-parity.json">player health report</a>
+records <strong>243,146 matching lines per JAR</strong>, covering modified limits, healing,
+absorption reads/writes, combined dirty/default lists, received assignments,
+callback packet drains and failures. Targeted Clippy passes. Observer effects
+are controlled; custom virtual data replacement, other synchronized serializers,
+wire codecs and full player damage/tick integration remain pending.</p>
+<p><code>server_player_damage</code> composes ordinary server-player inner damage with
+registered armor/toughness and health/absorption limits, shared synchronized
+float storage and stored hunger. Armor break callbacks may change attributes
+before the hit queries armor; received damage uses the actual reduction and
+health modules, and player exhaustion retains its ability/client guards.</p>
+<p><code>python3 tools/test_server_player_damage_parity.py</code> compares the native Player
+inner damage method on ServerPlayer receivers, using actual native reduction,
+registered modified attributes, synchronized data and FoodData. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-server-player-damage-2026-10-07/scoped-parity.json">server-player damage report</a>
+records <strong>373,455 matching lines per JAR</strong>, covering repeated hits, bypass flags,
+resistance, numeric edges, armor attribute mutation, dirty packet drains and
+callback failures. Targeted Clippy passes. Empty equipment and controlled
+source/effect, durability, combat/stat/event services bound this scope; outer
+hurt gates, enchanted equipment and the complete player lifecycle remain pending.</p>
+<p><code>living_hurt</code> implements the outer living hurt sequence: early rejection,
+blocking/freezing/helmet dispatch, non-finite damage sanitization, repeated-hit
+cooldowns, hurt-animation writes, attribution, impact/knockback, death/sound
+branches, last-source timestamps, effect notifications and criterion dispatch.
+Services receive live hurt state, including the distinct field writes before and
+after the inner hit in fresh-hit and cooldown-difference branches.</p>
+<p><code>python3 tools/test_living_hurt_parity.py</code> invokes the native LivingEntity method
+directly on base and ServerPlayer receivers. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-living-hurt-2026-10-07/scoped-parity.json">living hurt report</a>
+records <strong>441,413 matching lines per JAR</strong>, including numeric edges, repeated
+hits, callback mutations/failures, empty-hand death-protection lookup, native
+soundless blocking components and victim criteria with no listeners. Targeted
+Clippy passes. Inner damage, blocking amounts, sounds, knockback, death and
+attribution/effect services are controlled. Successful totems, attacker-player
+criteria, actual blocking reduction, full service bindings and player-specific
+outer gates remain pending.</p>
+<p><code>player_hurt</code> adds the player ability/invulnerability gates, no-action reset,
+shoulder removal, damage-source difficulty scaling and exact-zero rejection
+before living hurt. The server-player wrapper first checks PvP permission for
+player attackers and player owners of arrow attackers. Difficulty is queried
+separately for the peaceful, easy and hard branches as in vanilla.</p>
+<p><code>python3 tools/test_player_hurt_parity.py</code> compares actual Player and ServerPlayer
+methods through the native living hurt sequence. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-player-hurt-2026-10-07/scoped-parity.json">player hurt report</a>
+records <strong>410,880 matching lines per JAR</strong>, including all three-query difficulty
+combinations, player/arrow-owner PvP gates, repeated hits and callback failures.
+Targeted Clippy passes. Native downstream living services retain the controlled
+fixture scope above; invulnerability internals, rule/source registries, actual
+team permissions, successful totems, attacker server-player criteria and complete
+player lifecycle integration remain pending.</p>
+<p><code>damage_immunity</code> implements entity permanent/temporary invulnerability and base
+source immunity, living enchantment dispatch, ordered player damage gamerules,
+and server-player dimension-change/client-loading checks. It preserves early
+returns and repeated source-tag queries across the inheritance layers.</p>
+<p><code>python3 tools/test_damage_immunity_parity.py</code> compares each native layer on
+ServerPlayer receivers, retaining native empty-equipment enchantment iteration.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-damage-immunity-2026-10-07/scoped-parity.json">damage immunity report</a>
+records <strong>170,314 matching lines per JAR</strong>, including mixed damage tags, rule
+precedence, virtual flag mutations and callback failures. Targeted Clippy passes.
+Source/rule queries and virtual flags are controlled; registered source/rule
+bindings, nonempty enchantment immunity and full pipeline integration remain
+pending.</p>
+<p><code>server_player_combat</code> binds server/player/living outer hurt to the checked
+registered-attribute, synchronized-health/absorption and hunger inner damage
+path. Dead-or-dying reads live health and the direct death flag; the outer
+cooldown/animation state is shared across hits. PvP, blocking, effects,
+attribution, knockback, death and other world services remain explicit.</p>
+<p><code>python3 tools/test_server_player_combat_parity.py</code> compares the actual native
+ServerPlayer hurt chain through actual inner reduction and player storage. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-server-player-combat-2026-10-07/scoped-parity.json">server-player combat report</a>
+records <strong>561,528 matching lines per JAR</strong>, including repeated hits, death
+rejection, modified attributes, cooldown differences, packet drains, numeric
+edges and failures after partial writes. Some fixtures explicitly reset cooldown
+between hits; they do not claim entity-tick coverage. Targeted Clippy passes.
+Invulnerability answers, blocking amounts, armor-durability callbacks, effects,
+PvP permission, combat/event/knockback/death services and criterion listeners are
+controlled. Enchanted items, registered sources, actual lifecycle services and
+playable integration remain pending.</p>
+<p>The stored-player combat binding now executes the verified server-player
+invulnerability predicates at every outer and inner query. Its inner damage body
+is shared with standalone living/player damage after the required predicate has
+run. Native integration retains inherited Entity/LivingEntity/Player/ServerPlayer
+immunity methods, including empty-equipment enchantment iteration, gamerule
+precedence, dimension changes and client-loading guards.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-server-player-combat-immunity-2026-10-07/scoped-parity.json">combat immunity integration report</a>
+records <strong>1,176,994 matching lines per JAR</strong>. The standalone inner-damage
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-server-player-combat-immunity-2026-10-07/inner-damage-regression.json">regression report</a>
+retains <strong>161,198 matching lines per JAR</strong> after extracting the shared body.
+Targeted Clippy passes. Virtual flags, source tags/rule values and the other
+world services listed above remain controlled; the fixture now executes the
+immunity decisions themselves instead of supplying their final result.</p>
+<p><code>damage_source</code> imports version-checked native decoded damage definitions and
+resolves their raw tag resources with the shared tag implementation. Sources
+retain distinct direct/causing entities and optional explicit positions. Weapon
+and fallback position queries use the direct entity; difficulty scaling uses
+the stored causing entity, while creative-source detection dispatches virtual
+causing-entity access before reading player abilities.</p>
+<p><code>python3 tools/test_damage_source_parity.py</code> covers all <strong>51 bundled damage
+types and 36 damage-type tags</strong>, using the actual native DamageType codec and
+TagLoader. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-damage-source-2026-10-07/scoped-parity.json">damage-source report</a>
+records <strong>152,175 matching lines per JAR</strong>, including constructor identities,
+scaling, exhaustion, tag/type membership, position/weapon queries, virtual
+causing-entity replacement, mutations and failures. Targeted Clippy passes.
+Catalogs are immutable snapshots with local indices, not network IDs. Rust
+DamageType codecs, runtime reload, death-message generation, full entity query
+bindings and combat source integration remain pending.</p>
+<p>Registered damage sources now drive a composed player-combat fixture. Source
+helpers map the immunity, outer-hurt and reduction tag enums to the imported
+vanilla tags. Native source methods supply exhaustion, difficulty scaling,
+creative-source abilities and direct-entity weapon selection through the real
+ServerPlayer hurt chain; thorns also follows its native secondary-sound branch.</p>
+<p><code>python3 tools/test_registered_player_combat_parity.py</code> records <strong>1,431,711
+matching lines per JAR</strong> in the
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-registered-player-combat-2026-10-07/scoped-parity.json">registered player-combat report</a>,
+covering all 51 damage types and 36 tags, direct/causing entity combinations,
+repeated hits, health/absorption/hunger, cooldown state and callback failures.
+Targeted Clippy passes. Equipment is unenchanted; virtual entity flags/rule
+values, blocking amounts, durability, PvP permission, attribution, effects,
+knockback/death services and empty criterion listeners remain controlled.
+Complete entity lifecycle and playable game integration remain pending.</p>
+<p><code>blocking_rules</code> implements damage-reduction angle/type conditions, ordered
+reduction sums and clamping, block delay/disable tick rounding and item-damage
+threshold/floor arithmetic. Source type-set membership is queried only when its
+entry's angle condition reaches that check.</p>
+<p><code>python3 tools/test_blocking_rules_parity.py</code> compares native BlocksAttacks
+records and direct holder-set membership. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-blocking-rules-2026-10-07/scoped-parity.json">blocking rules report</a>
+records <strong>105,068 matching lines per JAR</strong>, including exact angle boundaries,
+NaN/infinity/signed zero, randomized float bits, source-type mutations and query
+failures. Targeted Clippy passes. Angles are supplied in radians; direction/acos
+calculation, component codecs, item durability, sounds and full blocking
+integration remain pending.</p>
+<p><code>view_direction</code> implements native float-table pitch/yaw vectors and horizontal
+blocking angles, using the pinned pure-Rust <code>libm</code> 0.2.16 inverse cosine. A local
+203,072-input probe found 7,908 differences with the platform <code>acos</code>, versus none
+with this pinned implementation, so platform math is not used for this path.</p>
+<p><code>python3 tools/test_view_direction_parity.py</code> compares actual native view vectors
+and Java Math.acos, plus the native view/subtract/normalize/dot/acos composition
+used by blocking. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-view-direction-2026-10-07/scoped-parity.json">view-direction report</a>
+records <strong>226,459 matching lines per JAR</strong>, including random doubles, inverse-
+cosine boundaries, arbitrary float rotations, degenerate horizontal vectors and
+the widened float-PI fallback. Targeted Clippy passes. Full item-blocking dispatch
+and validation against JVMs on other platforms remain pending. This does not
+resolve the separately tracked Math.cos/Gaussian portability differences.</p>
+<p><code>item_blocking</code> implements living blocking dispatch: item/component capture,
+bypass and pierced-arrow rejection, source direction, component reduction,
+blocking-item damage dispatch and the later non-projectile melee response.
+The virtual level/used hand are queried after reduction; melee response retains
+the original server-level argument and performs a fresh direct-entity lookup.</p>
+<p><code>python3 tools/test_item_blocking_parity.py</code> compares actual LivingEntity
+applyItemBlocking with native components on base and ServerPlayer receivers.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-blocking-2026-10-07/scoped-parity.json">item-blocking report</a>
+records <strong>87,930 matching lines per JAR</strong>, including callback mutations/failures,
+captured items/components, piercing/bypass combinations, native direction/math,
+client/stat guards and melee responses. Targeted Clippy passes. Native stacks
+are explicitly undamageable; actual damageable-item mutation, blocking eligibility,
+component codecs and complete combat/world integration remain pending.</p>
+<p><code>item_use</code> implements blocking-item eligibility and both elapsed-use timer
+overloads. It retains the original blocking delay while rereading active-item
+storage and remaining ticks after the virtual duration query; partial-tick
+queries preserve the second virtual use-state check.</p>
+<p><code>python3 tools/test_item_use_parity.py</code> compares the actual inherited native
+methods with real blocking components and controlled virtual item durations.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-use-2026-10-07/scoped-parity.json">item-use report</a>
+records <strong>108,690 matching lines per JAR</strong>, covering wrapping tick arithmetic,
+delay boundaries, absent components, empty stacks, shared item types, partial
+float values and callback mutations/failures. Targeted Clippy passes. Full
+item-use lifecycle, damageable-item storage and complete combat/world integration
+remain pending.</p>
+<p><code>item_durability</code> stores the durability projection of an item stack, including
+raw versus visible counts/components, clamped damage access, damageability/break
+predicates and wrapping count changes. Server-level damage preserves creative
+immunity, the positive float enchantment pipeline, advancement-before-write and
+copy-before-shrink ordering. The non-breaking variant retains its native empty
+break consumer, including unusual invalid component values.</p>
+<p><code>python3 tools/test_item_durability_parity.py</code> compares actual unenchanted native
+ItemStack operations. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-durability-2026-10-07/scoped-parity.json">durability report</a>
+records <strong>81,762 matching lines per JAR</strong>, including absent components, empty/air
+stacks, unbreakable flags, integer boundaries, callback mutations and failures.
+Targeted Clippy passes. This is a durability projection, not complete item-stack
+component storage. Enchantment effects, component codecs, equipment break
+handling and full gameplay integration remain pending.</p>
+<p><code>blocking_item_damage</code> composes blocking-component item-damage arithmetic with
+stored durability. It preserves player-only handling, the passed level's client
+guard for item-use statistics, the later virtual entity-level check and the
+server-player-only creative/advancement queries. Break callbacks receive the
+pre-shrink stack copy and the caller's original equipment slot.</p>
+<p><code>python3 tools/test_blocking_item_damage_parity.py</code> compares actual native
+BlocksAttacks calls into ItemStack storage on non-player, Player and ServerPlayer
+receivers. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-blocking-item-damage-2026-10-07/scoped-parity.json">blocking durability report</a>
+records <strong>71,800 matching lines per JAR</strong>, including scalar float boundaries,
+invalid/absent durability components, statistic item capture, callback mutations
+and failures. Targeted Clippy passes. Stacks are unenchanted; full component
+storage, equipment lifecycle and complete combat/world integration remain pending.</p>
+<p><code>item_use_lifecycle</code> implements living use ticks, per-item updates, completion,
+release and stop ordering. Stable stack handles preserve type versus identity
+checks, rereads after virtual hand queries, captured level/item arguments,
+wrapping countdowns, returned-item placement and failure-visible state changes.</p>
+<p><code>python3 tools/test_item_use_lifecycle_parity.py</code> compares actual inherited native
+methods and ItemStack dispatch with controlled custom item handlers. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-use-lifecycle-2026-10-07/scoped-parity.json">lifecycle report</a>
+records <strong>144,736 matching lines per JAR</strong>, including empty stacks, changed
+held/active items, shared item types, client/server queries, finish vibrations,
+kinetic-map presence and callback mutation/failure ordering. Targeted Clippy
+passes. Starting use, actual synchronized flags, consumable/kinetic effects,
+remainder/cooldown components and full inventory/game-tick integration remain
+pending.</p>
+<p><code>item_use_start</code> starts use from a captured held stack, writes the returned
+duration after its callback, synchronizes equipment before changing using/offhand
+flags, emits the component's start vibration and resets recent kinetic enemies
+when the final active stack has a kinetic-weapon component.</p>
+<p><code>python3 tools/test_item_use_start_parity.py</code> compares inherited native
+startUsingItem and its private equipment packet construction. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-use-start-2026-10-07/scoped-parity.json">start-use report</a>
+records <strong>84,873 matching lines per JAR</strong>, including captured stack/level/hand
+arguments, empty stacks, callback mutation/failure ordering, flag writes, native
+UseEffects/KineticWeapon presence and clearing a populated kinetic-enemy map.
+Targeted Clippy passes; all 20 existing horizon-world library tests pass with
+these changes. Synchronized flag storage, packet encoding/delivery, kinetic
+combat and complete inventory/game-tick integration remain pending.</p>
+<p><code>item_use_catalog</code> imports all 1,658 pinned item identities and a typed projection
+of their default components for stack size, durability and use-duration/release
+queries. Component-driven use preserves consumable precedence over blocking and
+kinetic weapons. Registered duration overrides remain separate; consumables
+truncate float ticks while instruments floor them. Empty stacks query air
+behavior and hide their stored components.</p>
+<p><code>python3 tools/test_item_use_catalog_parity.py</code> binds vanilla's actual component
+initializers and confirms both JARs export equivalent defaults. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-use-catalog-2026-10-07/scoped-parity.json">registered item-use report</a>
+records <strong>246,715 matching lines per JAR</strong>, covering every item default, count
+changes and component mutation sequences, override behavior, stackability,
+durability and integer/float extremes. Targeted Clippy passes. The imported
+projection does not implement all item components or their codecs; full inventory,
+enchantment effects and stored gameplay integration remain pending.</p>
+<p><code>component_patch</code> stores shared immutable prototypes and ordered copy-on-write
+patches. Set/remove return values, redundant-value sanitation, explicit removals,
+unsanitized restoration, independent copies and saved patch snapshots retain
+native behavior. Entry iteration emits patched values before untouched defaults;
+key-set order instead applies the patch to the prototype's key sequence.</p>
+<p><code>python3 tools/test_component_patch_parity.py</code> compares actual native patched
+maps. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-component-patch-2026-10-07/scoped-parity.json">component-patch report</a>
+records <strong>622,680 matching lines per JAR</strong>, including integer/boxed-float equality,
+NaN/signed zero, copy isolation and mutation-before-error when a restored removal
+has no prototype default. Targeted Clippy passes. Prototypes have at most seven
+keys in this suite; callers supply prototype order and native value equality.
+Native large-prototype identity-hash ordering, codecs, mutable payload aliases
+and full item/inventory integration remain pending.</p>
+<p><code>component_durability</code> binds damage/count queries and mutations directly to
+shared component prototypes and patches. The durability algorithm now accepts
+<code>DurabilityStorage</code>, so writes and storage errors occur at their native points,
+including before break callbacks. The earlier plain durability projection
+remains supported through the same interface.</p>
+<p><code>python3 tools/test_component_durability_parity.py</code> compares native ItemStack
+operations with nonempty prototypes and observable patches at every callback.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-component-durability-2026-10-07/scoped-parity.json">component durability report</a>
+records <strong>83,727 matching lines per JAR</strong>, including original/copy independence
+and mutation-before-error for unsanitized restored removals. Targeted Clippy
+passes. The refactor also preserves both native regression suites:
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-component-durability-2026-10-07/scalar-regression.json">scalar durability</a>
+(<strong>81,762 lines per JAR</strong>) and
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-component-durability-2026-10-07/blocking-regression.json">blocking durability</a>
+(<strong>71,800 lines per JAR</strong>). Full component codecs, enchanted durability, equipment
+and complete gameplay integration remain pending.</p>
+<p><code>item_stack_storage</code> implements stored item identity, count/pop-time storage,
+component visibility, copying, splitting, transmutation and consumption. Copies
+share component data until a write; canonical empty results are explicit so a
+containing item store can preserve reference identity. Negative counts and
+wrapping arithmetic follow the pinned methods, including mutations to an empty
+stack and consumption callbacks that change or fail after a copy is captured.</p>
+<p><code>python3 tools/test_item_stack_storage_parity.py</code> compares 7,856 fixtures with
+actual native ItemStack methods and small bound integer-component prototypes.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-stack-storage-2026-10-07/scoped-parity.json">storage report</a>
+records <strong>568,580 matching lines per JAR</strong>. Comparisons include raw and visible
+state, component patch order, stack identity and item/component/count equality.
+Targeted Clippy passes. The fixture arena preserves canonical EMPTY aliases;
+a production inventory, full component values/codecs and complete item-use,
+equipment and game-tick integration remain pending.</p>
+<p><code>item_stack_refs</code> adds shared stack identity with automatic reference-counted
+lifetime management on the simulation thread. <code>simple_container</code> uses these
+references for get/set, merging, removals, reverse removal by type, clearing,
+capacity checks and item counts. Copies retain independent component patches;
+container slots and callers can deliberately share the same stack.</p>
+<p><code>python3 tools/test_simple_container_parity.py</code> compares actual native container
+and stack methods, including changes and failures in virtual size/change hooks.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-simple-container-2026-10-07/scoped-parity.json">container report</a>
+records <strong>590,402 matching lines per JAR</strong>. It checks alias identity, raw/visible
+counts, empty-stack references, component-sensitive merging, overflow, invalid
+indices and mutation prefixes on failure. In particular, native insertion into
+the first empty slot clears the remainder before limiting the inserted copy.
+Targeted Clippy passes. Player inventory, menus, crafting accounting, persistence,
+arbitrary getItem/setItem overrides and complete gameplay integration remain
+pending. Reference counting here has not been benchmarked as a performance gain.</p>
+<p><code>player_inventory</code> implements the 36 ordinary slots, seven mapped equipment
+slots, shared entity equipment, selected hotbar slot, picking, matching/crafting
+eligibility, removals, replacement, clearing and the change counter. Equipment
+retains populated entries when cleared. Stack and equipment references can be
+shared across inventories; replacing an inventory retains stack aliases.</p>
+<p><code>python3 tools/test_player_inventory_parity.py</code> compares actual native Inventory,
+EntityEquipment and ItemStack methods. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-player-inventory-2026-10-07/scoped-parity.json">inventory report</a>
+records <strong>790,440 matching lines per JAR</strong>, including invalid-index failure
+prefixes, selected-slot changes, negative equipment removal amounts, ordinary
+versus equipment identity, self-replacement and shared equipment clearing.
+Components cover damage, unbreakable presence, a fixed enchantment and literal
+custom names. Native Map.of iteration order varies by JVM; fixtures explicitly
+supply equipment-map order to both sides when removing an aliased reference.
+Targeted Clippy passes. Pickup, inventory/equipment ticks, menus, recipe
+accounting, persistence, full component values and complete gameplay integration
+remain pending.</p>
+<p><code>inventory_pickup</code> composes player slot search and insertion with shared stack
+storage. Search checks the selected slot, offhand, then ordinary slots. Insertion
+consumes its source, preserves component-sensitive merging and pop time, and
+handles damaged stacks and creative fallback at their native callback points.</p>
+<p><code>python3 tools/test_inventory_pickup_parity.py</code> compares actual native
+Inventory.add/getSlotWithRemainingSpace, ItemStack operations and shared
+equipment. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-inventory-pickup-2026-10-07/scoped-parity.json">pickup report</a>
+records <strong>424,282 matching lines per JAR</strong>, including source/destination aliases,
+callback mutations, failures, count overflow, invalid slots and the damaged
+copy-and-clear that happens before slot validation. Targeted Clippy passes.
+Native crash-report wrapping is represented as an error; diagnostic text is not
+compared. Item-entity pickup events, networking, inventory ticks, menus, full
+components and complete gameplay integration remain pending.</p>
+<p><code>inventory_tick</code> composes inventory/equipment iteration with ItemStack's pop-time
+update and ServerLevel-only item dispatch. It retains stack arguments across
+level callbacks, reads hotbar selection at the native point and observes changes
+to later equipment entries during the same tick. Aliased stacks can be visited
+more than once, with each visit updating their shared pop-time counter.</p>
+<p><code>python3 tools/test_inventory_tick_parity.py</code> compares actual Inventory.tick,
+EntityEquipment.tick and ItemStack.inventoryTick with custom item handlers. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-inventory-tick-2026-10-07/scoped-parity.json">tick report</a>
+records <strong>195,957 matching lines per JAR</strong>, including empty stacks, callbacks
+that mutate later slots, weakly consistent equipment iteration and failure
+prefixes. The client comparison uses an actual allocated ClientLevel for the
+non-server branch; the dedicated JAR uses null because ClientLevel is absent.
+Targeted Clippy passes. Registered items' individual tick effects, full entity
+and world ticking and complete gameplay integration remain pending.</p>
+<p><code>player_equipment</code> binds the main hand to the selected inventory slot and other
+equipment to the shared entity map. Hand/slot writes capture the previous item,
+store the new reference and then invoke the equip callback. Clearing the base
+equipment map does not clear the selected stack; clearing the inventory does.</p>
+<p><code>python3 tools/test_player_equipment_parity.py</code> compares actual PlayerEquipment
+and inherited LivingEntity hand/slot access over a real native Inventory. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-player-equipment-2026-10-07/scoped-parity.json">equipment report</a>
+records <strong>408,852 matching lines per JAR</strong>, including selection changes, callback
+mutations/failures, old/new aliases, raw enum-map main-hand entries and the
+selected main-hand override. Targeted Clippy passes. Full onEquipItem effects,
+synchronized flags, active-use integration and complete gameplay integration
+remain pending.</p>
+<p>The item-use interfaces now accept cloned shared references as well as small
+copyable handles. <code>StackRef</code> equality compares object identity; component/count
+value comparisons remain explicit. Captured references stay alive through
+callbacks that replace the active or held stack. The lifecycle fixture now uses
+the production reference-counted stack implementation.</p>
+<p>The native regressions retain <strong>144,736 lifecycle</strong>, <strong>84,873 start-use</strong> and
+<strong>108,690 eligibility/timing</strong> matching lines per JAR. Reports:
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-shared-item-use-2026-10-07/item-use-lifecycle.json">lifecycle</a>,
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-shared-item-use-2026-10-07/item-use-start.json">start</a>,
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-shared-item-use-2026-10-07/item-use.json">eligibility</a>.
+Targeted Clippy and all 20 horizon-world library tests pass. Hand queries and
+flags remain controlled in these fixtures; composing them with actual player
+inventory, synchronized flags and full item effects remains pending.</p>
+<p><code>synced_values</code> shares the synchronized scalar algorithm between bytes and
+floats, retaining Java boxed-float equality. <code>living_use_flags</code> binds the pinned
+byte field to using-item/offhand queries and signed-mask flag writes. Flag writes
+use the same write-before-callback, callback-before-dirty ordering as other
+synchronized values.</p>
+<p><code>python3 tools/test_synced_bytes_parity.py</code> compares actual byte SynchedEntityData
+and inherited LivingEntity flag methods. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-synced-bytes-2026-10-07/scoped-parity.json">byte/flag report</a>
+records <strong>572,100 matching lines per JAR</strong>, covering all initial bytes, signed
+masks, forced updates, assignments, reentrant callbacks, dirty packing and
+failures. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-synced-bytes-2026-10-07/float-regression.json">float regression</a>
+retains <strong>554,909 matching lines per JAR</strong>. Targeted Clippy passes. Mixed-serializer
+storage, entity schemas, wire codecs and full item-use/gameplay integration remain
+pending.</p>
+<p><code>inventory_use</code> binds living item-use ticks, completion, release and stop to
+actual player inventory/hands, shared stack references and synchronized byte
+flags. Equipment storage changes precede equip callbacks; synchronized flag
+writes retain their value/callback/dirty ordering. Effects receive the same
+mutable inventory, flag storage and active-use state.</p>
+<p><code>python3 tools/test_inventory_use_parity.py</code> compares inherited native lifecycle
+methods composed with real Inventory, PlayerEquipment and SynchedEntityData. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-inventory-use-2026-10-07/scoped-parity.json">combined report</a>
+records <strong>349,310 matching lines per JAR</strong>, including live count mutations,
+selection/offhand changes, equipment callbacks, flag dirty prefixes, completion
+replacement and failed callbacks. Targeted Clippy passes. Item/level effects and
+the equip/synchronized observers are controlled; starting use, default observer
+reactions, consumables, kinetic combat, remainders/cooldowns and complete gameplay
+integration remain pending.</p>
+<p><code>inventory_use::flags_updated</code> implements LivingEntity's synchronized use-flag
+reaction. On clients, a using flag can select the held stack and query its
+duration; clearing use can clear the active stack and remaining time. Server
+notifications leave active-use state unchanged. Received assignments notify even
+when the byte value is unchanged, while ordinary unchanged writes do not.</p>
+<p><code>python3 tools/test_use_flag_reaction_parity.py</code> invokes the inherited native
+observer through actual synchronized writes/assignments, player inventory and
+equipment. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-use-flag-reaction-2026-10-07/scoped-parity.json">reaction report</a>
+records <strong>366,331 matching lines per JAR</strong>, including duration callbacks,
+empty-but-distinct stack references, signed masks, repeated received values,
+selection/count mutations and failures before dirty marking. Ordinary lifecycle
+operations are also exercised with the real observer reaction. Targeted Clippy
+passes. Other synchronized keys, start-use packet flow, full item/equip effects
+and complete gameplay integration remain pending.</p>
+<p><code>inventory_use</code> now binds start-use to stored inventory, shared active stacks
+and synchronized flag reactions. Server equipment synchronization precedes flag
+writes, followed by start vibration and the kinetic-enemy reset service. Captured
+stack/hand arguments and live state reads retain native callback ordering.</p>
+<p><code>python3 tools/test_inventory_use_start_parity.py</code> exercises inherited native
+start-use with actual Inventory, PlayerEquipment and synchronized storage. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-inventory-use-start-2026-10-07/scoped-parity.json">start report</a>
+records <strong>9,506 fixtures and 223,004 matching lines per JAR</strong>, including native
+equipment packet construction, observer reactions, callback mutations/failures
+and clearing a populated kinetic-enemy map. Targeted Clippy passes. Packet
+encoding/delivery, the full kinetic-enemy map and combat, complete item/equip
+effects and full gameplay integration remain pending.</p>
+<p><code>item_template</code> implements immutable template construction, conversion from
+stacks, count replacement with native reference identity, current-prototype
+component lookup, creation and patch precedence. Strict validation checks
+damageable/stackable incompatibility before contained components and top-level
+size. A required component-schema service handles contained validation. Rejected
+creations return canonical EMPTY; rejected applied patches restore the exact
+previous raw patch, including redundant entries.</p>
+<p><code>python3 tools/test_item_template_parity.py</code> compares actual ItemStackTemplate
+and ItemStack validation with scalar max-stack-size/max-damage/damage components.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-template-2026-10-07/scoped-parity.json">template report</a>
+records <strong>518,556 matching lines per JAR</strong>, covering zero/negative/overflow-edge
+counts, changed prototypes, component removals, aliasing and validation rollback.
+Targeted Clippy passes. Contained components and bundle-weight validation are
+not exercised by this corpus; their schema implementation, codecs, use-remainder
+integration and complete gameplay integration remain pending.</p>
+<p><code>use_remainder</code> converts a consumed stack using the validated item-template
+factory. Infinite materials and unchanged visible counts retain the original
+reference. An exhausted stack returns the created remainder; otherwise an extra
+item callback runs and the captured original reference is returned. Callback
+mutations and failures retain their native prefix.</p>
+<p><code>python3 tools/test_use_remainder_parity.py</code> compares actual UseRemainder with
+native template creation. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-use-remainder-2026-10-07/scoped-parity.json">remainder report</a>
+records <strong>353,264 matching lines per JAR</strong>, including canonical EMPTY creation,
+empty-but-distinct inputs, reference replacement and callback failures. Targeted
+Clippy passes. The concrete actor inventory/drop handler, contained-component
+validation, finish-use side effects and complete gameplay integration remain
+pending.</p>
+<p><code>bundle_weight</code> implements checked native fraction construction, addition and
+multiplication, nested-bundle overhead, occupied-beehive weight and lazy caching
+of successful and failed weight calculations. Contained validation checks
+container sizes, then bundle sizes and weight, then charged projectile sizes.
+It does not recursively apply full strict validation to each contained item.</p>
+<p><code>python3 tools/test_bundle_weight_parity.py</code> compares pinned Fraction arithmetic,
+actual BundleContents and ItemStack strict validation. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-bundle-weight-2026-10-07/scoped-parity.json">bundle report</a>
+records <strong>137,332 matching lines per JAR</strong>, including overflow, negative template
+counts, changed prototypes, cached errors, nested bundles, bee presence, empty
+component visibility and validation order. Targeted Clippy passes. Typed schema
+adapters remain fixture-local; complete bundle inventory operations, codecs,
+item-use integration and full gameplay integration remain pending.</p>
+<p><code>java_hash_map</code> supplies default-capacity storage for non-null keys with native
+hash codes and a total comparable ordering consistent with equality. It retains
+linked bucket traversal, tree-bin root movement, red/black insertion/deletion,
+resize splits, iterator removal and structural-modification checks. Tree lookup
+uses the ordered tree; removed arena slots are reused.</p>
+<p><code>python3 tools/test_java_hash_map_parity.py</code> compares this API with the actual
+JDK 25 HashMap used by vanilla cooldown storage. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-java-hash-map-2026-10-07/scoped-parity.json">map report</a> records
+<strong>601,084 matching lines</strong> for each pinned-game classpath run, including all-key
+collisions, tree/list transitions, varied removal orders, iterator mutations
+and clear-on-empty behavior. Both runs use the same installed JDK; this is a
+collection comparison, not a gameplay parity claim. Targeted Clippy passes.
+Null/non-comparable keys, alternate map constructors and unexposed Map methods
+are outside this storage API. Concrete cooldown and gameplay integration remain
+pending.</p>
+<p><code>item_cooldowns</code> composes cooldown entries with native hash-map ordering. Adds
+store before start notifications; removals notify even for missing groups. Tick
+expiry removes before end notifications, rereads the live clock and preserves
+iterator invalidation after callback mutations. Percentages use native wrapping
+integer differences and float arithmetic. <code>identifier</code> supplies validated names,
+Java hashes and path-first ordering. UseCooldown converts seconds and retrieves
+the player cooldown manager before adding through the stack's current group.</p>
+<p><code>python3 tools/test_item_cooldowns_parity.py</code> compares actual ItemCooldowns and
+UseCooldown over real stack components, with controlled player/start/end
+callbacks. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-cooldowns-2026-10-07/scoped-parity.json">cooldown report</a>
+records <strong>167,906 matching lines per JAR</strong>, including colliding identifiers,
+wrapping clocks, zero/negative durations, float edge cases, empty visibility,
+reentrant ticks and mutation/failure prefixes. Targeted Clippy passes. Complete
+item-finish integration, server cooldown packets and full gameplay remain
+pending.</p>
+<p><code>item_after_use</code> composes shared stack copying, item completion, validated
+remainder creation and cooldown application. The original stack is copied before
+the item handler; remainder, cooldown and count are captured from that copy
+before actor callbacks. The original copy reaches cooldown grouping even when
+the item handler returns another stack. <code>use_remainder::convert_with</code> permits
+creation and delivery to share the same mutable world without overlapping
+borrows. Templates and component patches support structural value equality.</p>
+<p><code>python3 tools/test_item_after_use_parity.py</code> invokes actual
+ItemStack.finishUsingItem and native remainder/template/cooldown implementations.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-after-use-2026-10-07/scoped-parity.json">completion report</a>
+records <strong>211,804 matching lines per JAR</strong>, including prototype changes, original
+copies, empty aliases and mutations/failures at each effect boundary. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-after-use-2026-10-07/remainder-regression.json">remainder regression</a>
+retains <strong>353,264 matching lines per JAR</strong>. Targeted Clippy passes. Item handlers
+and actor extra-item delivery remain controlled; concrete consumables, full
+inventory-use binding, contained schemas and complete gameplay remain pending.</p>
+<p><code>extra_items::deliver</code> connects server-player remainder delivery to actual
+inventory pickup. Failed insertion reaches the predicted drop service with the
+same remaining stack; successful insertion retains native count consumption and
+slot aliases. The drop service represents throwRandomly=false and
+Prediction::PREDICTED.</p>
+<p><code>python3 tools/test_extra_items_parity.py</code> composes native item completion,
+remainders and cooldowns with inherited ServerPlayer extra-item handling and
+real Inventory/PlayerEquipment. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-extra-items-2026-10-07/scoped-parity.json">delivery report</a>
+records <strong>272,124 matching lines per JAR</strong>, including full/partially filled
+inventories, offhand merging, aliased slots, creative material queries, partial
+insertion and callback failures. Targeted Clippy passes. Drop arguments are
+verified, but entity spawning remains controlled. Concrete item handlers, full
+contained schemas, complete use lifecycle and full gameplay remain pending.</p>
+<p><code>food_properties</code> implements the food consumption listener with stored FoodData
+and native random streams. It captures the actor's random source before the
+first sound, updates hunger and saturation for players, then emits the burp
+sound using the captured source and current position.</p>
+<p><code>python3 tools/test_food_properties_parity.py</code> compares actual
+FoodProperties.onConsume with real FoodData and both native random generators.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-food-properties-2026-10-07/scoped-parity.json">food listener report</a>
+records <strong>70,632 matching lines per JAR</strong>, including player/non-player actors,
+sound arguments, subsequent random state, changed food stores and positions,
+and callback mutation/failure prefixes. Targeted Clippy passes. Sound playback,
+complete consumable dispatch, particles/effects and full gameplay integration
+remain pending.</p>
+<p><code>item_particles</code> emits eating particles from one retained ItemStackTemplate.
+Each iteration reads the actor's direct random field and current rotations;
+eye-height and level callbacks preserve native evaluation order. Component
+mutations after capture do not alter the particle template.</p>
+<p><code>python3 tools/test_item_particles_parity.py</code> compares inherited
+LivingEntity.spawnItemParticles with real templates and both native random
+generators. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-item-particles-2026-10-07/scoped-parity.json">particle report</a>
+records <strong>143,167 matching lines per JAR</strong>, including exact position/velocity
+bits, empty stacks, negative particle counts, snapshot identity, float edge
+cases, random-source replacement and callback mutation/failure prefixes.
+Targeted Clippy passes. The fixture uses scalar damage component patches and
+controlled particle delivery; renderer enqueue, full consumable dispatch and
+complete gameplay remain pending.</p>
+<p><code>consumable</code> supplies consumption timing and particle/sound dispatch. Both
+eating and drinking pitch draws occur for every animation before particle
+callbacks. Sound overrides run afterward; volume and pitch retain their
+previously drawn values. Particle emission may use a different actor random
+source from the one supplied for sound selection.</p>
+<p><code>python3 tools/test_consumable_emission_parity.py</code> composes actual Consumable
+emission with inherited LivingEntity particles and real item templates. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-consumable-emission-2026-10-07/scoped-parity.json">consumable emission report</a>
+records <strong>124,732 matching lines per JAR</strong>, covering all animations, timing
+overflow and float edges, random-source aliases, optional particles, sound
+overrides and callback mutation/failure prefixes. Targeted Clippy passes. Sound
+playback, rendering, consumable completion/effects and full gameplay remain
+pending.</p>
+<p><code>consumable</code> now also runs eligibility, immediate/timed start and completion.
+Completion captures its random source before emission, selects the current item
+for server statistics, dispatches live component listeners, then runs server
+effects, the game event and finite-material stack shrink in native order. The
+same input stack is returned even when callbacks empty it. Timed starts return
+CONSUME without a transformed stack; immediate starts return that stack.</p>
+<p><code>python3 tools/test_consumable_parity.py</code> compares actual Consumable methods
+with concrete FoodProperties/FoodData, inherited particles, shared stacks and
+both native random generators. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-consumable-2026-10-07/scoped-parity.json">consumption report</a>
+records <strong>246,033 matching lines per JAR</strong>, covering player/non-player/server
+branches, food component changes, stat item selection, empty advancement trigger
+storage, client/server effects, game events, creative material queries and
+mutation/failure prefixes. Targeted Clippy passes. Eligibility and start-use
+callbacks, statistics, effect bodies and event delivery remain controlled;
+listener enumeration here binds the ordinary food schema. Full advancement
+evaluation, potion effects, entity/world lifecycle integration and playable
+gameplay remain pending.</p>
+<p><code>status_effect</code> stores shared MobEffectInstance identity, scalar details, hidden
+chains and blend state. Native copies retain scalar details while omitting hidden
+effects and resetting blend state. Stronger/longer effect updates preserve
+hidden-chain aliases and native change flags. Duration mapping skips zero and
+infinite durations; scaling uses the pinned version's floor and narrowing rules.</p>
+<p><code>python3 tools/test_status_effect_parity.py</code> compares actual constructors,
+copy/update operations, duration mapping/scaling, equality and blend copying.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-status-effect-2026-10-07/scoped-parity.json">status storage report</a>
+records <strong>655,643 matching lines per JAR</strong>, covering constructor clamping, raw
+amplifiers, shared hidden chains, negative/overflow/infinite durations, float
+edges and mapper mutation/failure behavior. Equality excludes hidden and blend
+state as in vanilla. Mismatched-holder warning logs are outside the comparison.
+Server/client ticking, concrete effect behavior, registries and full entity
+integration remain pending.</p>
+<p><code>consume_effect</code> implements apply-status, remove-status, clear-status and sound
+consumption effects. Applying status effects draws probability even for an empty
+list, creates fresh native-style instance copies and visits every entry without
+short-circuiting on success. Removal preserves holder order and duplicates;
+sound playback captures block position before querying the actor's category.</p>
+<p><code>python3 tools/test_consume_effect_parity.py</code> compares the four actual native
+consume-effect classes with real effect instances and random generators. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-consume-effect-2026-10-07/scoped-parity.json">consume-effect report</a>
+records <strong>184,437 matching lines per JAR</strong>, including NaN/probability edges,
+copy identity/details, hidden/blend resets, shared input mutation, return-value
+aggregation, sound arguments and callback failure prefixes. Targeted Clippy
+passes. Actor status add/remove/clear and sound delivery remain controlled;
+named holder-set rebinding, teleport consumption and full gameplay integration
+remain pending.</p>
+<p><code>teleport_consume</code> implements random-teleport consumption, including the
+16-attempt limit, coordinate/random evaluation order, logical-height bounds,
+dismounting and post-success effects. Successful teleports emit the game event,
+class-specific sound and optional packed directional-particle event before
+resetting fall distance and impulse context.</p>
+<p><code>python3 tools/test_teleport_consume_parity.py</code> compares actual
+TeleportRandomlyConsumeEffect with both native random generators, ordinary and
+fox actor classes, native offset packing and fall/impulse reset bodies. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-teleport-consume-2026-10-07/scoped-parity.json">teleport consumption report</a>
+records <strong>282,010 matching lines per JAR</strong>, including exact candidates and
+subsequent random state, height overflow, float edges, attempt exhaustion,
+captured/live positions and callback mutation/failure prefixes. Targeted Clippy
+passes. Destination validation and teleporting, passenger links and world event
+delivery remain controlled services; full gameplay integration remains pending.</p>
+<p><code>status_effect</code> also implements server/client ticking and client blend updates.
+Hidden instances count down with their parent. When the active duration reaches
+zero, the hidden details are restored before the server downgrade callback.
+Infinite effects use the actor's tick count for scheduling. Blend updates retain
+native callback/read ordering, duration-dependent steps and interpolation.</p>
+<p><code>python3 tools/test_status_tick_parity.py</code> compares actual MobEffectInstance
+ticks, skipBlending and getBlendFactor with controlled MobEffect callbacks. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-status-tick-2026-10-07/scoped-parity.json">status tick report</a>
+records <strong>412,552 matching lines per JAR</strong>, including shared hidden chains,
+zero/negative/infinite durations, raw amplifiers, early application failures,
+downgrade notifications, blend float edge cases, removed actors and callback
+mutation/failure prefixes. Targeted Clippy passes. Registered effect behaviors,
+entity effect maps, UI rendering and full gameplay remain pending.</p>
+<p><code>java_hash_map</code> now supports non-comparable keys, unequal keys whose comparable
+ordering returns zero, and the native map-copy constructor. Lookup searches
+ambiguous tree branches; tree insertion uses class/identity tie-breaking. Copies
+size their table from the source count before insertion, retaining shared values
+while allowing the resulting bucket order to differ.</p>
+<p><code>python3 tools/test_java_identity_map_parity.py</code> compares actual JDK 25 HashMap
+operations and copies across mixed key classes. Each Java process exports its
+actual identity hashes for Rust to use in that same scenario. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-java-identity-map-2026-10-07/scoped-parity.json">identity/copy report</a>
+records <strong>577,200 matching lines per classpath run</strong>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-java-identity-map-2026-10-07/ordered-map-regression.json">ordered-key regression</a>
+retains <strong>601,084 matching lines</strong>, and the
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-java-identity-map-2026-10-07/cooldown-regression.json">cooldown regression</a>
+retains <strong>167,906 matching lines per JAR</strong>. Targeted Clippy passes. Map-only runs
+use the same installed JDK; these comparisons do not assert gameplay parity or
+equal identity hashes across processes. Keys must have pure operations; null
+keys and other unexposed Map APIs remain outside this storage subset.</p>
+<p><code>PlayerAttributeHealth</code>, <code>ServerPlayerDamage</code> and <code>ServerPlayerCombat</code> can now
+borrow <code>LiveAttributes</code>, the same storage used by the resident moving player,
+as well as <code>EntityAttributes</code>. Health limits and armor queries use the borrowed
+store; equipment damage callbacks can update it before damage reduction reads
+armor and toughness. Player absorption retains synchronized float storage.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-live-player-combat-2026-10-07/scoped-parity.json">live player combat comparison</a>
+runs the identical corpus through both stores and matches 1,176,994 output lines
+against each pinned Java reference. It covers repeated hits, cooldowns, health
+and absorption writes, exhaustion, numeric edges, armor mutation during a hit
+and callback failures. Equipment, attribution, death services and other world
+consumers retain the controlled boundaries documented in the report. Connecting
+this binding to the resident client landing consumer remains the next step.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/collision-geometry.md"><code>docs/collision-geometry.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

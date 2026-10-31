@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microsoft account sign-in and online-mode play · Rusty Minecraft docs</title>
+<meta name="description" content="Microsoft account sign-in and online-mode play: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details open><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html" aria-current="page">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="microsoft-account-sign-in-and-online-mode-play">Microsoft account sign-in and online-mode play</h1>
+<p>Rusty Minecraft signs players in with their Microsoft account in the launcher and joins online-mode
+(authenticated) servers like vanilla 26.3 does. The launcher plays only with an account that owns
+Minecraft: Java Edition (<a href="#the-owner-gate">the owner gate</a>); offline names, LAN and offline-mode
+servers play behind it. This note is the design, the status of each part and what Ludovic has to
+register.</p>
+<h2 id="what-ludovic-registers-needs-his-accounts">What Ludovic registers (needs his accounts)</h2>
+<p>Nothing below can be done by an agent: the app registrations belong to Ludovic. A build without
+the client ID can't sign in, so its launcher can't start the game (&quot;This build of the launcher has
+no Microsoft sign-in&quot;); release builds have it.</p>
+<ol>
+<li><strong>Azure app registration</strong> (https://portal.azure.com → Microsoft Entra ID → App registrations →
+New registration):
+<ul>
+<li>Name: <code>Rusty Minecraft</code> (shown to players on the Microsoft consent page).</li>
+<li>Supported account types: <strong>Personal Microsoft accounts only</strong> (Minecraft accounts are
+consumer accounts; the launcher uses the <code>consumers</code> tenant).</li>
+<li>Redirect URI: none needed for the device-code flow. If the form insists, add a
+&quot;Mobile and desktop applications&quot; redirect <code>https://login.microsoftonline.com/common/oauth2/nativeclient</code>.</li>
+<li>After creating it: Authentication → Advanced settings → <strong>Allow public client flows: Yes</strong>
+(this enables the device-code flow; there is no client secret, Rusty Minecraft is a public client).</li>
+<li>API permissions: none to add. The launcher requests the scopes <code>XboxLive.signin offline_access</code>
+at sign-in time; <code>offline_access</code> gives the refresh token.</li>
+<li>Copy the <strong>Application (client) ID</strong> (a GUID).</li>
+</ul>
+</li>
+<li><strong>Minecraft API access</strong> (Mojang): new Azure apps are refused by
+<code>api.minecraftservices.com/authentication/login_with_xbox</code> (HTTP 403, &quot;Invalid app registration&quot;)
+until Mojang approves them. Apply with the form linked from https://aka.ms/mce-reviewappid
+(Minecraft Java &quot;App ID review&quot;), giving the client ID above, the app name, the project URL
+(https://github.com/horizon-rust/horizon) and a short description (&quot;open-source Minecraft Java
+Edition client written in Rust; signs players in to join online-mode servers&quot;). Approval takes
+days to weeks; sign-in fails at the Minecraft step with &quot;This app is not approved by Mojang yet&quot;
+until then.</li>
+<li><strong>Where the ID goes</strong>:
+<ul>
+<li>Release builds: the GitHub repository variable (not a secret: client IDs are public)
+<code>HORIZON_MSA_CLIENT_ID</code>; the launcher's build reads it with <code>option_env!</code> at compile time.</li>
+<li>Any build, at run time: the environment variable <code>HORIZON_MSA_CLIENT_ID</code> overrides the built-in
+value (empty or unset = not configured).</li>
+</ul>
+</li>
+</ol>
+<p>Never use another application's client ID (the official launcher's or another launcher's).</p>
+<h2 id="flow-launcher">Flow (launcher)</h2>
+<p>All requests use HTTPS and JSON except the two OAuth calls (form-encoded):</p>
+<ol>
+<li><strong>Device code</strong>: <code>POST https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode</code>
+(<code>client_id</code>, <code>scope=XboxLive.signin offline_access</code>). The launcher shows the <code>user_code</code> and
+<code>verification_uri</code> (https://www.microsoft.com/link) with a copy button and opens the browser.</li>
+<li><strong>Poll</strong> <code>POST …/consumers/oauth2/v2.0/token</code> (<code>grant_type=urn:ietf:params:oauth:grant-type:device_code</code>)
+every <code>interval</code> seconds; <code>authorization_pending</code> waits, <code>slow_down</code> adds 5 s, <code>authorization_declined</code>,
+<code>expired_token</code> and <code>bad_verification_code</code> end the sign-in with a message. Result: the Microsoft
+access token and refresh token.</li>
+<li><strong>Xbox Live</strong>: <code>POST https://user.auth.xboxlive.com/user/authenticate</code> with
+<code>AuthMethod=RPS, SiteName=user.auth.xboxlive.com, RpsTicket=d=&lt;MS access token&gt;</code>,
+<code>RelyingParty=http://auth.xboxlive.com</code>. Result: the XBL token and the user hash (<code>uhs</code>).</li>
+<li><strong>XSTS</strong>: <code>POST https://xsts.auth.xboxlive.com/xsts/authorize</code> with the XBL token,
+<code>SandboxId=RETAIL</code>, <code>RelyingParty=rp://api.minecraftservices.com/</code>. The <code>XErr</code> codes become
+messages: 2148916233 no Xbox profile yet, 2148916235 Xbox Live not available in the country,
+2148916236/2148916237 adult verification (South Korea), 2148916238 child account (needs a family).</li>
+<li><strong>Minecraft</strong>: <code>POST https://api.minecraftservices.com/authentication/login_with_xbox</code>
+(<code>identityToken = &quot;XBL3.0 x=&lt;uhs&gt;;&lt;XSTS token&gt;&quot;</code>). Result: the Minecraft access token (24 h).</li>
+<li><strong>Entitlements</strong>: <code>GET https://api.minecraftservices.com/entitlements/mcstore</code>: the account must
+own <code>game_minecraft</code> or <code>product_minecraft</code> (Game Pass included), else &quot;This account doesn't own
+Minecraft Java Edition&quot;.</li>
+<li><strong>Profile</strong>: <code>GET https://api.minecraftservices.com/minecraft/profile</code>: UUID, name, skins, capes.
+404 = owns the game but has no profile yet (&quot;Create your Minecraft profile on minecraft.net first&quot;).</li>
+</ol>
+<h2 id="the-owner-gate">The owner gate</h2>
+<p>Decided 2026-10-27 (Ludovic, after a modder's suggestion): like other launchers, Rusty Minecraft's
+launcher starts the game only while an account in it owns Java Edition. Offline play stays
+possible; the launcher just doesn't offer it on its own.</p>
+<ul>
+<li><strong>Play needs an owner.</strong> Every Play (Home, instances and packs, <code>horizon-launcher play</code>,
+<code>modpack play</code>, the MCP's <code>play</code>) asks <code>account::launch</code> first. It asks the Minecraft services
+again for each account, the selected one first, until one owns the game: the token renewal
+(below) if due, then entitlements and profile. Without an owner the game doesn't start and Play
+says &quot;Sign in with a Microsoft account that owns Minecraft: Java Edition to play&quot;, with Sign in.</li>
+<li><strong>The window says it once.</strong> A player without an owner (one who played offline until now) sees
+the gate's screen once when the launcher opens: why Rusty Minecraft needs the account (&quot;like other
+launchers&quot;), that worlds, offline names and settings stay where they are, and Sign in, which shows
+the device code on the same screen. It comes back whenever Play is refused; Not now closes it,
+and Home keeps a Sign in row (<code>launcher/src/owner_page.rs</code>).</li>
+<li><strong>The answer lives with the tokens.</strong> Each account's keychain item keeps the last answer
+(<code>owns</code>), so no plain file can say yes. With no network (or a sign-in that can't be renewed) the
+last answer stands: being offline never blocks a player who passed before, and the game starts
+without a session, offline. An answer of &quot;doesn't own&quot; (or no profile) blocks at once.</li>
+<li><strong>Offline names play behind an owner.</strong> They can be added and played only while an owning
+account is signed in. Signing the last one out keeps them, and they play again once one is back.</li>
+<li><strong>Who isn't affected:</strong> the game binary itself (<code>horizon-client</code>, <code>horizon-ctl launch</code>, the
+harnesses, CI), the dedicated server and <code>horizon-server</code>, the website. There is no bypass flag:
+the launcher's tests use accounts in a memory store (<code>MemoryStore</code>, and <code>HORIZON_NO_KEYCHAIN</code>
+for the CLI and MCP tests, which then have no owner).</li>
+</ul>
+<h2 id="downloading-the-game-for-an-owner">Downloading the game for an owner</h2>
+<p>Decided 2026-10-27. This is the only exception to &quot;Rusty Minecraft never downloads the game&quot;, and it
+applies only on the player's machine, for an account the owner gate just asked about. The
+launcher's &quot;Download and prepare&quot; (<code>horizon-launcher prepare --download</code>) fetches the pinned
+version straight from Mojang (<code>launcher/src/mojang.rs</code>): the version file, the client jar,
+libraries, the asset index and the assets, each checked against the size and sha1 Mojang lists.
+They go to <code>minecraft/</code> in the launcher's data folder, and the preparation runs as usual. The
+download can be cancelled and goes on where it stopped. CI, agents, harnesses and the repo never
+download or keep Mojang's files.</p>
+<p>Refresh: the Minecraft token is renewed from the Microsoft refresh token (steps 2-5 with
+<code>grant_type=refresh_token</code>) when it has less than an hour left, before every launch; steps 6-7 run
+at every launch (the owner gate). A refused
+refresh token (<code>invalid_grant</code>) asks the player to sign in again. Several accounts can be signed in;
+one is selected. &quot;Sign out&quot; deletes the account's secrets from the keychain.</p>
+<h2 id="token-storage">Token storage</h2>
+<ul>
+<li>Secrets (the Microsoft refresh token, the Minecraft access token and its expiry, the last
+ownership answer) go to the OS
+keychain, one item per account: Keychain on macOS, Credential Manager on Windows, the Secret
+Service (GNOME Keyring, KWallet) on Linux. Service name <code>dev.playhorizon.launcher</code>, account = the
+Minecraft UUID. Credential Manager takes at most 2560 bytes per item, which the secrets of a sign-in
+exceed: on macOS and Windows a longer secret is split over the items <code>&lt;uuid&gt;</code>, <code>&lt;uuid&gt;.1</code>, <code>&lt;uuid&gt;.2</code>...
+A write that stops partway (the store refused a piece) puts the old secret back: new pieces in
+front of old ones would read back as no secret, and the account would be signed out at the next
+start.</li>
+<li><strong>Windows: &quot;Windows Credential Manager is full&quot; (Windows error 8, #4313, #4366).</strong> Credential
+Manager refuses every new item with <code>ERROR_NOT_ENOUGH_MEMORY</code> once the player's store reaches an
+undocumented total size, whatever the item's size; it is not the computer's memory. The Xbox app
+and the Minecraft Launcher are known to leave hundreds of <code>XblGrts…</code> and <code>Xbl|…</code> items there. The
+launcher says so and nothing is saved; the player opens Credential Manager (Start menu) → Windows
+Credentials, removes entries they no longer use (<code>cmdkey /list</code> in a terminal lists them), and
+signs in again. Removing an entry can sign the app that made it out. The launcher never deletes
+other apps' items.</li>
+<li><code>accounts.json</code> in the launcher's data folder keeps only public data: UUID, name, skin URL, which
+account is selected. Never a token.</li>
+<li>No keychain available (a Linux box without a Secret Service, a locked keychain): sign-in still
+works for the session but nothing is saved, and the launcher says &quot;No keychain available: you will
+have to sign in again next time&quot; (it never falls back to a plain file).</li>
+<li>Tokens never appear in logs, errors, <code>horizon-launcher</code> CLI output, MCP results or crash reports.
+Requests are logged by endpoint name only.</li>
+</ul>
+<h2 id="handing-the-session-to-the-game">Handing the session to the game</h2>
+<p>Vanilla's launcher passes <code>--accessToken &lt;token&gt;</code> on the command line, where every user of the
+machine can read it in the process list. Rusty Minecraft keeps it out of argv:</p>
+<ul>
+<li>The launcher writes <code>session-&lt;random&gt;.json</code> (mode 0600 on Unix, created new, in the game home's
+<code>sessions/</code> folder) with <code>{&quot;name&quot;, &quot;uuid&quot;, &quot;access_token&quot;, &quot;user_type&quot;: &quot;msa&quot;, &quot;xuid&quot;}</code> and starts
+the game with <code>--session-file PATH</code>.</li>
+<li>The game reads the file at start and deletes it at once; the token lives only in the game's memory.
+A file older than two minutes is refused (and deleted), so a stale file can't be replayed.</li>
+<li>Without a session file the game is offline as today (<code>--name</code>, offline UUID).</li>
+<li><code>HORIZON_SESSION_FILE</code> is the same as <code>--session-file</code> (development and harnesses).</li>
+<li><code>--session-stdin</code> takes the same JSON on standard input instead, so nothing touches the disk (for other
+launchers: <a href="api/launch.html">the Launch API</a>).</li>
+</ul>
+<h2 id="online-mode-login-game">Online-mode login (game)</h2>
+<p>Vanilla's <code>ClientHandshakePacketListenerImpl.handleHello</code>, <code>Crypt</code> and authlib's
+<code>MinecraftServicesSessionService.joinServer</code>:</p>
+<ol>
+<li><code>ClientboundHelloPacket</code> (server id, X.509 RSA public key, challenge, should_authenticate).</li>
+<li>Generate a random 16-byte AES key (the shared secret).</li>
+<li>Server hash: SHA-1 over <code>serverId</code> (ISO-8859-1), the shared secret, the encoded public key;
+<code>new BigInteger(digest).toString(16)</code> (signed two's complement hex, e.g. &quot;Notch&quot; →
+<code>4ed1f46bbe04bc756bcb17c0c7ce3e4632f06a48</code>, &quot;jeb_&quot; → <code>-7c9d5b0044c130109a5d7b5fb5c317c02b4e28c1</code>).</li>
+<li>If <code>should_authenticate</code>: <code>POST</code> the session service's <code>join</code> endpoint
+<code>{&quot;accessToken&quot;, &quot;selectedProfile&quot; (undashed UUID), &quot;serverId&quot;: hash}</code>, the URL taken from the
+services discovery document (<code>https://discovery.minecraftservices.com/minecraft/client</code>, fetched
+once per game). Errors map like authlib's <code>MinecraftClientHttpException</code>:
+<code>ForbiddenOperationException</code> or 401 → &quot;Failed to log in: Invalid session (Try restarting your
+game and the launcher)&quot;, <code>InsufficientPrivilegesException</code> → &quot;Multiplayer is disabled…&quot;,
+<code>multiplayer.access.banned</code> / <code>FORCED_USERNAME_CHANGE</code> → &quot;You are banned from playing online&quot;,
+5xx or no network → &quot;The authentication servers are currently not reachable…&quot;. Without a session
+the game says &quot;This server is in online mode. Sign in with your Microsoft account in the Rusty Minecraft
+launcher to join it.&quot; (Vanilla goes on after a failed join on LAN-discovered servers, which then
+refuse the player anyway; Rusty Minecraft stops at once.)</li>
+<li>Send <code>ServerboundKeyPacket</code> (the secret and the challenge, each RSA PKCS#1 v1.5 encrypted with
+the server key), then AES/CFB8 (key = IV = the secret) both ways.</li>
+</ol>
+<p>The connecting screen follows vanilla's states: &quot;Connecting to the server...&quot; until the encryption
+request, &quot;Logging in...&quot; while joining the session service, &quot;Encrypting...&quot;, then &quot;Joining world...&quot;.
+Code: <code>horizon-protocol</code> (<code>rsa.rs</code>, <code>crypto::server_hash</code>), <code>horizon-client</code> (<code>auth.rs</code>, <code>net.rs</code>).</p>
+<p>Rusty Minecraft's dedicated server verifies players when <code>online-mode=true</code>. A LAN or Play with Friends world
+verifies its guests when the host is signed in, as vanilla's <code>IntegratedServer</code> does
+(<code>OnlineMode::lan</code>); under an offline name it stays offline-mode. The host's own player joins through
+memory and is never asked to authenticate.</p>
+<p><code>HORIZON_API_DISCOVERY</code> overrides the discovery URL, the counterpart of authlib's
+<code>-Dminecraft.api.discovery.host</code>; it is how the harness points both the vanilla server and Rusty Minecraft at
+a local mock.</p>
+<h2 id="skins-and-capes-part-b">Skins and capes (part b)</h2>
+<p>Profile properties (<code>textures</code>, base64 JSON) arrive in <code>ClientboundPlayerInfoUpdatePacket</code> for every
+player and in the login profile for ourselves. Like authlib's <code>unpackTextures</code>, only URLs under the
+discovery document's <code>profiles/getTexture</code> <code>validUris</code> (textures.minecraft.net) are fetched; skins
+(classic/slim from the <code>metadata.model</code>), capes and elytra textures are downloaded over HTTPS on a
+worker thread, cached on disk by texture hash (<code>assets/skins/xx/hash</code>, like vanilla's
+<code>SkinManager</code>), converted from legacy 64×32 the way <code>SkinTextureDownloader</code> does and given to the
+player renderer. Until a skin arrives the default skin for the UUID shows (as today).</p>
+<h2 id="chat-signing-part-d">Chat signing (part d)</h2>
+<p>26.3's dedicated servers default to <code>enforce-secure-profile=true</code>. A client without a chat session
+can join and play, but every chat message and signed command argument is refused with &quot;Chat
+disabled due to missing profile public key. Please try reconnecting.&quot; (<code>SignedMessageChain.Decoder.unsigned</code>).
+To chat on such servers the game will:</p>
+<ul>
+<li>fetch the profile key pair from the services <code>player/getCertificates</code> endpoint (Minecraft token);</li>
+<li>send <code>ServerboundChatSessionUpdatePacket</code> (random session UUID, key expiry, public key, Mojang's
+key signature) after joining;</li>
+<li>sign each chat message and signable command argument with SHA256withRSA over vanilla's
+<code>SignedMessageBody</code> layout and keep the last-seen message tracker and acknowledgements.</li>
+</ul>
+<p>Until part d lands, Rusty Minecraft joins online servers but chat works only where
+<code>enforce-secure-profile=false</code> (or the server can't validate keys).</p>
+<h2 id="harnesses">Harnesses</h2>
+<p><code>tools/test_online_mode_parity.py</code> (dev only, needs no account): a local mock of the Minecraft
+services (discovery document, <code>join</code>, <code>hasJoined</code>/<code>verify</code>, no public keys) and a vanilla 26.3
+dedicated server in online mode started with <code>-Dminecraft.api.discovery.host=&lt;mock&gt;</code> (authlib
+10.0.77's only override: it replaces the whole discovery URL; the old <code>minecraft.api.session.host</code>
+style properties are gone). Rusty Minecraft's
+headless client (<code>HORIZON_NET_REPORT</code>) joins with a session file holding a mock token: the server
+verifies the join through the mock with the hash it computed itself (so the RSA wrapping, the hash
+and AES/CFB8 are all checked against vanilla's code), the player spawns, chats and runs <code>/list</code>.
+Negative cases: a token the mock rejects (the client must show vanilla's &quot;Invalid session&quot; message)
+and a client that skips the join (the server must say &quot;Failed to verify username!&quot;).</p>
+<p>Rust unit tests: server hash vectors (Notch, jeb_, simon), RSA wrapping round trip with a test key,
+X.509 key parsing, AES/CFB8 vectors (already in <code>horizon-protocol</code>), the session file (permissions,
+age, deletion), the error mapping. Launcher: the whole token chain against a local mock of the
+Microsoft, Xbox and Minecraft endpoints, and the keychain abstraction with an in-memory backend.</p>
+<h2 id="pr-plan">PR plan</h2>
+<ul>
+<li>(a) Game: online-mode handshake, encryption, session join, session file, harness (15/15 checks
+against vanilla 26.3 on macOS).</li>
+<li>(c) Launcher: device-code sign-in, token chain, keychain, accounts UI, CLI/MCP (<code>account list</code>,
+<code>account sign-in</code>, <code>account sign-out</code>, never tokens), session file handoff.</li>
+<li>(b) Game: skins and capes over HTTPS, the real names and skins in game.</li>
+<li>(d) Game: chat signing (profile keys, chat session, signed messages and commands).</li>
+</ul>
+<p>Each part ships on its own: online mode needs a session, which only (c) creates.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/microsoft-account.md"><code>docs/microsoft-account.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#what-ludovic-registers-needs-his-accounts">What Ludovic registers (needs his accounts)</a></li><li class="l2"><a href="#flow-launcher">Flow (launcher)</a></li><li class="l2"><a href="#the-owner-gate">The owner gate</a></li><li class="l2"><a href="#downloading-the-game-for-an-owner">Downloading the game for an owner</a></li><li class="l2"><a href="#token-storage">Token storage</a></li><li class="l2"><a href="#handing-the-session-to-the-game">Handing the session to the game</a></li><li class="l2"><a href="#online-mode-login-game">Online-mode login (game)</a></li><li class="l2"><a href="#skins-and-capes-part-b">Skins and capes (part b)</a></li><li class="l2"><a href="#chat-signing-part-d">Chat signing (part d)</a></li><li class="l2"><a href="#harnesses">Harnesses</a></li><li class="l2"><a href="#pr-plan">PR plan</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

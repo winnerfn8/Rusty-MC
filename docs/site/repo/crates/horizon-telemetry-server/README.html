@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>horizon-telemetry-server · Rusty Minecraft docs</title>
+<meta name="description" content="horizon-telemetry-server: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../assets/tokens.css">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../../../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="../../README.html">Rusty Minecraft</a></li><li><a href="../../../java-mod-translation.html">Java mod translation</a></li><li><a href="../../../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="../../launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../../../website.html">The documentation website</a></li><li><a href="../../ROADMAP.html">Horizon roadmap</a></li><li><a href="../../roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="../../AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../../../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../../../native-client.html">Rusty Minecraft native client</a></li><li><a href="../../../hosting.html">Host a server</a></li><li><a href="../../../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../../../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../../../server-next.html">The next server: design</a></li><li><a href="../../../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../../../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../../../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../../../graphics.html">Graphics: settings and performance</a></li><li><a href="../../../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../../../extras.html">Rusty Minecraft extras</a></li><li><a href="../../../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../../../mods.html">Rusty Minecraft mods</a></li><li><a href="../../../native-mods.html">Native mods (experimental)</a></li><li><a href="../../../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../../../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../../../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../../../versioning.html">Versioning</a></li><li><a href="../../../resource-packs.html">Resource packs: what works</a></li><li><a href="../../../telemetry.html">Opt-in data collection</a></li><li><a href="../../../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="../../../api/README.html">Rusty Minecraft APIs</a></li><li><a href="../../../api/stability.html">API stability and versioning</a></li><li><a href="../../../play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="../../../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../../../parity-workflow.html">Parity workflow</a></li><li><a href="../../../parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="../../../parity/meshing.html">Section meshing parity</a></li><li><a href="../../../port-ledger.html">Port ledger</a></li><li><a href="../../../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../../../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../../../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../../../world-generation.html">World generation</a></li><li><a href="../../../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../../../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../../../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../../../density-functions.html">Compiled density evaluation</a></li><li><a href="../../../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../../../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../../../biome-lookup.html">Biome lookup</a></li><li><a href="../../../biome-temperatures.html">Biome temperatures</a></li><li><a href="../../../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../../../material-conditions.html">Numeric material conditions</a></li><li><a href="../../../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../../../vertical-anchors.html">Vertical anchors</a></li><li><a href="../../../value-providers.html">World-generation value providers</a></li><li><a href="../../../carving.html">Carving</a></li><li><a href="../../../heightmaps.html">Heightmaps</a></li><li><a href="../../../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../../../world-data.html">Rusty Minecraft world data</a></li><li><a href="../../../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../../../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../../../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../../../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../../../profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="../../../api/agent-control.html">Agent control API</a></li><li><a href="../../../api/data-formats.html">Data formats</a></li><li><a href="../../../api/launch-reference.html">Launch API reference</a></li><li><a href="../../../api/launch.html">Launch API</a></li><li><a href="../../../api/launcher.html">Launcher API</a></li><li><a href="../../../api/mod-index.html">The registry index and .hpack</a></li><li><a href="../../../api/server-reference.html">Server reference</a></li><li><a href="../../../api/server.html">Server API</a></li><li><a href="../../../api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="../../../api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="../../benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="../../benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="../../benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="../../benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="../../benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="../../benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="../../benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="../../benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../../../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../../../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../../../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../../../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../../../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../../../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../../../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../../../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../../../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../../../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../../../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="../../launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="../../CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="../../THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="../../roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details open><summary>Crates, launcher and tools</summary><ul><li><a href="../horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="../horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="../horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="../horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="../horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="../horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="../horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="README.html" aria-current="page">horizon-telemetry-server</a></li><li><a href="tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="../../packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="../../tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../../../controllers.html">Controllers</a></li><li><a href="../../../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../../../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../../../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../../../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../../../known-issues.html">Known issues</a></li><li><a href="../../../launcher-commands.html">Launcher commands</a></li><li><a href="../../../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../../../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../../../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../../../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../../../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../../../release-flow.html">Release flow</a></li><li><a href="../../../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../../../save-batch-entities.html">Block entity save batches</a></li><li><a href="../../../security.html">Security</a></li><li><a href="../../../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../../../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="horizon-telemetry-server">horizon-telemetry-server</h1>
+<p>This server receives what players choose to send (performance summaries, crash and bug reports, benchmark uploads: <a href="../../../telemetry.html">docs/telemetry.md</a>) and stores it in one SQLite file. It serves anonymous totals to the website. It also keeps the live player count from the games' anonymous &quot;I'm playing&quot; pings, in memory only, and takes what players send from the hub (playhorizon.dev/hub): votes and bug reports. It is one small Rust process, about 7 MB of memory when idle.</p>
+<pre><code>cargo run --release                     # in this folder: its own workspace, like the launcher's
+PORT=8080 HORIZON_TELEMETRY_DB=/data/telemetry.sqlite3 horizon-telemetry-server
+</code></pre>
+<p>It runs at <strong>https://telemetry.playhorizon.dev</strong> (<code>DEFAULT_ENDPOINT</code> in <code>crates/horizon-telemetry</code>). The game and the launcher use it unless <code>HORIZON_TELEMETRY_URL</code> names another server, or is <code>off</code> (tests and automated runs send nothing).</p>
+<h2 id="endpoints">Endpoints</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /v1/batch</code></td>
+<td>A zstd batch (<code>Content-Encoding: zstd</code>, at most 256 KiB, 1 MiB inflated, 64 items). Returns 204. Returns 400 for a bad batch, 413 for one too large, 415 if it is not zstd, 429 when over a limit.</td>
+</tr>
+<tr>
+<td><code>DELETE /v1/installs/&lt;id&gt;</code></td>
+<td>Deletes everything that install sent. Its share of the daily totals is rebuilt at once.</td>
+</tr>
+<tr>
+<td><code>GET /v1/aggregate?days=30</code></td>
+<td>The totals the website reads. Cached 10 minutes, with <code>Access-Control-Allow-Origin</code> set to the website.</td>
+</tr>
+<tr>
+<td><code>GET /v1/benchmarks/summary</code></td>
+<td>Players' benchmark uploads grouped by GPU, CPU, render distance and game, for the website's Benchmarks page (below). Cached 10 minutes, same <code>Access-Control-Allow-Origin</code>.</td>
+</tr>
+<tr>
+<td><code>POST /v1/live</code></td>
+<td>A game's &quot;I'm playing&quot; ping (JSON, at most 512 bytes). Returns 204. Returns 400 for a bad ping, 413 for one too large, 429 over the address's limit, 503 when it holds <code>LIVE_MAX_SESSIONS</code> already.</td>
+</tr>
+<tr>
+<td><code>GET /v1/live</code></td>
+<td>How many play now, rounded: <code>playing</code>, <code>lan</code>, <code>versions</code>, <code>platforms</code>. Made again at most every 15 seconds, with the same <code>Access-Control-Allow-Origin</code>.</td>
+</tr>
+<tr>
+<td><code>POST /hub/vote</code></td>
+<td><code>{&quot;item&quot;: &quot;&lt;roadmap id&gt;&quot;, &quot;voter&quot;: &quot;&lt;the browser's random id&gt;&quot;, &quot;up&quot;: true}</code>: a 👍 on a roadmap item, one per voter; <code>&quot;up&quot;: false</code> takes it back. Returns <code>{&quot;item&quot;, &quot;votes&quot;}</code>. 400 for a bad id, 429 over the address's limit.</td>
+</tr>
+<tr>
+<td><code>GET /hub/votes</code></td>
+<td><code>{&quot;votes&quot;: {&quot;&lt;item&gt;&quot;: n}}</code>. Made again at most every minute.</td>
+</tr>
+<tr>
+<td><code>POST /hub/report</code></td>
+<td>A bug report from the hub's form: <code>{&quot;title&quot;, &quot;did&quot;, &quot;happened&quot;, &quot;expected&quot;, &quot;version&quot;?, &quot;system&quot;, &quot;name&quot;?}</code>. Opens a GitHub issue at once (labels <code>bug</code> and <code>from-website</code>, the <code>#horizon-bugs</code> template, &quot;Reported on playhorizon.dev&quot;) and returns 201 <code>{&quot;id&quot;, &quot;issue&quot;: &quot;&lt;url&gt;&quot;}</code>. If GitHub fails: 202 <code>{&quot;id&quot;, &quot;issue&quot;: null}</code>, and the upkeep tries again for a week. The same report twice in a day returns the first one's issue. 400 for an empty or too long field, 429 over the address's limit, 503 past the day's cap or without <code>GITHUB_TOKEN</code>.</td>
+</tr>
+<tr>
+<td><code>GET /healthz</code></td>
+<td><code>ok</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>The hub's posts take JSON from the website (<code>OPTIONS</code> preflights answer with its origin). A form's hidden <code>website</code> field filled in (a bot) gets 202 and is dropped.</p>
+<p>The totals are grouped per version, OS, GPU vendor and render distance. Each group has its sessions, install-days, hours played, the 14 frame-time buckets summed, and the mean p50 and p99 frame times. Groups with fewer than 5 install-days are left out. The totals also list crash counts per version. Benchmark uploads are published only through the summary below, never one by one.</p>
+<h2 id="benchmarks-summary">Benchmarks summary</h2>
+<p><code>src/summary.rs</code> makes it with the same rules as the website's <code>scripts/benchmarks.mjs</code> (horizon-rust/horizon-site), which bakes the page's fallback copy; both are tested against the same fixtures (<code>tests/fixtures/benchmarks/</code> here, copied in the site's repository).</p>
+<ul>
+<li>Only reports that compare: a version 1 <code>horizon-benchmark-report</code> of the standard flight over the four scenes, VSync off, no frame cap, on screen, from Rusty Minecraft or plain vanilla, naming its GPU and CPU.</li>
+<li>A group (GPU, CPU, render distance, game) is published only with <strong>at least 3 different installs</strong>. Each install counts once: the median of its runs, then the median across installs.</li>
+<li>Out go the names, the counts, the newest three versions and the medians. Never an install ID, a day, an OS version, a driver, a memory size or a screen.</li>
+</ul>
+<pre><code class="language-json">{
+  &quot;format&quot;: &quot;horizon-benchmark-summary&quot;, &quot;version&quot;: 1, &quot;generated&quot;: &quot;2026-10-22T20:00:00Z&quot;, &quot;min_installs&quot;: 3,
+  &quot;groups&quot;: [{
+    &quot;gpu&quot;: &quot;NVIDIA GeForce RTX 4080&quot;, &quot;cpu&quot;: &quot;13th Gen Intel Core i7-13700KF&quot;, &quot;render_distance&quot;: 12,
+    &quot;game&quot;: &quot;horizon&quot;, &quot;source&quot;: &quot;players&quot;, &quot;installs&quot;: 3, &quot;reports&quot;: 4, &quot;versions&quot;: [&quot;v0.2.1&quot;, &quot;v0.2.0&quot;],
+    &quot;medians&quot;: { &quot;avg_fps&quot;: 515, &quot;low_1pct_fps&quot;: 120, &quot;p95_ms&quot;: 3.5, &quot;world_ms&quot;: 4500,
+                 &quot;chunk_load_ms&quot;: 1400, &quot;rss_peak_mb&quot;: 1450, &quot;rss_steady_mb&quot;: 1250 }
+  }]
+}
+</code></pre>
+<p>Frame rates are whole numbers, milliseconds have one decimal under 10, megabytes are whole. Groups come most installs first. A deleted install leaves its groups at once.</p>
+<h2 id="storage">Storage</h2>
+<ul>
+<li><code>systems</code>: each distinct machine description once. Sessions point at it.</li>
+<li><code>perf</code>: one row per session, in columns, its frame and tick summaries as 80-byte blobs.</li>
+<li><code>reports</code>: crash and bug reports and benchmarks, their data compressed with zstd.</li>
+<li><code>perf_daily</code>: the totals per day, rebuilt from <code>perf</code> when a day changes (new sessions, a deletion).</li>
+</ul>
+<p>Measured: <strong>about 190 bytes per play session</strong> on disk, indexes included (<code>tests/server.rs</code>, 10 000 sessions). 1 000 players playing twice a day for 180 days is about 70 MB.</p>
+<p>The live count is a table in memory: a session ID, when it last pinged, its version, platform and LAN flag, about 100 bytes a session. A session counts while its last ping is under 2 minutes old and is forgotten after that. Nothing of it reaches the disk, so a restart empties it; it is whole again a minute later.</p>
+<p>The day stored is the day the server received an item. The sender's IP address is never written down. The per-address rate limit keeps addresses in memory for an hour at most.</p>
+<p>The hub keeps votes as an item ID and the browser's random ID, and bug reports as their text, for <code>HORIZON_TELEMETRY_HUB_KEEP_DAYS</code> (90). Its rate limits key their buckets by a hash of the address with a key drawn at each start, in memory.</p>
+<p>Raw rows are deleted after <code>HORIZON_TELEMETRY_RETENTION_DAYS</code> (180). The daily totals stay; they hold no install ID.</p>
+<h2 id="settings">Settings</h2>
+<p>All are environment variables:</p>
+<ul>
+<li><code>PORT</code></li>
+<li><code>HORIZON_TELEMETRY_DB</code></li>
+<li><code>HORIZON_TELEMETRY_RETENTION_DAYS</code> (180)</li>
+<li><code>HORIZON_TELEMETRY_MIN_INSTALL_DAYS</code> (5)</li>
+<li><code>HORIZON_TELEMETRY_REQUESTS_PER_HOUR</code> per address (60, bursts of 6)</li>
+<li><code>HORIZON_TELEMETRY_ITEMS_PER_DAY</code> per install (100)</li>
+<li><code>HORIZON_TELEMETRY_TRUST_PROXY=1</code> behind a proxy (the client's address is then the proxy's <code>X-Real-IP</code>, else the last <code>X-Forwarded-For</code> entry; it is used only for the rate limits, in memory, and never stored or logged)</li>
+<li><code>HORIZON_TELEMETRY_ALLOW_ORIGIN</code> (<code>https://playhorizon.dev</code>)</li>
+<li><code>HORIZON_TELEMETRY_LIVE_PER_HOUR</code> per address, pings and reads (600, bursts of 60: ten players behind one address)</li>
+<li><code>HORIZON_TELEMETRY_LIVE_WINDOW_SECONDS</code> (120)</li>
+<li><code>HORIZON_TELEMETRY_LIVE_MAX_SESSIONS</code> (200 000)</li>
+<li><code>HORIZON_TELEMETRY_HUB_PER_HOUR</code> votes and vote reads per address (600, bursts of 60: a page load is one read, and several players can share an address)</li>
+<li><code>HORIZON_TELEMETRY_HUB_POSTS_PER_HOUR</code> bug reports per address (20, bursts of 2)</li>
+<li><code>HORIZON_TELEMETRY_HUB_REPORTS_PER_DAY</code> from everyone (30): each opens an issue</li>
+<li><code>HORIZON_TELEMETRY_HUB_KEEP_DAYS</code> (90)</li>
+<li><code>HORIZON_TELEMETRY_GITHUB_TOKEN</code>: a fine-grained token with Issues read and write on the repository only (unset: <code>POST /hub/report</code> answers 503 and the form points to GitHub and Discord)</li>
+<li><code>HORIZON_TELEMETRY_GITHUB_REPO</code> (<code>horizon-rust/horizon</code>)</li>
+</ul>
+<h2 id="hosting">Hosting</h2>
+<p><code>Dockerfile</code> builds it from the repository root (<code>docker build -f crates/horizon-telemetry-server/Dockerfile .</code>). The database goes on a volume mounted at <code>/data</code>.</p>
+<p>On Railway it is a service of the same project as the website:</p>
+<ul>
+<li>Source: this repository, root directory <code>/</code> (the Dockerfile needs the shared crate), config file <code>/crates/horizon-telemetry-server/railway.json</code> (Dockerfile build, health check <code>/healthz</code>, one replica in <code>europe-west4</code>, Amsterdam: one SQLite file can't be shared).</li>
+<li>A volume mounted at <code>/data</code>. The Dockerfile already sets <code>HORIZON_TELEMETRY_DB=/data/telemetry.sqlite3</code> and <code>HORIZON_TELEMETRY_TRUST_PROXY=1</code>; Railway sets <code>PORT</code>.</li>
+<li>The custom domain <code>telemetry.playhorizon.dev</code>: a <code>CNAME</code> at Porkbun to the target Railway gives.</li>
+</ul>
+<p>Check it with <code>curl https://telemetry.playhorizon.dev/healthz</code>.</p>
+<p>At Railway's prices (RAM $10/GB-month, CPU $20/vCPU-month, volumes $0.15/GB-month, egress $0.05/GB), one more service with a 1 GB volume uses about $0.35 a month:</p>
+<ul>
+<li>RAM about 15 MB: $0.15</li>
+<li>CPU nearly idle: under $0.05</li>
+<li>the volume: $0.15</li>
+<li>egress, the cached totals: cents</li>
+</ul>
+<p>That fits inside the Hobby plan's included $5 of usage. Railway Postgres would cost a few dollars a month for its memory alone and buys nothing at this size. A bucket isn't needed: crash reports are a few KB compressed and live in the same file.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/crates/horizon-telemetry-server/README.md"><code>crates/horizon-telemetry-server/README.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#endpoints">Endpoints</a></li><li class="l2"><a href="#benchmarks-summary">Benchmarks summary</a></li><li class="l2"><a href="#storage">Storage</a></li><li class="l2"><a href="#settings">Settings</a></li><li class="l2"><a href="#hosting">Hosting</a></li></ul></nav>
+</div>
+<script src="../../../assets/site.js"></script>
+</body>
+</html>

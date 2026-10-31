@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resource packs: what works · Rusty Minecraft docs</title>
+<meta name="description" content="Resource packs: what works: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html" aria-current="page">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="resource-packs-what-works">Resource packs: what works</h1>
+<p>Java Edition resource packs load in Rusty Minecraft: put the folder or <code>.zip</code> in <code>resourcepacks/</code>, pick it on the Resource Packs
+screen (the same screen as vanilla's) or in game, and every loader reloads from it. This page lists everything a
+26.3 resource pack can change and whether Rusty Minecraft honours it, with the proof.</p>
+<h2 id="how-it-works">How it works</h2>
+<p><code>packs.rs</code> finds the packs (<code>FolderRepositorySource</code>: folders and zips, plus the built-in Programmer Art and High
+Contrast, which only the asset index holds: preparation copies them, <code>horizon-prepare packs</code> repairs older resources),
+reads <code>pack.mcmeta</code> (format range, overlays, filters) and builds one overlay directory that layers the
+selected packs over the prepared vanilla resources, later packs winning. Files vanilla reads as a resource <em>stack</em>
+(language files, <code>sounds.json</code>, font definitions, atlas definitions) are merged layer by layer as vanilla merges them.
+Every loader then reads that one tree; <code>game/packs.rs</code> (<code>reload_packs</code>) reloads all of them in game, as
+<code>Minecraft.reloadResourcePacks</code> does. Unchanged selections reuse the overlay (<a href="reuse-pack-overlays.html">reuse-pack-overlays.md</a>).</p>
+<p>Vanilla 26.3's reload listeners (<code>Minecraft.&lt;init&gt;</code>, <code>Gui</code>, <code>Hud</code>): languages, textures, shaders, sounds, atlases,
+fonts, grass / foliage / dry foliage colour maps, models (block states, block models, item definitions), equipment
+assets, paletted textures, entity and block entity renderers, particles, the game renderer (post effects), the level
+renderer, clouds, GPU warn list, regional compliance, splashes and waypoint styles. Every row below comes from one
+of them.</p>
+<h2 id="the-table">The table</h2>
+<p><strong>Works</strong>: Rusty Minecraft reads it from the pack and draws or plays it like vanilla. <strong>Partly</strong>: some of it.
+<strong>No</strong>: ignored (the vanilla version stays). Proof: a parity harness in <code>tools/</code> (compares with the pinned 26.3
+client), a unit test, or the loader reading the overlay (vanilla's files go through the same loader, and the
+harness named checks that loader against vanilla).</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Files</th>
+<th>State</th>
+<th>Proof</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pack metadata: description, icon, <code>min_format</code>/<code>max_format</code>, old <code>supported_formats</code>, compatibility warning</td>
+<td><code>pack.mcmeta</code>, <code>pack.png</code></td>
+<td>works</td>
+<td><code>test_pack_screen_parity</code>, <code>test_pack_selection_parity</code></td>
+</tr>
+<tr>
+<td>Overlays per format</td>
+<td><code>pack.mcmeta</code> <code>overlays</code></td>
+<td>works</td>
+<td><code>test_resource_pack_parity</code> (an overlay for 26.3 applied, an older one not)</td>
+</tr>
+<tr>
+<td>Filters</td>
+<td><code>pack.mcmeta</code> <code>filter</code></td>
+<td>works</td>
+<td><code>test_resource_pack_parity</code> (<code>horizon-client-core/src/pattern.rs</code> regex subset)</td>
+</tr>
+<tr>
+<td>Folder and zip packs, order, built-in packs</td>
+<td><code>resourcepacks/</code></td>
+<td>works</td>
+<td><code>test_resource_pack_parity</code>, <code>test_pack_selection_parity</code></td>
+</tr>
+<tr>
+<td>Server resource packs: the prompt, the server list's Server Resource Packs setting, download (250 MiB, SHA-1, <code>downloads/</code> keeps 20), download toasts, a progress screen while the packs reload, applied on top of the player's packs, removed on leaving</td>
+<td>the server's <code>resource_pack_push</code>/<code>_pop</code></td>
+<td>works</td>
+<td><code>tools/server_pack_e2e.py</code> (against vanilla's server and Rusty Minecraft's), unit tests in <code>server_packs.rs</code>; <code>test_server_resource_pack_parity</code> for Rusty Minecraft's server</td>
+</tr>
+<tr>
+<td>Other namespaces</td>
+<td><code>assets/&lt;namespace&gt;/</code></td>
+<td>works</td>
+<td><code>test_resource_pack_parity</code></td>
+</tr>
+<tr>
+<td>Block states: variants, multipart, weights, rotations, uvlock</td>
+<td><code>blockstates/</code></td>
+<td>works</td>
+<td><code>test_blockstate_model_parity</code>, <code>test_model_choice_parity</code>, <code>test_blockstate_transform_parity</code></td>
+</tr>
+<tr>
+<td>Block models: parents, elements, rotations, faces, cullface, tint, shade, light emission, ambient occlusion</td>
+<td><code>models/block/</code></td>
+<td>works</td>
+<td><code>test_model_resolution_parity</code>, <code>test_model_baking_parity</code>, <code>test_section_mesh_parity</code></td>
+</tr>
+<tr>
+<td>Item definitions and item models (all model types, display transforms, tints)</td>
+<td><code>items/</code>, <code>models/item/</code></td>
+<td>works</td>
+<td><code>test_item_model_parity</code></td>
+</tr>
+<tr>
+<td>Entity models</td>
+<td>(code in vanilla)</td>
+<td>n/a</td>
+<td>entity models aren't resource files in 26.3 (<code>test_entity_model_parity</code> checks the code ones)</td>
+</tr>
+<tr>
+<td>Textures, any resolution (16x to 512x)</td>
+<td><code>textures/</code></td>
+<td>works</td>
+<td>atlases stitched from the overlay; Faithful 32x, Default HD 128x and FPBR measured in <a href="reuse-pack-overlays.html">reuse-pack-overlays.md</a></td>
+</tr>
+<tr>
+<td>Texture animation: frames, frame time, frame size</td>
+<td><code>*.png.mcmeta</code> <code>animation</code></td>
+<td>works</td>
+<td><code>test_sprite_animation_parity</code></td>
+</tr>
+<tr>
+<td>Texture animation: <code>interpolate</code></td>
+<td><code>*.png.mcmeta</code> <code>animation</code></td>
+<td><strong>no</strong></td>
+<td>frames step instead of blending (vanilla's own prismarine, magma, stems, lit furnaces and campfires, command blocks, sculk too): fix in progress</td>
+</tr>
+<tr>
+<td>Mipmap strategy, alpha cutoff bias</td>
+<td><code>*.png.mcmeta</code> <code>texture</code></td>
+<td>works</td>
+<td><code>test_mipmap_parity</code></td>
+</tr>
+<tr>
+<td><code>blur</code> / <code>clamp</code></td>
+<td><code>*.png.mcmeta</code> <code>texture</code></td>
+<td>partly</td>
+<td>vanilla's own files (vignette, pumpkin blur, shadow, glint, nausea) are drawn with their vanilla sampling; a pack that changes the flags is ignored</td>
+</tr>
+<tr>
+<td>Atlases and sprite sources: <code>directory</code>, <code>single</code>, <code>filter</code>, <code>unstitch</code>, <code>paletted_permutations</code></td>
+<td><code>atlases/</code></td>
+<td>works</td>
+<td><code>test_resource_pack_parity</code> (merged source lists), <code>atlas_sources.rs</code> tests</td>
+</tr>
+<tr>
+<td>GUI sprites</td>
+<td><code>textures/gui/sprites/</code></td>
+<td>works</td>
+<td><code>test_hud_parity</code>, <code>test_screen_layout_parity</code></td>
+</tr>
+<tr>
+<td>GUI sprite scaling: <code>nine_slice</code> border</td>
+<td><code>*.png.mcmeta</code> <code>gui</code></td>
+<td>works</td>
+<td><code>ui.rs</code> reads the border; vanilla's buttons, sliders and frames use it</td>
+</tr>
+<tr>
+<td>GUI sprite scaling: <code>width</code>/<code>height</code>, <code>stretch_inner</code>, <code>tile</code>, <code>stretch</code></td>
+<td><code>*.png.mcmeta</code> <code>gui</code></td>
+<td>partly</td>
+<td>the border is taken in texels, so HD GUI sprites get thin borders; <code>stretch_inner</code> (vanilla's tooltip frame) and <code>tile</code> aren't read</td>
+</tr>
+<tr>
+<td>Fonts: <code>bitmap</code>, <code>space</code>, <code>unihex</code>, <code>reference</code></td>
+<td><code>font/*.json</code>, <code>textures/font/</code></td>
+<td>works</td>
+<td><code>test_resource_pack_parity</code> (merged provider lists)</td>
+</tr>
+<tr>
+<td>Fonts: <code>ttf</code></td>
+<td><code>font/*.json</code></td>
+<td><strong>no</strong></td>
+<td>no TrueType rasteriser yet</td>
+</tr>
+<tr>
+<td>Fonts picked by text components (<code>&quot;font&quot;: &quot;...&quot;</code>, custom fonts)</td>
+<td><code>font/</code></td>
+<td>partly</td>
+<td>the default font and the enchanting table's <code>alt</code> glyphs are drawn; other fonts named by a text component use the default</td>
+</tr>
+<tr>
+<td>Languages, translations</td>
+<td><code>lang/*.json</code></td>
+<td>works</td>
+<td><code>test_resource_pack_parity</code> (key by key, as <code>ClientLanguage</code>)</td>
+</tr>
+<tr>
+<td>New languages</td>
+<td><code>pack.mcmeta</code> <code>language</code></td>
+<td>works</td>
+<td><code>lang.rs</code> reads every pack's <code>language</code> section into the language list</td>
+</tr>
+<tr>
+<td>Sounds and sound events (<code>replace</code>, weights, streams, event references)</td>
+<td><code>sounds.json</code>, <code>sounds/</code></td>
+<td>works</td>
+<td><code>test_resource_pack_parity</code>, <code>test_sound_event_parity</code>, <code>test_sound_engine_parity</code></td>
+</tr>
+<tr>
+<td>Splashes</td>
+<td><code>texts/splashes.txt</code></td>
+<td>works</td>
+<td><code>title.rs</code> reads it from the overlay</td>
+</tr>
+<tr>
+<td>Credits, end poem</td>
+<td><code>texts/credits.json</code>, <code>end.txt</code>, <code>postcredits.txt</code></td>
+<td><strong>no</strong></td>
+<td>Rusty Minecraft has no credits screen yet (Options → <em>Credits &amp; Attribution</em> opens nothing)</td>
+</tr>
+<tr>
+<td>Grass, foliage and dry foliage colours</td>
+<td><code>textures/colormap/</code></td>
+<td>works</td>
+<td><code>biome.rs</code> reads the overlay; <code>test_section_mesh_parity</code> checks the tints</td>
+</tr>
+<tr>
+<td>Entity textures and variants</td>
+<td><code>textures/entity/</code></td>
+<td>works</td>
+<td><code>test_entity_model_parity</code>, loaded from the overlay</td>
+</tr>
+<tr>
+<td>Block entities: chests, signs, beds, banners, shields, shulker boxes, decorated pots</td>
+<td><code>atlases/</code>, <code>textures/entity/</code></td>
+<td>works</td>
+<td><code>test_block_entity_render_parity</code></td>
+</tr>
+<tr>
+<td>Villager hats</td>
+<td><code>*.png.mcmeta</code> <code>villager</code></td>
+<td><strong>no</strong></td>
+<td>the type layer's hat is always drawn; vanilla hides it under a profession hat marked <code>full</code>/<code>partial</code></td>
+</tr>
+<tr>
+<td>Equipment (armour, horse/llama/wolf/nautilus armour, wings, dyeable layers)</td>
+<td><code>equipment/</code>, <code>textures/entity/equipment/</code></td>
+<td>works</td>
+<td><code>game/armor_stands.rs</code>, <code>mobs/render.rs</code> read the overlay</td>
+</tr>
+<tr>
+<td>Armour trims on items</td>
+<td><code>atlases/items.json</code>, <code>textures/trims/items/</code></td>
+<td>works</td>
+<td><code>paletted_permutations</code> (<code>atlas_sources.rs</code> tests)</td>
+</tr>
+<tr>
+<td>Armour trims on worn armour</td>
+<td><code>textures/trims/entity/</code>, <code>textures/palettes/</code>, <code>palette</code> metadata</td>
+<td><strong>no</strong></td>
+<td>worn trims aren't drawn yet (<code>PalettedTextureManager</code>)</td>
+</tr>
+<tr>
+<td>Particles</td>
+<td><code>particles/</code>, <code>textures/particle/</code></td>
+<td>works</td>
+<td><code>test_particle_providers_parity</code></td>
+</tr>
+<tr>
+<td>Sky: sun, moon phases, stars, end sky, clouds, rain and snow</td>
+<td><code>atlases/celestials.json</code>, <code>textures/environment/</code></td>
+<td>works</td>
+<td><code>test_environment_render_parity</code>, <code>test_cloud_render_parity</code>, <code>test_weather_render_parity</code></td>
+</tr>
+<tr>
+<td>Title panorama</td>
+<td><code>textures/gui/title/background/</code></td>
+<td>works</td>
+<td><code>gfx/panorama.rs</code> loads it from the overlay</td>
+</tr>
+<tr>
+<td>Screen overlays: vignette, pumpkin, powder snow, nausea, underwater, world border</td>
+<td><code>textures/misc/</code></td>
+<td>works</td>
+<td><code>test_world_border_render_parity</code>, <code>test_hud_parity</code>; loaded from the overlay</td>
+</tr>
+<tr>
+<td>Enchantment glint</td>
+<td><code>textures/misc/enchanted_glint_*</code></td>
+<td>works</td>
+<td><code>item_render/gui.rs</code>, <code>entity.wgsl</code></td>
+</tr>
+<tr>
+<td>Maps: background, decorations</td>
+<td><code>textures/map/</code>, <code>atlases/map_decorations.json</code></td>
+<td>works</td>
+<td>loaded from the overlay</td>
+</tr>
+<tr>
+<td>Paintings, mob effect icons</td>
+<td><code>atlases/paintings.json</code>, <code>textures/mob_effect/</code></td>
+<td>works</td>
+<td>loaded from the overlay</td>
+</tr>
+<tr>
+<td>Locator bar styles</td>
+<td><code>waypoint_style/</code></td>
+<td><strong>no</strong></td>
+<td>the locator bar isn't drawn yet</td>
+</tr>
+<tr>
+<td>Post effects (spectating a creeper, spider or enderman; glowing outlines)</td>
+<td><code>post_effect/</code>, <code>shaders/post/</code></td>
+<td><strong>no</strong></td>
+<td>Rusty Minecraft's effects are WGSL; a pack's GLSL post chain isn't run</td>
+</tr>
+<tr>
+<td>Core shaders</td>
+<td><code>shaders/core/</code>, <code>shaders/include/</code></td>
+<td><strong>no</strong></td>
+<td>Rusty Minecraft draws with WGSL; a pack's GLSL core shaders aren't run</td>
+</tr>
+<tr>
+<td>GPU warn list, regional compliance</td>
+<td><code>gpu_warnlist.json</code>, <code>regional_compliancies.json</code></td>
+<td>n/a</td>
+<td>OpenGL driver warnings and play-time notices for some regions; not used</td>
+</tr>
+</tbody>
+</table></div>
+<p>Summary: 45 rows; 32 work, 3 partly, 8 don't (interpolated animation, TrueType fonts, credits and end poem,
+villager hats, trims on worn armour, locator bar styles, post effects, core shaders), 2 don't apply. Except the
+shaders, the missing pieces are missing vanilla features too, and each vanilla parity fix covers the pack case as well.</p>
+<h2 id="gaps-and-their-work">Gaps and their work</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Gap</th>
+<th>Size</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Animation <code>interpolate</code></td>
+<td>small</td>
+<td>fix PR (<code>gfx.rs</code> <code>animate_sprites</code>)</td>
+</tr>
+<tr>
+<td>GUI scaling <code>width</code>/<code>height</code>, <code>stretch_inner</code>, <code>tile</code>, <code>stretch</code></td>
+<td>small</td>
+<td>next fix PR (<code>ui.rs</code>)</td>
+</tr>
+<tr>
+<td>Villager hats</td>
+<td>small</td>
+<td><a href="https://github.com/horizon-rust/horizon/issues/334">#334</a></td>
+</tr>
+<tr>
+<td><code>blur</code>/<code>clamp</code> from packs</td>
+<td>small</td>
+<td><a href="https://github.com/horizon-rust/horizon/issues/335">#335</a></td>
+</tr>
+<tr>
+<td>Text component fonts, TrueType fonts</td>
+<td>medium</td>
+<td><a href="https://github.com/horizon-rust/horizon/issues/336">#336</a></td>
+</tr>
+<tr>
+<td>Trims on worn armour (paletted textures)</td>
+<td>medium</td>
+<td><a href="https://github.com/horizon-rust/horizon/issues/337">#337</a></td>
+</tr>
+<tr>
+<td>Credits and end poem screen</td>
+<td>medium</td>
+<td><a href="https://github.com/horizon-rust/horizon/issues/338">#338</a></td>
+</tr>
+<tr>
+<td>Locator bar</td>
+<td>medium</td>
+<td><a href="https://github.com/horizon-rust/horizon/issues/339">#339</a></td>
+</tr>
+<tr>
+<td>Post effects and core shaders</td>
+<td>large</td>
+<td>none yet</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="testing-a-pack">Testing a pack</h2>
+<p><code>tools/test_resource_pack_parity.py</code> builds small packs (folder and zip, overlays, a filter, textures, languages,
+sounds, fonts, atlases), and a Java oracle answers what vanilla's loaders read from them; Rusty Minecraft's loaders must
+give the same answers. Never commit third-party packs: build test packs in the harness or the test.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/resource-packs.md"><code>docs/resource-packs.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#how-it-works">How it works</a></li><li class="l2"><a href="#the-table">The table</a></li><li class="l2"><a href="#gaps-and-their-work">Gaps and their work</a></li><li class="l2"><a href="#testing-a-pack">Testing a pack</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

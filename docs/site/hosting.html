@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Host a server · Rusty Minecraft docs</title>
+<meta name="description" content="Host a server: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html" aria-current="page">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="host-a-server">Host a server</h1>
+<p><code>horizon-server</code> hosts a Minecraft Java Edition 26.3 server with Rusty Minecraft's own game as the engine: one native
+program, no Java, one settings file, a command line, and a web panel. Vanilla 26.3 clients and Rusty Minecraft clients
+can join it. This page covers what works on <code>main</code> today and says plainly what doesn't yet. The design and the
+plan are in <a href="https://github.com/horizon-rust/horizon/blob/main/docs/server.md">docs/server.md</a>.</p>
+<h2 id="before-you-start">Before you start</h2>
+<ul>
+<li><strong>Online mode checks accounts</strong> (release v2026.10.17.07 and newer). With <code>online_mode = true</code>, the
+default, players who sign in with the official Minecraft launcher join with their own accounts, as on a
+vanilla server.</li>
+<li><strong>Names you add are accounts</strong> (release v2026.10.17.14 and newer). <code>init --player</code>, <code>horizon-server whitelist add</code> and <code>op</code>, and the console's <code>whitelist add</code>, <code>op</code> and <code>ban</code> look a name up the way vanilla
+does: players already seen (kept in <code>usercache.json</code>), then Mojang's profile service. In online mode a name
+with no account is refused. So you can whitelist friends before they first join. On an offline server,
+<code>horizon-server whitelist add</code> always writes the offline UUID, the one the player joins with, also while
+the server runs (it writes the entry and the game reloads the list): the console's own <code>whitelist add</code>
+takes the account's UUID when someone owns that name, as vanilla does, and that player is then refused.</li>
+<li><strong>Rusty Minecraft's own client can't sign in to a Microsoft account yet.</strong> That needs an Azure app registration and
+Mojang's approval, which the project doesn't have
+(<a href="https://github.com/horizon-rust/horizon/blob/main/docs/microsoft-account.md">docs/microsoft-account.md</a>).
+Until then Rusty Minecraft players can join offline servers only (<code>online_mode = false</code>). An offline server never
+checks accounts: anyone who reaches it can join under any name. Keep it on your LAN or a tailnet
+(Tailscale, ZeroTier), or share it only with friends you trust.</li>
+<li><strong>Secure chat</strong> works as on vanilla's server: in online mode, vanilla clients sign their chat, and with
+<code>enforce-secure-profile=true</code> (the default) unsigned chat is refused. On an offline server, or for a player
+without a chat session (Rusty Minecraft's own client today), chat stays unsigned and shows as not secure.</li>
+<li><strong>Nether and End:</strong> each player travels on their own through portals, and operators with <code>execute in &lt;dimension&gt; run tp</code>. The players in the level they leave stop seeing them, and the ones in the level they
+arrive in start to, as on vanilla (checked against vanilla with two players, by command and through an End
+portal: <code>tools/test_server_dimension_players_parity.py</code>). The console can't send another player to a
+dimension yet (<code>execute in ... run tp NAME</code>).</li>
+<li><strong>Movement checks and chunk pacing</strong> (release v2026.10.17.16 and newer). The server pulls back players who
+move too fast (&quot;moved too quickly&quot;), as vanilla does, and sends chunks as fast as each client acknowledges
+them.</li>
+<li><strong>No Docker image is published.</strong> You build it yourself from the repository (below). Publishing an image
+needs the project owner.</li>
+<li>Nothing of Mojang's is downloaded or shipped. The server reads the game files you prepare from your own copy
+of Minecraft 26.3.</li>
+</ul>
+<h2 id="1-install">1. Install</h2>
+<p>Linux (x86-64) and macOS (Apple Silicon):</p>
+<pre><code class="language-sh">curl -fsSL https://raw.githubusercontent.com/horizon-rust/horizon/main/packaging/server/install.sh | sh
+</code></pre>
+<p>Windows (x64), in PowerShell:</p>
+<pre><code class="language-powershell">irm https://raw.githubusercontent.com/horizon-rust/horizon/main/packaging/server/install.ps1 | iex
+</code></pre>
+<p>The script downloads the current Rusty Minecraft Nightly for your computer from GitHub (the only build Rusty Minecraft ships;
+<code>--version</code> picks another), checks it against the SHA-256 GitHub publishes, and never asks for sudo or administrator rights. It installs:</p>
+<ul>
+<li>the release in <code>~/.local/share/horizon/releases/&lt;version&gt;</code> (Windows: <code>%LOCALAPPDATA%\Rusty Minecraft</code>), with
+<code>current</code> pointing at the one in use;</li>
+<li><code>horizon-server</code> and <code>horizon-prepare</code> in <code>~/.local/bin</code> (Windows: added to your PATH);</li>
+<li>a <code>game-files</code> folder for the files you prepare, kept across updates.</li>
+</ul>
+<p>Options: <code>--version vX.Y.Z</code>, <code>--dir FOLDER</code>, <code>--bin FOLDER</code> (Windows: <code>-Version</code>, <code>-Dir</code>). Other systems,
+such as Linux on ARM, build from source: <code>cargo build --release -p horizon-client --bin horizon-client -p horizon-server</code> and keep both programs in one folder.</p>
+<p>The Rusty Minecraft launcher also installs releases. Every release folder holds <code>horizon-server</code>, so you can run it
+from there too.</p>
+<h2 id="2-prepare-the-game-files">2. Prepare the game files</h2>
+<p>Rusty Minecraft reads Minecraft's data from your own copy of the game. You need Minecraft Java Edition 26.3, played
+once from the official launcher on this computer, a Java 25 runtime, and the 26.3 <code>server.jar</code>: it's the
+<code>downloads.server.url</code> in your launcher's <code>versions/26.3/26.3.json</code>. Then:</p>
+<pre><code class="language-sh">horizon-prepare --prepare --server-jar /path/to/server.jar
+</code></pre>
+<p>Add <code>--minecraft-dir PATH</code> if your launcher keeps the game elsewhere. The prepared files go to
+<code>game-files</code>, which updates keep.</p>
+<p><strong>On a headless machine</strong> (a VPS, a home server), prepare on your own computer instead, with the launcher or
+<code>horizon-prepare</code>, and copy the prepared <code>26.3</code> folder to the server: into
+<code>~/.local/share/horizon/game-files/horizon-client/26.3</code>, or into <code>resources/</code> in the server folder, or anywhere
+<code>[engine] resources</code> in <code>server.toml</code> names. A folder copied this way needs release v2026.10.17.07 or
+newer: older ones don't keep <code>registries.json</code> and <code>commands.json</code> with the prepared files, and the
+server then stops with &quot;registries.json not found next to the resources&quot;. Prepare again with a newer release.</p>
+<h2 id="3-first-run">3. First run</h2>
+<pre><code class="language-sh">mkdir my-server &amp;&amp; cd my-server
+horizon-server init
+</code></pre>
+<p><code>init</code> asks five things and writes <code>server.toml</code>:</p>
+<ol>
+<li>whether you agree to the <a href="https://aka.ms/MinecraftEULA">Minecraft EULA</a>: only a yes writes <code>eula=true</code>;</li>
+<li>the world's name and an optional seed (an existing world or vanilla server folder is kept and its
+<code>server.properties</code> imported);</li>
+<li>the port, 25565 by default;</li>
+<li>whether to use a whitelist (yes by default, as in vanilla) and who to add;</li>
+<li>whether to make the first player an operator.</li>
+</ol>
+<p>It then tells you where it found the game and its files. Every question has a flag, so it also runs from a
+script:</p>
+<pre><code class="language-sh">horizon-server init --eula --world survival --seed 12345 --port 25565 --whitelist --player Alex --op Alex --yes
+</code></pre>
+<p><code>--no-whitelist</code> turns the whitelist off, and <code>--offline</code> turns online mode off (see &quot;Before you start&quot;).
+The players you add are looked up as Minecraft accounts in online mode, and get offline UUIDs on an offline
+server, as vanilla does.</p>
+<p>Start the server in the foreground, with the console on your terminal (Ctrl-C stops it cleanly):</p>
+<pre><code class="language-sh">horizon-server run
+</code></pre>
+<p>or in the background:</p>
+<pre><code class="language-sh">horizon-server start
+horizon-server status
+</code></pre>
+<pre><code class="language-text">Running, up 29 s
+TPS 20.0, MSPT 1.0 ms average, 3.1 ms P95
+0 of 20 players, 377 chunks loaded
+RAM 1.42 GB, CPU 2 % of a core
+</code></pre>
+<p>Players join at your computer's address and the port (<code>192.168.1.20:25565</code>, or a tailnet name). Every
+command takes <code>--dir FOLDER</code> to work on a server folder from elsewhere.</p>
+<h2 id="4-settings-servertoml">4. Settings: <code>server.toml</code></h2>
+<p>You edit one file. The server writes vanilla's <code>server.properties</code> from it before every start, so the game
+reads exactly what a vanilla server reads, and a vanilla server folder works as it is.</p>
+<pre><code class="language-toml">[server]
+motd = &quot;A Minecraft Server&quot;
+port = 25565
+bind = &quot;&quot;                    # listen on every address, or only on this one (server-ip)
+max_players = 20
+online_mode = true           # check accounts with Mojang (see &quot;Before you start&quot;)
+whitelist = true
+enforce_whitelist = false
+view_distance = 10
+simulation_distance = 10
+
+[world]
+name = &quot;world&quot;
+seed = &quot;&quot;                    # empty: a random seed on the first start
+game_mode = &quot;survival&quot;
+difficulty = &quot;easy&quot;
+hardcore = false
+
+# Any other server.properties key, spelled as vanilla spells it:
+[properties]
+# spawn-protection = 16
+# resource-pack = &quot;https://example.com/pack.zip&quot;   # offered to players as they join; with
+# resource-pack-sha1, require-resource-pack and resource-pack-prompt, as on vanilla
+
+[engine]
+path = &quot;&quot;                    # the game program; empty: the one beside horizon-server
+resources = &quot;&quot;               # the prepared game files; empty: resources/ here, else the usual places
+restart_on_crash = true
+
+[backups]
+every = &quot;6h&quot;                 # 30m, 6h, 1d...; &quot;0&quot; turns automatic backups off
+keep = 12                    # automatic backups kept; backups made by hand are never deleted
+
+[panel]
+bind = &quot;127.0.0.1:8130&quot;      # this computer only, or a tailnet address (100.x); &quot;&quot; turns it off
+allow_public = false
+</code></pre>
+<p>The defaults are vanilla 26.3's. Unknown keys and values vanilla would refuse are errors, so a typo stops the
+start instead of being ignored. When the game changes a setting itself (<code>/whitelist on</code>), the change is copied
+back into <code>server.toml</code> when it stops, and your comments are kept. Changes to the file apply at the next
+restart: there is no live reload yet.</p>
+<p>Already have a vanilla server? Run <code>horizon-server init</code> in its folder, or <code>horizon-server import server.properties</code> to write <code>server.toml</code> from it. The world, <code>ops.json</code>, <code>whitelist.json</code> and the ban lists
+keep vanilla's names and formats, so going back to vanilla works too.</p>
+<h2 id="5-commands">5. Commands</h2>
+<pre><code class="language-text">horizon-server init                      first run
+horizon-server run                       in the foreground, with the console; Ctrl-C stops it
+horizon-server start | stop | restart    in the background (its output goes to logs/supervisor.log)
+horizon-server status [--json]           up or not, TPS, MSPT, players, chunks, RAM, CPU
+horizon-server cmd COMMAND...            one console command, and what it answers
+horizon-server logs [-f] [-n N]          the log; -f follows it
+horizon-server report [SECONDS]          record a performance report (below)
+horizon-server op|deop NAME
+horizon-server whitelist on|off|list
+horizon-server whitelist add|remove NAME
+horizon-server backup [NAME]             back up now
+horizon-server backups [--json]          list the backups
+horizon-server restore BACKUP [--yes]
+horizon-server service install|uninstall|print [--system]
+horizon-server panel                     a one-time login link for the web panel
+horizon-server import FILE               server.toml from a vanilla server.properties
+horizon-server config [--json]           the settings in server.toml
+horizon-server config set KEY=VALUE...   change settings, checked first (below)
+horizon-server update [--check]          install the newest release and restart on it (below)
+horizon-server rollback                  back to the release before
+</code></pre>
+<p>While the server runs, <code>op</code>, <code>whitelist</code> and <code>cmd</code> go to the game's console, so they act exactly as vanilla's
+console commands do. While it's stopped, they edit vanilla's files directly. Any console command works through
+<code>cmd</code>: <code>horizon-server cmd ban Griefer</code>, <code>horizon-server cmd say Restarting in 5 minutes</code>.
+To generate the world around spawn ahead of the players, Rusty Minecraft has its own <code>pregen</code> command, off until
+<code>server.toml</code> has <code>horizon-pregen = true</code> under <code>[properties]</code>: <code>horizon-server cmd pregen start 2500</code>
+(<a href="pregeneration.html">pregeneration</a>).
+To let only the Rusty Minecraft client join, set <code>horizon-clients-only = true</code> under <code>[properties]</code> (off by default).
+Other clients are turned away while they connect with &quot;This server is for the Rusty Minecraft client:
+playhorizon.dev&quot;, and the console says which client it was. The check reads the brand a client names itself
+by (<code>minecraft:brand</code>), which any client can fake: it keeps out players who didn't install Rusty Minecraft, not
+cheaters. The server's own checks (reach, movement) are what protect it.</p>
+<p><code>horizon-server report</code> records the running server for 60 seconds (<code>report 300</code> for five minutes, up to 600),
+then prints a short summary and saves it in <code>reports/</code>: <code>perf-&lt;time&gt;.txt</code> and <code>perf-&lt;time&gt;.json</code>. They say where
+the ticks' time went, phase by phase (mobs, block ticks, block entities, the network and the chunks it
+sends, saving...), the slowest ticks, how many entities of each type, chunks, players, memory, CPU, and the
+settings that matter (view and simulation distance, max players). They hold no names, UUIDs or addresses, so you
+can attach them to an issue as they are. On the console it is <code>horizon-report [SECONDS]</code>.</p>
+<p><code>config set</code> changes <code>server.toml</code> without opening it: <code>horizon-server config set world.difficulty=hard server.max_players=10</code>. Each key is a section and a name from the file (<code>properties.spawn-protection=0</code> for any
+other vanilla key). The values are checked as the server checks them, and nothing is written if one is wrong.
+A running server takes the difficulty, the default game mode, the whitelist and the backup settings at once;
+the rest applies at its next start, and <code>config set</code> says which. <code>--json</code> prints that as <code>saved</code>, <code>applied</code>
+and <code>restart</code>.</p>
+<p>The server restarts the game by itself if it crashes: after 5 s, then waiting longer each time, up to 5
+minutes. It keeps the crash report and gives up after 5 crashes in 10 minutes, and <code>status</code> says why.</p>
+<p><strong>Updates</strong> (a server installed with the install script). The server checks for a newer release a minute
+after it starts and every 6 hours after, and says so in its log, in <code>status</code> and in the panel; it never
+updates by itself. <code>horizon-server update --check</code> asks once. <code>horizon-server update</code>:</p>
+<ol>
+<li>downloads the current Nightly and checks it against its signed SHA-256;</li>
+<li>stops the game, backs up the world (<code>backups/&lt;time&gt;-before-&lt;release&gt;.zip</code>) and switches to the new
+release;</li>
+<li>starts the game on it and waits up to 5 minutes (<code>--timeout SECONDS</code>) for it to come up.</li>
+</ol>
+<p>If the new game crashes or doesn't come up in time, the server goes back to the release it was on by itself
+and puts the world back as it was just before the switch (the world the new game left is kept in
+<code>backups/</code>). <code>horizon-server rollback</code> goes back to the release before by hand, keeping the world as it is
+(it backs it up first). <code>--version vX.Y.Z</code> installs a given release, and <code>--archive FILE --version NAME</code> an
+archive you have, such as your own build. A server still on a release from before the last dated one doesn't know
+that 0.2 comes after the dated releases and says it is up to date: run <code>horizon-server update --version v0.2.0</code>
+once (<a href="versioning.html">versioning</a>). A stopped server is switched and starts on the new release next
+time. Set <code>HORIZON_NO_UPDATE_CHECK=1</code> in the server's environment to turn the check off.</p>
+<p>Coming: <code>console</code> (attach to a server running in the background), <code>ban</code> and <code>pardon</code> as their own
+commands, and <code>mcp</code> (an MCP server so an AI assistant can run the server).</p>
+<h2 id="6-web-panel">6. Web panel</h2>
+<p>The panel runs inside <code>horizon-server</code> while the server runs. It shows live TPS, MSPT, RAM and CPU graphs for
+the last 10 minutes, the players with their ping (and a kick button), the console with a command line, and the
+backups (back up now, restore with a confirmation), with Restart and Stop. When a newer release is out it says
+so, with an Update button that runs <code>horizon-server update</code> (section 5), and shows how it went.</p>
+<pre><code class="language-sh">horizon-server panel
+</code></pre>
+<p>prints a login link that works once, for 10 minutes. The panel listens on <code>127.0.0.1:8130</code>, this computer
+only. To reach it from your other devices:</p>
+<ul>
+<li>put your tailnet address in <code>[panel] bind</code> (for example <code>bind = &quot;100.101.102.103:8130&quot;</code>), or</li>
+<li>forward the port over SSH: <code>ssh -L 8130:127.0.0.1:8130 your-server</code>, then open the link on your computer.</li>
+</ul>
+<p>Any other address, such as <code>0.0.0.0</code> or a public IP, is refused unless you set <code>allow_public = true</code>, and
+even then the panel warns at every start. It has no passwords to leak: whoever can read the server folder can
+make a login link, and no one else can. Never put it on the open internet.</p>
+<h2 id="7-backups">7. Backups</h2>
+<pre><code class="language-sh">horizon-server backup before-the-update
+horizon-server backups
+horizon-server restore before-the-update
+</code></pre>
+<p>A backup zips the world, vanilla's files and <code>server.toml</code> into <code>backups/</code>. A running server saves first and
+stays up: players don't notice. Automatic backups run on the <code>[backups] every</code> schedule while the server runs,
+and the oldest automatic ones beyond <code>keep</code> are deleted. Backups you make by hand are never deleted.</p>
+<p><code>restore</code> takes a backup's file name, a unique start of it, or the name you gave it. It moves the current
+world aside to <code>backups/replaced-&lt;time&gt;/</code> (never deleted), puts the backup in place, and restarts the server if
+it was running. The panel does the same with one click.</p>
+<h2 id="8-start-it-with-the-computer">8. Start it with the computer</h2>
+<pre><code class="language-sh">horizon-server service install
+</code></pre>
+<ul>
+<li><strong>Linux:</strong> a systemd user unit (<code>--system</code> for a system unit, with sudo). To keep a user unit running while
+you're logged out: <code>loginctl enable-linger $USER</code>.</li>
+<li><strong>macOS:</strong> a launchd agent in <code>~/Library/LaunchAgents</code>.</li>
+<li><strong>Windows:</strong> a task that starts at logon (a real Windows service comes later).</li>
+</ul>
+<p>The service runs <code>horizon-server run</code> through the installed <code>current</code> release, so an update applies at the
+next restart. <code>service print</code> shows what it would install, <code>service uninstall</code> removes it and leaves the server
+folder alone.</p>
+<h2 id="9-docker-build-it-yourself">9. Docker (build it yourself)</h2>
+<p>No image is published: build one from the repository. The image holds none of Minecraft's files; you mount the
+folder you prepared (step 2) read-only.</p>
+<pre><code class="language-sh">git clone https://github.com/horizon-rust/horizon &amp;&amp; cd horizon
+docker build -f packaging/server/Dockerfile -t horizon-server .
+
+docker run -d --name horizon -p 25565:25565 --stop-timeout 180 \
+  -v horizon-data:/data \
+  -v /path/to/26.3:/opt/horizon/.local/horizon-client/26.3:ro \
+  -e HORIZON_EULA=true -e HORIZON_WHITELIST=true -e HORIZON_PLAYERS=Alex,Steve -e HORIZON_OP=Alex \
+  horizon-server
+</code></pre>
+<ul>
+<li><code>HORIZON_EULA=true</code> accepts the <a href="https://aka.ms/MinecraftEULA">Minecraft EULA</a> for this server. Without it
+the container stops and says why.</li>
+<li>The first start writes <code>/data/server.toml</code> from <code>HORIZON_EULA</code>, <code>HORIZON_WORLD</code>, <code>HORIZON_SEED</code>,
+<code>HORIZON_PORT</code>, <code>HORIZON_WHITELIST</code>, <code>HORIZON_PLAYERS</code>, <code>HORIZON_OP</code> and <code>HORIZON_ONLINE</code>. Later starts use
+the file.</li>
+<li>The mounted folder must come from release v2026.10.17.07 or newer (see step 2).</li>
+<li>Manage it with <code>docker exec horizon horizon-server status</code> (and <code>cmd</code>, <code>backup</code>, <code>logs</code>, ...).
+<code>docker stop</code> saves and stops cleanly; <code>--stop-timeout 180</code> gives it the time.</li>
+<li>The panel stays on 127.0.0.1 inside the container.</li>
+<li>The image still carries ALSA and udev libraries because the game links them, even though a server never plays
+a sound. A smaller engine without them is planned.</li>
+</ul>
+<h2 id="10-how-fast-is-it">10. How fast is it</h2>
+<p>The latest bot benchmark compares Rusty Minecraft with vanilla 26.3, Paper and Fabric + Lithium:
+<a href="https://github.com/horizon-rust/horizon/blob/main/benchmarks/server-four-way-2026-10-19/README.md">benchmarks/server-four-way-2026-10-19</a>.
+It ran release v2026.10.19 on a 4-thread laptop CPU (i7-7500U), with 1 to 50 players walking, exploring and
+standing around spawn, the bots on another machine. All four servers did the same work. Earlier
+measurements are in <a href="https://github.com/horizon-rust/horizon/blob/main/docs/server.md">docs/server.md</a>. In
+short:</p>
+<ul>
+<li><strong>Memory:</strong> 0.7 GB with one player and 1.1 GB with 50, against 3.4 to 4.5 GB for the Java servers
+(each with a 4 GB heap): 3.8 to 4.8 times less.</li>
+<li><strong>Start:</strong> ready in 8 to 9 s, against 15 s for vanilla, 17 s for Fabric and 19 to 22 s for Paper.</li>
+<li><strong>CPU:</strong> from 10 players up, the least of the four (1.4 cores at 50, against Paper's 2.1 and Fabric's 2.4).</li>
+<li><strong>Average tick:</strong> Paper's is shorter at every count (10.3 against 13.7 ms with one player, 46.9 against
+47.8 with 50), and Fabric + Lithium's with 1 and 10 players. Rusty Minecraft's is shorter than vanilla's (equal
+with 10), and than Fabric's from 25 players up.</li>
+<li><strong>Slow ticks:</strong> from 10 players up, Rusty Minecraft's slowest ticks (99th percentile) are the shortest of the
+four (73 ms with 50, against 110 for Paper and 174 for Fabric).</li>
+<li><strong>50 players:</strong> Rusty Minecraft and Paper keep 20 TPS, Fabric + Lithium drops to 17, and vanilla's watchdog
+stopped it.</li>
+</ul>
+<p>For more than 50 active players, give it more cores.</p>
+<h2 id="when-something-goes-wrong">When something goes wrong</h2>
+<ul>
+<li><strong>&quot;no prepared game files&quot;</strong>: <code>init</code> and <code>run</code> list the folders they looked in. Prepare (step 2), or set
+<code>[engine] resources</code>.</li>
+<li><strong>&quot;registries.json not found next to the resources&quot;</strong>: the prepared folder is from an older release. Prepare
+again with a newer one.</li>
+<li><strong>Nobody can join</strong>: the whitelist is on by default (<code>horizon-server whitelist add NAME</code>), and the port must be
+open in your firewall. On a tailnet, use the server's tailnet address.</li>
+<li><strong>It keeps restarting</strong>: <code>horizon-server status</code> shows the last crash and <code>horizon-server logs -n 200</code> the log
+before it. Crash reports are in <code>crash-reports/</code>.</li>
+<li>Report problems at <a href="https://github.com/horizon-rust/horizon/issues">https://github.com/horizon-rust/horizon/issues</a>, with the end of the log.</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/hosting.md"><code>docs/hosting.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#before-you-start">Before you start</a></li><li class="l2"><a href="#1-install">1. Install</a></li><li class="l2"><a href="#2-prepare-the-game-files">2. Prepare the game files</a></li><li class="l2"><a href="#3-first-run">3. First run</a></li><li class="l2"><a href="#4-settings-servertoml">4. Settings: server.toml</a></li><li class="l2"><a href="#5-commands">5. Commands</a></li><li class="l2"><a href="#6-web-panel">6. Web panel</a></li><li class="l2"><a href="#7-backups">7. Backups</a></li><li class="l2"><a href="#8-start-it-with-the-computer">8. Start it with the computer</a></li><li class="l2"><a href="#9-docker-build-it-yourself">9. Docker (build it yourself)</a></li><li class="l2"><a href="#10-how-fast-is-it">10. How fast is it</a></li><li class="l2"><a href="#when-something-goes-wrong">When something goes wrong</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

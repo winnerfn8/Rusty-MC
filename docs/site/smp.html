@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Survival multiplayer (SMP): the official server&#x27;s mod · Rusty Minecraft docs</title>
+<meta name="description" content="Survival multiplayer (SMP): the official server&#x27;s mod: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html" aria-current="page">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="survival-multiplayer-smp-the-official-servers-mod">Survival multiplayer (SMP): the official server's mod</h1>
+<p>The official Rusty Minecraft server (horizon.bunchy7s.dev) wants an organised survival game: a currency players earn in
+game, a server market, safe player-to-player trades, small games of chance with that currency, and spawn, homes,
+teleport requests, warps, land claims and rules.</p>
+<p><strong>None of it is in Rusty Minecraft.</strong> The server people download stays a plain server, like vanilla's server jar: no SMP
+command, no SMP setting in <code>server.toml</code>, nothing in the release build. The SMP is a <strong>native mod</strong>, <code>smp</code>, that
+only the official server builds into its engine. What Rusty Minecraft gains are general <strong>server hook points</strong> any native
+mod can use (commands, players, messages, inventories, the world folder, then interactions, damage, menus): the
+mod API grows, and a server owner who wants their own SMP, shop or claims mod can write it on the same points.</p>
+<p>Status: design (this page); built in phases below.</p>
+<h2 id="players-install-nothing">Players install nothing</h2>
+<p>Everything works with a stock Rusty Minecraft client: no mod, no resource pack, nothing on the player's side. The SMP speaks
+only what vanilla's protocol already carries and the Rusty Minecraft client already renders:</p>
+<ul>
+<li>chat commands with completions (the server's command tree), and chat lines;</li>
+<li>menus the server opens with vanilla menu types (a 6-row chest, <code>generic_9x6</code>) and fills with ordinary items as
+buttons and displays; the server rules every click, the client only shows them;</li>
+<li>vanilla sounds, titles, the action bar, boss bars and the scoreboard sidebar for what a player should notice.</li>
+</ul>
+<p>Only the Rusty Minecraft client may join the official server; that gate is anticheat-1's work, not the SMP's. The SMP may rely
+on what the stock client renders, never on a client mod.</p>
+<h2 id="architecture">Architecture</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Where</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server hook points</td>
+<td>this repository, <code>crates/horizon-client/src/game/native_hooks.rs</code> (<a href="native-mods.html">native-mods.md</a>)</td>
+<td>stable, versioned (<code>NATIVE_HOOKS_API</code>), empty when no mod hooks them</td>
+</tr>
+<tr>
+<td>The <code>smp</code> mod</td>
+<td><a href="https://github.com/horizon-rust/horizon-mods">horizon-rust/horizon-mods</a>, <code>native/smp/</code></td>
+<td>a horizon-mixins bundle: <code>smp_store.rs</code>, <code>smp_economy.rs</code>, <code>smp_market.rs</code>... hold the rules and data (also the mod's own crate, with its tests, no game types), <code>glue.rs</code> and small helpers hook the points</td>
+</tr>
+<tr>
+<td>The official server's engine</td>
+<td>built from a Rusty Minecraft release's commit with the bundle applied</td>
+<td><code>horizon-server</code>'s <code>[engine] path</code> points at it; the rest of the server is unchanged</td>
+</tr>
+</tbody>
+</table></div>
+<p>Why a native mod: it is the mod system Rusty Minecraft has now, it runs on the server
+that simulates the world, and it keeps the SMP out of everyone else's game. Why hook points rather than reaching into
+the game's private code: a mod on the hook points builds on any later Rusty Minecraft (<code>&quot;hooks&quot;: N</code>), so the official server
+updates with each release without the mod being ported again.</p>
+<p>Why not a datapack: no command arguments, no inventory transactions, no trade window, no way to refuse an action in a
+claim.</p>
+<h3 id="hook-points-the-smp-needs">Hook points the SMP needs</h3>
+<p>Each is added in its own pull request, raising <code>NATIVE_HOOKS_API</code>, documented in <a href="native-mods.html">native-mods.md</a>,
+and free when no mod hooks it (an empty function). Where a contributor's pull request already adds one (block
+breaking and placing, item use: #4483, #4302), the SMP uses theirs.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>API</th>
+<th>Hook points and helpers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Economy</td>
+<td>8</td>
+<td><code>native_register_commands</code> (commands every player's chat box completes), <code>native_perform_command</code> (a player's command on the server, with that player's state as the acting player); helpers: the online players and their game mode, a line to one player or to all, the world's folder</td>
+</tr>
+<tr>
+<td>1. Market</td>
+<td>9</td>
+<td>the acting player's items: held, count, carried, take, room, give (plain stacks only, nothing dropped)</td>
+</tr>
+<tr>
+<td>2. Trading</td>
+<td>10</td>
+<td>a vanilla chest menu the server opens and fills for a player, display only: its clicks and its closing go to the mod; an atomic exchange of two players' items; a player left or died</td>
+</tr>
+<tr>
+<td>3. Gambling</td>
+<td>nothing new</td>
+<td></td>
+</tr>
+<tr>
+<td>4. Organisation</td>
+<td>21</td>
+<td>a right click on a block that a mod can refuse (beside #4302's item use and #4483's block breaking), the acting player, a command run as the server (teleports across levels with <code>execute in … run tp</code>), a player's health (a teleport's warmup stops when it drops)</td>
+</tr>
+<tr>
+<td>4. Claims</td>
+<td>22</td>
+<td>the world kept out of claims: fluid and fire spreading, pistons, explosions' blocks, buckets, a player's blow on an entity (frames, armor stands, animals); right-clicking an entity is #4648's</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="mojangs-rules">Mojang's rules</h2>
+<p>The currency is earned in game only (the market, trades, playing). Rules that no setting changes:</p>
+<ul>
+<li><strong>in-game currency only</strong>: games of chance take and pay only the SMP's currency, within limits the owner sets;</li>
+<li><strong>never bought with real money</strong>: no store, rank or perk sells the currency, a stake or a ticket;</li>
+<li><strong>never cashed out</strong>: nothing turns the currency or winnings into money or anything outside the game;</li>
+<li><strong>no paid random items</strong>: nothing random (crates, keys, loot boxes) is sold, for money or for the currency bought
+with money.</li>
+</ul>
+<p>Games of chance are off in the mod by default (<code>gambling.enabled: false</code>): a server that builds the mod turns them
+on itself. The official server has them on (Ludovic's decision, 2026-10-30). Operators' corrections (<code>/eco</code>) are
+logged like every other transaction.</p>
+<h2 id="commands">Commands</h2>
+<p>Player commands work for every player; operator commands need the permission level shown.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/balance [player]</code>, <code>/bal</code></td>
+<td>your balance, or another player's</td>
+</tr>
+<tr>
+<td><code>/pay &lt;player&gt; &lt;amount&gt;</code></td>
+<td>gives money to a player who has an account</td>
+</tr>
+<tr>
+<td><code>/baltop [page]</code></td>
+<td>the richest players</td>
+</tr>
+<tr>
+<td><code>/eco give|take|set &lt;player&gt; &lt;amount&gt;</code> (level 3)</td>
+<td>operator corrections, logged</td>
+</tr>
+<tr>
+<td><code>/sell hand [count]|all|&lt;item&gt; [count]</code>, <code>/buy &lt;item&gt; [count]</code>, <code>/worth [item]</code></td>
+<td>the server market, at the configured prices; plain items only, in survival and adventure</td>
+</tr>
+<tr>
+<td><code>/trade &lt;player&gt;</code>, <code>/trade accept|deny|cancel</code>, <code>/trade money &lt;amount&gt;</code></td>
+<td>a two-sided trade window</td>
+</tr>
+<tr>
+<td><code>/coinflip &lt;amount&gt; [player]</code>, <code>/coinflip accept &lt;player&gt;</code>, <code>/coinflip cancel|list</code></td>
+<td>a 50/50 bet between two players, both stakes held until it is decided</td>
+</tr>
+<tr>
+<td><code>/lottery [buy &lt;tickets&gt;]</code></td>
+<td>tickets for the next draw; the pot goes to one ticket drawn at random</td>
+</tr>
+<tr>
+<td><code>/spawn</code>, <code>/setspawn</code> (level 2)</td>
+<td>the server's spawn</td>
+</tr>
+<tr>
+<td><code>/sethome [name]</code>, <code>/home [name]</code>, <code>/delhome &lt;name&gt;</code>, <code>/homes</code></td>
+<td>up to <code>homes.max</code> homes</td>
+</tr>
+<tr>
+<td><code>/tpa &lt;player&gt;</code>, <code>/tpahere &lt;player&gt;</code>, <code>/tpaccept</code>, <code>/tpdeny</code></td>
+<td>teleport requests</td>
+</tr>
+<tr>
+<td><code>/warp [name]</code>, <code>/setwarp &lt;name&gt;</code>, <code>/delwarp &lt;name&gt;</code> (level 2)</td>
+<td>warps set by operators</td>
+</tr>
+<tr>
+<td><code>/claim [radius]</code>, <code>/unclaim</code>, <code>/trust &lt;player&gt;</code>, <code>/untrust &lt;player&gt;</code>, <code>/claims</code></td>
+<td>land claims</td>
+</tr>
+<tr>
+<td><code>/rules</code></td>
+<td>the server's rules</td>
+</tr>
+</tbody>
+</table></div>
+<p>Teleports wait <code>teleport.warmup_seconds</code> and are cancelled when the player moves more than half a block or takes
+damage.</p>
+<p><strong>Trades.</strong> <code>/trade Alex</code> asks Alex; once accepted, both see a 6-row chest menu: their own offer on the left, the
+other's on the right, the money each offers, and confirm and cancel buttons (ordinary items such as lime and red
+stained glass panes). The menu is display only: a player adds a stack to their offer by clicking it in their own
+inventory, below the menu, and takes it back by clicking it in the offer. <strong>Nothing moves until the swap</strong>: the
+offered stacks stay in their owners' inventories, the menu shows copies. Any change to either offer clears both
+confirmations; when both have confirmed, the server checks that each player still holds exactly what they offer and
+has room for what they get, then swaps the items and the money in one step of its tick, or swaps nothing. Closing the
+menu, <code>/trade cancel</code>, disconnecting, dying or the other player leaving ends the trade with nothing moved, so there is
+no item to return and nothing to duplicate. Tests cover each way out.</p>
+<p><strong>Claims.</strong> A rectangle of columns in one dimension, owned by a player who trusts others by name. In a claim, players
+who are neither the owner, trusted nor an operator can't break or place blocks, open containers, or use doors,
+buttons and levers. Claims start empty: existing builds are not claimed for anyone, their owners claim them. Each
+player may claim <code>claims.initial_blocks</code> plus <code>claims.blocks_per_hour</code> for each hour played (vanilla's <code>play_time</code>
+statistic, so past hours count), up to <code>claims.max_blocks</code>. Spawn protection is a claim of <code>spawn.protection_radius</code>
+around <code>/setspawn</code> that only operators change. Not covered at first: pistons, fluids, explosions and fire entering a
+claim from outside.</p>
+<h2 id="configuration-and-data">Configuration and data</h2>
+<p>Everything is in the world's folder, <code>world/horizon-smp/</code>, so a backup of the world carries it, and a world without
+that folder is untouched: the mod creates it the first time it runs.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>config.json</code></td>
+<td>the settings below, written with their defaults on first run; a section added by a later version is added to the file</td>
+</tr>
+<tr>
+<td><code>economy.json</code></td>
+<td>balances by player UUID, and names last seen</td>
+</tr>
+<tr>
+<td><code>homes.json</code>, <code>warps.json</code>, <code>spawn.json</code></td>
+<td>positions with their dimension</td>
+</tr>
+<tr>
+<td><code>claims.json</code></td>
+<td>claims: id, owner, dimension, corners, trusted UUIDs</td>
+</tr>
+<tr>
+<td><code>lottery.json</code></td>
+<td>the current draw's tickets</td>
+</tr>
+<tr>
+<td><code>audit.log</code></td>
+<td>one JSON line per transaction: time, kind, from, to, amount, items, balances after</td>
+</tr>
+</tbody>
+</table></div>
+<p>Each <code>.json</code> file is written whole to a temporary file, flushed and renamed over the old one, at the end of a server
+tick that changed it (at most once a tick) and when the world closes: a crash leaves the old file or the new one,
+never half of one. <code>audit.log</code> is appended before the balances change.</p>
+<pre><code class="language-json">{
+  &quot;currency&quot;: &quot;coins&quot;,
+  &quot;starting_balance&quot;: 0,
+  &quot;market&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;items&quot;: { &quot;minecraft:diamond&quot;: { &quot;buy&quot;: 400, &quot;sell&quot;: 100 }, &quot;minecraft:wheat&quot;: { &quot;buy&quot;: 0, &quot;sell&quot;: 1 } }
+  }
+}
+</code></pre>
+<p>In the market, <code>sell</code> is what the server pays for one item and <code>buy</code> what it asks; 0 closes that side. The later
+phases add their sections (<code>teleport</code>, <code>homes</code>, <code>claims</code>, <code>spawn</code>, <code>rules</code>). <code>gambling</code> holds <code>enabled</code> (false),
+<code>min_bet</code> (10), <code>max_bet</code> (1000), <code>cooldown_seconds</code> (30), <code>offer_seconds</code> (60) and <code>fee_percent</code> (0). A coinflip's
+stakes are held in <code>economy.json</code> itself (<code>held</code>), so one atomic write covers balances and stakes; an offer that
+ends, expires or whose player leaves gives its stake back, and so does the next start for one the server stopped
+with. The coin is a fresh random key from the system, never the world's random.</p>
+<h2 id="building-the-official-servers-engine">Building the official server's engine</h2>
+<p>A native mod is built into the game it runs in (<a href="native-mods.html">native-mods.md</a>). For the server: the source of the
+release the server runs, <code>horizon-mixins apply</code> with the <code>smp</code> bundle, then the server build
+(<code>cargo build --release --no-default-features -p horizon-client</code>), and <code>horizon-server</code>'s <code>[engine] path</code> set to
+the result. When to deploy it on the official server is the owners' decision; the mod's README holds the exact
+commands.</p>
+<h2 id="cost">Cost</h2>
+<p>With no mod hooking them, the hook points are empty functions. With <code>smp</code>, a server tick writes the files that
+changed (none most ticks) and looks at the teleports waiting; a claim check is a hash lookup of the chunk's claims,
+made only when a player acts on a block. Each phase measures a server tick with 55 bots (<code>tools/server_bench.py</code>).</p>
+<h2 id="phases">Phases</h2>
+<p>Each is pull requests under ~500 lines, each tested: the hook points here (unit tests, a game test that hooks
+them), the mod in horizon-mods (its crate's tests, and a proof: a dedicated server built with the bundle and real
+clients driven by <code>horizon-ctl</code>, in fresh folders).</p>
+<ol>
+<li><strong>Economy</strong>: command and player hook points; the mod's ledger, data files and audit log, <code>/balance</code>, <code>/pay</code>,
+<code>/baltop</code>, <code>/eco</code>; then the items helpers and the market (<code>/sell</code>, <code>/buy</code>, <code>/worth</code>).</li>
+<li><strong>Trading</strong>: the server menu hook points; <code>/trade</code>, with a test for each way out (close, cancel, disconnect,
+death, a full inventory, the other player leaving).</li>
+<li><strong>Gambling</strong>: <code>/coinflip</code> with escrow, then the lottery; limits, cooldown, logged.</li>
+<li><strong>Organisation</strong>: teleport and damage hook points, <code>/spawn</code>, homes, <code>/rules</code>, <code>/tpa</code>, warps; the interaction
+hook points, claims, spawn protection and limits that grow with time played.</li>
+</ol>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/smp.md"><code>docs/smp.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#players-install-nothing">Players install nothing</a></li><li class="l2"><a href="#architecture">Architecture</a></li><li class="l3"><a href="#hook-points-the-smp-needs">Hook points the SMP needs</a></li><li class="l2"><a href="#mojangs-rules">Mojang&#x27;s rules</a></li><li class="l2"><a href="#commands">Commands</a></li><li class="l2"><a href="#configuration-and-data">Configuration and data</a></li><li class="l2"><a href="#building-the-official-servers-engine">Building the official server&#x27;s engine</a></li><li class="l2"><a href="#cost">Cost</a></li><li class="l2"><a href="#phases">Phases</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

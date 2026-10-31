@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent control: driving the launcher and the game · Rusty Minecraft docs</title>
+<meta name="description" content="Agent control: driving the launcher and the game: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html" aria-current="page">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="agent-control-driving-the-launcher-and-the-game">Agent control: driving the launcher and the game</h1>
+<p>A player's own AI agent (Claude Code, Codex, Cursor, any MCP client) or a script can do
+everything a player does with the mouse and keyboard, in the launcher and in the game. This page
+covers developers: the surfaces, the full inventory, and the rules every new command follows.
+Players read <a href="https://playhorizon.dev/docs/agents">Control Rusty Minecraft with your AI agent</a>
+(playhorizon.dev/docs/agents).</p>
+<p>The command lists are generated, so they can't drift:</p>
+<ul>
+<li><a href="launcher-commands.html">launcher-commands.md</a>: every <code>horizon-launcher</code> command, its arguments
+and its MCP tool. It comes from the CLI's clap definition (<code>cli_tools::markdown</code>), and the
+launcher test <code>the_launcher_reference_is_up_to_date</code> fails when it is stale or a tool is missing.</li>
+<li><a href="horizon-ctl-commands.html">horizon-ctl-commands.md</a>: every <code>horizon-ctl</code> command, its MCP tool
+and its arguments. It comes from the command table (<code>horizon-ctl help --markdown</code>), and the
+test <code>the_generated_reference_is_up_to_date</code> fails when it is stale.</li>
+</ul>
+<h2 id="surfaces">Surfaces</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Where</th>
+<th>Transport</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Game control socket</td>
+<td><code>horizon-client --control</code> / <code>--control-socket PATH</code>, or Agent Control on in Rusty Minecraft Settings &gt; AI Agent (<code>crates/horizon-client/src/control.rs</code>; commands in <code>src/game/control.rs</code>, <code>agent.rs</code>, <code>ui_control.rs</code>, <code>saves_control.rs</code> and friends)</td>
+<td>text line in, one JSON line out; Unix socket, or localhost TCP and a token where there is none</td>
+</tr>
+<tr>
+<td><code>horizon-ctl</code></td>
+<td><code>crates/horizon-client/src/bin/horizon-ctl/</code></td>
+<td>CLI over the socket; one table of commands (<code>commands.rs</code>) gives the help, the argument checks, the MCP tools and the reference</td>
+</tr>
+<tr>
+<td><code>horizon-ctl mcp</code></td>
+<td>same</td>
+<td>MCP over stdio, one tool per command of the table</td>
+</tr>
+<tr>
+<td>Launcher CLI</td>
+<td><code>launcher/src/cli.rs</code></td>
+<td><code>horizon-launcher &lt;command&gt; [--json]</code></td>
+</tr>
+<tr>
+<td>Launcher MCP</td>
+<td><code>launcher/src/mcp.rs</code>, <code>cli_tools.rs</code>, <code>game_tools.rs</code></td>
+<td><code>horizon-launcher mcp</code> (stdio): every CLI command as a tool, the session tools, and the game's tools as <code>game_*</code></td>
+</tr>
+<tr>
+<td>Connecting</td>
+<td><code>launcher/src/agents.rs</code>, <code>agents_page.rs</code>; <code>src/game/agent_settings.rs</code></td>
+<td><code>horizon-launcher agent-config</code>; Settings &gt; AI in the launcher; Rusty Minecraft Settings &gt; AI Agent in the game</td>
+</tr>
+<tr>
+<td>No AI</td>
+<td><code>crates/horizon-core/src/no_ai.rs</code></td>
+<td><code>noAi:true</code> in <code>&lt;game home&gt;/horizon-extras.txt</code>, read by every surface</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="one-mcp-server-for-everything">One MCP server for everything</h2>
+<p>An agent adds one server, <code>horizon-launcher mcp</code>. It holds:</p>
+<ul>
+<li><strong>The launcher's CLI, generated.</strong> <code>cli_tools.rs</code> walks the clap definition. Each command is a
+tool named after its words (<code>mods search</code> is <code>mods_search</code>). Its arguments are the command's,
+in snake_case, with clap's help, choices and defaults. A call runs that command with <code>--json</code>
+as a child process and returns what it printed. A new CLI command is a new tool with no extra
+code.</li>
+<li><strong>Session tools</strong>, which keep something running between calls:
+<ul>
+<li><code>play</code> (the game, under control: <code>world</code>, <code>creative</code>, <code>join</code>, <code>offscreen</code>, <code>arg</code>);</li>
+<li><code>server</code>, <code>server_command</code>, <code>server_log</code>, <code>server_stop</code>;</li>
+<li><code>account_sign_in</code>, <code>account_list</code>.</li>
+</ul>
+</li>
+<li><strong>The game's tools.</strong> It runs the selected version's <code>horizon-ctl mcp</code> (shipped beside the
+game) as a child. It lists that server's tools as <code>game_&lt;name&gt;</code>, all but <code>launch</code>, and passes
+calls and results through, images included. <code>play</code> starts the game with a control socket in
+the launcher's data folder. While no game answers, <code>game_*</code> calls say to call <code>play</code>.</li>
+</ul>
+<p>Why one server rather than two: the game's tools stay defined once, in horizon-ctl's table. The
+agent's client needs one entry and one approval. The version that plays is always the one the
+launcher selected, so the game's tools always match the game. <code>horizon-ctl mcp</code> stays available
+on its own, for a game started by hand or by a script.</p>
+<h2 id="inventory-before-and-after">Inventory, before and after</h2>
+<p>Before is <code>main</code> at 2026-10-23, before #1342, #1343, #1344, #1345 and #1353. After is with
+them. CLI is <code>horizon-launcher</code> for the launcher and <code>horizon-ctl</code> for the game. MCP is
+<code>horizon-launcher mcp</code> (the game's tools as <code>game_*</code>) and <code>horizon-ctl mcp</code>. <strong>part</strong> means only
+through a generic command (<code>ui</code> and <code>click</code> by widget, or a raw socket line that horizon-ctl
+passes on without checking it).</p>
+<h3 id="launcher">Launcher</h3>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Window</th>
+<th>CLI before</th>
+<th>MCP before</th>
+<th>CLI after</th>
+<th>MCP after</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Releases and installed versions</td>
+<td>Play, version picker</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>versions [--installed]</code></td>
+</tr>
+<tr>
+<td>Install, remove a version</td>
+<td>Play</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>remove</code> needs <code>confirm</code> in MCP</td>
+</tr>
+<tr>
+<td>Pick the version that plays</td>
+<td>Play</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>settings selected-version TAG</code></td>
+</tr>
+<tr>
+<td>Prepare resources</td>
+<td>Play</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>Start the game</td>
+<td>Play</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>play --world --creative --join --arg</code>; MCP <code>play</code> adds <code>offscreen</code></td>
+</tr>
+<tr>
+<td>Join a friend by invite code</td>
+<td>Play</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>play --join CODE</code></td>
+</tr>
+<tr>
+<td>Dedicated server here: start, console, log, stop</td>
+<td>Servers</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>server</code>; MCP <code>server</code>, <code>server_command</code>, <code>server_log</code>, <code>server_stop</code></td>
+</tr>
+<tr>
+<td>Hosted servers: list, create, set up, run a command, forget</td>
+<td>Servers</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>servers ...</code>; <code>servers_forget</code> needs <code>confirm</code></td>
+</tr>
+<tr>
+<td>Accounts: list, sign in, sign out, select, offline</td>
+<td>Settings</td>
+<td>yes</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td>names and UUIDs only; sign-in is a device code; <code>account_offline</code> was missing</td>
+</tr>
+<tr>
+<td>Game folder, server folder, install new versions, opening animation</td>
+<td>Settings</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>settings [KEY VALUE]</code></td>
+</tr>
+<tr>
+<td>Extra game arguments</td>
+<td>Settings</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>game-args</code></td>
+</tr>
+<tr>
+<td>Applications menu entry (Linux)</td>
+<td>Settings</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>desktop-entry</code></td>
+</tr>
+<tr>
+<td>Updates: check and install</td>
+<td>Settings</td>
+<td>yes</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td>MCP could only check</td>
+</tr>
+<tr>
+<td>Patch notes, links</td>
+<td>Patch notes, footer</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>Game log, crash reports</td>
+<td>Settings</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>logs [--crash]</code></td>
+</tr>
+<tr>
+<td>Data collection: status, allow, deny, show, delete, send, bug, benchmark upload</td>
+<td>Settings &gt; Data</td>
+<td>yes</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td>sending was missing in MCP; <code>data_delete</code> needs <code>confirm</code></td>
+</tr>
+<tr>
+<td>Mod browser: search, check, install, update, remove, list (mods, resource packs, modpacks)</td>
+<td>Mods</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>mods ...</code>; <code>mods_remove</code> needs <code>confirm</code></td>
+</tr>
+<tr>
+<td>Modpacks: import, port, play, remove, list</td>
+<td>Modpacks</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>modpack ...</code>; <code>modpack_remove</code> needs <code>confirm</code></td>
+</tr>
+<tr>
+<td>Launcher benchmark</td>
+<td>(none)</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>The game it started</td>
+<td>(the game)</td>
+<td>(horizon-ctl)</td>
+<td>yes</td>
+<td>(horizon-ctl)</td>
+<td>yes</td>
+<td><code>game_*</code></td>
+</tr>
+<tr>
+<td>Connect an AI agent</td>
+<td>Settings &gt; AI</td>
+<td>no</td>
+<td>(none)</td>
+<td>yes</td>
+<td>(none)</td>
+<td><code>agent-config [--client] [--test]</code>; the agent is already connected, so there is no tool</td>
+</tr>
+<tr>
+<td>No AI</td>
+<td>Settings &gt; AI</td>
+<td>no</td>
+<td>(none)</td>
+<td>yes</td>
+<td>(none)</td>
+<td><code>no-ai [on|off]</code>; the player's switch, never an agent's</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="game">Game</h3>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Screen</th>
+<th>CLI before</th>
+<th>MCP before</th>
+<th>CLI after</th>
+<th>MCP after</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start, wait until ready, save, quit, log</td>
+<td>(all)</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>launch</code>, <code>wait-ready</code>, <code>save</code>, <code>quit</code>, <code>logs</code></td>
+</tr>
+<tr>
+<td>Every widget of every screen, by id; click, set, type</td>
+<td>(all)</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>ui</code>, <code>click ID</code>, <code>set ID VALUE</code>, <code>type</code>; <code>click-at</code>, <code>drag-at</code>, <code>scroll-at</code> by pixel</td>
+</tr>
+<tr>
+<td>Title menu, pause menu</td>
+<td>Title, Pause</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>ui</code>/<code>click</code>, <code>pause</code>, <code>resume</code></td>
+</tr>
+<tr>
+<td>Worlds: list</td>
+<td>Select World</td>
+<td>part</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>worlds</code></td>
+</tr>
+<tr>
+<td>Worlds: create, open</td>
+<td>Create New World</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>open WORLD [SEED] [creative]</code></td>
+</tr>
+<tr>
+<td>Worlds: rename, back up</td>
+<td>Edit World</td>
+<td>part</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>world-rename</code>, <code>world-backup</code></td>
+</tr>
+<tr>
+<td>Worlds: delete</td>
+<td>Select World</td>
+<td>part</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>world-delete FOLDER --confirm</code>; it was possible through <code>click</code> without any confirm</td>
+</tr>
+<tr>
+<td>Servers list</td>
+<td>Multiplayer</td>
+<td>part</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>servers</code> (names and addresses; reads servers.dat)</td>
+</tr>
+<tr>
+<td>Join a server or an invite code, leave</td>
+<td>Multiplayer</td>
+<td>part</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>connect</code>, <code>disconnect</code></td>
+</tr>
+<tr>
+<td>Open to LAN</td>
+<td>Pause &gt; Open to LAN</td>
+<td>part</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>lan open|close|status</code></td>
+</tr>
+<tr>
+<td>Play with Friends: host, stop, status</td>
+<td>Pause</td>
+<td>part</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>friends host|stop|status</code></td>
+</tr>
+<tr>
+<td>Vanilla options, every page</td>
+<td>Options</td>
+<td>yes</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>options-get</code>, <code>options-set</code> (all of options.txt, typed); <code>options PAGE</code> was socket-only</td>
+</tr>
+<tr>
+<td>Rusty Minecraft Settings: Graphics, Controller, Extras, Mods, AI Agent</td>
+<td>Rusty Minecraft Settings</td>
+<td>part</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>options horizon|graphics|extras|agent...</code>, then <code>ui</code>/<code>click</code>/<code>set</code></td>
+</tr>
+<tr>
+<td>Agent control on or off, status, connection details</td>
+<td>Rusty Minecraft Settings &gt; AI Agent</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>new page (#1353)</td>
+</tr>
+<tr>
+<td>Key binds</td>
+<td>Controls &gt; Key Binds</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>options-set key_key.jump key.keyboard.j</code></td>
+</tr>
+<tr>
+<td>Resource packs</td>
+<td>Options &gt; Resource Packs</td>
+<td>part</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>options packs</code>, then <code>ui</code> rows and <code>click</code>; <code>options-set resourcePacks</code></td>
+</tr>
+<tr>
+<td>Chat and commands</td>
+<td>Chat</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>chat</code>, <code>command</code>, <code>messages</code>, <code>chat-log</code></td>
+</tr>
+<tr>
+<td>Inventory, containers, stations</td>
+<td>Inventory, Chest...</td>
+<td>yes</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>inventory</code>, <code>screen</code>, <code>click-slot</code>; <code>container X Y Z</code> was socket-only</td>
+</tr>
+<tr>
+<td>Crafting, recipe book</td>
+<td>Crafting</td>
+<td>part</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td>the grid by <code>click-slot</code>; the recipe book by <code>ui</code>/<code>click</code></td>
+</tr>
+<tr>
+<td>Trading, riding, shearing (right-click an entity)</td>
+<td>Merchant, Horse</td>
+<td>part</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>interact-entity ID</code>; <code>mouse</code> was CLI-only</td>
+</tr>
+<tr>
+<td>Horse, llama inventory</td>
+<td>Horse</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>mount-menu</code></td>
+</tr>
+<tr>
+<td>Books, lecterns, signs</td>
+<td>Book, Sign</td>
+<td>part</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>book [next|back|take|done]</code>, <code>signedit X Y Z</code></td>
+</tr>
+<tr>
+<td>Move, look, find a path</td>
+<td>(playing)</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>move</code>, <code>goto</code>, <code>look</code>, <code>look-at</code>, <code>turn</code>, <code>jump</code></td>
+</tr>
+<tr>
+<td>Mine, place, use, attack, hotbar, drop</td>
+<td>(playing)</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>break</code>, <code>place</code>, <code>interact</code>, <code>use-item</code>, <code>attack</code>, <code>select</code>, <code>drop</code></td>
+</tr>
+<tr>
+<td>Raw keys and mouse buttons</td>
+<td>(all)</td>
+<td>yes</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>key</code>; <code>mouse</code>, <code>release</code> were CLI-only</td>
+</tr>
+<tr>
+<td>Controllers</td>
+<td>(all)</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>pad</code></td>
+</tr>
+<tr>
+<td>Respawn</td>
+<td>Death</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>respawn</code></td>
+</tr>
+<tr>
+<td>Screenshots</td>
+<td>(all)</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>PNG of the next frame, <code>--offscreen</code> too</td>
+</tr>
+<tr>
+<td>F3 data</td>
+<td>F3</td>
+<td>yes</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>key f3</code>; <code>status</code> (renderer, chunks, memory) was CLI-only</td>
+</tr>
+<tr>
+<td>Waits and events</td>
+<td>(all)</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>wait</code>, <code>wait-for</code>, <code>events</code></td>
+</tr>
+<tr>
+<td>Effects, experience, enchantments, potions, fill</td>
+<td>(cheats)</td>
+<td>part</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>effect</code>, <code>effects</code>, <code>xp</code>, <code>enchant</code>, <code>potion</code>, <code>fill</code></td>
+</tr>
+<tr>
+<td>Benchmarks and frame stats</td>
+<td>(all)</td>
+<td>yes</td>
+<td>part</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>bench</code>, <code>stats</code> were CLI-only; <code>fly</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="no-ai">No AI</h2>
+<p>One switch hides and turns off every AI feature: <code>noAi:true</code> in <code>&lt;game home&gt;/horizon-extras.txt</code>.
+The game home is <code>HORIZON_HOME</code>, else the data dir's <code>horizon</code>. The game reads its extras from
+its working directory, which is that folder. <code>horizon_core::no_ai</code> reads and writes the switch:</p>
+<ul>
+<li><code>is_on(home)</code> and <code>check(home)</code> read it;</li>
+<li><code>set(home, on)</code> keeps the file's other lines, and writes no file to turn off a switch that was
+never on;</li>
+<li><code>REFUSAL</code> is the one line every surface prints.</li>
+</ul>
+<p>The switch is in three places: Settings &gt; AI in the launcher, Rusty Minecraft Settings in the game
+(<code>Item::NoAi</code>), and <code>horizon-launcher no-ai on|off</code>. When it is on:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Game</td>
+<td>opens no control socket, even with <code>--control</code> (it logs the refusal); Rusty Minecraft Settings hides AI Agent...; turning it on in a running game closes the socket at once</td>
+</tr>
+<tr>
+<td><code>horizon-ctl</code></td>
+<td>every command refuses: exit status 4, <code>{&quot;error&quot;: REFUSAL, &quot;kind&quot;: &quot;denied&quot;}</code></td>
+</tr>
+<tr>
+<td><code>horizon-ctl mcp</code></td>
+<td>refuses to start (exit 4, REFUSAL on stderr); a session already running refuses each call</td>
+</tr>
+<tr>
+<td><code>horizon-launcher mcp</code></td>
+<td>refuses to start; a running session answers each <code>tools/call</code> with error -32000 and REFUSAL</td>
+</tr>
+<tr>
+<td>Launcher CLI</td>
+<td><code>mcp</code> and <code>agent-config</code> are hidden from the help and refuse</td>
+</tr>
+<tr>
+<td>Launcher window</td>
+<td>Settings &gt; AI shows only the No AI switch, without Connect an AI agent</td>
+</tr>
+<tr>
+<td>Companion (#1068)</td>
+<td>uses the same switch (see horizon-parity companion-notes.md)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Every other launcher command stays usable: versions, install, remove, prepare, play, server,
+notes, links, account, settings, game-args, logs, update, desktop-entry, data,
+modpack, mods, servers, no-ai and benchmark. None of them drives the game for an agent. The
+launcher itself, packagers, the docs and players' scripts need them, and <code>no-ai</code> has to stay to
+turn the switch off.</p>
+<h2 id="connecting">Connecting</h2>
+<ul>
+<li><strong>Launcher, Settings &gt; AI &gt; Connect an AI agent:</strong>
+<ul>
+<li>a client picker (Claude Code, Codex, Cursor, any MCP client) with its config and a Copy button;</li>
+<li>for clients with a CLI, the add command, shown and run only on <strong>Add to ...</strong>:
+<code>claude mcp add --scope user horizon -- &lt;exe&gt; mcp</code>, <code>codex mcp add horizon -- &lt;exe&gt; mcp</code>;</li>
+<li><strong>Test the connection</strong> (<code>agents::self_test</code>) starts <code>&lt;exe&gt; mcp</code>, lists its tools and says
+how many answered.</li>
+<li><code>horizon-launcher agent-config [--client ID] [--json] [--test]</code> prints the same thing.</li>
+</ul>
+</li>
+<li><strong>Game, Rusty Minecraft Settings &gt; AI Agent:</strong>
+<ul>
+<li><strong>Agent Control</strong> (<code>agentControl</code> in horizon-extras.txt, off by default) opens the default
+endpoint (<code>$HORIZON_CONTROL</code>, else <code>horizon-control.sock</code> in the runtime directory) in a game
+the player started. Turning it off closes the endpoint and stops its listener.</li>
+<li>The page shows whether a client is connected (<code>Server::clients</code>), when the last command came,
+and the socket's name.</li>
+<li><strong>Copy Connection Details</strong> copies the socket path, a <code>horizon-ctl --socket ... state</code> line
+and an <code>mcpServers</code> config for this game's <code>horizon-ctl mcp</code>.</li>
+</ul>
+</li>
+<li><strong>The default:</strong> a game an agent starts (<code>play</code> in MCP, <code>horizon-ctl launch</code>, <code>--control</code>) is
+under control. A game the player starts from the window is not, until they turn Agent Control
+on. An open socket lets any program of that user drive the game, so it opens only when an agent
+asked for the game, or when the player chose it.</li>
+</ul>
+<h2 id="design-rules-for-a-new-command">Design rules for a new command</h2>
+<h3 id="one-vocabulary">One vocabulary</h3>
+<ul>
+<li>
+<p><strong>A command has one name</strong>, kebab-case, the same on the socket, in <code>horizon-ctl</code> and in the
+launcher CLI. Its MCP tool is the name with <code>_</code> for <code>-</code> (<code>click-slot</code> is <code>click_slot</code>). In the
+launcher, a subcommand's words are joined (<code>mods search</code> is <code>mods_search</code>). The launcher's MCP
+offers every game tool as <code>game_&lt;name&gt;</code>, so none collides with its own (<code>logs</code> is on both
+sides). A launcher tool whose name starts with <code>game_</code> (<code>game_args</code>) is matched first.</p>
+</li>
+<li>
+<p><strong>Arguments:</strong> positional words, then <code>--flags</code>.</p>
+<ul>
+<li>The game: the <code>horizon-ctl</code> table (<code>Param</code>) is the source of truth. It generates the MCP
+<code>inputSchema</code> and the reference. A game command is not done until it is in that table.</li>
+<li>The launcher: the clap definition is the source of truth. Give every argument a help line;
+it becomes the tool's description.</li>
+</ul>
+</li>
+<li>
+<p><strong>Replies are one JSON object.</strong> A query returns its data; an action returns
+<code>{&quot;ok&quot;: true, ...}</code> plus what changed (<code>clicked</code>, <code>screen</code>, <code>drops</code>...).</p>
+</li>
+<li>
+<p><strong>Errors</strong> are <code>{&quot;error&quot;: &quot;&lt;sentence an agent can act on&gt;&quot;, &quot;kind&quot;: &quot;&lt;reason&gt;&quot;}</code>. The kinds:</p>
+<ul>
+<li><code>usage</code>: a bad or missing argument;</li>
+<li><code>unknown</code>: no such command, widget, option or entity;</li>
+<li><code>state</code>: the game is not in a state that allows it (no world, wrong screen, disabled widget);</li>
+<li><code>busy</code>: another action or a benchmark is running;</li>
+<li><code>timeout</code>;</li>
+<li><code>connection</code>: the game can't be reached;</li>
+<li><code>denied</code>: No AI is on (exit status 4).</li>
+</ul>
+<p>The message names what to do next (&quot;no world open; use: open WORLD&quot;).</p>
+</li>
+<li>
+<p><strong>Shapes are shared:</strong></p>
+<ul>
+<li>a position is <code>[x, y, z]</code>;</li>
+<li>a block is <code>{&quot;pos&quot;, &quot;block&quot;, &quot;state&quot;, &quot;loaded&quot;}</code>;</li>
+<li>an item stack is <code>{&quot;item&quot;, &quot;count&quot;, &quot;damage&quot;?, &quot;components&quot;?}</code>;</li>
+<li>a slot is a stack plus <code>&quot;slot&quot;: ID</code> (the slot ids of <code>click-slot</code>);</li>
+<li>bounds are <code>[x, y, w, h]</code> in GUI pixels, the coordinates of <code>click-at</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="safety">Safety</h3>
+<ul>
+<li><strong>Local only.</strong> The socket is a Unix socket in the user's runtime directory, or a TCP port on
+127.0.0.1 behind a 128-bit token in a file only the user can read. It is never <code>0.0.0.0</code> and
+never a network listener. Both MCP servers use stdio.</li>
+<li><strong>Confirm what can't be undone.</strong> A command that deletes the player's things requires
+<code>confirm</code> and carries the MCP <code>destructiveHint</code>. In the game these are <code>world-delete</code>, <code>fill</code>
+and <code>setblock</code> (the table's <code>DESTRUCTIVE</code>); in the launcher, <code>remove</code>, <code>modpack remove</code>,
+<code>mods remove</code>, <code>servers forget</code>, <code>account sign-out</code> and <code>data delete</code> (<code>cli_tools::DESTRUCTIVE</code>).
+Without <code>confirm: true</code> the call is refused and the message says to ask the player. In the game
+CLI the flag is <code>--confirm</code>. The launcher CLI asks nothing: a person typing <code>remove</code> meant it.</li>
+<li><strong>Ask before reaching out.</strong> A command that sends data or reaches other people carries
+<code>openWorldHint</code>, and its description says &quot;only when the player asks&quot;. In the game these are
+<code>connect</code>, <code>lan</code>, <code>friends</code>, <code>chat</code> and <code>command</code>; in the launcher, <code>data allow</code>, <code>data send</code>,
+<code>data bug</code>, <code>data benchmark</code> and <code>servers create</code>. <code>play</code>'s <code>join</code> argument says the same.
+Telemetry stays opt-in, and only <code>data allow</code> turns it on.</li>
+<li><strong>No secrets.</strong> No surface returns tokens, session files, keychain entries or invite secrets
+the player didn't ask to share:
+<ul>
+<li>accounts are names and UUIDs;</li>
+<li>sign-in is a device code the player enters;</li>
+<li><code>--session-file</code> is read once and deleted;</li>
+<li><code>servers</code> reads names and addresses only.</li>
+</ul>
+</li>
+<li><strong>Vanilla behaviour untouched.</strong> Control code reads state and synthesizes the input events a
+player produces; registering widgets for the tree draws nothing. A change to game files runs
+<code>tools/parity.py --changed origin/main</code>.</li>
+</ul>
+<h3 id="the-widget-tree">The widget tree</h3>
+<p><code>ui</code> returns every interactive element the last frame drew, on every screen:</p>
+<pre><code class="language-json">{&quot;screen&quot;: &quot;options&quot;, &quot;gui_size&quot;: [427, 240], &quot;frame&quot;: 3061,
+ &quot;widgets&quot;: [
+   {&quot;id&quot;: &quot;fov&quot;, &quot;kind&quot;: &quot;slider&quot;, &quot;label&quot;: &quot;FOV: 70&quot;, &quot;bounds&quot;: [40, 50, 150, 20], &quot;enabled&quot;: true, &quot;value&quot;: 0.5},
+   {&quot;id&quot;: &quot;done&quot;, &quot;kind&quot;: &quot;button&quot;, &quot;label&quot;: &quot;Done&quot;, &quot;bounds&quot;: [...], &quot;enabled&quot;: true}]}
+</code></pre>
+<ul>
+<li>
+<p><strong>Ids are stable and readable.</strong> An id is the label up to its <code>:</code>, as a slug (<code>FOV: 70</code> is
+<code>fov</code>, <code>AI Agent...</code> is <code>ai-agent</code>). A repeated slug gets <code>-2</code>, <code>-3</code>; unlabelled elements are
+<code>&lt;kind&gt;-&lt;n&gt;</code>. A slider's id doesn't change with its value. Slots are <code>slot-&lt;ID&gt;</code> with their
+stack.</p>
+</li>
+<li>
+<p><strong>Kinds:</strong> <code>button</code>, <code>slider</code> (<code>value</code> 0..1), <code>field</code>, <code>row</code> (a world, server, pack or
+language), <code>tab</code> (<code>selected</code>), <code>slot</code>.</p>
+</li>
+<li>
+<p><strong>Actions:</strong></p>
+<ul>
+<li><code>click ID [right|middle] [shift]</code> clicks where the mouse would.</li>
+<li><code>set ID VALUE</code> moves a slider.</li>
+<li><code>type</code> types into the focused field.</li>
+</ul>
+<p>After a click, the next <code>ui</code>, <code>click</code> or <code>set</code> waits for a redrawn frame.</p>
+</li>
+<li>
+<p><strong>No new code paths in screens.</strong> The tree is built from what the draw functions already
+register for controller navigation (<code>widgets.rs</code>).</p>
+</li>
+</ul>
+<h3 id="waits-and-events">Waits and events</h3>
+<ul>
+<li><code>wait-for screen NAME|widget ID|loaded|chat TEXT|event KIND [--timeout S] [--since SEQ]</code>
+replies when the condition holds, or with <code>kind: timeout</code>.</li>
+<li><code>events [--since SEQ]</code> returns what happened since SEQ: screens, chat, deaths, respawns, items,
+dimensions and worlds (the newest 256). Take <code>last</code> before an action, and wait with <code>--since</code>,
+so the action's event can't slip in before the wait.</li>
+</ul>
+<h2 id="tests">Tests</h2>
+<ul>
+<li><strong>Unit tests:</strong>
+<ul>
+<li>horizon-ctl: the table, the schemas, the reference, the No AI refusal, the destructive and
+network annotations;</li>
+<li>the launcher: generated tools, <code>confirm</code>, the reference, the agent configs;</li>
+<li><code>horizon_core::no_ai</code>;</li>
+<li><code>options_ui</code>: the AI Agent page, and that No AI hides it.</li>
+</ul>
+</li>
+<li><strong><code>tools/agent_control_e2e.py</code></strong> drives a real game, offscreen on macOS and on a virtual screen
+on Linux, through the CLI and MCP:
+<ul>
+<li><code>survival</code>, <code>ui</code>, <code>options</code>, <code>events</code>, <code>consume</code>, <code>pick</code>, <code>suggestions</code>;</li>
+<li><code>manage</code>: worlds, servers, effects, books, LAN, the options pages and <code>confirm</code>;</li>
+<li><code>no-ai</code>: every surface refuses;</li>
+<li><code>setting</code>: Agent Control on opens the endpoint, the AI Agent page, Copy, and off closes it.</li>
+</ul>
+</li>
+<li><strong><code>tools/launcher_mcp_e2e.py</code></strong> drives <code>horizon-launcher mcp</code>: the generated tools, <code>play</code> and
+the <code>game_*</code> tools, <code>confirm</code>, <code>agent-config</code> and <code>--test</code>, and No AI.</li>
+</ul>
+<h2 id="later">Later</h2>
+<p>These are tracked in FEATURES.md (LATER):</p>
+<ul>
+<li>Rusty Minecraft's own option files by key (<code>horizon-graphics.txt</code>, controller, extras) next to
+<code>options-get</code> and <code>options-set</code>.</li>
+<li>Adding and removing saved servers by command.</li>
+<li><code>subscribe</code>: events as a stream on one connection.</li>
+<li>Launcher window screenshots in this page's PRs.</li>
+<li>No AI changed in the launcher while a game is open: the game rewrites its extras when it saves.</li>
+<li>A confirmation question in the launcher CLI for destructive commands.</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/agent-control.md"><code>docs/agent-control.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#surfaces">Surfaces</a></li><li class="l2"><a href="#one-mcp-server-for-everything">One MCP server for everything</a></li><li class="l2"><a href="#inventory-before-and-after">Inventory, before and after</a></li><li class="l3"><a href="#launcher">Launcher</a></li><li class="l3"><a href="#game">Game</a></li><li class="l2"><a href="#no-ai">No AI</a></li><li class="l2"><a href="#connecting">Connecting</a></li><li class="l2"><a href="#design-rules-for-a-new-command">Design rules for a new command</a></li><li class="l3"><a href="#one-vocabulary">One vocabulary</a></li><li class="l3"><a href="#safety">Safety</a></li><li class="l3"><a href="#the-widget-tree">The widget tree</a></li><li class="l3"><a href="#waits-and-events">Waits and events</a></li><li class="l2"><a href="#tests">Tests</a></li><li class="l2"><a href="#later">Later</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

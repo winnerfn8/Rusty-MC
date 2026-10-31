@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Architecture: feature → files → checks · Rusty Minecraft docs</title>
+<meta name="description" content="Architecture: feature → files → checks: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html" aria-current="page">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="architecture-feature--files--checks">Architecture: feature → files → checks</h1>
+<p>The 40 areas changed most often in the 30 days to 2026-10-23 (commits on main touching the area; <code>game.rs</code> is
+counted only for the game loop because nearly every gameplay change touches it). The crate map, how <code>Game</code> is
+organised and how to build and test are in <a href="repo/AGENTS.html">AGENTS.md</a>.</p>
+<p>Paths: <code>L/</code> = <code>crates/horizon-client/src/</code>, <code>G/</code> = <code>crates/horizon-client/src/game/</code>, <code>W/</code> =
+<code>crates/horizon-world/src/</code>, <code>K/</code> = <code>crates/horizon-client-core/src/</code>, <code>C/</code> = <code>crates/horizon-command/src/</code>,
+<code>I/</code> = <code>crates/horizon-items/src/</code>, <code>R/</code> = <code>crates/horizon-client-render/src/</code>, <code>N/</code> = <code>crates/horizon-client-input/src/</code>.
+Checks: a bare name is a harness (<code>python3 tools/parity.py &lt;name&gt;</code>, script <code>tools/test_&lt;name&gt;_parity.py</code>);
+<code>lan_e2e &lt;check&gt;</code> is <code>python3 tools/lan_e2e.py --check &lt;check&gt;</code>.</p>
+<p>For the full set of harnesses a file can affect, ask the runner:
+<code>printf '%s\n' &lt;paths&gt; &gt; /tmp/p.txt &amp;&amp; python3 tools/parity.py --changed-files /tmp/p.txt --list</code>.
+Any file of the game binary (<code>game.rs</code>, <code>game/</code>) selects the ~25 harnesses that run the binary; a client lib
+file selects ~103.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Area (commits)</th>
+<th>Files</th>
+<th>Checks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Game loop, tick order, frame pacing (554)</td>
+<td><code>L/game.rs</code> (<code>fn tick</code>, <code>fn tick_world</code>, <code>fn render</code>, <code>about_to_wait</code>), <code>L/clock.rs</code>, <code>N/window.rs</code>, <code>R/spans.rs</code></td>
+<td>game_loop, frame_limiter, interaction_input, tick</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mobs in the game loop, spawning (166)</td>
+<td><code>G/creatures.rs</code>, <code>G/natural_spawning.rs</code>, <code>L/mobs/spawning.rs</code>, <code>L/mobs/spawn_rules.rs</code>, <code>L/mobs/spawn_selection.rs</code>, <code>L/mobs/finalize.rs</code>, <code>G/spawner.rs</code>, <code>G/trial_spawner.rs</code></td>
+<td>natural_spawn, spawn_rules, finalize_spawn, spawner, trial_spawner, mob_ai</td>
+</tr>
+<tr>
+<td>3</td>
+<td>World save and load (163)</td>
+<td><code>L/save.rs</code>, <code>G/saving.rs</code>, <code>G/persist.rs</code> (entities), <code>L/entity_nbt.rs</code>, <code>K/block_entity_nbt.rs</code>, <code>W/region.rs</code>, <code>W/nbt.rs</code></td>
+<td>save_roundtrip, world_reopen, world, datafix</td>
+</tr>
+<tr>
+<td>4</td>
+<td>World generation (153)</td>
+<td><code>W/worldgen.rs</code>, <code>W/worldgen/</code> (<code>generator*.rs</code>, <code>feature_graph.rs</code>, <code>structure/</code>, <code>placement/</code>), <code>L/vanillagen.rs</code></td>
+<td>chunk_generation, worldgen, server_world_gen, world_spawn, feature_graph, feature_placement, decoration and the other worldgen harnesses</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Multiplayer client, packets in (145)</td>
+<td><code>G/remote.rs</code> (<code>fn handle_packet</code>, <code>fn tick_remote</code>), <code>G/remote_*.rs</code>, <code>L/net.rs</code></td>
+<td>dedicated_server, server_entities, lan_e2e (all)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Agent control, horizon-ctl (145)</td>
+<td><code>L/control.rs</code>, <code>L/bin/horizon-ctl/</code>, <code>G/control.rs</code>, <code>G/agent.rs</code>, <code>G/events.rs</code>, <code>G/ui_control.rs</code></td>
+<td><code>python3 tools/agent_control_e2e.py</code>; <code>cargo test -p horizon-client --bin horizon-ctl</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>CI and release (134)</td>
+<td><code>.github/workflows/</code> (<code>ci.yml</code>, <code>parity.yml</code>, <code>release.yml</code>, <code>launcher.yml</code>), <code>tools/ci/</code>, <code>tools/parity.py</code>, <code>tools/pr_ready.py</code></td>
+<td><code>python3 -m unittest discover -s tests</code>; actionlint (<code>.github/actionlint.yaml</code>)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>LAN host: connections, play state, tracking (133)</td>
+<td><code>L/lan/</code> (<code>conn.rs</code>, <code>hub.rs</code> + <code>hub/</code>, <code>chunks.rs</code>, <code>entity.rs</code>, <code>tracking.rs</code>, <code>guest.rs</code>, <code>playerdata.rs</code>), <code>G/lan.rs</code></td>
+<td>lan, lan_e2e (all), <code>cargo test -p horizon-client --test lan_bot</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Renderer core (132)</td>
+<td><code>R/gfx.rs</code> (<code>Renderer::new</code>, <code>Renderer::render</code>), <code>R/gfx/</code> (cull, occlusion, translucency, upload, timing, lod)</td>
+<td>client_graphics, culling_rays, translucency; <code>horizon-client --benchmark standard</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Launcher (124)</td>
+<td><code>launcher/src/</code> (<code>main.rs</code>, <code>backend.rs</code>, <code>cli.rs</code>, <code>mcp.rs</code>, <code>servers_page.rs</code>)</td>
+<td><code>cd launcher &amp;&amp; cargo test</code>; <code>python3 tools/launcher_mcp_e2e.py</code></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Mob types and species (117)</td>
+<td><code>L/mobs.rs</code>, <code>L/mobs/species.rs</code>, <code>L/mobs/data.rs</code>, <code>L/mobs/living.rs</code>, <code>L/mobs/drops.rs</code>, <code>L/mobs/gear.rs</code></td>
+<td>mob_attributes, entity_attribute, entity_death_loot, mob_ai</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Guests' actions on a server (98)</td>
+<td><code>G/lan_actions.rs</code> (<code>fn as_guest</code>, <code>fn tick_guests</code>), <code>G/lan_{attributes,pvp,chat,crafting,stations,trading,mount_menu,waypoints}.rs</code></td>
+<td>server_player_combat, server_player_damage, server_player_targets, lan_e2e (all)</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Modpack porting, mod content (97)</td>
+<td><code>crates/horizon-port-pack/</code>, <code>L/mod_content.rs</code>, <code>tools/port_*.py</code></td>
+<td><code>cargo test -p horizon-port-pack</code>; <code>python3 tools/mod_port_harness.py</code></td>
+</tr>
+<tr>
+<td>14</td>
+<td>Mob AI (96)</td>
+<td><code>L/mobs/ai.rs</code>, <code>goals.rs</code>, <code>brain.rs</code>, <code>*_brain.rs</code>, <code>nav.rs</code>, <code>path.rs</code>, <code>control.rs</code></td>
+<td>mob_ai (probe <code>examples/mob_ai_probe.rs</code>; known failure on main: drowned_*, #290)</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Items and item use (96)</td>
+<td><code>I/items.rs</code>, <code>I/item_data.rs</code>, <code>G/hand.rs</code>, <code>G/consume.rs</code>, <code>G/potions.rs</code>, <code>R/effects.rs</code>; game.rs <code>fn use_hand</code>, <code>fn use_item</code></td>
+<td>use_item_on, item_use, item_use_lifecycle, consumable, consume_effect, status_effect</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Options and settings screens (93)</td>
+<td><code>R/options_ui.rs</code>, <code>G/options.rs</code>, <code>R/settings.rs</code>, <code>R/options_file.rs</code>, <code>R/graphics_ui.rs</code>, <code>R/graphics.rs</code></td>
+<td>options, toggle_keys</td>
+</tr>
+<tr>
+<td>17</td>
+<td>HUD, chat, tab list (93)</td>
+<td><code>R/hud.rs</code>, <code>R/hud_layout.rs</code>, <code>R/hud_overlays.rs</code>, <code>R/chat.rs</code>, <code>G/chat.rs</code>, <code>R/tab_list.rs</code>, <code>L/locator_bar.rs</code>, <code>G/locator_bar.rs</code></td>
+<td>hud, tab_list, locator_bar, chat_screen, secure_chat</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Command execution (88)</td>
+<td><code>G/commands.rs</code>, <code>G/commands/*.rs</code>, <code>L/scoreboard_cmd.rs</code>, <code>L/data_cmd.rs</code>, <code>K/scoreboard.rs</code>, <code>G/functions.rs</code></td>
+<td>command_exec (corpus <code>tools/command_exec_corpus.py</code>), scoreboard, server_ops_feedback, lan_e2e commands</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Chunk streaming, light, tickets (85)</td>
+<td><code>R/streaming.rs</code>, <code>R/world.rs</code>, <code>R/chunk.rs</code>, <code>R/chunk_map.rs</code>, <code>R/light.rs</code>, <code>L/ticket_levels.rs</code>, <code>L/tick_chunk_membership.rs</code>, <code>G/world_loading.rs</code></td>
+<td>light, chunk_status, random_tick_sections; <code>cargo test -p horizon-client --test streaming_meshes</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>Mob models and animation (78)</td>
+<td><code>L/mobs/render.rs</code>, <code>L/mobs/anim.rs</code>, <code>L/mobs/body_anim.rs</code>, <code>L/mobs/keyframes.rs</code>, <code>R/entity.wgsl</code></td>
+<td>entity_model</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Block behaviour, server side (78)</td>
+<td><code>W/level/</code> (<code>mod.rs</code>, <code>tick.rs</code>, <code>hooks.rs</code>, <code>data.rs</code>, <code>redstone.rs</code>, <code>place.rs</code>), <code>G/block_entity_ticks.rs</code>, <code>G/moving_pistons.rs</code></td>
+<td>block_update, redstone, random_tick, simple_block, piston_movement, block_entity_tickers</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Player movement and collision (75)</td>
+<td><code>L/motion.rs</code> + <code>L/motion/</code>, <code>R/collisions.rs</code>, <code>W/entity_move.rs</code>, <code>W/player_travel.rs</code>, <code>W/collision.rs</code></td>
+<td>collision, entity_move, player_travel, living_motion, climbing, swimming; <code>python3 tools/test_native_scene_motion.py</code></td>
+</tr>
+<tr>
+<td>23</td>
+<td>Resource packs and models (65)</td>
+<td><code>R/packs.rs</code> + <code>R/packs/</code>, <code>R/pack_screen.rs</code>, <code>R/atlas_sources.rs</code>, <code>R/sprites.rs</code>, <code>R/model_library.rs</code>, <code>G/packs.rs</code>, <code>crates/horizon-assets/</code></td>
+<td>resource_pack, pack_selection, pack_screen, model_resolution, item_model, mipmap</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Container menus and inventory (61)</td>
+<td><code>L/menu.rs</code>, <code>L/container_screen.rs</code>, <code>R/containers.rs</code>, <code>L/creative.rs</code>; game.rs <code>fn menu_ops</code>, <code>fn click_inventory</code></td>
+<td>menu_click, container_screen, creative, lan_e2e containers clicks</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Workstations (60)</td>
+<td><code>L/stations.rs</code>, <code>G/stations.rs</code>, <code>I/enchant.rs</code>, <code>R/brewing.rs</code></td>
+<td>enchanting, screen_layout, lan_e2e brewing loom stonecutter grindstone anvil smithing</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Crafting and the recipe book (59)</td>
+<td><code>L/crafting.rs</code>, <code>L/recipe_book.rs</code>, <code>L/recipe_book_screen.rs</code>, <code>G/recipe_book.rs</code>, <code>G/machines.rs</code>, <code>G/machines/crafter.rs</code></td>
+<td>recipe, recipe_book, recipe_book_view, place_recipe, ghost_recipe, crafter</td>
+</tr>
+<tr>
+<td>27</td>
+<td>Vehicles and mounts (54)</td>
+<td><code>G/boats.rs</code>, <code>G/boat_passengers.rs</code>, <code>G/minecarts.rs</code>, <code>G/mounts.rs</code>, <code>G/mount_menu.rs</code>, <code>G/llamas.rs</code>, <code>G/passengers.rs</code></td>
+<td>server_entities, lan_e2e boats minecarts riding mounts</td>
+</tr>
+<tr>
+<td>28</td>
+<td>Villagers, trading, raids (50)</td>
+<td><code>L/mobs/villager*.rs</code>, <code>L/merchant.rs</code>, <code>G/trading.rs</code>, <code>G/villagers.rs</code>, <code>L/raid.rs</code>, <code>G/raids.rs</code>, <code>L/gossip.rs</code></td>
+<td>trading, raid, mob_ai</td>
+</tr>
+<tr>
+<td>29</td>
+<td>Title, worlds, startup (49)</td>
+<td><code>L/title.rs</code> + <code>L/title/</code>, <code>G/startup_menu.rs</code>, <code>R/title_edition.rs</code></td>
+<td>world_options; <code>cargo test -p horizon-client --lib title</code></td>
+</tr>
+<tr>
+<td>30</td>
+<td>Dedicated server, horizon-server (48)</td>
+<td><code>G/dedicated.rs</code>, <code>G/dedicated/status.rs</code>, <code>crates/horizon-server/</code>, <code>crates/horizon-server-files/</code></td>
+<td>dedicated_server, server_files, user_cache, online_mode, server_ops_feedback</td>
+</tr>
+<tr>
+<td>31</td>
+<td>Particles and client effects (46)</td>
+<td><code>R/particles.rs</code>, <code>G/render_tick.rs</code>, <code>G/level_particles.rs</code>, <code>L/animate_tick.rs</code></td>
+<td>particle_providers, block_particles, entity_particles, emitter_particles, marker_particles</td>
+</tr>
+<tr>
+<td>32</td>
+<td>Bosses and the End (45)</td>
+<td><code>G/dragon.rs</code>, <code>G/wither.rs</code>, <code>G/end.rs</code></td>
+<td>server_dragon, forced_end, end_podium, end_gateway</td>
+</tr>
+<tr>
+<td>33</td>
+<td>Protocol and packets (44)</td>
+<td><code>crates/horizon-protocol/src/</code> (<code>packets/play.rs</code>, <code>entity_data.rs</code>, <code>connection.rs</code>)</td>
+<td>dedicated_server, online_mode, secure_chat; <code>cargo test -p horizon-protocol</code></td>
+</tr>
+<tr>
+<td>34</td>
+<td>Multiplayer and LAN screens, friends (44)</td>
+<td><code>L/multiplayer.rs</code>, <code>G/lan_screen.rs</code>, <code>G/friends.rs</code>, <code>L/friends_screen.rs</code>, <code>crates/horizon-friends/</code>, <code>crates/horizon-relay/</code></td>
+<td>lan, world_options; <code>python3 tools/test_friends.py</code></td>
+</tr>
+<tr>
+<td>35</td>
+<td>Dispensers (43)</td>
+<td><code>G/dispenser.rs</code>, <code>G/dispense_fixture.rs</code> (the harness side)</td>
+<td>dispenser</td>
+</tr>
+<tr>
+<td>36</td>
+<td>Audio and music (38)</td>
+<td><code>R/audio.rs</code>, <code>R/sound_engine.rs</code>, <code>R/sound_events.rs</code>, <code>L/music.rs</code>, <code>G/music.rs</code>, <code>L/ambience.rs</code>, <code>G/subtitle_hud.rs</code></td>
+<td>sound_engine, sound_event, music, situational_music, ambient_sound, subtitle</td>
+</tr>
+<tr>
+<td>37</td>
+<td>Integrated server and levels (34)</td>
+<td><code>G/integrated.rs</code>, <code>G/levels.rs</code>, <code>G/server_travel.rs</code></td>
+<td>server_dimension_players, <code>lan_e2e</code> (server-thread by default; portals, levels, distance, lava)</td>
+</tr>
+<tr>
+<td>38</td>
+<td>Command parsing (34)</td>
+<td><code>C/</code> (<code>args.rs</code>, <code>selector.rs</code>, <code>tree_*.rs</code>, <code>vanilla.rs</code>); <code>cargo test -p horizon-command</code></td>
+<td>command_parse (corpus <code>tools/command_parse_corpus.py</code>)</td>
+</tr>
+<tr>
+<td>39</td>
+<td>Benchmarks and telemetry (34)</td>
+<td><code>L/benchmark.rs</code>, <code>tools/perf_bench.py</code>, <code>R/telemetry.rs</code>, <code>crates/horizon-telemetry*/</code>, <code>crates/horizon-bench/</code></td>
+<td><code>python3 -m unittest tests.test_perf_bench</code>; <a href="benchmark.html">benchmark.md</a></td>
+</tr>
+<tr>
+<td>40</td>
+<td>Explosions and TNT (31)</td>
+<td><code>G/explosion.rs</code>, <code>G/tnt.rs</code></td>
+<td>lan_e2e blast; no dedicated harness yet</td>
+</tr>
+</tbody>
+</table></div>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/architecture.md"><code>docs/architecture.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

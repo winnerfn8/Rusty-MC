@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Java mods&#x27; code: mixins and the Java layer · Rusty Minecraft docs</title>
+<meta name="description" content="Java mods&#x27; code: mixins and the Java layer: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details open><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html" aria-current="page">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="java-mods-code-mixins-and-the-java-layer">Java mods' code: mixins and the Java layer</h1>
+<p>Status: <strong>phases 1 to 4 done.</strong> Content mods' translation is <a href="java-mod-translation.html">java-mod-translation.md</a>;
+this page is about the code inside a Java mod jar: what Rusty Minecraft can say about it, where a mod's mixins can
+bind, the JVM that runs small 26.x mods' injections, and (phase 4) the Java API layer with vanilla's names and the
+part of Fabric API those mods use most. Heavy modpacks are out of scope, and rendering is a separate, later task.</p>
+<h2 id="what-was-checked-first">What was checked first</h2>
+<p><strong>Native hook points</strong> (<a href="native-mods.html">native-mods.md</a>, <code>crates/horizon-client/src/game/native_hooks.rs</code>).
+Native mods change the game's Rust source before it is compiled (horizon-mixins: HEAD, RETURN, OVERWRITE... on
+named Rust functions). The stable part is a set of empty <code>native_*</code> functions the game calls at fixed places,
+listed with contract versions in <code>native-hooks.json</code>: 43 hooks at API 28 (tick, frame, world lifecycle, server
+tick, level tick, block changes, use item, break and place block, attack, tooltips, menus, screens...), only ever
+added, each addition raising <code>NATIVE_HOOKS_API</code>. They are compile-time hooks: a Java mod can't be compiled into
+the game on the player's computer, so its injections need hook points that dispatch while the game runs (below).
+Their names and contracts follow NeoForge's events (<a href="native-hooks-neoforge.html">native-hooks-neoforge.md</a>), not
+vanilla methods, so none of them is &quot;the start of <code>Class.method</code>&quot; a mixin names.</p>
+<p><strong>The port ledger</strong> (<a href="port-ledger.html">port-ledger.md</a>, <code>tools/port_ledger.py</code>). Vanilla <code>Class.method</code> maps to the
+Rust function whose doc comment opens with it (rule 1), the verdict map's <code>port</code> rows (<code>tools/port_map/</code>), and
+weaker matches (same name, structure, rare constants). A full build reads the 26.3 jar; this machine has no
+vanilla jar (Mojang's servers are not reachable from it), so the numbers here come from the ledger's own Rust
+parser and verdict map, not checked against the jar: of <strong>10,897</strong> vanilla methods with a port, <strong>10,094 (93%)</strong>
+map to exactly one Rust function, 551 to two, 252 to three or more. Two cautions:</p>
+<ul>
+<li>The methods mods target most are among the split ones. Rusty Minecraft runs the local player, a server's guests
+and mobs through separate paths and splits big vanilla methods into steps: <code>LivingEntity.hurtServer</code> has 3
+functions, <code>LivingEntity.die</code> 4, <code>Player.tick</code> 4, <code>ServerLevel.tick</code> 3, <code>LivingEntity.aiStep</code> 6,
+<code>Player.attack</code> 10. They need one port each (the paths calling it) before they can have a start and an end.</li>
+<li>Without the jar a citation can be a partial port (a function citing a method it implements one step of), so a
+row is a lead: each method was read before it got a hook point.</li>
+</ul>
+<p><strong>Obfuscation.</strong> Releases since 26.1 ship unobfuscated (<a href="version-ports.html">version-ports.md</a>; <code>tools/lab.py</code>
+refuses a version with mappings). A 26.x mod's mixins name vanilla's real classes and methods
+(<code>net/minecraft/server/MinecraftServer</code>, <code>tickServer</code>), which is what makes binding them by name possible. Older
+Fabric jars name the game in intermediary (<code>net/minecraft/class_3176</code>) and Forge's methods are SRG (<code>m_6074_</code>);
+NeoForge has used Mojang's names since 1.20.5, so its version decides.</p>
+<p><strong>How 26.x mods draw.</strong> Through Blaze3D, not OpenGL: <code>RenderSystem.getDevice()</code> hands a <code>GpuDevice</code>, drawing goes
+through <code>CommandEncoder</code> and <code>RenderPass</code> with <code>RenderPipeline</code>s (<code>RenderPipelines</code>) and
+<code>net.minecraft.client.renderer.rendertype.RenderType</code>, and 26.3 has an OpenGL and a Vulkan backend behind it
+(<a href="benchmark.html">benchmark.md</a>). The repository's Java oracles use exactly these classes and no <code>org.lwjgl.opengl</code>.
+So a mod draws through Mojang's high-level classes, which a later task could put over wgpu; a mod that calls
+OpenGL itself (rare, and broken on the Vulkan backend too) can't run, and its verdict says so.</p>
+<h2 id="decisions">Decisions</h2>
+<ul>
+<li><strong>Java runs only in an optional layer.</strong> <a href="repo/AGENTS.html">AGENTS.md</a> now allows one exception to &quot;everything players
+run is Rust&quot;: an embedded JVM, behind the <code>java-mods</code> cargo feature, off by default (Settings &gt; Java mods &gt; <strong>Run
+their code with Java</strong>), on a Java the player already has. Nothing is bundled.</li>
+<li><strong>Libraries.</strong> Loader APIs and libraries that touch Minecraft (Fabric API, NeoForge, Architectury, GeckoLib,
+Cloth Config...) run only once this repository has a Rust version of them (none yet). Plain Java libraries that
+never touch Minecraft (bundled JSON, config or maths libraries) run as they are in the JVM.</li>
+<li><strong>No weaving.</strong> There is no vanilla bytecode to weave into. Each supported injection binds to a hook point in
+the Rust code.</li>
+</ul>
+<h2 id="phase-1-the-verdicts">Phase 1: the verdicts</h2>
+<p><code>crates/horizon-port-pack/src/mixins.rs</code> reads each jar's mixin configs and every mixin member's annotations
+(<code>classes.rs</code> reads class files' annotations), puts each in a group with its reason (supported, needs the Java
+layer, not supported), lists the libraries, and tells 26.x mods from older ones. <code>check</code> and <code>translate</code> print it,
+and Settings &gt; Java mods shows a <strong>Code:</strong> line and every mixin and library on demand
+(<a href="java-mod-translation.html#what-its-code-needs">java-mod-translation.md</a>). Tests build their jars and class files
+themselves.</p>
+<h2 id="phase-2-hook-points">Phase 2: hook points</h2>
+<ul>
+<li><strong>The table.</strong> <code>python3 tools/mixin_hook_table.py</code> writes <code>crates/horizon-port-pack/data/vanilla-one-to-one.tsv</code>:
+the vanilla methods with exactly one Rust function, names only (<code>Class.method</code>, <code>file::Impl::fn</code>, how matched).
+With a full ledger build (<code>.local/port-ledger/ledger.json</code>, from the jar) it takes the jar-checked matches;
+without one it says so in its header. <code>--stats</code> prints the counts above. <code>tools/check_public_tree.py</code> accepts it.</li>
+<li><strong>Choosing methods.</strong> <code>horizon-port-pack mixin-targets &lt;folder of jars&gt;</code> ranks the vanilla methods the jars'
+mixins inject into (mods, then injections; start, end and inside counted apart), each with whether it has one
+Rust function and a hook point. Popular mods couldn't be downloaded on this machine (Modrinth and Fabric's Maven
+aren't reachable from it), so the first methods were chosen as methods small 26.x mods commonly inject into at
+their start or end, that have exactly one port and can be read whole: the server tick, mining speed, block drops
+and entity use. The next batch should come from running <code>mixin-targets</code> over popular 26.x mods on a machine that
+has them (never committed).</li>
+<li><strong>The hook points</strong> (API 29): the start and end of <code>MinecraftServer.tickServer</code> (<code>tick_server</code>),
+<code>BlockBehaviour.getDestroyProgress</code> (<code>destroy_progress</code>), <code>Block.getDrops</code> (<code>block_loot_at</code>) and
+<code>Player.interactOn</code> (<code>interact_entity</code>). Each is a pair of native hooks (<code>native_mixin_&lt;class&gt;_&lt;method&gt;_head</code>
+and <code>_return</code>, taking a <code>horizon_java::hooks::Call</code>: cancel, set or change the return value), catalogued with
+<code>vanilla</code>, <code>class</code>, <code>at</code>, <code>side</code> and <code>cancellable</code>, and a runtime entry (<code>horizon_java::hooks::Hook</code>) that
+handlers attach to while the game runs. <code>tick_server</code>'s end comes before <code>FixedStep::record</code> (vanilla records the
+tick's time inside <code>tickServer</code>); <code>TAIL</code> binds to the end, which also runs after early returns.</li>
+<li><strong>Cost.</strong> Nothing attached, a hook point is one relaxed atomic load and a branch, inlined at the call site.
+<code>cargo run --release -p horizon-java --example hook_cost</code> times the call-site pattern around a small body:
+<strong>−0.08 to +0.49 ns per call</strong> (noise) over three runs; a Rust handler that does nothing attached to both ends
+adds about 7 ns. The game's benchmark mode (<code>--benchmark standard</code>) needs vanilla resources, which this machine
+can't prepare: run it on a machine with them before and after to confirm in the real game.</li>
+<li><strong>Parity.</strong> With nothing attached the calls change no gameplay step and no random draw (a start that answers
+skips the method, as the mixin would in vanilla). <code>native_hooks::tests::catalog_matches_hook_points</code> and
+<code>mixin_hook_points_match_the_runtime</code> pass. <code>tools/parity.py --changed-files</code> lists 366 of 367 harnesses for the
+touched files (<code>game.rs</code> and the client lib); they need the vanilla data in <code>.local/</code>, which this machine
+doesn't have, so CI or a machine with the data must run them.</li>
+</ul>
+<h2 id="phase-3-the-java-layer">Phase 3: the Java layer</h2>
+<p><code>crates/horizon-java</code> (feature <code>jvm</code>; the game's feature <code>java-mods</code>):</p>
+<ol>
+<li><strong>The player's Java.</strong> <code>locate.rs</code> finds a Java home from Settings' choice (a JDK or JRE folder, its <code>java</code>, or
+its <code>libjvm</code>) or on the computer (<code>JAVA_HOME</code>, <code>PATH</code>, the usual install folders, newest first), and its JVM
+library. The launcher shows which, with <strong>Choose Java…</strong>.</li>
+<li><strong>The JVM.</strong> JNI's invocation API through the <code>jni</code> crate, which loads <code>libjvm</code> at run time (nothing links
+against Java, and a game without Java starts as before). Options: <code>-Xrs</code> (the game keeps its signals) and
+headless. The layer's own classes (<code>java/</code>: <code>CallbackInfo</code>, <code>CallbackInfoReturnable</code> with Mixin's public names,
+and a helper) are compiled by <code>build.rs</code> with <code>javac --release 21</code> and defined in the system class loader.</li>
+<li><strong>Mod jars</strong> load with a <code>URLClassLoader</code> over the jars of the mods that are on. A mixin class is read from it,
+defined with <code>ACC_ABSTRACT</code> cleared (<code>classfile.rs</code>: most mixins are abstract), and one instance is made without
+running a constructor.</li>
+<li><strong>Binding.</strong> Each supported injection (from the same reading as the verdicts) becomes a <code>jvm::Binding</code>: its
+hook point, class, handler and descriptor. A call hands the handler a <code>CallbackInfo</code> (or
+<code>CallbackInfoReturnable</code> with a boolean or float return value), <code>null</code> and zeros for the target method's other
+arguments (phase 4 hands the real ones), and reads back <code>isCancelled</code> and the return value; a <code>@ModifyReturnValue</code> gets the value and returns
+the new one (boolean and float for now). A handler that throws is logged once and skipped.</li>
+<li><strong>In the game</strong>, <code>mods::start_java_layer</code> (after the translation, at start) binds the injections of the
+translated mods that are on, and of code-only jars (verdict <em>Doesn't run</em>: no content mod to switch, so the jar
+in the folder is what turns it on), when the switch is on, and logs <code>Horizon: Java layer: N handlers bound on &lt;libjvm&gt;</code>.</li>
+</ol>
+<p><strong>The test mod</strong> (<code>crates/horizon-java/tests/tickcounter/</code>, written here) is a Fabric mod for 26.3 with an
+abstract mixin: an <code>@Inject(method = &quot;tickServer&quot;, at = @At(&quot;HEAD&quot;), cancellable = true)</code> that counts ticks and
+cancels one, and a <code>@ModifyReturnValue</code> on <code>getDestroyProgress</code> that doubles it. <code>cargo test -p horizon-java --features jvm</code> builds it with <code>javac</code>, reads it with horizon-port-pack, starts the JVM from this machine's Java,
+binds both handlers and calls <code>hooks::run</code> exactly as <code>tick_server</code> and <code>destroy_progress</code> do: three ticks counted,
+a cancelled tick, the progress doubled.</p>
+<p>In the real game (<code>horizon-client</code> built with <code>--features java-mods</code>, the test mod's jar in a scratch game folder's
+<code>mods/</code>, the switch on), the start translated the jar and logged <code>Horizon: Java layer: 2 handlers bound on /usr/lib/jvm/java-21-openjdk-amd64/lib/server/libjvm.so in 55 ms</code>. It stopped there: this machine has no display
+and no prepared vanilla resources, so no world opened and <code>tick_server</code> never ran. The run through <code>tick_server</code>
+in a real world is the first thing to check on a machine with them: the same build and jar, then the counter
+(or a log line from the handler) once the world ticks.</p>
+<h3 id="measurements">Measurements</h3>
+<p>Linux, 4 cores of an Intel Xeon at 2.1 GHz (a cloud VM), OpenJDK 21.0.12,
+<code>cargo run --release -p horizon-java --features jvm --example jvm_cost</code>, two runs:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start the JVM</td>
+<td>35 to 41 ms</td>
+</tr>
+<tr>
+<td>Load the test mod and bind its handler</td>
+<td>16 to 20 ms</td>
+</tr>
+<tr>
+<td>One call, Rust to Java (an empty static method, through the <code>jni</code> crate)</td>
+<td>37 ns</td>
+</tr>
+<tr>
+<td>One call, Java to Rust (an empty native method)</td>
+<td>9 to 10 ns</td>
+</tr>
+<tr>
+<td>A hook point with the test mod's handler (a new <code>CallbackInfo</code> each call, a local frame, <code>isCancelled</code>)</td>
+<td>360 to 400 ns</td>
+</tr>
+<tr>
+<td>A server tick's hook point with 100 handlers attached</td>
+<td>33 to 40 µs: under 0.1% of a 50 ms tick</td>
+</tr>
+<tr>
+<td>A hook point with nothing attached</td>
+<td>under 0.5 ns (above)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The handler call is dominated by what surrounds the Java call (the <code>CallbackInfo</code> object, the local frame, the
+second call to read <code>isCancelled</code>), not by crossing into Java.</p>
+<h2 id="phase-4-the-java-api-layer-and-fabric-api">Phase 4: the Java API layer and Fabric API</h2>
+<h3 id="hook-points-hand-the-game-and-the-arguments">Hook points hand the game and the arguments</h3>
+<p>A hook point now passes the game as a <code>horizon_java::hooks::Host</code> and what the vanilla method is handed (a <code>Site</code>:
+<code>this</code> and the arguments, as handles: the server, a level, an entity id, a block state id, a position, an item
+stack, a hand), made only when something is attached (<code>hooks::run(hook, &amp;mut call, self, |game| site)</code>; still one
+relaxed load and a branch when idle). The game implements <code>Host</code> in <code>crates/horizon-client/src/game/java_host.rs</code>
+through the same paths as native mods' server helpers: blocks of the level the hook point runs in (set through
+<code>/setblock</code>'s path), entities (a server's players by entity id, mobs, -1 for the acting player), the players, a
+message to one player or all. Six lifecycle points sit beside the native lifecycle hooks: a server starting
+(<code>native_lifecycle_open_started</code>), started (world ready), stopping (the close request, before the players leave and
+the final save), stopped (after the final save), and each level's part of a server tick (<code>native_level_tick_pre</code>
+and <code>_post</code>).</p>
+<h3 id="the-java-api-layer">The Java API layer</h3>
+<p><code>crates/horizon-java/java/net/minecraft/</code>: Java classes with vanilla 26.x's names, written for this repository
+from public documentation only (vanilla's class, method and field names and signatures are the API mods compile
+against; no line comes from Mojang's code). <code>tools/check_public_tree.py</code> accepts these sources and the test mod's,
+and still rejects any other <code>.java</code> or <code>.class</code> file. <code>crates/horizon-java/api.txt</code> lists every class and public
+member (64 classes); a test checks it against the compiled classes.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Classes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resources</code></td>
+<td><code>Identifier</code>, <code>ResourceKey</code></td>
+</tr>
+<tr>
+<td><code>core</code>, <code>core.registries</code></td>
+<td><code>BlockPos</code>, <code>Vec3i</code>, <code>Direction</code>, <code>Registry</code> (and <code>register</code>), <code>WritableRegistry</code>, <code>DefaultedRegistry</code>, <code>BuiltInRegistries</code> (<code>BLOCK</code>, <code>ITEM</code>), <code>Registries</code></td>
+</tr>
+<tr>
+<td><code>network.chat</code>, <code>ChatFormatting</code></td>
+<td><code>Component</code> (<code>literal</code>, <code>translatable</code>, <code>empty</code>), <code>MutableComponent</code></td>
+</tr>
+<tr>
+<td><code>server</code>, <code>server.level</code>, <code>server.players</code></td>
+<td><code>MinecraftServer</code>, <code>ServerLevel</code>, <code>ServerPlayer</code>, <code>PlayerList</code></td>
+</tr>
+<tr>
+<td><code>world</code>, <code>world.phys</code></td>
+<td><code>InteractionHand</code>, <code>InteractionResult</code>, <code>Vec3</code></td>
+</tr>
+<tr>
+<td><code>world.level</code> and below</td>
+<td><code>Level</code>, <code>BlockGetter</code>, <code>ItemLike</code>, <code>Block</code>, <code>Blocks</code> (34 common ones), <code>BlockBehaviour</code> and its <code>Properties</code>, <code>BlockState</code>, <code>BlockEntity</code></td>
+</tr>
+<tr>
+<td><code>world.item</code></td>
+<td><code>Item</code> and its <code>Properties</code>, <code>BlockItem</code>, <code>Items</code> (18 common ones), <code>ItemStack</code>, <code>Rarity</code></td>
+</tr>
+<tr>
+<td><code>world.entity</code></td>
+<td><code>Entity</code>, <code>LivingEntity</code>, <code>Player</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Values (<code>Identifier</code>, <code>BlockPos</code>, <code>Vec3</code>, <code>Component</code>...) are plain Java. Game objects hold the game's handle and
+ask the game through <code>dev.rustyminecraft.java.Host</code>'s native methods (<code>src/jvm/natives.rs</code>), which reach the
+<code>Host</code> of the hook point running on that thread and answer nothing anywhere else. A vanilla id the registries
+haven't seen stands for the game's own block or item (<code>Blocks.STONE</code> is <code>minecraft:stone</code>, whatever the game makes
+of it).</p>
+<p><strong>A mixin is its target.</strong> When the layer has a mixin's target class, the mixin class is rebased onto it as it loads
+(<code>classfile::rebase</code>: its superclass becomes the API class, its constructors and abstract methods go), so <code>this</code>
+<em>is</em> the server, the level, the entity or the block (<code>(MinecraftServer) (Object) this</code> works), and a <code>@Shadow</code>
+method resolves to the API class's method of the same name and descriptor. One instance stands for each target
+object (per thread, up to 4,096 per class), so a mixin's own fields (<code>@Unique</code>) are kept per target, as in Mixin.
+A <code>BlockBehaviour</code> mixin is rebased onto <code>Block</code> (every <code>BlockBehaviour</code> is a <code>Block</code> in vanilla).</p>
+<h3 id="fabric-api-the-smallest-useful-part">Fabric API, the smallest useful part</h3>
+<p>Fabric API's modules <code>fabric-api-base</code> and <code>fabric-lifecycle-events-v1</code> have a Rust version: <code>src/fabric.rs</code>
+knows which hook point fires each event and what it hands, with a Java facade under <code>java/net/fabricmc/</code> that mods
+compile against:</p>
+<ul>
+<li><code>ModInitializer</code>, <code>ClientModInitializer</code>, <code>DedicatedServerModInitializer</code>: the entry points <code>fabric.mod.json</code>
+names (a class, or <code>Class::field</code>) run when the layer starts, <code>main</code> first, then <code>client</code> in a game with a window
+or <code>server</code> on a dedicated server. A Kotlin adapter's entry point fails to run, saying so.</li>
+<li><code>FabricLoader</code>: <code>isModLoaded</code> (the mods that are on, the game, and the covered Fabric API modules),
+<code>getGameDir</code>, <code>getConfigDir</code>, <code>getEnvironmentType</code>, <code>isDevelopmentEnvironment</code>.</li>
+<li><code>Event</code> and <code>EventFactory</code> (<code>createArrayBacked</code>, <code>createWithPhases</code>): array-backed invokers, for a mod's own
+events too. Phases are accepted; listeners run in registration order.</li>
+<li><code>ServerTickEvents</code> (<code>START_SERVER_TICK</code>, <code>END_SERVER_TICK</code>, <code>START_WORLD_TICK</code>, <code>END_WORLD_TICK</code>) and
+<code>ServerLifecycleEvents</code> (<code>SERVER_STARTING</code>, <code>SERVER_STARTED</code>, <code>SERVER_STOPPING</code>, <code>SERVER_STOPPED</code>): an event's
+first listener attaches its hook point, which then fires it before the mods' own mixin handlers there (as Fabric
+API's own mixins apply first).</li>
+</ul>
+<p><strong>Registrations.</strong> <code>Registry.register(BuiltInRegistries.BLOCK, ...)</code> and <code>ITEM</code> hand each registration to Rust;
+after the entry points ran, <code>translate::apply_registrations</code> applies them to the mod's translated content before the
+game reads it: a block's hardness, explosion resistance, light, tool requirement and friction; an item's stack size,
+rarity, durability, fire resistance and crafting remainder. A block the jar has no blockstate for isn't added (it
+would have no model).</p>
+<h3 id="verdicts-sides-and-versions">Verdicts, sides and versions</h3>
+<ul>
+<li><strong>What the layer lacks.</strong> <code>horizon-port-pack</code> reads <code>api.txt</code> and every class of a 26.x jar: the vanilla, Fabric
+and Mixin classes and members its code uses that the layer doesn't have yet are counted on the <strong>Code:</strong> line
+(<em>uses 14 vanilla or Fabric API classes or members the Java layer doesn't have yet</em>) and the first twelve listed
+(<code>SoundType</code>, <code>BlockBehaviour.Properties.sound()</code>). A mod using them fails where it uses them
+(<code>NoClassDefFoundError</code>, logged), so this is the list to grow the layer from.</li>
+<li><strong>Groups.</strong> A <code>@Shadow</code> of a method the layer has, and a mod's own <code>@Unique</code> members, are now <em>supported</em>;
+<code>@Accessor</code>, <code>@Invoker</code>, <code>@Shadow</code> fields and <code>@Shadow</code> of a method the layer lacks <em>need more of the Java layer</em>.
+Fabric API counts as having a Rust version for its covered part, and its covered modules each get a line.</li>
+<li><strong>Sides.</strong> A mixin config's <code>client</code> and <code>server</code> lists apply by the game running the hook point (<code>Host::side</code>:
+the server thread and a dedicated server are the server, the window the client); entry points by the process.</li>
+<li><strong>Versions.</strong> The <strong>Code:</strong> details say which Java a mod's classes need (25 for 26.x). At start, a mod whose
+classes need a newer Java than the chosen one, or that requires a library with no Rust version (one that isn't
+another mod loading here), doesn't run its code, and the log says why.</li>
+<li><strong>Trust.</strong> The Settings row says Java mods' code runs with full access to the computer, like native mods.</li>
+</ul>
+<h3 id="the-test-mod-end-to-end">The test mod, end to end</h3>
+<p><code>tests/tickcounter/</code> (written here) now has three parts: <code>TickMixin</code> (<code>@Inject</code> at <code>tickServer</code>'s start, reading
+<code>getTickCount</code> through a <code>@Shadow</code> and checking that <code>this</code> is the server), <code>MiningMixin</code> (<code>@ModifyReturnValue</code>
+doubling <code>getDestroyProgress</code>, reading <code>this</code>, the state, the player, the level and the block below the position),
+and <code>TickCounter</code>, its <code>main</code> entry point, which registers a block (hardness 1.5, light 7, tool required), its item
+and an item (stacks of 16, rare), and listens to <code>END_SERVER_TICK</code> (a message to each player every 20 ticks) and
+<code>SERVER_STARTED</code>. <code>cargo test -p horizon-java --features jvm</code> builds it against the layer's own classes, runs it
+with a fake game as the host and checks each: the registrations reaching Rust with their properties, the shadow
+answering the host's tick count, the cancelled tick, the player's message, the start event, the doubled progress
+and the handler's reading of its arguments. <code>horizon-port-pack check</code> on its jar says <em>3 of 3 mixins supported</em>
+and lists nothing missing.</p>
+<p>In the game, <code>mods::start_java_layer</code> gathers the mods that are on, made for 26.x, whose Java and libraries are
+there; loads them; runs their entry points; applies their registrations; and logs <code>Horizon: Java layer: N handlers bound and M entry points run on &lt;libjvm&gt;</code>. As in phase 3, this machine has no display and no prepared vanilla
+resources, so no world ran here: the first check on a machine with them is the test mod's jar in a game folder's
+<code>mods/</code> with the switch on, then its message in chat every second.</p>
+<h3 id="measurements-1">Measurements</h3>
+<p>Same machine as phase 3 (4 cores of a 2.1 GHz Xeon cloud VM, OpenJDK 21.0.12), <code>jvm_cost</code> and <code>hook_cost</code>, two
+runs (the second beside a launcher build, so slower):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Phase 3</th>
+<th>Phase 4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start the JVM (and define the layer's 72 classes)</td>
+<td>35 to 41 ms</td>
+<td>37 to 111 ms</td>
+</tr>
+<tr>
+<td>Load the test mod and bind its handlers</td>
+<td>16 to 20 ms</td>
+<td>29 to 43 ms</td>
+</tr>
+<tr>
+<td>A hook point with the tick handler (a <code>CallbackInfo</code> reused per handler and thread; the server as <code>this</code>)</td>
+<td>360 to 400 ns</td>
+<td>242 to 251 ns</td>
+</tr>
+<tr>
+<td>A hook point with the mining handler (four argument objects made per call)</td>
+<td>(no arguments)</td>
+<td>863 to 966 ns</td>
+</tr>
+<tr>
+<td>A server tick's hook point with 100 handlers</td>
+<td>33 to 40 µs</td>
+<td>16 to 17 µs: 0.03% of a 50 ms tick</td>
+</tr>
+<tr>
+<td>A hook point with nothing attached</td>
+<td>under 0.5 ns</td>
+<td>under 0.7 ns (noise)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Per handler that is about 160 ns, short of the 100 ns aimed for: each still costs three JNI calls (reset the
+<code>CallbackInfo</code>, the call, read <code>cancelled</code>) and the <code>jni</code> crate's exception check after each. A dispatcher in Java
+that loops over a hook point's handlers (one JNI call per hook point) is the next step if it matters. Arguments cost
+most: each is a JNI call that makes an object; a hook point makes them once for all its handlers.</p>
+<h2 id="limits">Limits</h2>
+<ul>
+<li>Only the level a hook point runs in is reachable (the others are parked: reading them answers air), and only
+while a hook point runs: an entry point can register and listen, not read the world.</li>
+<li>Text is plain: styles are accepted and dropped, and a translatable component shows its key.</li>
+<li><code>Block.getDrops</code>'s list isn't handed over (a start that cancels drops nothing); hook points hand no block entity;
+item stacks carry their item and count only. Players' health can't be set (mobs' can).</li>
+<li>No accessors or invokers yet, and a <code>@Shadow</code> field is the mixin's own, not the game's value.</li>
+<li>Of Fabric API, only the two modules above: no item groups, registry sync, networking, commands, keybinds or
+rendering. Of vanilla, the 64 classes above: anything else a mod uses is listed in its verdict.</li>
+<li>26.x mods are compiled for Java 25; the layer's own classes for 21. Java mods run with the player's rights, like
+native mods; the JVM has no sandbox.</li>
+<li>Official builds don't have the feature; the switch says so, and such a game logs it.</li>
+</ul>
+<h2 id="next">Next</h2>
+<ol>
+<li>Grow the API layer from the verdicts: run <code>horizon-port-pack check</code> over popular small 26.x mods on a machine
+that has them (never committed) and add the most-used missing classes and members, then <code>api.txt</code>.</li>
+<li>Fabric API's <code>ItemGroupEvents</code> and creative tabs (content mods' items in vanilla's tabs), then registry sync.</li>
+<li>Accessors and invokers (an interface the rebased class implements), and <code>@Shadow</code> fields read through the game.</li>
+<li>More hook points from <code>mixin-targets</code> over the same mods, each with an API bump, its parity harnesses and a
+benchmark-mode run; one port for the split methods they target (<code>hurtServer</code>, <code>die</code>, <code>Player.tick</code>).</li>
+<li>A Java-side dispatcher per hook point, if the per-handler cost matters.</li>
+<li>Rendering (Mojang's high-level drawing classes over wgpu), separately.</li>
+</ol>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/java-mod-runtime.md"><code>docs/java-mod-runtime.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#what-was-checked-first">What was checked first</a></li><li class="l2"><a href="#decisions">Decisions</a></li><li class="l2"><a href="#phase-1-the-verdicts">Phase 1: the verdicts</a></li><li class="l2"><a href="#phase-2-hook-points">Phase 2: hook points</a></li><li class="l2"><a href="#phase-3-the-java-layer">Phase 3: the Java layer</a></li><li class="l3"><a href="#measurements">Measurements</a></li><li class="l2"><a href="#phase-4-the-java-api-layer-and-fabric-api">Phase 4: the Java API layer and Fabric API</a></li><li class="l3"><a href="#hook-points-hand-the-game-and-the-arguments">Hook points hand the game and the arguments</a></li><li class="l3"><a href="#the-java-api-layer">The Java API layer</a></li><li class="l3"><a href="#fabric-api-the-smallest-useful-part">Fabric API, the smallest useful part</a></li><li class="l3"><a href="#verdicts-sides-and-versions">Verdicts, sides and versions</a></li><li class="l3"><a href="#the-test-mod-end-to-end">The test mod, end to end</a></li><li class="l3"><a href="#measurements-1">Measurements</a></li><li class="l2"><a href="#limits">Limits</a></li><li class="l2"><a href="#next">Next</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

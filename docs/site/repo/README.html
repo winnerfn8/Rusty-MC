@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rusty Minecraft · Rusty Minecraft docs</title>
+<meta name="description" content="Rusty Minecraft: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details open><summary>Start here</summary><ul><li><a href="README.html" aria-current="page">Rusty Minecraft</a></li><li><a href="../java-mod-translation.html">Java mod translation</a></li><li><a href="../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../website.html">The documentation website</a></li><li><a href="ROADMAP.html">Horizon roadmap</a></li><li><a href="roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../native-client.html">Rusty Minecraft native client</a></li><li><a href="../hosting.html">Host a server</a></li><li><a href="../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../server-next.html">The next server: design</a></li><li><a href="../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../graphics.html">Graphics: settings and performance</a></li><li><a href="../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../extras.html">Rusty Minecraft extras</a></li><li><a href="../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../mods.html">Rusty Minecraft mods</a></li><li><a href="../native-mods.html">Native mods (experimental)</a></li><li><a href="../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../versioning.html">Versioning</a></li><li><a href="../resource-packs.html">Resource packs: what works</a></li><li><a href="../telemetry.html">Opt-in data collection</a></li><li><a href="../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="../api/README.html">Rusty Minecraft APIs</a></li><li><a href="../api/stability.html">API stability and versioning</a></li><li><a href="../play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../parity-workflow.html">Parity workflow</a></li><li><a href="../parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="../parity/meshing.html">Section meshing parity</a></li><li><a href="../port-ledger.html">Port ledger</a></li><li><a href="../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../world-generation.html">World generation</a></li><li><a href="../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../density-functions.html">Compiled density evaluation</a></li><li><a href="../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../biome-lookup.html">Biome lookup</a></li><li><a href="../biome-temperatures.html">Biome temperatures</a></li><li><a href="../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../material-conditions.html">Numeric material conditions</a></li><li><a href="../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../vertical-anchors.html">Vertical anchors</a></li><li><a href="../value-providers.html">World-generation value providers</a></li><li><a href="../carving.html">Carving</a></li><li><a href="../heightmaps.html">Heightmaps</a></li><li><a href="../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../world-data.html">Rusty Minecraft world data</a></li><li><a href="../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="../api/agent-control.html">Agent control API</a></li><li><a href="../api/data-formats.html">Data formats</a></li><li><a href="../api/launch-reference.html">Launch API reference</a></li><li><a href="../api/launch.html">Launch API</a></li><li><a href="../api/launcher.html">Launcher API</a></li><li><a href="../api/mod-index.html">The registry index and .hpack</a></li><li><a href="../api/server-reference.html">Server reference</a></li><li><a href="../api/server.html">Server API</a></li><li><a href="../api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="../api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../controllers.html">Controllers</a></li><li><a href="../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../known-issues.html">Known issues</a></li><li><a href="../launcher-commands.html">Launcher commands</a></li><li><a href="../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../release-flow.html">Release flow</a></li><li><a href="../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../save-batch-entities.html">Block entity save batches</a></li><li><a href="../security.html">Security</a></li><li><a href="../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<p align="center">
+  <img src="https://img.shields.io/badge/Minecraft-Java%2026.3-5D9C3F" alt="Minecraft Java 26.3">
+  <img src="https://img.shields.io/badge/Rust-stable-B7410E?logo=rust&logoColor=white" alt="Rust">
+  <img src="https://img.shields.io/badge/vanilla%20parity-100%25-F0795A" alt="Vanilla parity 100%">
+  <a href="#project-status"><img src="https://img.shields.io/badge/player--visible%20gaps-833%20open-F0795A" alt="Player-visible gaps open"></a>
+  <img src="https://img.shields.io/badge/fork%20of-Horizon-3B2F7E" alt="A fork of Horizon">
+  <img src="https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-2A2470" alt="Linux, macOS and Windows">
+  <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/LICENSE"><img src="https://img.shields.io/badge/license-MIT-3B2F7E" alt="MIT license"></a>
+</p>
+<p align="center">
+  <a href="#download"><b>Download</b></a> ·
+  <a href="../../index.html"><b>Documentation</b></a> ·
+  <a href="../java-mod-translation.html"><b>Java mods</b></a> ·
+  <a href="#project-status"><b>Project status</b></a> ·
+  <a href="#contributing"><b>Contributing</b></a> ·
+  <a href="https://github.com/horizon-rust/horizon"><b>Upstream: Horizon</b></a>
+</p>
+<h1 id="rusty-minecraft">Rusty Minecraft</h1>
+<p>Rusty Minecraft is Minecraft: Java Edition 26.3 rewritten in Rust: a native game that reads the same worlds, follows the same rules and generates the same terrain as the Java game, and is checked against it by more than 300 differential harnesses. You play it through a small launcher, on the files from your own copy of Minecraft. It is free, open source and unofficial.</p>
+<blockquote>
+<p><strong>A fork of Horizon.</strong> Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a>, the Rust
+rewrite of Minecraft: Java Edition by Ludovic Marie and the Horizon contributors, released under the MIT licence
+(see <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/LICENSE">LICENSE</a>). Nearly all of the game, the launcher and the tools here are their work. This fork
+continues it as its own version and adds a <strong>Java mod translation layer</strong>: a Fabric, Quilt, NeoForge or Forge mod
+jar put in the game folder becomes a content mod when the game starts, managed from the launcher's
+<strong>Settings &gt; Java mods</strong> (<a href="../java-mod-translation.html">docs/java-mod-translation.md</a>). Horizon's GitHub
+workflows are parked in <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/.github/upstream-workflows/README.md">.github/upstream-workflows</a>.</p>
+</blockquote>
+<blockquote>
+<p>Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft. Rusty Minecraft contains no Minecraft code, assets or data: you need your own legally obtained copy of Minecraft: Java Edition 26.3.</p>
+</blockquote>
+<h2 id="download">Download</h2>
+<p>Rusty Minecraft has no releases of its own yet: build the launcher from source (<a href="launcher/README.html">launcher/README.md</a>) and the game as below (<a href="#build-from-source">Build from source</a>). The launcher installs game builds from Horizon's releases until this fork publishes its own, so the game it installs is Horizon's, without this fork's changes; a game built from this repository has them.</p>
+<p><strong>You need</strong> a Microsoft account that owns Minecraft: Java Edition (the launcher signs in with it, as other launchers do; see <a href="../microsoft-account.html">Microsoft account</a>) and a GPU with Vulkan or OpenGL 3.3 on Linux, Vulkan or DirectX 12 on Windows, or any Apple Silicon Mac. With no Minecraft on your computer, Play downloads 26.3 and the Java it needs from Mojang for your account, as the official launcher does, then prepares it once. An install you already have (the official launcher, Prism, MultiMC and other launchers all work) is used instead.</p>
+<div class="table"><table>
+  <tr>
+    <td width="50%"><img src="../../media/launcher-java-mods.webp" alt="The launcher's Settings, Java mods section: the translation switch, Add mod jar, Translate now and Open folder, and translated jars with their verdicts"></td>
+    <td width="50%"><img src="../../media/launcher-settings.webp" alt="The launcher's Settings page: account, updates and appearance"></td>
+  </tr>
+</table></div>
+<h2 id="what-works-today">What works today</h2>
+<p>The <a href="../../index.html">documentation</a> covers each of these; Horizon's site, <a href="https://playhorizon.dev/docs/">playhorizon.dev/docs</a>, describes the upstream game they come from.</p>
+<ul>
+<li><strong>The game:</strong> singleplayer with vanilla's world generation, mobs, villagers, raids, redstone, every command, the HUD and the recipe book, on saves in vanilla's format. Worlds from 1.8 to 26.2 are upgraded as vanilla does. <a href="#project-status">Status table</a>.</li>
+<li><strong>Rusty Minecraft's own extras:</strong> new menus (vanilla's are one setting away), graphics presets, distant terrain up to 1024 chunks, controller support, optional zoom, minimap and more, all off by default where they would change the vanilla look. See <a href="https://playhorizon.dev/docs/settings">Settings</a>.</li>
+<li><strong>Resource packs and data packs:</strong> resource packs work, and data packs load functions, predicates, item modifiers and world generation, taller levels included (vanilla's biomes for now).</li>
+<li><strong>Playing with others:</strong> invite friends from the pause menu's Friends button with a code, Open to LAN, and joining servers, online-mode ones with the Microsoft account the launcher signs in with. See <a href="https://playhorizon.dev/docs/multiplayer">Multiplayer</a>.</li>
+<li><strong>Mods:</strong> content mods add blocks, items and data, and native mods change the game's own Rust code, built by the launcher on your copy, with no Rust to install. Rusty Minecraft's own (Zoom, FPS Counter, Keystrokes, Minimap, Recipes and Coordinates HUD) are native mods. Java mod jars' code does not run in Rusty Minecraft, but this fork translates what they carry (blocks, items, recipes, loot, worldgen, textures) into content mods when the game starts: <a href="../java-mod-translation.html">Java mod translation</a>. See <a href="https://playhorizon.dev/docs/mods">Mods and data packs</a>.</li>
+</ul>
+<p>Screenshots, captured in the Rust client itself with vanilla assets and no mods or shaders:</p>
+<div class="table"><table>
+  <tr>
+    <td colspan="2"><img src="../../media/sunset.webp" alt="Sunset over a savanna river valley and a plains village"></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="../../media/survival.webp" alt="Survival at dusk: a zombie walks up, with the hotbar, health, hunger and experience"></td>
+    <td width="50%"><img src="../../media/settings.webp" alt="Vanilla's Video Settings screen with Rusty Minecraft's own buttons at the top: Rusty Minecraft Graphics and Advanced Graphics"></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="../../media/village.webp" alt="A plains village among savanna hills, with farms, villagers and an iron golem"></td>
+    <td width="50%"><img src="../../media/nether.webp" alt="A crimson forest in the Nether with a zombified piglin"></td>
+  </tr>
+</table></div>
+<h2 id="host-a-server">Host a server</h2>
+<p>The launcher's <strong>Servers</strong> page creates, starts, backs up and updates a Rusty Minecraft server with buttons, and invites friends over Tailscale. On a VPS, <code>horizon-server</code> installs with one command and runs without Java. Guide: <a href="https://playhorizon.dev/docs/hosting">Host a server</a> (<a href="../hosting.html">reference</a>).</p>
+<h2 id="modpacks">Modpacks</h2>
+<p>The launcher's <strong>Modpacks</strong> page imports a Modrinth or CurseForge pack, shows which of its mods Rusty Minecraft can carry over, and plays the ones it can as their own profile. Today that means content mods made of data and assets; mods with Java code are not ported yet. See <a href="https://playhorizon.dev/docs/modpacks">Modpacks</a>.</p>
+<h2 id="agent-control">Agent control</h2>
+<p>AI agents and scripts can play Rusty Minecraft. <code>horizon-ctl</code>, shipped beside the game in every release folder, is a command line that reads the game as JSON and acts like a player; <code>horizon-ctl mcp</code> serves the same commands as an MCP server (one tool per command, screenshots returned as images).</p>
+<pre><code class="language-sh">horizon-ctl launch --world Survival --seed 5 --wait   # finds the version the launcher installed
+horizon-ctl state                                       # position, health, food, target, screen...
+horizon-ctl find-block birch_log                        # the nearest logs
+horizon-ctl goto -0.5 65 -2.5 --near 2.5                # walks there along a path
+horizon-ctl break -1 65 -3                              # mines it; replies with the drops
+horizon-ctl open-inventory &amp;&amp; horizon-ctl click-slot 0  # menus: slots, buttons by label, text fields
+</code></pre>
+<p>Commands block until the action is done and reply with what happened; errors are JSON with distinct exit codes, <code>horizon-ctl help</code> lists every command and <code>horizon-ctl COMMAND --help</code> explains one with examples. It talks to the game over a Unix socket on Linux and macOS and over a token-protected localhost port on Windows. See <a href="../native-client.html#agent-control-horizon-ctl-and-mcp">Agent control in the native client guide</a>.</p>
+<h2 id="build-from-source">Build from source</h2>
+<p>For developers. Requirements: Rust 1.90 or newer, Python 3.10 or newer, JDK 25, and on Linux the ALSA and udev development headers (<code>libasound2-dev libudev-dev</code> on Debian and Ubuntu). Development and the vanilla harnesses run on Linux.</p>
+<p>Rusty Minecraft contains no game files, and <code>horizon-prepare</code> never downloads them (the launcher downloads them from Mojang only for a signed-in account that owns the game). It builds its resources from <strong>your own copy</strong> of Minecraft: Java Edition 26.3, verified against the checksums in <code>research-lock.json</code>:</p>
+<ol>
+<li><strong>Client:</strong> install Java Edition with the official launcher and play 26.3 once. Rusty Minecraft reads <code>versions/26.3/</code>, <code>libraries/</code> and <code>assets/</code> from the launcher's game directory (<code>~/.minecraft</code> on Linux). If yours lives elsewhere, pass <code>--minecraft-dir</code> or set <code>HORIZON_MINECRAFT_DIR</code>.</li>
+<li><strong>Server jar:</strong> the 26.3 server jar, from the <code>downloads.server.url</code> in your launcher's <code>versions/26.3/26.3.json</code> (or <a href="https://www.minecraft.net/en-us/download/server">minecraft.net/download/server</a> while 26.3 is the current release). Pass it with <code>--server-jar</code> or set <code>HORIZON_SERVER_JAR</code>. It is only needed the first time.</li>
+</ol>
+<pre><code class="language-sh">git clone https://github.com/winnerfn8/Rusty-Minecraft.git
+cd Rusty-Minecraft
+cargo run --release -p horizon-prepare -- --prepare --server-jar ~/Downloads/server.jar   # needs JDK 25
+cargo run --release -p horizon-prepare -- sounds   # optional: sounds from your launcher install
+cargo run --release -p horizon-client
+</code></pre>
+<p>Everything prepared lands in the gitignored <code>.local/</code>. It is derived from the game: never commit it or share it.</p>
+<p>The client starts on the title screen. Command-line options (<code>--world</code>, <code>--seed</code>, <code>--creative</code>, <code>--render-distance</code>, <code>--dedicated</code>), controls, scripting through <code>horizon-ctl</code> and the architecture are described in <a href="../native-client.html">the native client guide</a>. The rest of the developer documentation is indexed in <a href="../../index.html">docs/README.md</a>, including <a href="../parity-workflow.html">the parity workflow</a>.</p>
+<h2 id="roadmap">Roadmap</h2>
+<p><a href="ROADMAP.html">ROADMAP.md</a> is Horizon's roadmap as of the fork, kept for reference; <a href="https://playhorizon.dev/hub">playhorizon.dev/hub</a> shows upstream's current one.</p>
+<h2 id="contributing">Contributing</h2>
+<p>Issues and pull requests are welcome: see <a href="CONTRIBUTING.html">CONTRIBUTING.md</a> for how we work (vanilla first, small pull requests, labels). A fix to the game that isn't specific to this fork is worth offering to <a href="https://github.com/horizon-rust/horizon">Horizon</a> too. Before opening a pull request, run the self-check and paste the block it prints:</p>
+<pre><code class="language-sh">git config core.hooksPath .githooks
+python3 tools/pr_ready.py
+</code></pre>
+<p>It runs rustfmt, clippy with warnings denied, the tests of the crates you touched, the Python tests, the public-tree check, and the vanilla harnesses your change can affect. CI runs the same checks on GitHub's Linux runners; the vanilla harnesses need the game, which Rusty Minecraft never downloads, so they run on a maintainer's computer holding their own copy. Never commit game files, decompiled source or prepared resources: <code>tools/check_public_tree.py</code> rejects them, and tracked Java is allowed only under the project's own <code>dev/horizonlab</code> namespace.</p>
+<h2 id="project-status">Project status</h2>
+<p><strong>Player-visible gaps: 833 open</strong> of the 833 the <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/tools/port_ledger.py">port ledger</a> found, reading every vanilla 26.3 method against Rusty Minecraft's code: vanilla behaviour a player would notice that Rusty Minecraft doesn't have yet. By area: Screens, HUD and client packets <a href="https://github.com/horizon-rust/horizon/issues/3518">197</a>; Entity and block rendering, models <a href="https://github.com/horizon-rust/horizon/issues/3519">129</a>; Animals <a href="https://github.com/horizon-rust/horizon/issues/3512">110</a>; Server and players on the server <a href="https://github.com/horizon-rust/horizon/issues/3520">106</a>; Blocks, redstone and fluids <a href="https://github.com/horizon-rust/horizon/issues/3516">86</a>; Entities, projectiles, vehicles and decorations <a href="https://github.com/horizon-rust/horizon/issues/3514">64</a>; Monsters and bosses <a href="https://github.com/horizon-rust/horizon/issues/3513">53</a>; Mob AI, villagers and raids <a href="https://github.com/horizon-rust/horizon/issues/3521">35</a>; World, world generation and saves <a href="https://github.com/horizon-rust/horizon/issues/3517">32</a>; Items, enchantments and inventories <a href="https://github.com/horizon-rust/horizon/issues/3515">21</a>. This number goes down as gaps close (<code>tools/parity_gaps.py</code>); the harness results below say that what is tested matches.</p>
+<p>The table below is the project's own audit of each subsystem. Every subsystem now matches vanilla in every harness that compares it. 100% means 100% of what the harnesses compare, not proof that nothing else differs. The remaining known differences are listed below.</p>
+<h3 id="java-parity-100">Java parity: 100%</h3>
+<p>Each subsystem scores 0 (absent), 0.25 (started, not playable), 0.5 (playable,
+major vanilla features missing), 0.75 (playable, mostly complete) or 1 (complete
+and verified against vanilla by differential tests). The percentage is the
+average; <code>tests/test_parity.py</code> keeps it in sync with this table. Last audited
+2026-10-13 against the harness results: all 281 harnesses pass on Linux, each
+rerun whenever one of its inputs changed, and the Mac mini now runs every one of
+them too (Rust uses Java's own float maths on each platform).</p>
+<p>The harnesses measure behaviour. A second measure is method by method: the <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/tools/port_ledger.py">port ledger</a>
+lists every method of vanilla 26.3 next to the Rust functions that port it, with a verdict for each one
+(ported, folded into another function, missing, or needing no port), and the untested ports. Run
+<code>python3 tools/port_ledger.py build</code>, then <code>coverage</code>, with the vanilla data in <code>.local/</code>.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Subsystem</th>
+<th style="text-align:right">Score</th>
+<th>Main gaps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Window, input and game loop</td>
+<td style="text-align:right">1</td>
+<td>None: the game loop, options, camera, auto-jump, toggle sprint/sneak, local input and the frame limiter match vanilla</td>
+</tr>
+<tr>
+<td>Assets and resources</td>
+<td style="text-align:right">1</td>
+<td>None: item models match vanilla over 196,290 stacks and the client draws every item through them; the resource pack screen matches vanilla's drawing over 3,000 sessions of clicks, scrolling and searching, its incompatibility confirmation included</td>
+</tr>
+<tr>
+<td>Network protocol and multiplayer</td>
+<td style="text-align:right">1</td>
+<td>None: joins vanilla servers; the dedicated server (<code>--dedicated</code>) matches vanilla's files, status ping, login, configuration, play, chunks, chat, recipes, advancements and command tree, a client built from vanilla's packet code joins it, Rusty Minecraft joins a vanilla server, and LAN discovery matches over 462 cases (offline mode only)</td>
+</tr>
+<tr>
+<td>Chunk storage and palettes</td>
+<td style="text-align:right">1</td>
+<td>None: client and saves share paletted containers, identical to vanilla over 266 scenarios</td>
+</tr>
+<tr>
+<td>Section meshing</td>
+<td style="text-align:right">1</td>
+<td>None: 112 scenes and over a million quads identical to vanilla</td>
+</tr>
+<tr>
+<td>Rendering</td>
+<td style="text-align:right">1</td>
+<td>None: entity models, block entity renderers (407 cases, End portals, gateways and the loom's banner preview included) and their animations (296 cases, End gateway beams included), the HUD overlays (2,200 states), the recipe book (600 states), the player list, subtitles and the world border match vanilla</td>
+</tr>
+<tr>
+<td>Lighting</td>
+<td style="text-align:right">1</td>
+<td>None: saved and relit light matches vanilla, slabs and stairs included</td>
+</tr>
+<tr>
+<td>World generation</td>
+<td style="text-align:right">1</td>
+<td>None: 2,352 whole chunks over 225 structure sites, in all three dimensions, identical to vanilla</td>
+</tr>
+<tr>
+<td>Region files and saves</td>
+<td style="text-align:right">1</td>
+<td>None: saves round-trip with vanilla, and worlds from 1.8 to 26.2 upgrade as vanilla's DataFixers do, superflat worlds included; old options.txt and hotbar.nbt files are upgraded too</td>
+</tr>
+<tr>
+<td>Entities and physics</td>
+<td style="text-align:right">1</td>
+<td>None: attributes, dimensions, death loot, spawn rules, natural spawning (15,500 cases), raids and patrols (1,900 cases), spawned mobs' gear, enchantments and state (<code>finalizeSpawn</code>, 24,000 cases) and mob AI (92 scenarios: villager breeding and gossip, the warden, ghastlings and copper golems included) match vanilla</td>
+</tr>
+<tr>
+<td>Interaction and inventory</td>
+<td style="text-align:right">1</td>
+<td>None: menu clicks match over 8,000 click sequences, the loom and the crafter included; recipe book placement (6,000 cases), its buttons (1,200), the saved book (1,500) and the loom and crafter screens (1,600) match vanilla</td>
+</tr>
+<tr>
+<td>Menus, HUD and chat</td>
+<td style="text-align:right">1</td>
+<td>None: every command runs as vanilla (758 commands over 39,685 parsed inputs), scoreboards and teams match (81,000 operations), the player list matches over 872,000 draw calls with heads drawn from players' skins (authlib's textures, SkinManager's lookup, legacy skin conversion), and the chat matches focused and scrolled; the resource pack screen (selection over 4,000 cases, drawing and its incompatibility confirmation over 3,000 sessions) and the chat input with its command suggestions, usage lines, Tab completion and history (3,000 sessions on vanilla's client command tree) match vanilla</td>
+</tr>
+<tr>
+<td>Audio</td>
+<td style="text-align:right">1</td>
+<td>None: the sound engine, sound events, music, situational music, ambience and subtitles match vanilla</td>
+</tr>
+<tr>
+<td>Block behaviours and ticking</td>
+<td style="text-align:right">1</td>
+<td>None: block updates, random ticks, redstone, dispensers (6,000 cases), crafters (4,000 crafts), block entity removal (containers spill, 4,000 cases), copper golem chest sorting and the sculk family (435 scenarios: shrieker warnings and warden summoning included) match vanilla</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="known-issues">Known issues</h3>
+<p>Skins served over https show the default skin unless already cached; pack icons show the unknown-pack texture in game; item tooltips lack attribute lines.</p>
+<h2 id="licence">Licence</h2>
+<p><a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/LICENSE">MIT</a>, for the project's original work only. Dependencies keep their own licences. Minecraft is a trademark of Mojang Synergies AB; Minecraft code and assets belong to Mojang and Microsoft and are covered by the <a href="https://www.minecraft.net/en-us/eula">Minecraft EULA</a>. Decompiled game source and prepared resources stay on your machine and are never published.</p>
+<p>Third-party credits and licenses: <a href="THIRD_PARTY_NOTICES.html">Third-party notices</a>.</p>
+<h2 id="author">Author</h2>
+<p>Made by <a href="https://lu4ovic.com">Ludovic Marie</a> (<a href="https://github.com/ludovic111">@ludovic111</a>).</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/README.md"><code>README.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#download">Download</a></li><li class="l2"><a href="#what-works-today">What works today</a></li><li class="l2"><a href="#host-a-server">Host a server</a></li><li class="l2"><a href="#modpacks">Modpacks</a></li><li class="l2"><a href="#agent-control">Agent control</a></li><li class="l2"><a href="#build-from-source">Build from source</a></li><li class="l2"><a href="#roadmap">Roadmap</a></li><li class="l2"><a href="#contributing">Contributing</a></li><li class="l2"><a href="#project-status">Project status</a></li><li class="l3"><a href="#java-parity-100">Java parity: 100%</a></li><li class="l3"><a href="#known-issues">Known issues</a></li><li class="l2"><a href="#licence">Licence</a></li><li class="l2"><a href="#author">Author</a></li></ul></nav>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

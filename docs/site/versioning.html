@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Versioning · Rusty Minecraft docs</title>
+<meta name="description" content="Versioning: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html" aria-current="page">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="versioning">Versioning</h1>
+<p>How Rusty Minecraft's releases are numbered from 0.2 on, how that maps onto the release workflows, and how every install
+made before 0.2 gets there. The workflows themselves are in <a href="release-flow.html">release-flow.md</a>.</p>
+<p>Until 0.2 the game was tagged by date (<code>v2026.10.19.15</code>) and the launcher counted on its own (<code>launcher-v0.16.0</code>).
+From 0.2 both follow <a href="https://semver.org">semantic versioning</a> and share one release line: <strong>Rusty Minecraft 0.2.x</strong> is the
+game and the launcher of the 0.2 line.</p>
+<p><strong>Since 2026-10-28 the game ships only Nightlies</strong> (<a href="release-flow.html#nightly-only">release-flow.md</a>): no new <code>vX.Y.Z</code>
+game tag is made, and a game build is named <code>nightly-&lt;date&gt;-&lt;commit&gt;</code> (its release title, &quot;Nightly <date> ·
+<commit>&quot;), which launchers and servers rank after every <code>vX.Y.Z</code>. The launcher keeps its <code>launcher@X.Y.Z</code> tags on
+the release line. What follows describes the <code>vX.Y.Z</code> game tags as they were.</p>
+<h2 id="tags">Tags</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Game</th>
+<th>Launcher</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>From 0.2</td>
+<td><code>v0.2.0</code>, <code>v0.2.1</code>, …</td>
+<td><code>launcher@0.2.0</code>, <code>launcher@0.2.1</code>, …</td>
+</tr>
+<tr>
+<td>Before 0.2</td>
+<td><code>v2026.10.19</code>, <code>v2026.10.19.15</code>, …</td>
+<td><code>launcher-v0.1.1</code> … <code>launcher-v0.16.0</code> (and the bridge, <code>launcher-v0.17.0</code>)</td>
+</tr>
+<tr>
+<td>Release title</td>
+<td><code>Rusty Minecraft 0.2.3: &lt;what changed&gt;</code></td>
+<td><code>Rusty Minecraft launcher 0.2.1</code></td>
+</tr>
+<tr>
+<td>The program says</td>
+<td><code>horizon-server 0.2.3</code>, <code>v0.2.3</code> in crash reports and telemetry</td>
+<td><code>horizon-launcher 0.2.1</code></td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>The line</strong> (<code>MAJOR.MINOR</code>) is in <code>.github/release-line.txt</code>, one line such as <code>0.2</code>. Ludovic decides when it
+moves; moving it is a one-line pull request (<code>0.3</code>), and the new line's first releases (<code>v0.3.0</code>,
+<code>launcher@0.3.0</code>) go out as soon as it merges. Without the file, the release train keeps the tags from before
+0.2. A <code>feature</code> label no longer bumps anything: it only lists the change under <strong>New</strong>.</li>
+<li><strong>Patch releases</strong> are every release the train makes: the patch after the newest release tagged on the line, game
+and launcher counted separately (the game releases more often, so <code>v0.2.14</code> can go with <code>launcher@0.2.3</code>).</li>
+<li><strong>One channel</strong> (since 2026-10-23): every game release is published under its final tag as the release and
+GitHub's latest, once its smoke test passed and no <code>release-blocker</code> is open
+(<a href="release-flow.html#one-channel">One channel</a>). The game pre-releases from before (v0.2.1 on, the old Alpha
+channel) keep their tags and stay pre-releases.</li>
+<li><strong>Pre-release tags</strong> (<code>v0.3.0-rc.1</code>, <code>v0.3.0-beta.2</code>) are semver's and are reserved for a hand-made preview of a
+new line; the train never makes them. Every reader orders them before their release and after the release
+before (<code>v0.2.9</code> &lt; <code>v0.3.0-beta.1</code> &lt; <code>v0.3.0-rc.1</code> &lt; <code>v0.3.0</code>).</li>
+<li><strong><code>launcher@</code>, not <code>launcher-v</code></strong>: <code>launcher-v0.2.0</code> and <code>launcher-v0.2.1</code> were taken long before 0.2, and a
+launcher from before 0.2 must not mistake a new 0.2.x for an older release (see below).</li>
+</ul>
+<h3 id="the-order-every-reader-uses">The order every reader uses</h3>
+<p>Every 0.2 tag is newer than every tag from before 0.2. Within each:</p>
+<ul>
+<li>before 0.2: number by number, missing numbers as zero (<code>v2026.10.19</code> = <code>v2026.10.19.0</code>);</li>
+<li>from 0.2: semver: major, minor, patch as numbers, then a release after its pre-releases, whose identifiers
+compare one by one (numbers before words, numbers as numbers, a shorter list first).</li>
+</ul>
+<p>A tag is a 0.2 tag when it is <code>v</code> or <code>launcher@</code> followed by exactly three numbers (and an optional <code>-PRE</code>) with a
+major below 1000; a date's first number is a year, so <code>v2026.10.21</code> never is. The rule is written once per
+language, with the same tests: <code>crates/horizon-server/src/update.rs</code> (<code>newer</code>), <code>launcher/src/backend.rs</code>
+(<code>release_order</code>), <code>tools/release_train.py</code> (<code>tag_key</code>) and
+the website's <code>src/versions.js</code> (horizon-rust/horizon-site).</p>
+<h2 id="the-workflows">The workflows</h2>
+<ul>
+<li><strong><code>release.yml</code></strong>: <code>tools/release_train.py decide --kind game</code> picks the tag (<code>next_game_tag</code>); the build gets the
+version without its <code>v</code> in <code>HORIZON_VERSION</code>, so <code>horizon_core::release::VERSION</code> (and <code>--version</code>, the user
+agents, crash reports and telemetry) say <code>0.2.3</code>. No version-bump commits: <code>Cargo.toml</code> versions are what builds
+from source say. The build checks that <code>horizon-server --version</code> and <code>horizon-prepare --version</code> say it.</li>
+<li><strong><code>launcher.yml</code></strong>: <code>decide --kind launcher</code> picks <code>launcher@0.2.N</code>; the build gets <code>HORIZON_LAUNCHER_VERSION</code>
+(<code>0.2.N</code>) and <code>HORIZON_LAUNCHER_TAG</code> (<code>launcher@0.2.N</code>). The tag tells the launcher which line it is on: a release
+built with only the version (every launcher before 0.2) is a <code>launcher-v</code> one.</li>
+<li><strong>Notes</strong>: a line's first release (<code>X.Y.0</code>) opens with a paragraph saying so; <code>v0.2.0</code>'s and <code>launcher@0.2.0</code>'s say
+that releases are numbered from now on, and tell server owners to run <code>horizon-server update</code> (or, if their server
+says it is up to date, <code>horizon-server update --version v0.2.0</code>).</li>
+<li><strong>A line's first release</strong> goes out as soon as the release train runs after the line changes, without waiting for
+a pull request, but never while <code>RELEASES_PAUSED</code> is set.</li>
+</ul>
+<h2 id="existing-installs-the-way-to-02">Existing installs: the way to 0.2</h2>
+<p>Installs made before 0.2 run old code that compares tags number by number, so to them <code>v0.2.0</code> is older than
+<code>v2026.10.19.15</code> and launcher 0.2.0 older than 0.16.0. What each one does, and what moves it:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Install</th>
+<th>What its old code does with 0.2</th>
+<th>How it gets there</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Launcher 0.16.0 and older, updating itself</td>
+<td>Looks only at <code>launcher-v</code> tags and takes one above its own version. Never sees <code>launcher@</code>.</td>
+<td><strong>The bridge</strong>: one last <code>launcher-v0.17.0</code>, built with the new code. Old launchers take it as usual; it knows it is a <code>launcher-v</code> release and takes <code>launcher@0.2.0</code> next. Two updates, both by themselves.</td>
+</tr>
+<tr>
+<td>Launcher 0.16.0 and older, installing games</td>
+<td>Sorts <code>v0.2.0</code> below every dated release and below the versions it has installed, so it never offers it.</td>
+<td>Once the launcher has updated itself (above), it offers <code>v0.2.0</code> like any update. Until then a player can install <code>v0.2.0</code> by hand on the Versions page (it is listed last).</td>
+</tr>
+<tr>
+<td>Launcher that never updates itself (<code>HORIZON_LAUNCHER_NO_SELF_UPDATE</code>, a package)</td>
+<td>As above, without the bridge.</td>
+<td>Update the package, or install <code>v0.2.0</code> by hand.</td>
+</tr>
+<tr>
+<td><code>horizon-server</code> from before the bridge</td>
+<td>Reads GitHub's <em>latest</em> release and installs it only if its tag compares higher: <code>v0.2.0</code> never does. <code>--version &lt;tag&gt;</code> skips the comparison. A server never updates itself: its supervisor only logs a notice every 6 hours, and the running process keeps its old code until the service restarts.</td>
+<td><strong>The game bridge</strong>: the last dated release, built with the new code, made stable (<em>latest</em>) before <code>v0.2.0</code> is published. <code>v0.2.0</code> then spends at least 6 hours as a beta, so <em>latest</em> stays the bridge for that long (the longer it stays a beta, the more servers are caught). An owner who runs <code>horizon-server update</code> in that time gets the bridge, and the command runs the new code at once, so the next <code>horizon-server update</code> takes <code>v0.2.0</code> once it is stable. The log notice only changes after the service restarts. An owner on old code after that time is told the server is up to date, and runs <code>horizon-server update --version v0.2.0</code> once. 0.2.0's notes say so.</td>
+</tr>
+<tr>
+<td>Servers the launcher hosts (Servers page)</td>
+<td>Set up from the launcher's installed versions.</td>
+<td>Follow the launcher.</td>
+</tr>
+<tr>
+<td><code>install.sh</code>, <code>install.ps1</code></td>
+<td>Install <em>latest</em>.</td>
+<td>Nothing to do.</td>
+</tr>
+<tr>
+<td>Crash reports and telemetry of releases before 0.2</td>
+<td>Report the folder name (<code>v2026.10.19.15</code>).</td>
+<td>Unchanged; 0.2 builds report <code>v0.2.x</code> from the built-in version.</td>
+</tr>
+</tbody>
+</table></div>
+<p>No change on the feed side alone could do it: the dated releases can't be hidden (old launchers also compare with the
+versions they have installed, and <em>latest</em> is a single release), and GitHub's release JSON can't be rewritten. So the
+bridges are required, and must never be withdrawn or deleted: <code>launcher-v0.17.0</code> stays the step every old launcher
+takes, for as long as any is around.</p>
+<p>Outside this repository, whatever reads tags must accept <code>vX.Y.Z</code> and <code>launcher@X.Y.Z</code> too: Kira's release posts,
+the fleet's <code>release-kick</code> and the orchestrator's heartbeat prompts.</p>
+<h2 id="irreversible">Irreversible</h2>
+<p><strong>None of these can be undone.</strong></p>
+<ul>
+<li>Once 0.2 is published, dated tags can never be used again: every reader ranks them below <code>v0.2.0</code>.</li>
+<li>After <code>launcher-v0.17.0</code>, no other <code>launcher-v</code> release may ever go out: old launchers would take it.</li>
+<li><code>.github/release-line.txt</code> must never be removed.</li>
+<li>The bridges (<code>launcher-v0.17.0</code> and the last dated game release) must never be withdrawn or deleted.</li>
+</ul>
+<h2 id="the-day-ludovic-says-go">The day Ludovic says go</h2>
+<p>Done on 2026-10-22; kept as the record of how 0.2 went out. <code>promote.yml</code> and <code>tools/release_channels.py</code>, which
+it uses, are gone since the single channel (2026-10-23, <a href="release-flow.html#one-channel">One channel</a>).</p>
+<p>Run by the orchestrator, in this order. Until step 3, nothing is published.</p>
+<ol>
+<li>Merge, in order: this page, the <code>horizon-server update</code> order, the launcher order, the release line (train,
+workflows), the version sources and the website pull requests. Not the switch pull request yet. Wait for main's
+<code>checks</code> to pass.</li>
+<li>Turn the freeze off:<pre><code class="language-sh">gh workflow enable release &amp;&amp; gh workflow enable launcher &amp;&amp; gh workflow enable promote
+gh variable delete RELEASES_PAUSED
+U=$(id -u); launchctl enable gui/$U/dev.fleet.release-kick
+launchctl bootstrap gui/$U ~/Library/LaunchAgents/dev.fleet.release-kick.plist   # on the Mac mini
+</code></pre>
+<strong>Decision for Ludovic first:</strong> the pre-freeze beta <code>v2026.10.21</code> would be promoted. A dry run says
+<code>Would promote: v2026.10.21</code> (<code>python3 tools/release_channels.py promote --dry-run</code>). The first promote run after
+this step (at :13 or :43) makes it stable and <em>latest</em>, hours before the bridge is due. Either he accepts that build as
+stable, or it is held: leave <code>gh workflow enable promote</code> out of this step and run it once the bridge has been out
+6 hours (a run promotes only the newest due beta, which is then the bridge). An open <code>release-blocker</code> issue
+would hold the bridge too, so it is no way to hold just this one. Do not run this step before he has said which.</li>
+<li>The bridges go out by themselves within about 25 minutes (the pull requests merged during the freeze count): a
+dated game beta (<code>v2026.10.DD</code>) and <code>launcher-v0.17.0</code>. Check:<pre><code class="language-sh">gh release list --limit 5
+gh run list --workflow launcher --limit 1   # its build log shows horizon-launcher 0.17.0
+</code></pre>
+</li>
+<li>Let the game bridge become stable on its normal schedule: about 6 hours after it was published, the promote run
+makes it <em>latest</em>. Do not force it (<code>promote</code> with <code>force=true</code>): it carries about 43 player-facing pull requests
+from the freeze and needs its beta like any release. Check it is <em>latest</em>:
+<code>gh api repos/horizon-rust/horizon/releases/latest --jq .tag_name</code>.</li>
+<li>Only then merge the update channels pull request (the launcher's Stable and Alpha, the daily promotion), then
+mark the switch pull request (#1132) ready and merge it (<code>.github/release-line.txt</code> = <code>0.2</code>, and the
+docs that talk about 0.2). On the next run, about 10 minutes, the train publishes <code>v0.2.0</code> as a beta and
+<code>launcher@0.2.0</code>, both &quot;the first release of 0.2&quot;, built from the same code as the bridges plus that pull request.</li>
+<li>Check the way over from an old launcher, in a scratch folder:<pre><code class="language-sh">export HORIZON_LAUNCHER_HOME=$(mktemp -d)
+# with launcher-v0.16.0's binary:  update --check --json  -&gt;  &quot;launcher&quot;: &quot;0.17.0&quot;
+# with launcher-v0.17.0's binary:  update --check --json  -&gt;  &quot;launcher&quot;: &quot;0.2.0&quot;, &quot;horizon&quot;: &quot;v0.2.0&quot; (with Beta builds on)
+</code></pre>
+and <code>gh release view v0.2.0 --json assets</code>, <code>horizon-server --version</code> in the Linux server archive.</li>
+<li><code>v0.2.0</code> becomes stable in the first daily promotion (20:00 UTC) it has been out 6 hours for (or
+<code>gh workflow run promote -f tag=v0.2.0</code>). While it is a beta, <em>latest</em>
+stays the bridge, so keeping it in beta for longer catches more servers (Ludovic's call). From then on everything
+is automatic again: <code>v0.2.1</code>, <code>launcher@0.2.1</code>, ….</li>
+<li>Point Kira, <code>release-kick</code> and the heartbeat prompts at the new tags (outside this repository).</li>
+</ol>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/versioning.md"><code>docs/versioning.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#tags">Tags</a></li><li class="l3"><a href="#the-order-every-reader-uses">The order every reader uses</a></li><li class="l2"><a href="#the-workflows">The workflows</a></li><li class="l2"><a href="#existing-installs-the-way-to-02">Existing installs: the way to 0.2</a></li><li class="l2"><a href="#irreversible">Irreversible</a></li><li class="l2"><a href="#the-day-ludovic-says-go">The day Ludovic says go</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

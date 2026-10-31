@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Java mod translation · Rusty Minecraft docs</title>
+<meta name="description" content="Java mod translation: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details open><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html" aria-current="page">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="java-mod-translation">Java mod translation</h1>
+<p>Rusty Minecraft runs no Java, so a Fabric, Quilt, NeoForge or Forge jar can't run as it is (<a href="mods.html">mods.md</a>). The
+translation layer gets the most out of one anyway: put the jar where Minecraft would want it, start the game, and
+what the jar carries plays as a Rusty Minecraft content mod.</p>
+<p align="center">
+  <img src="../media/launcher-java-mods.webp" alt="The launcher's Settings, Java mods section: the Translate Java mods switch with Add mod jar, Translate now and Open folder, the switch for mods that only partly translate, the Run their code with Java switch with its full-access notice, the Java found and Choose Java, and translated jars with their verdicts and Code lines, the Tick Counter test mod's three supported mixins and its Fabric API line listed" width="90%">
+</p>
+<h2 id="using-it">Using it</h2>
+<ol>
+<li>Put the jar in the instance's <code>mods/</code> folder (or <code>horizon-mods/</code>), as you would for Minecraft. Or, in the
+launcher, open <strong>Settings &gt; Java mods</strong> and press <strong>Add mod jar…</strong>, or drop jars on that section.</li>
+<li>Start the game. New and changed jars are translated before the game reads its mods, and a jar's mod is turned on
+the first time. After that, its switch (Options &gt; Mods in the game, or the row in Settings &gt; Java mods) is yours.</li>
+<li>Remove the jar to remove its mod: <strong>Remove</strong> in Settings &gt; Java mods moves the jar to the trash, or delete it by
+hand. The next start (or <strong>Translate now</strong>) uninstalls the mod.</li>
+</ol>
+<p>Settings &gt; Java mods lists every jar of the selected instance with its verdict:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Verdict</th>
+<th>Means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Works</strong></td>
+<td>Content only: its blocks, items, recipes, loot, tags, worldgen, models and textures all port.</td>
+</tr>
+<tr>
+<td><strong>Partly</strong></td>
+<td>Its content ports; some of what its code does doesn't (listed under <em>Missing</em>). Turned on only while <strong>Turn on mods that only partly translate</strong> is on (it is by default).</td>
+</tr>
+<tr>
+<td><strong>Doesn't run</strong></td>
+<td>Nothing to port: everything it does is Java code (a performance mod, a library, a minimap), or it was made for Minecraft 1.12 or older.</td>
+</tr>
+<tr>
+<td><strong>Not installed</strong></td>
+<td>It ports, but a mod with the same id is already in <code>horizon-mods/</code> (from the Mods page, by hand, or another jar of the same mod). The row says which.</td>
+</tr>
+<tr>
+<td><strong>Failed</strong></td>
+<td>The jar couldn't be read.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Translate Java mods</strong> turns the translation at game start off; <strong>Translate now</strong> still runs it. A Java instance
+(one that plays Minecraft: Java Edition with a loader) runs its Java mods as they are, so the section only says so.</p>
+<p><strong>Run their code with Java (experimental)</strong>, off by default, runs the entry points, supported mixins and Fabric
+API listeners of mods made for 26.x on your own Java, with a part of vanilla's and Fabric API's API
+(<a href="java-mod-runtime.html">java-mod-runtime.md</a>), in games built with the Java layer (the <code>java-mods</code> build option;
+official builds don't have it yet). The row says that Java mods' code runs with full access to the computer, like
+native mods, and shows the Java it would use (the newest found, or the one picked with <strong>Choose Java…</strong>; <strong>Find
+Java automatically</strong> goes back to the newest). What a mod registers from Java (a block's hardness and light, an
+item's stack size and rarity) then applies to its translated content.</p>
+<h2 id="what-is-translated">What is translated</h2>
+<p>The steps run on the player's own computer, on the jars they put there, and nothing is uploaded.</p>
+<ol>
+<li><strong>Layout.</strong> Jars made for Minecraft 1.13 to 1.20 name their data folders in the plural (<code>recipes/</code>,
+<code>loot_tables/</code>, <code>advancements/</code>, <code>structures/</code>, <code>functions/</code>, <code>tags/blocks/</code>, <code>tags/items/</code>...) and recipe
+results as <code>item</code> (or a bare id). The jar is staged with 1.21's names (<code>recipe/</code>, <code>loot_table/</code>, <code>tags/block/</code>,
+<code>&quot;result&quot;: {&quot;id&quot;: ...}</code>), which the carry-over reads. A jar that keeps a stale plural folder beside the new one keeps
+the new one.</li>
+<li><strong>Mod id.</strong> A content mod's id is <code>[a-z0-9_]{1,64}</code>. Fabric and Quilt allow <code>-</code> (<code>copper-lanterns</code>): the id
+becomes <code>copper_lanterns</code>, and the files and ids in the namespace <code>copper-lanterns</code> are renamed with it (paths,
+<code>copper-lanterns:</code> ids, <code>#copper-lanterns:</code> tags, translation keys such as <code>block.copper-lanterns.x</code>). A jar
+without metadata takes the namespace holding most of its files.</li>
+<li><strong>Content.</strong> The staged jar goes through the same carry-over and class reading as the launcher's mod browser
+(<code>horizon-port-pack check</code>, <a href="modpacks.html">modpacks.md</a>): recipes upgraded to 26.3, item definitions written,
+each block given the closest vanilla template, and the classes read for what can't port (block entities,
+entities, menus, Mixins, event handlers...).</li>
+<li><strong>Install.</strong> The folder mod is copied into <code>horizon-mods/&lt;id&gt;/</code>, its manifest's description saying which jar
+and verdict it comes from (Options &gt; Mods shows it), with a marker file <code>.java-translation.json</code> naming the jar.
+Only a folder holding that marker is ever replaced or removed: a mod from the Mods page or put there by hand is
+left alone.</li>
+</ol>
+<p>Each jar's translation is kept by its SHA-1 in <code>.horizon-cache/java-mods/</code> in the game folder, so a jar is
+translated once; <code>translations.json</code> beside the cache is what Settings &gt; Java mods lists.</p>
+<h2 id="what-its-code-needs">What its code needs</h2>
+<p>The translation also reads what the jar's code would need to run in the optional Java layer
+(<a href="java-mod-runtime.html">java-mod-runtime.md</a>), without running anything (<code>crates/horizon-port-pack/src/mixins.rs</code>).
+Each row shows it as <strong>Code:</strong>, for example <em>4 of 9 mixins supported; 2 need more of the Java layer; needs GeckoLib
+(no Rust version)</em>, and <strong>Show each mixin and library</strong> lists them, coloured by group:</p>
+<ul>
+<li><strong>Mixins.</strong> The mixin configs the metadata names (<code>mixins</code> in <code>fabric.mod.json</code>, <code>[[mixins]]</code> in
+<code>neoforge.mods.toml</code>, <code>mixin</code> in <code>quilt.mod.json</code>, Forge's <code>MixinConfigs</code> manifest line), and in each mixin class
+the annotations <code>@Mixin</code>, <code>@Inject</code> (its <code>at</code> and <code>cancellable</code>), <code>@Redirect</code>, <code>@ModifyArg</code>, <code>@ModifyVariable</code>,
+<code>@ModifyConstant</code>, <code>@Overwrite</code>, <code>@Accessor</code>, <code>@Invoker</code>, <code>@Shadow</code>, <code>@Unique</code> and MixinExtras' <code>@WrapOperation</code>,
+<code>@ModifyExpressionValue</code>, <code>@ModifyReturnValue</code>, <code>@WrapWithCondition</code>. Each falls in one group, with its reason:
+<ul>
+<li><em>supported</em> (green): a start, end or cancel injection (<code>@Inject</code> at <code>HEAD</code>, <code>RETURN</code> or <code>TAIL</code>;
+<code>@ModifyReturnValue</code>) on a vanilla method with a mixin hook point there (<code>native-hooks.json</code> entries with a
+<code>vanilla</code> method), a <code>@Shadow</code> of a method the Java API layer has, and the mod's own <code>@Unique</code> members;</li>
+<li><em>needs more of the Java layer</em> (yellow): <code>@Accessor</code>, <code>@Invoker</code>, a <code>@Shadow</code> field, and a <code>@Shadow</code> of a
+method the Java API layer doesn't have yet;</li>
+<li><em>not supported</em> (red): everything else, said why: a change inside a method (<code>@Redirect</code>, <code>@ModifyArg</code>,
+<code>@ModifyVariable</code>, <code>@ModifyConstant</code>, <code>@WrapOperation</code>...), a whole method replaced (<code>@Overwrite</code>), a method with
+no hook point yet, a class that isn't vanilla's.</li>
+</ul>
+</li>
+<li><strong>Libraries.</strong> Every required mod and library: loader APIs (Fabric API and its modules, NeoForge, QSL) and
+libraries that touch Minecraft (Architectury, GeckoLib, Cloth Config...) run only once this repository has a Rust
+version of them, and the row says which have one: Fabric API's <code>fabric-api-base</code> and <code>fabric-lifecycle-events-v1</code>
+so far. Jars bundled inside (<code>META-INF/jars/</code>, <code>META-INF/jarjar/</code>) whose classes never name Minecraft or a loader
+are plain Java and run as they are.</li>
+<li><strong>The Java API layer.</strong> For a 26.x mod, every class of the jar is read for what it uses of vanilla's, Fabric's
+and Mixin's API: what the Java layer doesn't have yet is counted (<em>uses 14 vanilla or Fabric API classes or
+members the Java layer doesn't have yet</em>) and the first twelve listed (<code>SoundType</code>,
+<code>BlockBehaviour.Properties.sound()</code>), with the Java its classes need (25 for 26.x).</li>
+<li><strong>OpenGL.</strong> 26.x draws through Blaze3D (<code>RenderPipeline</code>, <code>RenderType</code>) and Rusty Minecraft through wgpu: a
+jar calling <code>org.lwjgl.opengl</code> itself says so.</li>
+</ul>
+<p>Only mods made for 26.x get code support: 26.x ships unobfuscated, so their mixins name vanilla's real classes and
+methods. An older mod (its metadata names 1.x, or its classes use intermediary or SRG names) keeps the content-only
+translation, and its <strong>Code:</strong> line says why. <code>horizon-port-pack check &lt;jar&gt; &lt;out&gt;</code> and <code>horizon-port-pack translate &lt;game folder&gt;</code> print the same lines.</p>
+<h2 id="files">Files</h2>
+<p>All in the game folder (the one holding <code>options.txt</code>):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mods/*.jar</code>, <code>horizon-mods/*.jar</code></td>
+<td>The Java jars the player put there (<code>.jar.disabled</code> ones are skipped).</td>
+</tr>
+<tr>
+<td><code>horizon-mods/&lt;id&gt;/</code></td>
+<td>A translated mod, with <code>.java-translation.json</code>.</td>
+</tr>
+<tr>
+<td><code>horizon-mods.txt</code></td>
+<td>The game's on-list (<code>mod.&lt;id&gt;:true</code>), shared with every other content mod.</td>
+</tr>
+<tr>
+<td><code>horizon-java-mods.txt</code></td>
+<td><code>translate:true</code> (translate at game start) and <code>partial:true</code> (turn on mods that partly translate), both <code>true</code> by default; <code>code:false</code> (run their supported code in the Java layer) and <code>java:&lt;path&gt;</code> (the Java to run it on; none finds one).</td>
+</tr>
+<tr>
+<td><code>.horizon-cache/java-mods/</code></td>
+<td><code>translations.json</code> and the cache of each jar's translation. Safe to delete.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="from-the-command-line">From the command line</h2>
+<pre><code class="language-sh">horizon-port-pack translate ~/.local/share/horizon      # the default instance's game folder on Linux
+</code></pre>
+<p>It does what the game does at start and prints each jar's verdict and state.</p>
+<h2 id="limits">Limits</h2>
+<ul>
+<li>Java code doesn't run, except 26.x mods' entry points, supported mixins and Fabric API listeners in the optional
+Java layer (<a href="java-mod-runtime.html">java-mod-runtime.md</a>).
+A machine's block is placed and mined like its template, but it doesn't process anything; new mobs, dimensions,
+keybinds, screens and most mixins are not there. The verdict lists what is missing.</li>
+<li>Jars made before 1.13 (<code>mcmod.info</code>, <code>textures/blocks/</code>) are not translated.</li>
+<li>Libraries a mod needs aren't required: their code wouldn't run either. A content add-on whose recipes use another
+mod's items needs that mod's jar translated too.</li>
+<li>Two jars of the same mod: the one installed before stays (else the first by file path), and the other says why it
+is not installed.</li>
+</ul>
+<p>The code: <code>crates/horizon-port-pack/src/translate.rs</code> (the layer and <code>horizon-port-pack translate</code>),
+<code>crates/horizon-client/src/game/mods.rs</code> (<code>translate_java_mods</code>, run at game start) and <code>launcher/src/java_mods.rs</code>
+(Settings &gt; Java mods).</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/java-mod-translation.md"><code>docs/java-mod-translation.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#using-it">Using it</a></li><li class="l2"><a href="#what-is-translated">What is translated</a></li><li class="l2"><a href="#what-its-code-needs">What its code needs</a></li><li class="l2"><a href="#files">Files</a></li><li class="l2"><a href="#from-the-command-line">From the command line</a></li><li class="l2"><a href="#limits">Limits</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

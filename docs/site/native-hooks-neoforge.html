@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Native hook points, modelled on NeoForge 26.3 (proposal) · Rusty Minecraft docs</title>
+<meta name="description" content="Native hook points, modelled on NeoForge 26.3 (proposal): Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html" aria-current="page">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="native-hook-points-modelled-on-neoforge-263-proposal">Native hook points, modelled on NeoForge 26.3 (proposal)</h1>
+<p>Status: proposal, for the authors of hook PRs to comment on. Nothing here is built yet. Checked against <code>native-hooks.json</code> on main
+(41 hooks, <code>NATIVE_HOOKS_API</code> 24) on 31 October 2026.</p>
+<p>Native mods hook empty functions in <code>crates/horizon-client/src/game/native_hooks.rs</code>, listed by name in
+<code>native-hooks.json</code> (<a href="native-mods.html">native-mods.md</a>). So far each hook was designed on its own, and open PRs
+number their API versions over each other. This proposes one
+reference for every new hook point: the NeoForge 26.3 event that does the same thing.</p>
+<p>Why NeoForge:</p>
+<ul>
+<li>Its events already answer the questions each of our hooks asks again: where exactly it fires, on which side,
+what it can cancel, what it is handed.</li>
+<li>Mod authors know them. A Java mod's <code>@SubscribeEvent</code> methods map to hook names, which helps porting by
+hand. <a href="modpacks.html">horizon-port-pack</a> may suggest mappings for a human to review, not translate listeners
+automatically.</li>
+</ul>
+<p>What we take is event names and their documented contracts, from NeoForge's public user documentation
+(<a href="https://docs.neoforged.net/">https://docs.neoforged.net/</a>) only, each claim below citing the page it comes from, as <a href="repo/CONTRIBUTING.html#only-original-code-or-code-whose-license-allows-it">CONTRIBUTING.md</a> allows. Nobody
+reads, copies, translates or paraphrases NeoForge's source, its patches included: where a hook fires is decided
+from vanilla 26.3's own methods, and the hooks stay Rusty Minecraft's own Rust.</p>
+<h2 id="rules">Rules</h2>
+<ol>
+<li><strong>Name.</strong> A hook with a NeoForge counterpart takes the event's name in snake case, its nested class
+included: <code>ServerTickEvent.Pre</code> → <code>server_tick_pre</code>, function <code>native_server_tick_pre</code>;
+<code>PlayerInteractEvent.RightClickBlock</code> → <code>right_click_block</code>. A hook with no counterpart (the minimap, the
+mods list, the item panel) keeps a Rusty Minecraft name.</li>
+<li><strong>Firing point.</strong> It fires in Rusty Minecraft's port of the vanilla method where the documented event happens
+(the tick starts, a block is broken), at the point vanilla's own steps make that true. The catalog names the vanilla method, so a
+reviewer can check it with <code>tools/rea_vanilla.py</code>.</li>
+<li><strong>Side.</strong> NeoForge documents that &quot;some events are only fired on one side&quot;
+(<a href="https://docs.neoforged.net/docs/concepts/events/">Events</a>, &quot;Sided Events&quot;); the rest fire on whichever
+side runs the method. Rusty Minecraft has one binary with several
+<code>Game</code>s (the window, the server thread, a dedicated server), so each hook says its side:
+<ul>
+<li><code>server</code>: the server's <code>Game</code> (single player's server thread, LAN host, dedicated) and the in-frame path.</li>
+<li><code>client</code>: the window's <code>Game</code>.</li>
+<li><code>both</code>: both, with the <code>Game</code>'s role available (<code>native_window</code>). Interactions are <code>both</code>: the client
+predicts, the server acts, and a mod that claims a use on one side only gets the two out of step.</li>
+</ul>
+</li>
+<li><strong>Cancel and results.</strong> Hooks never return; several mods hook the same point. A cancellable event takes
+<code>canceled: &amp;mut bool</code>; one with a result (an <code>InteractionResult</code>) takes <code>result: &amp;mut Option&lt;...&gt;</code>. Every
+mod is called; a mod checks <code>*canceled</code> itself when it should stand back. NeoForge's handlers likewise
+&quot;can opt to explicitly receive cancelled events&quot; and some events implement <code>ICancellableEvent</code>
+(<a href="https://docs.neoforged.net/docs/concepts/events/">Events</a>, &quot;Cancellable Events&quot;).</li>
+<li><strong>Payload.</strong> The event's getters become parameters, by value or <code>&amp;</code>. A hook gets <code>&amp;mut self</code> only when the
+NeoForge listener may change the world at that point (server-side events); otherwise <code>&amp;self</code>, and the
+doc does not call a <code>&amp;mut</code> hook read-only.</li>
+<li><strong>Frozen once merged.</strong> Name, parameters and call site never change after a merge (as today). A changed
+contract is a new hook (<code>..._v2</code>) or a new catalog <code>version</code>. A stack of PRs that refines one hook lands
+in one release batch, under one <code>NATIVE_HOOKS_API</code> bump.</li>
+<li><strong>API numbers are given at merge</strong>, not when a PR is opened: a PR says &quot;API next&quot; and takes <code>main + 1</code>
+when it merges, so open PRs stop colliding.</li>
+</ol>
+<h2 id="catalog-fields">Catalog fields</h2>
+<p>Each <code>native-hooks.json</code> entry gains three optional fields:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;server_tick_pre&quot;,
+  &quot;version&quot;: 1,
+  &quot;target&quot;: &quot;horizon_client::game::native_hooks::Game&lt;'_&gt;::native_server_tick_pre&quot;,
+  &quot;neoforge&quot;: &quot;ServerTickEvent.Pre&quot;,
+  &quot;side&quot;: &quot;server&quot;,
+  &quot;cancellable&quot;: false
+}
+</code></pre>
+<p><code>neoforge</code> is absent for Rusty Minecraft-only hooks. horizon-mixins ignores fields it doesn't know, so this needs no
+tool change; the launcher and the docs can list them.</p>
+<h2 id="the-hooks-we-have">The hooks we have</h2>
+<p>Main's catalog (<code>native-hooks.json</code>) is the list; this page does not copy it. Each hook would gain <code>side</code>,
+<code>cancellable</code> and, where one exists, <code>neoforge</code>, filled in by the PR that adopts this page. Hooks main already
+has under a NeoForge-like name: <code>server_tick</code>, <code>level_tick_pre</code>, <code>level_tick_post</code>, <code>right_click_block</code>,
+<code>block_entity_tick</code>, <code>destroy_block</code>, <code>place_block</code>, <code>attack_entity</code>. Per rule 6 none of them is renamed:
+a rename is a new hook with a new name, if ever wanted.</p>
+<h2 id="next-hooks">Next hooks</h2>
+<p>Hooks main does not have yet, with the vanilla method each would sit in (rule 2). The NeoForge names are
+proposals, to be confirmed against the Javadoc linked from the documentation when a hook is built.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Hook</th>
+<th>NeoForge event</th>
+<th>Side</th>
+<th>Cancellable</th>
+<th>Vanilla method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>left_click_block</code></td>
+<td><code>PlayerInteractEvent.LeftClickBlock</code></td>
+<td>both</td>
+<td>yes</td>
+<td><code>ServerPlayerGameMode.handleBlockBreakAction</code></td>
+</tr>
+<tr>
+<td><code>right_click_item</code></td>
+<td><code>PlayerInteractEvent.RightClickItem</code></td>
+<td>both</td>
+<td>yes, with a result</td>
+<td><code>ServerPlayerGameMode.useItem</code></td>
+</tr>
+<tr>
+<td><code>entity_interact</code></td>
+<td><code>PlayerInteractEvent.EntityInteract</code></td>
+<td>both</td>
+<td>yes</td>
+<td><code>Player.interactOn</code></td>
+</tr>
+<tr>
+<td><code>player_tick_pre</code> / <code>_post</code></td>
+<td><code>PlayerTickEvent.Pre</code> / <code>.Post</code></td>
+<td>both</td>
+<td>no</td>
+<td><code>Player.tick</code></td>
+</tr>
+<tr>
+<td><code>entity_join_level</code></td>
+<td><code>EntityJoinLevelEvent</code></td>
+<td>server</td>
+<td>yes</td>
+<td><code>ServerLevel.addEntity</code></td>
+</tr>
+<tr>
+<td><code>living_incoming_damage</code></td>
+<td><code>LivingIncomingDamageEvent</code></td>
+<td>server</td>
+<td>yes</td>
+<td><code>LivingEntity.hurtServer</code></td>
+</tr>
+<tr>
+<td><code>living_death</code></td>
+<td><code>LivingDeathEvent</code></td>
+<td>server</td>
+<td>yes</td>
+<td><code>LivingEntity.die</code></td>
+</tr>
+<tr>
+<td><code>chunk_load</code> / <code>chunk_unload</code></td>
+<td><code>ChunkEvent.Load</code> / <code>.Unload</code></td>
+<td>server</td>
+<td>no</td>
+<td>chunk map load/unload</td>
+</tr>
+<tr>
+<td><code>container_open</code> / <code>_close</code></td>
+<td><code>PlayerContainerEvent.Open</code> / <code>.Close</code></td>
+<td>server</td>
+<td>no</td>
+<td><code>ServerPlayer.openMenu</code>, <code>doCloseContainer</code></td>
+</tr>
+<tr>
+<td><code>client_tick_pre</code> / <code>_post</code></td>
+<td><code>ClientTickEvent.Pre</code> / <code>.Post</code></td>
+<td>client</td>
+<td>no</td>
+<td>the window's half of <code>tick</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="capabilities">Capabilities</h2>
+<p>Hoppers, comparators and other mods should not read a fixed <code>slots</code> field. NeoForge's documentation lists
+<code>Capabilities.Item.BLOCK</code> (&quot;automation-accessible inventory of a block&quot;) with <code>ResourceHandler&lt;ItemResource&gt;</code>,
+and <code>Capabilities.Energy.BLOCK</code> with <code>EnergyHandler</code>
+(<a href="https://docs.neoforged.net/docs/inventories/capabilities/">Capabilities</a>). A Rusty Minecraft
+<code>block_capability(pos, kind, side, out)</code> hook could fill an out parameter with a handler object, so new kinds
+(fluids, energy) are new kinds, not new fields on a struct, and older mods keep compiling. Menus and screens
+are not modelled here: main already has <code>menu_clicked</code>, <code>menu_closed</code>, <code>screen*</code> and <code>block_entity_container</code>,
+and any change to them gets its own proposal with its own citations.</p>
+<h2 id="rollout">Rollout</h2>
+<ol>
+<li>This document, and the catalog fields filled in for the hooks main has.</li>
+<li>The table above, one small PR per hook or family, each with a test that it fires at the vanilla method
+named here.</li>
+</ol>
+<h2 id="open-questions">Open questions</h2>
+<ul>
+<li>Snake-case NeoForge names without a <code>neoforge_</code> prefix (agreed in the comments). Both-side hooks pass the
+role as a parameter (agreed).</li>
+<li>Rule 7 renumbers every open PR on each merge. Every catalog entry already has a name and <code>version</code>, so a
+bundle could list the hooks it uses (<code>random_tick</code> v1...) and the launcher check each against the catalog,
+with <code>&quot;hooks&quot;: N</code> kept for old bundles. That is a separate change to <code>native-mods.md</code>; if agreed, rule 7
+goes away.</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/native-hooks-neoforge.md"><code>docs/native-hooks-neoforge.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#rules">Rules</a></li><li class="l2"><a href="#catalog-fields">Catalog fields</a></li><li class="l2"><a href="#the-hooks-we-have">The hooks we have</a></li><li class="l2"><a href="#next-hooks">Next hooks</a></li><li class="l2"><a href="#capabilities">Capabilities</a></li><li class="l2"><a href="#rollout">Rollout</a></li><li class="l2"><a href="#open-questions">Open questions</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulk density and noise generation benchmark · Rusty Minecraft docs</title>
+<meta name="description" content="Bulk density and noise generation benchmark: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details open><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html" aria-current="page">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="bulk-density-and-noise-generation-benchmark">Bulk density and noise generation benchmark</h1>
+<p>The PR dispatches unary and binary density operations once per bulk buffer, resolves the shared Beardifier kernel once per sampled position, and reuses Perlin X-column permutations across the Y loop. Binary bit-exact tests cover every operation, distinct NaN payloads, signed zeros, infinities, subnormals, random float pairs and SIMD/tail-sized buffers. Child-failure tests retain left/right evaluation order and partial output. Scalar shortcuts, arithmetic expressions, RNG consumption and generation traversal are preserved.</p>
+<h2 id="whole-terrain-measurements">Whole-terrain measurements</h2>
+<p><strong>Times below are complete terrain wall elapsed divided by 256 input chunks, with no thread multiplier.</strong> Four-worker figures are elapsed latency/throughput measurements, not per-thread CPU costs. Combined time adds the complete decoration phase, still divided by 256; 196 interior chunks are decorated with unchanged border work. At the primary site, 256 terrain chunks take about 2.578 seconds with one worker versus 0.860 seconds with four: approximately 3.00× throughput, or 75% of ideal fourfold scaling. A subsequent 1/2/4/8-worker scaling experiment is reported below.</p>
+<p>Fresh equivalent optimized builds compare baseline <code>e4f8154cb4115aa1ee622381d9b12387cdf515d4</code> with the extended candidate. Every case has one discarded process pair, then five measured pairs alternating baseline/candidate order. Initialized processes first generate and discard the same offset 9×9 region at center+(64,64), using the same seeded generator, before timing fresh measured workers. This excludes lazy ring initialization without pre-generating target chunks. All cases use size 16; primary seed/site is 12345/(0,0), second Overworld seed/site is -1/(32,-32).</p>
+<p>Medians below are baseline → extended candidate, ms/input chunk, followed by percent reduction.</p>
+<ul>
+<li><strong>overworld, 1 worker(s):</strong> terrain 12.685400 → 10.069365 (20.62%); combined 14.696298 → 12.105007 (17.63%).</li>
+<li><strong>overworld, 4 worker(s):</strong> terrain 4.045564 → 3.359536 (16.96%); combined 4.663124 → 3.944952 (15.40%).</li>
+<li><strong>the_nether, 1 worker(s):</strong> terrain 5.088375 → 4.848149 (4.72%); combined 5.481617 → 5.239165 (4.42%).</li>
+<li><strong>the_nether, 4 worker(s):</strong> terrain 1.446298 → 1.366468 (5.52%); combined 1.574890 → 1.472913 (6.48%).</li>
+<li><strong>the_end, 1 worker(s):</strong> terrain 1.085323 → 0.980046 (9.70%); combined 1.161651 → 1.053080 (9.35%).</li>
+<li><strong>the_end, 4 worker(s):</strong> terrain 0.281733 → 0.259724 (7.81%); combined 0.312280 → 0.288982 (7.46%).</li>
+<li><strong>overworld, 1 worker(s), second site:</strong> terrain 11.585829 → 9.079823 (21.63%); combined 12.650823 → 10.145760 (19.80%).</li>
+<li><strong>overworld, 4 worker(s), second site:</strong> terrain 3.105819 → 2.519504 (18.88%); combined 3.410155 → 2.812551 (17.52%).</li>
+<li><strong>overworld, 1 worker(s), non-initialized generator:</strong> terrain 23.429316 → 20.942006 (10.62%); combined 25.599745 → 23.005476 (10.13%).</li>
+</ul>
+<p>The non-initialized case retains lazy startup work and is separate from recurring-cost qualification; resource loading is outside all terrain brackets. All 45 measured terrain pairs improved, but Nether one-worker median terrain improvement remains below 5%. Results are workload-dependent. The primary one-worker noise bracket improves 5.901774 → 4.773963 ms/chunk (19.11%); shared bulk material-density work also improves, with surface 4.576660 → 3.181641 (30.48%). Whole-terrain gains must not be described as noise-stage-only gains. Parallel stage brackets are aggregate worker elapsed and are not exclusive CPU shares.</p>
+<h2 id="added-benefit-beyond-unary-dispatch">Added benefit beyond unary dispatch</h2>
+<p>A separate five-pair alternating comparison uses the existing unary-only PR revision <code>594b50278044df6b72b641cd02d5050925c86203</code> as baseline. It uses the same initialized primary workload and fresh builds. These numbers measure the binary/Beardifier/Perlin additions together; they do not assign a separate speedup to each addition.</p>
+<ul>
+<li><strong>1 worker(s):</strong> terrain 10.913267 → 10.034900 (8.05%); combined 12.867017 → 12.079432 (6.12%).</li>
+<li><strong>4 worker(s):</strong> terrain 3.536831 → 3.312338 (6.35%); combined 4.110268 → 3.897104 (5.19%).</li>
+</ul>
+<p>All ten incremental terrain pairs improved. Pair reductions ranged 4.72–9.93% with one worker and 2.10–8.61% with four, so not every individual pair exceeds 5%. A preliminary gate was excluded in its entirety because a concurrent Rusty Minecraft client consumed roughly seven cores. Its raw samples remain in <code>contended-gate/</code>; all qualification runs began after the client was closed. No individual samples were selectively removed from the restarted runs.</p>
+<h2 id="worker-scaling-follow-up">Worker scaling follow-up</h2>
+<p>Candidate revision <code>c47b30fcf0db87b8023e6784d941a4f06524b453</code> was tested at 1, 2, 4 and 8 workers on the same primary initialized Overworld workload. The saved <code>final-candidate</code> optimized binary is used without rebuilding or changing instrumentation. After one discarded process per worker count, eight measured processes per count run sequentially. Worker orders <code>[1,2,4,8]</code>, <code>[2,8,1,4]</code>, <code>[4,1,8,2]</code>, <code>[8,4,2,1]</code> repeat twice, placing each count in each order position twice. Every process initializes its generator using the same offset 9×9 region before measuring 256 terrain chunks and 196 interior decorations. No baseline comparison or new correctness claim is inferred from this scaling experiment.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Workers</th>
+<th>Terrain median ms/chunk (min–max)</th>
+<th>Terrain chunks/s</th>
+<th>Speedup</th>
+<th>Efficiency</th>
+<th>Combined median ms/chunk</th>
+<th>Combined speedup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>9.994644 (9.842544–10.312603)</td>
+<td>100.05</td>
+<td>1.000×</td>
+<td>100.0%</td>
+<td>11.950737</td>
+<td>1.000×</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5.580046 (5.499388–5.772284)</td>
+<td>179.21</td>
+<td>1.791×</td>
+<td>89.6%</td>
+<td>6.644499</td>
+<td>1.799×</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3.405281 (3.238112–3.525516)</td>
+<td>293.66</td>
+<td>2.935×</td>
+<td>73.4%</td>
+<td>3.996531</td>
+<td>2.990×</td>
+</tr>
+<tr>
+<td>8</td>
+<td>2.750915 (2.662450–2.915874)</td>
+<td>363.52</td>
+<td>3.633×</td>
+<td>45.4%</td>
+<td>3.220818</td>
+<td>3.710×</td>
+</tr>
+</tbody>
+</table></div>
+<p>Speedup is the one-worker median divided by the respective median; efficiency divides speedup by worker count. Eight workers give 23.8% more terrain throughput than four workers, with 19.2% lower wall ms/chunk. This is sublinear scaling on this machine and site; eight workers exceed the six physical cores, and this experiment does not identify the causes of diminishing returns. Ordinary desktop activity was not isolated. All 32 measured runs are retained. Raw samples, per-process logs, binary SHA-256, protocol, runnable script and combined ranges are in <code>/srv/bob-data/horizon-noise-aquifer-e477fa56/extension/scaling/</code> (<code>raw.json</code>, <code>summary.json</code>, <code>protocol.json</code>, <code>run.py</code>). Run with <code>python /srv/bob-data/horizon-noise-aquifer-e477fa56/extension/scaling/run.py</code>; the script uses the prepared resources and saved optimized binary, requiring no build. The earlier comparison medians above remain unchanged.</p>
+<h2 id="machine-and-validation">Machine and validation</h2>
+<p>AMD Ryzen 5 5600X, 6 cores/12 logical CPUs, 32 GiB RAM, Linux, Rust 1.99.0. Optimized <code>fast</code> profile: release optimization, LTO disabled, 16 codegen units. Builds and timed processes were sequential; ordinary desktop activity was not isolated. Primary terrain process CPU medians are 12.4 → 10.0 ms/input chunk (one worker) and 15.9 → 13.2 (four), using coarse 100 Hz accounting. Peak RSS is effectively unchanged: 786288 → 786256 KiB and 833496 → 833528 KiB. No new heap buffer is introduced. Executable text increases 1804 bytes against the original baseline and decreases 1056 bytes against the unary-only revision.</p>
+<p>Validation of the extended candidate passed:</p>
+<ul>
+<li>193 targeted optimized Rust unit/integration tests, including binary floating-point and failure-order tests, density/world fields, storage/palettes, material/carving stages, biome regions, retrogen and ticks.</li>
+<li>Fresh pinned Java client/server density parity: 15,524,627 output lines per side.</li>
+<li>Dedicated noise parity: 1,443,539 lines per side, covering Perlin/smeared bulk paths, strided/wrapped volumes, buffer tails, constructor RNG and derivatives.</li>
+<li>Dedicated Beardifier/structure-density parity: 183 fixtures, 1,360,095 lines per side.</li>
+<li>Terrain-fill parity: 114 fixtures, 200 fills, 7,950,873 lines per side, including prefilled chunks, repeated fills, partial vertical volumes, aquifers, WG heightmaps and ordered postprocessing.</li>
+<li>24/24 exact region phase comparisons: three dimensions × two seeds/sites × one/four workers, each with 81 retained chunks and 49 interior decorations. Every retained chunk is compared before and after decoration, including borders. Snapshots include raw/public block reads and palettes, quart biomes, entities/block entities as binary NBT, complete scheduled ticks, all six heightmaps, ordered postprocessing, actual non-air counts and chunk metadata. Temporary diagnostic accessors were removed from production source.</li>
+</ul>
+<p>This validates the declared corpora and sites, not every possible seed, biome or platform. Lighting, meshing, saving, streaming and full application startup were not benchmarked.</p>
+<p>The existing <code>crates/horizon-world/examples/chunkgen_bench.rs</code> is the standard workload entry point. Both performance builds used the same saved diagnostic source adding optional generator initialization and exact elapsed/count output; its thread-multiplied human display was not used. Diagnostic builds use <code>CARGO_TARGET_DIR=/srv/bob-data/horizon-stage3d-target cargo build --profile fast -p horizon-world --example chunkgen_profile</code>. Raw timings, exact commands, binary/source hashes, scripts and parity outputs are retained outside Git at <code>/srv/bob-data/horizon-noise-aquifer-e477fa56/extension/</code>: <code>gate-raw.json</code>, <code>matrix-raw.json</code>, <code>summary.json</code>, <code>marginal/marginal-raw.json</code>, <code>binary-hashes.json</code>, and the <code>*-parity.json</code> reports. Prepared resources are <code>/srv/bob-data/horizon/.local/horizon-client/26.3</code>. Generated artifacts and private fixtures remain outside the PR.</p>
+<p>The repository quick PR self-check also passes: public-tree validation, workspace rustfmt, workspace/all-target clippy with warnings denied, and 96 full core-crate tests. Relevant pinned Java suites were run separately as listed above. A production-only rebuild after removing diagnostic support has byte-identical executable instructions and read-only constants to the measured candidate.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/noise-aquifer-benchmark.md"><code>docs/noise-aquifer-benchmark.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#whole-terrain-measurements">Whole-terrain measurements</a></li><li class="l2"><a href="#added-benefit-beyond-unary-dispatch">Added benefit beyond unary dispatch</a></li><li class="l2"><a href="#worker-scaling-follow-up">Worker scaling follow-up</a></li><li class="l2"><a href="#machine-and-validation">Machine and validation</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

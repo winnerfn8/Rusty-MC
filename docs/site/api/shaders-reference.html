@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shader API reference (0.1) · Rusty Minecraft docs</title>
+<meta name="description" content="Shader API reference (0.1): Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="../repo/README.html">Rusty Minecraft</a></li><li><a href="../java-mod-translation.html">Java mod translation</a></li><li><a href="../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="../repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../website.html">The documentation website</a></li><li><a href="../repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="../repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="../repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../native-client.html">Rusty Minecraft native client</a></li><li><a href="../hosting.html">Host a server</a></li><li><a href="../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../server-next.html">The next server: design</a></li><li><a href="../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../graphics.html">Graphics: settings and performance</a></li><li><a href="../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../extras.html">Rusty Minecraft extras</a></li><li><a href="../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../mods.html">Rusty Minecraft mods</a></li><li><a href="../native-mods.html">Native mods (experimental)</a></li><li><a href="../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../versioning.html">Versioning</a></li><li><a href="../resource-packs.html">Resource packs: what works</a></li><li><a href="../telemetry.html">Opt-in data collection</a></li><li><a href="../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="README.html">Rusty Minecraft APIs</a></li><li><a href="stability.html">API stability and versioning</a></li><li><a href="../play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../parity-workflow.html">Parity workflow</a></li><li><a href="../parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="../parity/meshing.html">Section meshing parity</a></li><li><a href="../port-ledger.html">Port ledger</a></li><li><a href="../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../world-generation.html">World generation</a></li><li><a href="../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../density-functions.html">Compiled density evaluation</a></li><li><a href="../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../biome-lookup.html">Biome lookup</a></li><li><a href="../biome-temperatures.html">Biome temperatures</a></li><li><a href="../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../material-conditions.html">Numeric material conditions</a></li><li><a href="../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../vertical-anchors.html">Vertical anchors</a></li><li><a href="../value-providers.html">World-generation value providers</a></li><li><a href="../carving.html">Carving</a></li><li><a href="../heightmaps.html">Heightmaps</a></li><li><a href="../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../world-data.html">Rusty Minecraft world data</a></li><li><a href="../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../profiling.html">Find the next bottleneck</a></li></ul></details><details open><summary>API reference</summary><ul><li><a href="agent-control.html">Agent control API</a></li><li><a href="data-formats.html">Data formats</a></li><li><a href="launch-reference.html">Launch API reference</a></li><li><a href="launch.html">Launch API</a></li><li><a href="launcher.html">Launcher API</a></li><li><a href="mod-index.html">The registry index and .hpack</a></li><li><a href="server-reference.html">Server reference</a></li><li><a href="server.html">Server API</a></li><li><a href="shaders-reference.html" aria-current="page">Shader API reference (0.1)</a></li><li><a href="shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="../repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="../repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="../repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="../repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="../repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="../repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="../repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="../repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="../repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="../repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="../repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="../repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="../repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="../repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="../repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="../repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="../repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="../repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="../repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="../repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="../repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="../repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="../repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../controllers.html">Controllers</a></li><li><a href="../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../known-issues.html">Known issues</a></li><li><a href="../launcher-commands.html">Launcher commands</a></li><li><a href="../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../release-flow.html">Release flow</a></li><li><a href="../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../save-batch-entities.html">Block entity save batches</a></li><li><a href="../security.html">Security</a></li><li><a href="../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="shader-api-reference-01">Shader API reference (0.1)</h1>
+<p>Generated from <code>crates/horizon-shader-api</code> (<code>HORIZON_WRITE_DOCS=1 cargo test -p horizon-shader-api --test reference</code>
+rewrites it; the test fails when it drifts). The API's design and pack format: <a href="shaders.html">shaders.md</a>.</p>
+<p>A stage is a function your WGSL defines, with the signature below; Rusty Minecraft puts the prelude (these structs, the
+resources and helpers) before your files and calls the function from its own pass. Your files declare no
+bindings and no entry points, and no names starting with <code>horizon_</code>.</p>
+<h2 id="stages">Stages</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>In <code>horizon-shaders.toml</code></th>
+<th>Your function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sky</td>
+<td><code>[sky]</code></td>
+<td><code>fn sky(input: SkyInput) -&gt; vec4&lt;f32&gt;</code></td>
+</tr>
+<tr>
+<td>material</td>
+<td><code>[material]</code></td>
+<td><code>fn material(input: MaterialInput) -&gt; Surface</code></td>
+</tr>
+<tr>
+<td>post</td>
+<td><code>[[post]]</code></td>
+<td><code>fn post(input: PostInput) -&gt; vec4&lt;f32&gt;</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="sky">sky</h2>
+<p><code>fn sky(input: SkyInput) -&gt; vec4&lt;f32&gt;</code></p>
+<h3 id="skyinput"><code>SkyInput</code></h3>
+<p>One direction of the sky, for <code>fn sky(input: SkyInput) -&gt; vec4&lt;f32&gt;</code>. The sun, moon, stars and clouds are drawn over the result.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>direction</code></td>
+<td><code>vec3&lt;f32&gt;</code></td>
+<td>Unit view ray, camera-relative world axes.</td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td><code>vec4&lt;f32&gt;</code></td>
+<td>Vanilla's sky colour along the ray (sky, fog and sunrise).</td>
+</tr>
+</tbody>
+</table></div>
+<p>Resources (bind group 3):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Binding</th>
+<th>Declaration</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>var&lt;uniform&gt; frame: Frame</code></td>
+<td>The frame (<code>Frame</code>).</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="material">material</h2>
+<p><code>fn material(input: MaterialInput) -&gt; Surface</code></p>
+<h3 id="materialinput"><code>MaterialInput</code></h3>
+<p>One point of a block's surface, for <code>fn material(input: MaterialInput) -&gt; Surface</code>.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>albedo</code></td>
+<td><code>vec4&lt;f32&gt;</code></td>
+<td>The block texture's colour here (alpha 0..1).</td>
+</tr>
+<tr>
+<td><code>tint</code></td>
+<td><code>vec4&lt;f32&gt;</code></td>
+<td>The vertex colour: biome tint, face shade and ambient occlusion.</td>
+</tr>
+<tr>
+<td><code>light</code></td>
+<td><code>vec2&lt;f32&gt;</code></td>
+<td>Block and sky light, 0..1, smoothed over the face.</td>
+</tr>
+<tr>
+<td><code>lightmap</code></td>
+<td><code>vec3&lt;f32&gt;</code></td>
+<td>Vanilla's light colour for that light this frame.</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td><code>vec3&lt;f32&gt;</code></td>
+<td>The point, camera-relative, in blocks.</td>
+</tr>
+<tr>
+<td><code>uv</code></td>
+<td><code>vec2&lt;f32&gt;</code></td>
+<td>The texture coordinate inside the block atlas.</td>
+</tr>
+<tr>
+<td><code>translucent</code></td>
+<td><code>bool</code></td>
+<td>Drawn in the translucent pass (water, stained glass, ice).</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="surface"><code>Surface</code></h3>
+<p>What <code>material</code> returns. Vanilla's own is <code>albedo * tint * vec4(lightmap, 1.0)</code>; Rusty Minecraft then applies the alpha test (cutout and translucent) and fog.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>color</code></td>
+<td><code>vec4&lt;f32&gt;</code></td>
+<td>The lit colour, 0..1, with its alpha.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Resources (bind group 3):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Binding</th>
+<th>Declaration</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>var&lt;uniform&gt; frame: Frame</code></td>
+<td>The frame (<code>Frame</code>).</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="post">post</h2>
+<p><code>fn post(input: PostInput) -&gt; vec4&lt;f32&gt;</code></p>
+<h3 id="postinput"><code>PostInput</code></h3>
+<p>One pixel of the picture, for <code>fn post(input: PostInput) -&gt; vec4&lt;f32&gt;</code>.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uv</code></td>
+<td><code>vec2&lt;f32&gt;</code></td>
+<td>Where the pixel is, 0..1 from the top left.</td>
+</tr>
+<tr>
+<td><code>pixel</code></td>
+<td><code>vec2&lt;f32&gt;</code></td>
+<td>The pixel's centre, in pixels from the top left of what the pass draws (the world's size; the window's for the last pass).</td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td><code>vec4&lt;f32&gt;</code></td>
+<td>The previous pass's colour here (the world's picture for the first pass).</td>
+</tr>
+<tr>
+<td><code>depth</code></td>
+<td><code>f32</code></td>
+<td>The world's depth here, reversed: 0 is the sky.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Resources (bind group 3):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Binding</th>
+<th>Declaration</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>var&lt;uniform&gt; frame: Frame</code></td>
+<td>The frame (<code>Frame</code>).</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>var scene_color: texture_2d&lt;f32&gt;</code></td>
+<td>The world's picture before any pass.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>var scene_depth: texture_depth_2d</code></td>
+<td>The world's depth, reversed (1 near, 0 far and sky).</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>var previous: texture_2d&lt;f32&gt;</code></td>
+<td>The previous pass's output (<code>scene_color</code> for the first pass).</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>var linear_sampler: sampler</code></td>
+<td>Bilinear filtering, clamped to the edges.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>var nearest_sampler: sampler</code></td>
+<td>Nearest texel, clamped to the edges.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Helpers:</p>
+<ul>
+<li><code>fn depth_at(uv: vec2&lt;f32&gt;) -&gt; f32</code>: the world's depth at <code>uv</code>.</li>
+<li><code>fn view_position(uv: vec2&lt;f32&gt;, depth: f32) -&gt; vec3&lt;f32&gt;</code>: the camera-relative position, in blocks, of
+the point at <code>uv</code> and <code>depth</code>.</li>
+</ul>
+<h2 id="the-frame">The frame</h2>
+<h3 id="frame"><code>Frame</code></h3>
+<p>The frame, as <code>frame</code> in every stage. Positions and directions are in world axes relative to the camera (x east, y up, z south), so they stay precise far from the world's origin; depth is reversed (1 near, 0 at the far plane and in the sky).</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Offset</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view</code></td>
+<td><code>mat4x4&lt;f32&gt;</code></td>
+<td>0</td>
+<td>Camera-relative world to view space: the camera's rotation.</td>
+</tr>
+<tr>
+<td><code>projection</code></td>
+<td><code>mat4x4&lt;f32&gt;</code></td>
+<td>64</td>
+<td>View to clip space (reversed depth, wgpu's clip space: z 0..1).</td>
+</tr>
+<tr>
+<td><code>view_inverse</code></td>
+<td><code>mat4x4&lt;f32&gt;</code></td>
+<td>128</td>
+<td>View to camera-relative world space.</td>
+</tr>
+<tr>
+<td><code>projection_inverse</code></td>
+<td><code>mat4x4&lt;f32&gt;</code></td>
+<td>192</td>
+<td>Clip to view space.</td>
+</tr>
+<tr>
+<td><code>camera_position</code></td>
+<td><code>vec3&lt;f32&gt;</code></td>
+<td>256</td>
+<td>The camera's world position, in blocks (about a millimetre of precision 10 000 blocks out).</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td><code>f32</code></td>
+<td>268</td>
+<td>Seconds since the pack was loaded, wrapping to 0 every hour.</td>
+</tr>
+<tr>
+<td><code>sun_direction</code></td>
+<td><code>vec3&lt;f32&gt;</code></td>
+<td>272</td>
+<td>Unit vector toward the sun (below the horizon at night).</td>
+</tr>
+<tr>
+<td><code>day_time</code></td>
+<td><code>f32</code></td>
+<td>284</td>
+<td>The time of day, 0..1: 0 sunrise, 0.25 noon, 0.5 sunset, 0.75 midnight.</td>
+</tr>
+<tr>
+<td><code>moon_direction</code></td>
+<td><code>vec3&lt;f32&gt;</code></td>
+<td>288</td>
+<td>Unit vector toward the moon.</td>
+</tr>
+<tr>
+<td><code>game_time</code></td>
+<td><code>f32</code></td>
+<td>300</td>
+<td>Vanilla's GameTime: (game time % 24000 + partial tick) / 24000, 0..1.</td>
+</tr>
+<tr>
+<td><code>sky_color</code></td>
+<td><code>vec3&lt;f32&gt;</code></td>
+<td>304</td>
+<td>Vanilla's sky colour this frame, 0..1.</td>
+</tr>
+<tr>
+<td><code>rain</code></td>
+<td><code>f32</code></td>
+<td>316</td>
+<td>Rain strength, 0..1.</td>
+</tr>
+<tr>
+<td><code>fog_color</code></td>
+<td><code>vec3&lt;f32&gt;</code></td>
+<td>320</td>
+<td>Vanilla's fog colour this frame (also the clear colour), 0..1.</td>
+</tr>
+<tr>
+<td><code>thunder</code></td>
+<td><code>f32</code></td>
+<td>332</td>
+<td>Thunder strength, 0..1.</td>
+</tr>
+<tr>
+<td><code>resolution</code></td>
+<td><code>vec2&lt;f32&gt;</code></td>
+<td>336</td>
+<td>The size of the world's picture, in pixels (the resolution scale applied).</td>
+</tr>
+<tr>
+<td><code>eye_light</code></td>
+<td><code>vec2&lt;f32&gt;</code></td>
+<td>344</td>
+<td>Block and sky light at the camera, 0..1 (level / 15).</td>
+</tr>
+<tr>
+<td><code>fog_start</code></td>
+<td><code>f32</code></td>
+<td>352</td>
+<td>Where vanilla's fog starts, in blocks from the camera.</td>
+</tr>
+<tr>
+<td><code>fog_end</code></td>
+<td><code>f32</code></td>
+<td>356</td>
+<td>Where vanilla's fog is full, in blocks.</td>
+</tr>
+<tr>
+<td><code>render_distance</code></td>
+<td><code>f32</code></td>
+<td>360</td>
+<td>The render distance, in blocks.</td>
+</tr>
+<tr>
+<td><code>far</code></td>
+<td><code>f32</code></td>
+<td>364</td>
+<td>The far plane, in blocks.</td>
+</tr>
+<tr>
+<td><code>night_vision</code></td>
+<td><code>f32</code></td>
+<td>368</td>
+<td>Night vision strength, 0..1.</td>
+</tr>
+<tr>
+<td><code>blindness</code></td>
+<td><code>f32</code></td>
+<td>372</td>
+<td>Blindness strength, 0..1.</td>
+</tr>
+<tr>
+<td><code>darkness</code></td>
+<td><code>f32</code></td>
+<td>376</td>
+<td>The darkness effect's strength, 0..1.</td>
+</tr>
+<tr>
+<td><code>brightness</code></td>
+<td><code>f32</code></td>
+<td>380</td>
+<td>The Brightness option, 0..1 (Moody to Bright).</td>
+</tr>
+<tr>
+<td><code>eye_in</code></td>
+<td><code>u32</code></td>
+<td>384</td>
+<td>What the camera is in: 0 air, 1 water, 2 lava, 3 powder snow.</td>
+</tr>
+<tr>
+<td><code>dimension</code></td>
+<td><code>i32</code></td>
+<td>388</td>
+<td>0 the Overworld, -1 the Nether, 1 the End, 2 any other dimension.</td>
+</tr>
+<tr>
+<td><code>frame_index</code></td>
+<td><code>u32</code></td>
+<td>392</td>
+<td>Frames drawn since the pack was loaded (wraps).</td>
+</tr>
+<tr>
+<td><code>hide_gui</code></td>
+<td><code>u32</code></td>
+<td>396</td>
+<td>1 while F1 hides the HUD, else 0.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="options">Options</h2>
+<p>Each <code>[[options]]</code> entry sets the WGSL <code>override</code> of the same name when the pipelines are built:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th><code>type</code></th>
+<th>Keys</th>
+<th>The <code>override</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bool</code></td>
+<td><code>default</code></td>
+<td><code>override &lt;id&gt;: bool</code></td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><code>default</code>, <code>min</code>, <code>max</code>, <code>step</code></td>
+<td><code>override &lt;id&gt;: f32</code></td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td><code>default</code>, <code>min</code>, <code>max</code></td>
+<td><code>override &lt;id&gt;: i32</code></td>
+</tr>
+<tr>
+<td><code>choice</code></td>
+<td><code>values</code>, <code>default</code> (one of them)</td>
+<td><code>override &lt;id&gt;: u32</code>, the value's index</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="limits">Limits</h2>
+<ul>
+<li>8 post passes, 64 options, <code>budget.gpu_ms</code> up to 16.</li>
+<li>256 KiB per WGSL file, 8 MiB per pack.</li>
+<li>Per stage: 20000 naga expressions over all its functions, 64 texture reads (samples,
+gathers and loads, the prelude's included).</li>
+</ul>
+<h2 id="the-check">The check</h2>
+<p>A pack runs only after it passes <code>horizon_shader_api::check</code> (the game when it loads a pack, the launcher before it
+installs one, the registry's CI): each stage is parsed and validated by naga, checked against its signature and
+the rules above, and translated for Vulkan (SPIR-V), Metal and DirectX 12 (HLSL) with its options at their
+defaults, minimums and maximums. Every option must be an <code>override</code> of its type in some stage; an <code>override</code>
+that is no option needs a default.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/api/shaders-reference.md"><code>docs/api/shaders-reference.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#stages">Stages</a></li><li class="l2"><a href="#sky">sky</a></li><li class="l3"><a href="#skyinput">SkyInput</a></li><li class="l2"><a href="#material">material</a></li><li class="l3"><a href="#materialinput">MaterialInput</a></li><li class="l3"><a href="#surface">Surface</a></li><li class="l2"><a href="#post">post</a></li><li class="l3"><a href="#postinput">PostInput</a></li><li class="l2"><a href="#the-frame">The frame</a></li><li class="l3"><a href="#frame">Frame</a></li><li class="l2"><a href="#options">Options</a></li><li class="l2"><a href="#limits">Limits</a></li><li class="l2"><a href="#the-check">The check</a></li></ul></nav>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

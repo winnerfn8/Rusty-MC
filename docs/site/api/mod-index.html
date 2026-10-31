@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The registry index and .hpack · Rusty Minecraft docs</title>
+<meta name="description" content="The registry index and .hpack: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="../repo/README.html">Rusty Minecraft</a></li><li><a href="../java-mod-translation.html">Java mod translation</a></li><li><a href="../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="../repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../website.html">The documentation website</a></li><li><a href="../repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="../repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="../repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../native-client.html">Rusty Minecraft native client</a></li><li><a href="../hosting.html">Host a server</a></li><li><a href="../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../server-next.html">The next server: design</a></li><li><a href="../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../graphics.html">Graphics: settings and performance</a></li><li><a href="../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../extras.html">Rusty Minecraft extras</a></li><li><a href="../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../mods.html">Rusty Minecraft mods</a></li><li><a href="../native-mods.html">Native mods (experimental)</a></li><li><a href="../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../versioning.html">Versioning</a></li><li><a href="../resource-packs.html">Resource packs: what works</a></li><li><a href="../telemetry.html">Opt-in data collection</a></li><li><a href="../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="README.html">Rusty Minecraft APIs</a></li><li><a href="stability.html">API stability and versioning</a></li><li><a href="../play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../parity-workflow.html">Parity workflow</a></li><li><a href="../parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="../parity/meshing.html">Section meshing parity</a></li><li><a href="../port-ledger.html">Port ledger</a></li><li><a href="../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../world-generation.html">World generation</a></li><li><a href="../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../density-functions.html">Compiled density evaluation</a></li><li><a href="../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../biome-lookup.html">Biome lookup</a></li><li><a href="../biome-temperatures.html">Biome temperatures</a></li><li><a href="../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../material-conditions.html">Numeric material conditions</a></li><li><a href="../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../vertical-anchors.html">Vertical anchors</a></li><li><a href="../value-providers.html">World-generation value providers</a></li><li><a href="../carving.html">Carving</a></li><li><a href="../heightmaps.html">Heightmaps</a></li><li><a href="../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../world-data.html">Rusty Minecraft world data</a></li><li><a href="../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../profiling.html">Find the next bottleneck</a></li></ul></details><details open><summary>API reference</summary><ul><li><a href="agent-control.html">Agent control API</a></li><li><a href="data-formats.html">Data formats</a></li><li><a href="launch-reference.html">Launch API reference</a></li><li><a href="launch.html">Launch API</a></li><li><a href="launcher.html">Launcher API</a></li><li><a href="mod-index.html" aria-current="page">The registry index and .hpack</a></li><li><a href="server-reference.html">Server reference</a></li><li><a href="server.html">Server API</a></li><li><a href="shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="../repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="../repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="../repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="../repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="../repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="../repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="../repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="../repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="../repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="../repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="../repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="../repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="../repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="../repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="../repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="../repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="../repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="../repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="../repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="../repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="../repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="../repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="../repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../controllers.html">Controllers</a></li><li><a href="../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../known-issues.html">Known issues</a></li><li><a href="../launcher-commands.html">Launcher commands</a></li><li><a href="../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../release-flow.html">Release flow</a></li><li><a href="../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../save-batch-entities.html">Block entity save batches</a></li><li><a href="../security.html">Security</a></li><li><a href="../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="the-registry-index-and-hpack">The registry index and <code>.hpack</code></h1>
+<p>Rusty Minecraft's registry lists what is made for Rusty Minecraft and reviewed: content mods (<code>.hmod</code>), native mods (<code>.hnmod</code>,
+<a href="../native-mods.html">native-mods.md</a>), modpacks (<code>.hpack</code>), resource packs and Rusty Minecraft shader packs (<code>.hshader</code>,
+<a href="../shaders.html">shaders.md</a>). A project is listed by a reviewed pull request in
+<a href="https://github.com/horizon-rust/horizon-mods">horizon-rust/horizon-mods</a> that links its GitHub repository; its versions are
+the repository's GitHub releases, read and checked by the registry's CI with no pull request and no review per version. The launcher and the
+website read one file, <code>index.json</code>, which that repository's CI builds. The Rust types and every check below are
+<code>horizon_mods::index</code> and <code>horizon_mods::modpack</code> (feature <code>index</code>); the sample is
+<code>crates/horizon-mods/tests/index/index-v1.json</code>, read by the tests with the files it lists.</p>
+<p>Level: preview (<a href="stability.html">stability.md</a>). Schema 1.</p>
+<h2 id="indexjson"><code>index.json</code></h2>
+<pre><code class="language-json">{
+  &quot;schema&quot;: 1,
+  &quot;generated&quot;: &quot;2026-10-24T18:00:00Z&quot;,
+  &quot;projects&quot;: [{
+    &quot;id&quot;: &quot;coords_hud&quot;, &quot;kind&quot;: &quot;mod&quot;, &quot;name&quot;: &quot;Coordinates HUD&quot;, &quot;summary&quot;: &quot;One line.&quot;,
+    &quot;description&quot;: &quot;Markdown.&quot;, &quot;authors&quot;: [&quot;Rusty Minecraft&quot;], &quot;owners&quot;: [&quot;ludovic111&quot;],
+    &quot;license&quot;: &quot;MIT&quot;, &quot;source&quot;: &quot;https://github.com/...&quot;, &quot;icon&quot;: &quot;https://...png&quot;, &quot;key&quot;: &quot;RWT...&quot;, &quot;downloads&quot;: 1234,
+    &quot;versions&quot;: [{
+      &quot;version&quot;: &quot;0.1.0&quot;, &quot;published&quot;: &quot;2026-10-24&quot;, &quot;changelog&quot;: &quot;&quot;,
+      &quot;api&quot;: &quot;0.1&quot;, &quot;side&quot;: &quot;client&quot;, &quot;capabilities&quot;: [&quot;registries&quot;], &quot;game&quot;: &quot;26.3&quot;,
+      &quot;file&quot;: { &quot;name&quot;: &quot;coords_hud-0.1.0.hmod&quot;, &quot;url&quot;: &quot;https://github.com/horizon-rust/horizon-mods/releases/download/...&quot;,
+                &quot;size&quot;: 438, &quot;sha256&quot;: &quot;e113...&quot;, &quot;signature&quot;: &quot;untrusted comment: ...\n...\ntrusted comment: ...\n...\n&quot; }
+    }]
+  }],
+  &quot;revoked&quot;: [{ &quot;id&quot;: &quot;bad_mod&quot;, &quot;sha256&quot;: &quot;1111...&quot;, &quot;reason&quot;: &quot;Sent chat messages it didn't declare.&quot;, &quot;date&quot;: &quot;2026-10-24&quot; }]
+}
+</code></pre>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema</code></td>
+<td>1. A reader refuses a higher number with &quot;update Rusty Minecraft&quot; rather than misread it.</td>
+</tr>
+<tr>
+<td><code>projects[].id</code></td>
+<td><code>[a-z0-9_]{1,64}</code>, unique; a mod's is its manifest's <code>id</code>.</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td><code>mod</code> (content), <code>native-mod</code>, <code>modpack</code>, <code>resourcepack</code>, <code>shader</code> (Rusty Minecraft's own shader packs, not Iris or OptiFine packs). Other kinds (data packs, worlds, themes) may come without a new schema: a reader keeps a kind it doesn't know and doesn't offer it.</td>
+</tr>
+<tr>
+<td><code>summary</code>, <code>description</code></td>
+<td>One line for lists; Markdown for the project's page.</td>
+</tr>
+<tr>
+<td><code>owners</code></td>
+<td>GitHub logins allowed to publish updates.</td>
+</tr>
+<tr>
+<td><code>license</code>, <code>source</code></td>
+<td>An SPDX expression and an <code>https://</code> address of the source code: both required.</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td><code>https://</code>, optional.</td>
+</tr>
+<tr>
+<td><code>key</code></td>
+<td>The author's <a href="https://jedisct1.github.io/minisign/">minisign</a> public key. When set, every version must be signed with it; an update signed with another key is refused. Absent: the project is unsigned and the launcher says so.</td>
+</tr>
+<tr>
+<td><code>versions</code></td>
+<td>Newest first, at least one.</td>
+</tr>
+<tr>
+<td><code>downloads</code></td>
+<td>How many times its files were downloaded, every version together: GitHub's count of each release asset, summed by the publish job, which runs every hour. Absent until a file is downloaded. Read-only: never in an entry.</td>
+</tr>
+<tr>
+<td><code>api</code></td>
+<td>A mod's API line (its manifest's <code>api</code>); a native mod's pinned revisions (<code>native-1/&lt;horizon&gt;/&lt;mixins&gt;</code>); a modpack's manifest format (<code>1</code>).</td>
+</tr>
+<tr>
+<td><code>side</code>, <code>capabilities</code></td>
+<td>A mod's, read from its manifest by CI, never typed by hand.</td>
+</tr>
+<tr>
+<td><code>api_level</code></td>
+<td>A legacy field in old entries; the launcher ignores it.</td>
+</tr>
+<tr>
+<td><code>game</code></td>
+<td>The Minecraft version it is for.</td>
+</tr>
+<tr>
+<td><code>requires</code></td>
+<td>A modpack's mods: <code>{ id, version, sha256 }</code>, each a version in this index with that hash.</td>
+</tr>
+<tr>
+<td><code>file</code></td>
+<td>A plain name with the kind's extension (<code>.hmod</code>, <code>.hnmod</code>, <code>.hpack</code>, <code>.zip</code>, <code>.hshader</code>), an <code>https://</code> URL (the registry's release <code>https://github.com/horizon-rust/horizon-mods/releases/download/&lt;id&gt;-&lt;version&gt;/&lt;name&gt;</code>, or an asset of the project's own repository, <code>https://github.com/&lt;owner&gt;/&lt;repo&gt;/releases/download/&lt;tag&gt;/&lt;name&gt;</code>: the launcher accepts exactly these shapes), the size (at most 64 MiB), the lowercase hex SHA-256, and the <code>.minisig</code> text when the project has a key.</td>
+</tr>
+<tr>
+<td><code>revoked</code></td>
+<td>Files taken down: one file by <code>sha256</code>, or every version of <code>id</code> without it. The launcher refuses to install them and turns installed copies off with the reason.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Readers ignore fields they don't know, so an optional field can be added to schema 1. Renaming or removing a field, or
+changing what one means, makes schema 2.</p>
+<h2 id="before-a-file-is-installed">Before a file is installed</h2>
+<p><code>index::check_file</code> runs on the downloaded file, before it reaches the game folder:</p>
+<ol>
+<li>Its size and SHA-256 are the ones the entry lists, and it isn't revoked.</li>
+<li>With a project key: its signature verifies with that key (minisign's prehashed and legacy signatures both).</li>
+<li>What the file says matches the entry: a mod's <code>horizon-mod.toml</code> (id, version, API, side, capabilities), its API
+level when the entry lists one, and its
+content's fence (<a href="../mods.html#content-mods-api-02">mods.md</a>); a native mod's <code>horizon-native.json</code> and
+<code>horizon-mixin.toml</code> (id, version, the pinned Rusty Minecraft and horizon-mixins revisions); a modpack's manifest (id, version, format, game,
+mods); a resource pack's <code>pack.mcmeta</code>; a shader pack's <code>horizon_shader_api::check</code> and manifest (id, version,
+shader API).</li>
+<li>A kind this build can't install is refused with &quot;this Rusty Minecraft can't install a … yet&quot;.</li>
+</ol>
+<h2 id="hpack"><code>.hpack</code></h2>
+<p>A zip holding <code>horizon-modpack.toml</code> and, optionally, <code>overrides/</code>. The mods are not inside: the launcher downloads
+each from the index and checks it as above.</p>
+<pre><code class="language-toml">format = 1
+id = &quot;cozy&quot;                 # [a-z0-9_]{1,64}: the profile's folder
+name = &quot;Cozy&quot;
+version = &quot;1.0.0&quot;
+description = &quot;Coordinates and a calm render distance.&quot;
+authors = [&quot;Rusty Minecraft&quot;]
+game = &quot;26.3&quot;
+
+[[mods]]
+id = &quot;coords_hud&quot;
+version = &quot;0.1.0&quot;
+sha256 = &quot;e1135345692f6dd8fd4c51920151944b82333e17049c9bb7d756f27b8deefc53&quot;
+on = true                   # optional, default true: turned on in the profile's horizon-mods.txt
+</code></pre>
+<p>Unknown keys are refused. <code>overrides/</code> may hold only <code>options.txt</code>, <code>horizon-graphics.txt</code>, <code>horizon-extras.txt</code>,
+<code>resourcepacks/&lt;name&gt;.zip</code> and <code>horizon-mods/.horizon-mod-data/&lt;a listed mod&gt;/...</code> (a mod's own saved settings,
+a native mod's saved settings), each at most 64 MiB and 256 MiB in all; anything else refuses the pack. The launcher copies
+them into the profile's game folder.</p>
+<h2 id="the-registry-repository">The registry repository</h2>
+<p><a href="https://github.com/horizon-rust/horizon-mods">horizon-rust/horizon-mods</a> holds one <code>mods/&lt;id&gt;.toml</code> per project and
+<code>revoked.toml</code>. An entry is <strong>a link and a page</strong>: the project's GitHub repository and what the listing says about it.
+Its versions are the repository's GitHub releases. What an entry can't vouch for is read from the file by the kind's own
+check (<code>index::inspect</code>): a mod's API, side and capabilities, a modpack's mods, the size. Types and rules:
+<code>horizon_mods::index::registry</code>.</p>
+<pre><code class="language-toml">id = &quot;coords_hud&quot;                # the file's name, and the manifest's id
+kind = &quot;mod&quot;                     # mod | native-mod | modpack | resourcepack | shader
+repo = &quot;horizon-rust/coords-hud&quot; # GitHub owner/name: its releases are its versions
+owners = [&quot;ludovic111&quot;]          # GitHub logins responsible for the project
+key = &quot;RWT...&quot;                   # optional: the minisign public key every version is signed with
+icon = &quot;icons/coords_hud.png&quot;    # optional: a PNG of at most 256 KiB in the repository, or https://
+# The page. Each field may instead come from horizon-registry.toml in the repo (below); these win.
+name = &quot;Coordinates HUD&quot;
+summary = &quot;One line, at most 160 characters.&quot;
+description = &quot;&quot;&quot;Markdown.&quot;&quot;&quot;
+authors = [&quot;Rusty Minecraft&quot;]
+license = &quot;MIT&quot;
+# source defaults to https://github.com/&lt;repo&gt;
+</code></pre>
+<p><strong>Versions come from the releases.</strong> For each entry with a <code>repo</code>, the registry's CI lists its GitHub releases (drafts
+and pre-releases are skipped) and, for each release it has not read yet, downloads the asset with the kind's extension
+(and its <code>&lt;name&gt;.minisig</code> when the project has a key), runs the checks of a submission (below), and if they pass
+adds the version. The version, the game and the pins are the file's own manifest (<code>horizon-mod.toml</code>,
+<code>horizon-native.json</code>, <code>horizon-modpack.toml</code>, the shader manifest); the release's tag stands in where the file
+names none (a leading <code>v</code> is dropped). <code>published</code> is the release's date, <code>changelog</code> its notes (cut at 6000
+characters), <code>file.url</code> the asset's address in the repository, <code>file.sha256</code> and <code>size</code> are computed by the CI and, when GitHub
+gives the asset a digest, must equal it. Tags and asset names use letters, digits, <code>.</code>, <code>-</code>, <code>_</code> and <code>+</code>. A release
+that fails a check is skipped and reported in an issue of the registry; the same bytes are not read again. The versions that passed are kept,
+in the order they were read, in <code>versions/&lt;id&gt;.json</code> on the registry's <code>versions</code> branch (the page last read from
+the repository is kept with them), so the history is auditable and the index does not change when a repository
+does: a release deleted or an asset replaced later does not change the index (the launcher refuses bytes that are not the pinned ones).</p>
+<p><strong><code>horizon-registry.toml</code></strong> at the root of the repository, as of the newest release's tag, may hold <code>name</code>, <code>summary</code>,
+<code>description</code>, <code>authors</code> and <code>license</code> (unknown keys, and anything about owners, key, kind or icon, are refused): they fill the
+page fields the entry leaves out. A listing that is incomplete without it is refused until it is.</p>
+<p><strong><code>[[versions]]</code> in an entry are optional</strong> and kept for projects listed before releases were read, and for Rusty Minecraft's own
+mods built in the registry (<code>native/&lt;name&gt;/</code>):</p>
+<pre><code class="language-toml">[[versions]]                     # newest first
+version = &quot;0.1.0&quot;                # letters, digits, '.', '-', '_': the release tag is &lt;id&gt;-&lt;version&gt;
+published = &quot;2026-10-24&quot;
+game = &quot;26.3&quot;
+file = &quot;coords_hud-0.1.0.hmod&quot;   # the name players download, a release asset of the registry
+sha256 = &quot;e113...&quot;               # pins the reviewed file
+signature = &quot;&quot;&quot;untrusted comment: ...&quot;&quot;&quot;   # when the project has a key
+changelog = &quot;&quot;                   # optional
+</code></pre>
+<p>The index lists both kinds, newest first. A project listed by its repository with no release yet is not in the index.</p>
+<pre><code class="language-toml"># revoked.toml
+[[revoked]]
+id = &quot;bad_mod&quot;
+sha256 = &quot;1111...&quot;               # optional: without it, every version
+reason = &quot;Sent chat messages it didn't declare.&quot;
+date = &quot;2026-10-24&quot;
+</code></pre>
+<p>Who reviews what: <strong>a project is reviewed when it is listed</strong> (the pull request that adds its entry: the
+repository, its source, the page, the owners), and again if its <code>repo</code>, owners or key change. <strong>Later releases are
+checked automatically, not reviewed by a person</strong>; <code>revoked.toml</code> takes a bad one down. A signing <code>key</code> makes a stolen
+repository or account useless for publishing an update.</p>
+<p>The submission form's service (<code>crates/horizon-mod-registry</code>) lists a new project: it signs the creator in with GitHub,
+reads the repository's address and the page, and opens the pull request. It no longer takes updates for a project listed
+with a <code>repo</code>: &quot;publish a GitHub release in <repo>&quot;. Projects without a <code>repo</code> can still be updated through the form
+(it uploads the file to the repository's <code>staging</code> release as <code>&lt;sha256&gt;.&lt;extension&gt;</code> and opens a pull request; an
+owner's update with nothing else changed is merged by <code>owner-update</code> once the checks pass).</p>
+<p>Unknown keys in an entry are refused. Its CI runs <code>cargo-horizon-mod</code> (<code>crates/cargo-horizon-mod</code>):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cargo horizon-mod check &lt;file&gt; [--json]</code></td>
+<td>A submission's checks: its kind's (above) and its signature with <code>--key</code> and <code>--signature</code>. It runs no mod's code: a native mod's source is read by the reviewers when it is listed.</td>
+</tr>
+<tr>
+<td><code>cargo horizon-mod registry check &lt;base&gt; &lt;head&gt; --files &lt;dir&gt;</code></td>
+<td><code>check</code> on each hosted file <code>head</code> lists and <code>base</code> doesn't: a pull request's new files.</td>
+</tr>
+<tr>
+<td><code>cargo horizon-mod registry list &lt;checkout&gt;</code></td>
+<td><code>&lt;sha256&gt; &lt;id&gt; &lt;version&gt; &lt;file&gt;</code> per hosted version: the files to download.</td>
+</tr>
+<tr>
+<td><code>cargo horizon-mod registry build &lt;checkout&gt; --files &lt;dir&gt; --out index.json</code></td>
+<td>Reads every entry, its hosted files (<code>&lt;dir&gt;/&lt;sha256&gt;</code>) and <code>versions/&lt;id&gt;.json</code>, lists every problem, and writes the index (<code>--release</code>, ending in <code>/</code>, defaults to the repository's releases, for hosted versions).</td>
+</tr>
+<tr>
+<td><code>cargo horizon-mod registry release &lt;checkout&gt; &lt;id&gt; &lt;file&gt; --tag T --published D [--notes F] [--signature F] [--game G]</code></td>
+<td>The checks of a submission, then the version a release of the project's repository is, as the index lists it (JSON).</td>
+</tr>
+<tr>
+<td><code>cargo horizon-mod registry page &lt;checkout&gt; &lt;id&gt; &lt;horizon-registry.toml&gt;</code></td>
+<td>The repository's page file, checked against its entry (JSON).</td>
+</tr>
+<tr>
+<td><code>cargo horizon-mod registry review &lt;base&gt; &lt;head&gt; --author &lt;login&gt;</code></td>
+<td>A pull request's changes: a published file never changes and is never removed (take it down in <code>revoked.toml</code>), a kind never changes; changes by a non-owner and to owners, keys or the repository are pointed out for the reviewers.</td>
+</tr>
+</tbody>
+</table></div>
+<p>How the repository runs (its workflows are in <code>.github/workflows/</code>):</p>
+<ul>
+<li><strong>A pull request</strong> (<code>check.yml</code>) runs <code>registry review</code>, downloads each new hosted file from the <code>staging</code> prerelease,
+runs <code>registry check</code> on it and builds the index it would publish; the report is the run's summary. The tool is
+<code>cargo-horizon-mod</code> from Rusty Minecraft at the commit in the repository variable <code>HORIZON_REV</code>.</li>
+<li><strong>Every hour, and on a push to <code>main</code></strong> (<code>publish.yml</code>): read the new releases of every entry with a <code>repo</code> as above and
+keep the result on the <code>versions</code> branch, make each new hosted version a release <code>&lt;id&gt;-&lt;version&gt;</code>, and deploy
+<code>index.json</code> and <code>icons/</code> to GitHub Pages: <code>https://horizon-rust.github.io/horizon-mods/index.json</code>, served with
+<code>Access-Control-Allow-Origin: *</code>.</li>
+<li><strong>Merging</strong> an entry needs the <code>check</code> run and a CODEOWNER's review.</li>
+<li><strong>Weekly</strong>, <code>cleanup.yml</code> deletes staged copies of published files after 7 days and of files no open pull request
+lists after 30.</li>
+<li><strong>Taking a file down</strong> is a pull request adding it to <code>revoked.toml</code>. Removing an entry outright (a test, a project
+nobody installed) fails <code>registry review</code> on purpose and needs an administrator's merge.</li>
+</ul>
+<p>Kinds open to submissions: <code>mod</code> (content only), <code>native-mod</code>, <code>modpack</code>, <code>resourcepack</code>, <code>shader</code>. A shader pack (<code>.hshader</code>) passes
+<code>horizon_shader_api::check</code>, the check the game runs before it loads one (<code>horizon-shader check</code>, <a href="../shaders.html">shaders.md</a>):
+every stage validated by naga and translated for Vulkan, Metal and DirectX 12; its manifest's id, version and shader
+API line are its facts. Iris and OptiFine packs are for the Modrinth browser. A new kind gets its own check before it
+opens.</p>
+<h2 id="changelog">Changelog</h2>
+<ul>
+<li>2026-10-30: an entry names its GitHub repository (<code>repo</code>) and its versions are the repository's releases, read by the registry's CI; <code>file.url</code> may be a release asset of that repository. The index's schema is unchanged.</li>
+<li>2026-10-26: <code>projects[].downloads</code>, GitHub's download counts of a project's files, refreshed every hour.</li>
+<li>2026-10-26: the launcher installs <code>shader</code> files into <code>shaderpacks/</code>; the sample index lists one (<code>glow</code>).</li>
+<li>2026-10-25: <code>shader</code> opens, checked by <code>horizon_shader_api::check</code>; its files are <code>.hshader</code>.</li>
+<li>Schema 1 (2026-10-24): kinds <code>mod</code>, <code>modpack</code>, <code>resourcepack</code>, <code>shader</code>; <code>.hpack</code> format 1.</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/api/mod-index.md"><code>docs/api/mod-index.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#indexjson">index.json</a></li><li class="l2"><a href="#before-a-file-is-installed">Before a file is installed</a></li><li class="l2"><a href="#hpack">.hpack</a></li><li class="l2"><a href="#the-registry-repository">The registry repository</a></li><li class="l2"><a href="#changelog">Changelog</a></li></ul></nav>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

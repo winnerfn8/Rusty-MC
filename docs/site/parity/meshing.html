@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section meshing parity · Rusty Minecraft docs</title>
+<meta name="description" content="Section meshing parity: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="../repo/README.html">Rusty Minecraft</a></li><li><a href="../java-mod-translation.html">Java mod translation</a></li><li><a href="../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="../repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../website.html">The documentation website</a></li><li><a href="../repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="../repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="../repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../native-client.html">Rusty Minecraft native client</a></li><li><a href="../hosting.html">Host a server</a></li><li><a href="../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../server-next.html">The next server: design</a></li><li><a href="../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../graphics.html">Graphics: settings and performance</a></li><li><a href="../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../extras.html">Rusty Minecraft extras</a></li><li><a href="../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../mods.html">Rusty Minecraft mods</a></li><li><a href="../native-mods.html">Native mods (experimental)</a></li><li><a href="../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../versioning.html">Versioning</a></li><li><a href="../resource-packs.html">Resource packs: what works</a></li><li><a href="../telemetry.html">Opt-in data collection</a></li><li><a href="../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="../api/README.html">Rusty Minecraft APIs</a></li><li><a href="../api/stability.html">API stability and versioning</a></li><li><a href="../play-with-friends.html">Play with friends</a></li></ul></details><details open><summary>Parity</summary><ul><li><a href="../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../parity-workflow.html">Parity workflow</a></li><li><a href="blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="meshing.html" aria-current="page">Section meshing parity</a></li><li><a href="../port-ledger.html">Port ledger</a></li><li><a href="../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../world-generation.html">World generation</a></li><li><a href="../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../density-functions.html">Compiled density evaluation</a></li><li><a href="../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../biome-lookup.html">Biome lookup</a></li><li><a href="../biome-temperatures.html">Biome temperatures</a></li><li><a href="../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../material-conditions.html">Numeric material conditions</a></li><li><a href="../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../vertical-anchors.html">Vertical anchors</a></li><li><a href="../value-providers.html">World-generation value providers</a></li><li><a href="../carving.html">Carving</a></li><li><a href="../heightmaps.html">Heightmaps</a></li><li><a href="../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../world-data.html">Rusty Minecraft world data</a></li><li><a href="../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="../api/agent-control.html">Agent control API</a></li><li><a href="../api/data-formats.html">Data formats</a></li><li><a href="../api/launch-reference.html">Launch API reference</a></li><li><a href="../api/launch.html">Launch API</a></li><li><a href="../api/launcher.html">Launcher API</a></li><li><a href="../api/mod-index.html">The registry index and .hpack</a></li><li><a href="../api/server-reference.html">Server reference</a></li><li><a href="../api/server.html">Server API</a></li><li><a href="../api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="../api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="../repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="../repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="../repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="../repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="../repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="../repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="../repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="../repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="../repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="../repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="../repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="../repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="../repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="../repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="../repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="../repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="../repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="../repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="../repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="../repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="../repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="../repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="../repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../controllers.html">Controllers</a></li><li><a href="../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../known-issues.html">Known issues</a></li><li><a href="../launcher-commands.html">Launcher commands</a></li><li><a href="../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../release-flow.html">Release flow</a></li><li><a href="../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../save-batch-entities.html">Block entity save batches</a></li><li><a href="../security.html">Security</a></li><li><a href="../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="section-meshing-parity">Section meshing parity</h1>
+<p><code>tools/test_section_mesh_parity.py</code> compares the vertices Rusty Minecraft's section
+mesher (<code>crates/horizon-client-render/src/mesher.rs</code>, with <code>mesher/lighting.rs</code> and
+<code>mesher/fluid.rs</code>) emits with the vertices the pinned client's own renderers
+emit for the same scenes.</p>
+<h2 id="what-is-compared">What is compared</h2>
+<ul>
+<li><strong>Vanilla side</strong>: <code>VanillaSectionMeshOracle</code> bootstraps the game, binds the
+prepared block tags, parses the jar's blockstate definitions and block
+models, and bakes <code>BlockStateModel</code>s through the real <code>ModelDiscovery</code>,
+<code>UnbakedRoot.bake</code> and <code>FaceBakery</code> path. Every texture becomes a real sprite
+(its PNG from the jar) alone in a unit atlas, so UVs stay in sprite-local
+[0,1] space; the five fluid sprites share one strip with gaps so the fluid
+vertex stream still identifies them. A fixed <code>BlockAndTintGetter</code> serves the
+scene's block states, per-cell sky/block light, constant biome colours per
+<code>ColorResolver</code> and the overworld or Nether <code>CardinalLighting</code>. Blocks of one
+section are visited like <code>SectionCompiler.compile</code>: fluids through
+<code>FluidRenderer.tesselate</code>, then <code>RenderShape.MODEL</code> blocks through
+<code>ModelBlockRenderer.tesselateBlock</code> with smooth lighting on, culling on,
+cutout leaves, <code>BlockColors.createDefault()</code> and <code>state.getSeed(pos)</code>.</li>
+<li><strong>Rusty Minecraft side</strong>: <code>crates/horizon-client/examples/probe/section_mesh_fixture.rs</code>
+loads the prepared resources (<code>Assets</code>, <code>BlockFacts</code>, <code>Biomes</code>,
+<code>load_visibility</code>, <code>MeshTables</code>), builds the same blocks and light in real
+client <code>Chunk</code>s (a 3x3 chunk region), sets every biome's colours to the
+scene constants (or, for the biome-blend scenes, keeps the real biome
+definitions and fills the chunks' quart biome arrays) and runs <code>Mesher::mesh</code>.</li>
+<li><strong>Comparison</strong>: quads are matched as multisets per scene, keyed by sprite,
+render-layer class (translucent vs. solid/cutout) and geometry rounded to
+1/1000 after binary32 normalisation, with a winding-preserving rotation.
+Matched quads compare per vertex: positions and UVs within 1e-4, ARGB colour
+and light coordinates (sky and block, 1/16 steps) exactly.</li>
+<li><strong>Per-state facts</strong>: a second gate compares, for all 35,723 states, the facts
+the Rust tables derive from prepared resources with the client's accessors:
+<code>getShadeBrightness</code>, <code>emissiveRendering</code>, <code>isSolid</code>, <code>isLightPermeable</code>,
+<code>isSolidRender</code>, <code>isCollisionShapeFullBlock</code>, light emission, the water
+overlay classes (<code>HalfTransparentBlock</code>/<code>LeavesBlock</code>), tint source counts
+and <code>getOffset</code> at five columns.</li>
+</ul>
+<p>The corpus (112 sections, ~1.0M quads, ~206k of them fluid quads) has full
+cubes in open air, corners, cavities and overhangs; slabs, stairs, walls,
+fences, panes, bars, torches, flowers and grasses with XZ/XYZ offsets, tall
+plants, tinted blocks (grass, leaves, stems, redstone, lily pad, petals, leaf
+litter, cauldrons), snow layers, carpets, farmland, paths, hoppers, anvils,
+chains, lanterns, dripleaf, dripstone; water and lava sources, flowing levels,
+falling columns, waterlogged blocks, water against glass/leaves/slabs/ice;
+section edges with neighbours in other chunks and sections; a cave with
+emissive and light-emitting blocks (magma, glowstone, sea lantern, active
+sculk sensor, glow lichen); Nether shading; every block's default state; every
+<code>RenderShape.MODEL</code> state of the registry on a sparse grid; and dense random
+scenes mixing all model states with fluids under propagated or random light.</p>
+<p>Biome tint blending is compared against the client's real
+<code>ClientLevel.calculateBlockTint</code>: the oracle builds a <code>BiomeManager</code> (the
+eight-corner zoom with a random hashed seed) over a fixed noise-biome map of
+real <code>Biome</code> objects from the registry bootstrap (colormap sampling, colour
+overrides, the dark-forest and swamp grass modifiers), initialises
+<code>GrassColor</code>/<code>FoliageColor</code>/<code>DryFoliageColor</code> from the jar's colormaps, and
+averages the resolver over the blend radius at each block's own height. The
+<code>biome_blend_r*</code> scenes (radius 0, 1, 2, 3, 5, 7) put tinted blocks (grass,
+leaves, water, leaf litter, cane, ferns, vines) at four heights on every
+column of a Voronoi patchwork of 16 common biomes that shifts with height;
+the <code>biome_each_*</code> scenes cover all 67 biomes. Option scenes (<code>options_*</code>)
+cover flat lighting (<code>ao</code> off), opaque leaves (<code>cutoutLeaves</code> off, which
+<code>SectionCompiler</code> draws in the solid layer and <code>LeavesBlock.skipRendering</code>
+joins) and both together.</p>
+<p>With <code>biomeBlendRadius</code> 0 the client takes the resolver's colour as is. Biome
+colours given as plain RGB (all water colours, most grass/foliage overrides)
+have alpha 0 there, so the client's tinted vertices come out fully
+transparent, which the terrain shader would discard. Rusty Minecraft keeps them
+opaque and the gate compares RGB for radius-0 scenes.</p>
+<h2 id="running">Running</h2>
+<pre><code class="language-sh">python3 tools/test_section_mesh_parity.py            # full corpus
+python3 tools/test_section_mesh_parity.py --quick    # skip the all-states catalogue
+python3 tools/test_section_mesh_parity.py --strict   # exit 1 on any difference
+python3 tools/test_section_mesh_parity.py --only fluids
+</code></pre>
+<p>It needs the pinned jars (<code>tools/lab.py prepare</code>) and prepared client resources
+(<code>cargo run --release -p horizon-prepare -- --prepare</code>). Outputs, logs and
+<code>report.json</code> go to <code>target/section-mesh-parity/</code>; nothing is written under
+<code>.local/</code>. The fixture is built with <code>--profile fast</code> and reports its
+meshing time.</p>
+<h2 id="results">Results</h2>
+<p>Before the port (commit <code>2940b5a</code>, first 18 scenes): 25,391 of 55,017 vanilla
+quads identical (46%); 7,685 fluid quads missing, 9,231 extra quads, and
+light/colour differences on most of the rest.</p>
+<p>After: all 841,775 quads of the 94 scenes match and are identical, and all
+per-state facts match. Meshing cost is unchanged within noise: the fixture
+meshes the 94 (dense) corpus sections in about 3 ms each with both the old and
+the ported mesher (<code>--profile fast</code>, loaded 24-thread desktop).</p>
+<p>What was ported to get there:</p>
+<ul>
+<li><code>BlockModelLighter</code>: quad shape (<code>faceCubic</code>/<code>facePartial</code>), the corner,
+diagonal and centre samples (diagonals only through light-permeable blocks,
+the centre from the neighbour unless it is solid-render), shade brightness
+overrides, emissive full-bright samples, <code>smoothBlend</code> (zero samples take the
+centre, sky-less samples borrow its sky, only when the centre is above 2),
+the partial-face weights with <code>smoothWeightedBlend</code>'s int narrowing, and the
+vertex remap. The padded section border grew to two blocks because cubic
+faces sample two blocks out along their normal.</li>
+<li><code>ModelBlockRenderer</code>: flat lighting for light-emitting blocks or when the
+first model part disables AO (culled quads read light from the cull
+neighbour, others from the neighbour only when flush), <code>ARGB.gray</code>/
+<code>scaleRGB</code>/<code>multiply</code> integer arithmetic, cardinal shading including
+<code>NETHER</code>, shade-direction overrides, per-element light emission, tint source
+counts (layer indices past the list are untinted; water and bubble columns
+are untinted in the world) and <code>getOffset</code> for XZ/XYZ blocks.</li>
+<li><code>FluidRenderer</code>: face culling against the neighbour's occlusion face shape
+for the fluid box height, self occlusion, <code>isSolid</code> corner heights, the
+weighted corner averages in vanilla order, the 0.001 insets (also feeding the
+side faces), <code>FlowingFluid.getFlow</code> with <code>Mth.atan2</code> and the sine table, the
+water overlay beside half-transparent and leaf blocks, back faces,
+<code>max(self, above)</code> light, bottom light from below, and cardinal shading.</li>
+<li><code>UnbakedCuboidGeometry.bake</code>: elements flat along an axis draw no faces
+across it (<code>bake_block_model</code> in horizon-assets; the raw
+<code>bake_model_transformed</code> used by the model-baking gate is unchanged).</li>
+</ul>
+<p>Exported facts used: <code>block-behaviours.json</code> (class chains, <code>isSolid</code>, full
+face sturdiness), <code>gameplay-facts.json</code> (<code>offset</code> flag, emission, shapes),
+the <code>#minecraft:blocks_fluid_flow</code> tag and the occlusion faces already loaded
+for face visibility. Offset types and maximum offsets, shade-brightness and
+emissive overrides are keyed by class or block name and checked by the facts
+gate.</p>
+<h2 id="what-remains-different-or-untested">What remains different or untested</h2>
+<ul>
+<li>Changing <code>biomeBlendRadius</code>, <code>ao</code> or <code>cutoutLeaves</code> in the options does not
+remesh resident sections; new and edited sections use the new values.</li>
+<li>Model variant seeds: <code>DoublePlantBlock</code>, <code>DoorBlock</code> and <code>AbstractBedBlock</code>
+override <code>getSeed</code>; Rusty Minecraft seeds every block from its own position. No
+vanilla block among those has weighted variants, so output is unaffected.</li>
+<li>Opaque leaves: the vertex layer carries a flag (<code>OPAQUE_LAYER</code>) that makes
+the terrain shader ignore the texture's alpha; the shader side is not
+compared (GPU pixels).</li>
+<li>Layers: vanilla's solid and cutout layers are compared as one class because
+Rusty Minecraft draws both in its opaque pass.</li>
+<li>Not compared: block entities and their renderers, animated sprite frames,
+translucent sorting, chunk-border light outside loaded chunks and GPU
+pixels.</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/parity/meshing.md"><code>docs/parity/meshing.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#what-is-compared">What is compared</a></li><li class="l2"><a href="#running">Running</a></li><li class="l2"><a href="#results">Results</a></li><li class="l2"><a href="#what-remains-different-or-untested">What remains different or untested</a></li></ul></nav>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

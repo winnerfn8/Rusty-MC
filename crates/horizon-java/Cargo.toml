@@ -1,0 +1,28 @@
+[package]
+name = "horizon-java"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version = "1.85"
+description = "Java mods' code: the mixin hook points' runtime side, and the optional embedded JVM that runs a mod's injections (docs/java-mod-runtime.md)"
+
+[features]
+# The embedded JVM (docs/java-mod-runtime.md): JNI's invocation API, loading the player's own
+# libjvm at run time (nothing links against Java). Building it needs a JDK's javac.
+jvm = ["dep:jni"]
+
+[dependencies]
+jni = { version = "0.21.1", features = ["invocation"], optional = true }
+log = "0.4"
+
+[dev-dependencies]
+horizon-port-pack = { path = "../horizon-port-pack" }
+jni = { version = "0.21.1", features = ["invocation"] }
+zip = { version = "2", default-features = false, features = ["deflate"] }
+
+[lints]
+workspace = true
+
+[[example]]
+name = "jvm_cost"
+required-features = ["jvm"]

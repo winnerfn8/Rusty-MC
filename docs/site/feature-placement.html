@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feature placement · Rusty Minecraft docs</title>
+<meta name="description" content="Feature placement: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details open><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html" aria-current="page">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="feature-placement">Feature placement</h1>
+<p>Rusty Minecraft implements eighteen Java Edition <strong>26.3</strong> placement modifiers: count,
+square spread, three-axis offset, height range, rarity filtering, random-chance
+filtering, fixed positions, random selection among modifiers, heightmap positions, surface-relative
+thresholds, water-depth filtering, both noise-based count forms, cuboid placement,
+count-on-every-layer scans, predicate filtering, vertical environment scans and biome filtering.</p>
+<p>Placement preserves callback order, duplicate positions, wrapping coordinates,
+provider sampling and random draw consumption. Fixed positions are filtered by
+the origin's chunk X/Z. Random-choice nesting is bounded to depth 256 and 65,536
+modifier nodes; lists are bounded to 8,192 entries. Consumer failures retain
+previous emissions and consumed draws. Probability-range decoding distinguishes
+negative zero from positive zero, matching the native codec.</p>
+<p>Run <code>python3 tools/test_placement_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-placement-2026-10-06/scoped-parity.json">local report</a> records
+<strong>1,268,600 matching lines per reference JAR</strong>, across <strong>520 definitions</strong> and
+<strong>21,840 seeded fixtures</strong>, with <strong>70,080 requested modification calls</strong> and <strong>17,280 direct count queries</strong>. Actual
+<code>PlacementModifier.CODEC</code> and modifier callbacks supply the reference results.
+The corpus tests both random modes, relative-height overflow, nested choices,
+malformed fields, repeated calls, consumers that draw randomness and failures
+before or after earlier emissions.</p>
+<p>This suite uses an actual placement context backed by a world proxy with traced synthetic heightmaps.
+Additional block predicates, full feature registries, registry integration,
+Gaussian providers, encoding and complete generated worlds remain pending.</p>
+<h2 id="modifier-chains">Modifier chains</h2>
+<p><code>FeaturePlacer</code> collects a modifier's outputs before processing its descendants,
+preserving sibling order through a reusable pending stack. Actual feature callbacks
+share the modifier random stream. Boolean results accumulate without skipping later
+placements. An empty chain calls the feature directly. Errors retain pending and
+modified-position buffers, matching vanilla when the same placer is used again.</p>
+<p>Run <code>python3 tools/test_feature_placement_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-feature-placement-2026-10-06/scoped-parity.json">chain report</a>
+records <strong>548,461 matching lines per JAR</strong>. Actual native <code>FeaturePlacer</code> executes
+native modifiers and a synthetic feature sink, comparing emitted positions,
+feature results, consumed randomness and repeated calls after failures. This tests
+the execution machinery; the separate feature suite below connects it to initial block-writing algorithms.</p>
+<p>Rust bounds chains to 1,024 modifiers and per-call work/pending buffers to 2^20.
+Unit tests reject oversized chains before feature calls or random draws and stop
+multiplicative count expansion after bounded partial progress.</p>
+<h2 id="heightmap-queries">Heightmap queries</h2>
+<p><code>PlacementContext</code> supplies generation bounds, the world minimum and heightmap
+queries. These are separate: the world minimum can differ from the generator's
+minimum. Heightmap placement emits only above the world minimum. Surface-relative
+thresholds use 64-bit sums; water-depth subtraction retains Java integer wrapping.
+Queries and emitted positions retain native order, and query errors stop the
+current operation without drawing randomness or emitting a replacement position.</p>
+<p>Both suites include ordinary/extreme synthetic heights, all six map types,
+distinct world/generator minima, default/reversed threshold ranges and injected
+query failures. This validates how modifiers consume heightmaps; connecting
+feature generation to complete world regions remains pending.</p>
+<h2 id="noise-based-counts">Noise-based counts</h2>
+<p>Noise-based and noise-threshold counts share vanilla's fixed biome-information
+simplex noise. They preserve the float noise result before double arithmetic,
+ceiling/narrowing behavior and strict threshold comparison. They consume no caller
+random draws. <code>repetitions</code> exposes counts without expanding position lists.</p>
+<p>Primitive comparisons include extreme ratios, factors, offsets and thresholds,
+including count-only queries that can return enormous counts safely. Chain tests
+exercise ordinary noise counts together with other modifiers and feature callbacks.
+Emitting repeating modifiers remains bounded to 4,096 repetitions in Rust.</p>
+<p>Cuboid placement samples Y size, then independent X and Z sizes, before emitting
+positions in X/Y/Z order. Its extents are inclusive. Edge and interior controls
+are independent, and coordinates wrap. The suites cover all four control
+combinations, provider variation, maximum decoded extents, consumer failures and
+cuboids embedded in modifier chains.</p>
+<h2 id="layered-placement">Layered placement</h2>
+<p>Count-on-every-layer placement samples its count provider at every loop-condition
+check, including the final check. Each attempt draws X/Z offsets, queries the
+motion-blocking heightmap and scans down for the requested surface layer. Air
+states and exact water/lava blocks count as empty. Bedrock is excluded as ground;
+other blocks, including bubble columns, are potential ground. Emissions and count
+sampling interleave, sharing the caller's random stream.</p>
+<p>The suites compare traced synthetic strata containing these block kinds, random
+count providers, repeated passes and injected height/block/consumer failures.
+<code>LayerBlock</code> is a query classification supplied by the world; complete block
+behavior and region-backed feature generation remain pending. A shared 65,536-step
+budget bounds scans, including when world queries supply extreme heights.</p>
+<h2 id="initial-block-writing-features">Initial block-writing features</h2>
+<p><code>BasicFeature</code> implements the void start platform, End islands and the End
+arrival platform. The world supplies block reads and mutations; required block
+states bind through its registry. The algorithms preserve write order, update
+flags, wrapped coordinates, ignored false mutation results and partial effects
+when a world operation fails. End-island radius sampling retains native draw order.</p>
+<p>Run <code>python3 tools/test_basic_feature_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-basic-feature-2026-10-06/scoped-parity.json">feature report</a>
+records <strong>1,820,614 matching lines per JAR</strong>. Actual feature codecs and native place
+methods operate on a mutable world proxy. Both random modes, multiple seeds,
+nearby/far chunks, extreme coordinates, rejected writes, thrown failures and
+repeated placements are compared, including complete accumulated stored states.
+Native <code>setBlockAndUpdate</code> executes its actual default method, exposing its flags.
+The suite also composes these features with modifier chains, sharing the mutable
+world and random stream and reusing placer buffers after failures.
+<code>place_with_context</code> gives feature callbacks the same world used by modifiers.</p>
+<p>This covers feature algorithms against a supplied mutation interface. Actual chunk
+mutation, neighbor updates, lighting, entities/drops, complete feature registries
+and generated worlds remain pending. The End-platform generation path does not
+request the separate block-destruction/drop behavior used by portal recreation.</p>
+<h2 id="predicate-filters-and-environment-scans">Predicate filters and environment scans</h2>
+<p>Logical predicates (<code>true</code>, <code>not</code>, <code>all_of</code>, <code>any_of</code>) preserve ordered
+short-circuiting, including empty-list identities. Inside-world-bounds predicates
+apply wrapping offsets before checking the world's inclusive height bounds.
+Their offset codec retains Java's wrapping absolute-value behavior for the
+minimum signed integer. These five predicate kinds also work inside filters and
+vertical scans; state-dependent predicates remain pending.</p>
+<p>Environment scans check the initial allowed condition before the target, then
+move one block at a time. They stop immediately outside build height. A failed
+allowed condition after a move still permits the final target test at that
+position. The codec limits scans to 1–32 steps; shared work and nesting budgets
+also bound directly constructed predicates and scans.</p>
+<p>Both placement suites compare actual native codecs and predicate execution,
+traced world-bound queries, short-circuiting, wrapped offsets, invalid directions,
+step limits and query failures. Unit tests exercise oversized trees and scans
+that would otherwise traverse billions of positions.</p>
+<h2 id="resident-feature-regions">Resident feature regions</h2>
+<p><code>TerrainRegion</code> routes block reads/writes by signed chunk coordinates and lazily
+primes missing heightmaps. It requires consistent vertical bounds and registry
+identity across resident chunks. Its placement context supplies generation bounds,
+world bounds, heightmaps and layer classifications from those same chunks.
+<code>TerrainFeatureAccess</code> shares that region with feature algorithms and forwards
+all writes and flags to a caller-supplied mutation callback.</p>
+<p>Run <code>python3 tools/test_feature_region_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-feature-region-2026-10-06/scoped-parity.json">region report</a>
+records <strong>28,922,634 matching lines per JAR</strong> across 192 fixtures and 2,304 requested
+placements. Actual native features and <code>FeaturePlacer</code> operate over a world proxy
+backed by nine <code>ProtoChunk</code>s per fixture. The comparison includes both heightmap
+groups, count/square/heightmap/layered chains, repeated writes, missing neighbors,
+rejected writes, failures, update flags, random state, final raw sections and
+packed heightmaps.</p>
+<p>The region corpus also runs a composed sequence of configured fill layers over
+the same live chunks: water, horizontal logs, air and an out-of-height layer.
+This connects block-state decoding, nested feature execution, shared placement
+and chunk heightmap updates; the standalone fill-layer suite below covers
+integer-property parsing and per-column query ordering in more detail.
+Single-block replacement and scattered ore also execute against those resident
+chunks, sharing the updated state, heightmaps, failure policy and random stream.</p>
+<p>The reference proxy supplies storage mutation. This verifies the connection
+between features, placement queries and resident chunks; actual region write
+zones, POIs, block entities, postprocessing, lighting and the full feature registry
+remain pending. Unit tests check mixed-registry/bounds rejection, negative chunk
+routing, missing-neighbor errors and mutation-callback flag/return handling.</p>
+<h2 id="inline-feature-composition">Inline feature composition</h2>
+<p><code>FeatureDefinition</code> and <code>PlacedFeatureDefinition</code> compose the initial block-writing
+features with no-op, sequence, boolean choice, uniform choice, chance-based
+choice, weighted-choice and overlay features. Overlays execute every child and
+accumulate success. Sequences stop on the first false child. Selectors return the
+chosen child's result directly. Child modifiers and features share world state
+and randomness; each sequence uses one fresh placer across its children.
+Native single-object holder-set shorthand is accepted for sequence/uniform lists.</p>
+<p>Run <code>python3 tools/test_feature_graph_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-feature-graph-2026-10-06/scoped-parity.json">graph report</a> records
+<strong>1,146,057 matching lines per JAR</strong> for actual native feature codecs and nested
+placement. Cases include empty/malformed lists, singleton and nested choices,
+zero/one probabilities, negative zero, false child results, partial writes, world
+failures, repeated calls and top-level modifier chains.</p>
+<p>Decode depth, node count and list size are bounded. Feature/placed-feature visits
+and nested modifier-chain execution share a runtime budget. Unit tests cover deep
+decoding, large trees and modifier expansion that reaches no leaf features.
+Weighted choices retain zero-weight children and return false without random draws
+when their total weight is zero. Positive totals preserve the existing bounded
+weighted draw algorithm. <code>OptionalWeightedList</code> keeps this behavior separate from
+the nonempty weighted lists required by integer/height providers. The graph suite
+covers empty/zero lists, integer narrowing, invalid/overflowing weights and nested
+choices; both provider suites also pass after the shared implementation change.
+The resource resolver below adds named holders and tags. Encoders and the full
+feature registry remain pending.</p>
+<h2 id="named-feature-resources">Named feature resources</h2>
+<p><code>FeatureCatalog</code> stores an immutable resource snapshot and resolves requested
+feature or placed-feature roots. Named children, compact singleton holder sets,
+mixed named/inline lists and ordered placed-feature tags expand into executable
+trees. Resolution preserves numeric JSON fields, validates unselected children
+and bounds dependency depth and expanded nodes. Duplicate canonical resource
+names, missing dependencies and cycles return errors.</p>
+<p>Run <code>python3 tools/test_feature_catalog_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-feature-catalog-2026-10-06/scoped-parity.json">catalog report</a>
+records <strong>2,528,704 matching lines per JAR</strong> against actual registry-aware holder
+codecs, registered feature snapshots and native <code>TagLoader</code>. It compares ten
+named features, fifteen placed features, five tag files, nested/duplicate references,
+optional/required missing tags, namespace shorthand and subsequent execution.
+Configured fill layers, single-block replacements and scattered ore bind block-state
+metadata through named roots, nested tags and modifier chains. Block-set
+predicates execute through filters, ordered volumes and environment scans against
+the mutable world, including repeated placement after earlier writes and flowing-water replacement
+that changes later fluid-predicate results.</p>
+<p>Empty named tags retain a native distinction from empty inline lists: a sequence
+can resolve an empty tag and succeed, an overlay returns false, while a uniform selector resolves it and
+then fails its zero-bound random choice. The inline list codecs reject empty
+lists during decoding. These cases and their random-state effects are compared.</p>
+<p>The resource API validates requested reachable roots, allowing unused unported
+resources to remain in the snapshot. Complete datapack loading, live reloads,
+registry ownership/identity semantics and all feature algorithms remain pending.</p>
+<h2 id="configured-fill-layers">Configured fill layers</h2>
+<p><code>FeatureBlockBindings</code> binds block-state JSON against the pinned registry and its
+integer-property metadata. <code>FillLayerFeature</code> visits 16 by 16 columns in native
+X/Z order, queries the world minimum for each column and replaces only air states.
+It preserves wrapping coordinates, write flags, ignored false write results and
+early termination on world errors. Placement consumes no random draws.</p>
+<p>Run <code>python3 tools/test_fill_layer_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-fill-layer-2026-10-06/scoped-parity.json">fill-layer report</a>
+records <strong>1,305,274 matching lines per JAR</strong>, including codec inputs for all
+35,723 pinned states, compact/full states, integer properties, invalid-property
+defaults, height bounds, extreme coordinates, rejected writes and injected query,
+read and write failures. Both random implementations retain matching subsequent
+state. This comparison uses observable mutable storage; complete region effects
+and full generated worlds remain pending.</p>
+<h2 id="replacement-rules">Replacement rules</h2>
+<p><code>RuleTest</code> implements all ten pinned replacement-rule kinds: constant true,
+negation, all/any, block identity, exact block state, block tags, inclusive height
+range and the two random block/state matches. Logical rules preserve ordering and
+short-circuiting. Random rules draw only after matching identity, including at
+zero/one probability; their codecs allow probabilities outside that interval.</p>
+<p>Run <code>python3 tools/test_rule_test_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-rule-test-2026-10-06/scoped-parity.json">rule report</a> records
+<strong>1,890,716 matching lines per JAR</strong>, covering every block/state identity, all
+300 bundled block tags, absent and empty-path tags, malformed inputs, reversed
+height ranges, nested logic and subsequent draws from both random streams.
+Decode depth, node count and list size are bounded, including branching inputs.</p>
+<p>Bindings share immutable sets of state IDs for blocks and resolved tags.
+Native tag identifiers permit an empty path, which remains distinct from a
+missing field. These predicates do not establish complete ore generation or
+structure-processor behavior.</p>
+<h2 id="single-block-replacement">Single-block replacement</h2>
+<p><code>ReplaceBlockFeature</code> applies ordered rule/state pairs at an origin. It re-reads
+the current state for each candidate and stops at the first match, regardless of
+whether the write returns true. Empty or unmatched target lists still succeed;
+read/write errors stop evaluation with the preceding mutations and RNG state
+intact. Target decoding shares the graph's node budget when nested in a feature.</p>
+<p>Run <code>python3 tools/test_replace_block_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-replace-block-2026-10-06/scoped-parity.json">replacement report</a>
+records <strong>303,678 matching lines per JAR</strong> for actual native codecs and placement,
+including rule ordering, shared random state, update flags, rejected writes,
+partial failures, repeated mutations and invalid unselected targets.</p>
+<h2 id="scattered-ore">Scattered ore</h2>
+<p><code>ScatteredOreFeature</code> samples the native attempt count, consumes six float draws
+for each offset (including zero spread), rounds with Java's tie behavior and
+captures the candidate state once per attempt. Matching target rules then apply
+the configured air-exposure probability and ordered directional neighbor checks.
+The first accepted target writes with flag 2; a false write result is ignored.</p>
+<p>Run <code>python3 tools/test_scattered_ore_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-scattered-ore-2026-10-06/scoped-parity.json">scattered-ore report</a>
+records <strong>758,484 matching lines per JAR</strong> across 11,544 fixtures and 23,088
+requested placements. Cases include size/discard codec boundaries, empty targets,
+solid/mixed worlds, each of the six air-neighbor directions, wrapping positions,
+partial failures, rejected writes and both shared random streams.</p>
+<p>Ordinary ore veins use a separate bulk-section mutation path and remain pending.
+A private Linux/JDK 25 probe also found 4,935 bit differences among 2,581,112
+double sine/cosine results for sampled ore angles when using Rust platform math.
+Those intermediates are not yet validated for vein geometry; no exact double-trig
+parity is claimed.
+This scoped feature comparison does not establish biome decoration or full
+generated-world parity.</p>
+<h2 id="bulk-section-access">Bulk section access</h2>
+<p><code>TerrainBulkAccess</code> exclusively borrows resident chunks and caches sections by
+vanilla's packed section key. Raw reads retain cave/void air even when normal
+chunk reads collapse an all-air section to AIR. Outside-height reads return AIR
+before resolving a chunk. Raw writes maintain section occupancy but leave chunk
+heightmaps untouched; region write permissions remain the caller's responsibility.</p>
+<p>Run <code>python3 tools/test_bulk_section_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-bulk-section-2026-10-06/scoped-parity.json">bulk report</a> records
+<strong>959,640 matching lines per JAR</strong> against actual <code>BulkSectionAccess</code> and resident
+<code>ProtoChunk</code>s. It covers every state, primed/lazy heightmaps, missing chunks,
+vertical boundaries, packed-coordinate aliases, cache reset and complete final
+section/heightmap data. The exclusive Rust borrow replaces Java's acquire/release
+locks within this resident-region API; concurrent section ownership remains pending.</p>
+<h2 id="biome-feature-ordering">Biome feature ordering</h2>
+<p><code>build_features_per_step</code> combines ordered biome feature lists using placed-feature
+object identities. It assigns encounter indices, orders graph traversal by step
+and index, detects cycles and reverses DFS completion order to produce each step's
+feature list and identity-to-index mapping. Equal feature payloads remain separate
+when their identities differ. Traversal uses an explicit stack and bounded input
+work; tests include a 50,000-feature dependency chain.</p>
+<p>Run <code>python3 tools/test_feature_sort_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-feature-sort-2026-10-06/scoped-parity.json">ordering report</a>
+records <strong>411,751 matching lines per JAR</strong> across 3,871 fixtures. Native
+<code>FeatureSorter</code> receives identity-distinct dummy payloads for synthetic graphs and
+the feature lists from all 67 bundled biomes, including shuffled/subset combinations.
+Cycles, duplicate references, cross-step reuse, empty steps and index lookups are
+compared. Cycle diagnostic minimization/text and complete decoration remain pending.</p>
+<h2 id="world-generation-random-streams">World-generation random streams</h2>
+<p><code>WorldgenRandom</code> applies vanilla's legacy bit-sampling interface to legacy or
+xoroshiro sources. Longs and doubles retain their multi-draw assembly, bounded
+integers retain legacy rejection and each bit request increments a wrapping count.
+Reseeding preserves the counter. Forks and positional factories delegate to the
+underlying source and return its normal draw behavior through a transparent variant.</p>
+<p>Run <code>python3 tools/test_worldgen_random_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-worldgen-random-2026-10-06/scoped-parity.json">random-adapter report</a>
+records <strong>238,800 matching lines per JAR</strong> for 119,100 operations in 300 fixtures.
+It includes one to three nested wrappers, arbitrary signed bit-width shifts,
+failed bounds, parent/child streams, positional UTF-16 hashes and decoration,
+feature, large-feature, salted and slime-chunk seeds with int/long overflow.
+Gaussian sampling, concurrent use and complete chunk decoration remain pending.</p>
+<h2 id="biome-placement-filtering">Biome placement filtering</h2>
+<p><code>Biome</code> requires the invocation's top placed feature before querying the biome and
+its generation settings. <code>place_with_biome_check</code> establishes that context for
+the current modifier chain; a nested ordinary placer starts without it. Biome
+resolution and membership are supplied by the world. Native membership treats
+structurally equal placed-feature copies as equal, while feature ordering uses
+object identities.</p>
+<p>Run <code>python3 tools/test_biome_placement_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-biome-placement-2026-10-06/scoped-parity.json">biome-filter report</a>
+records <strong>121,423 matching lines per JAR</strong> for 27,456 requested placements across
+9,152 fixtures. Actual <code>BiomeFilter</code> and <code>FeaturePlacer</code> compare missing roots,
+equal copies, different features, ordered queries, nested ordinary placement,
+injected failures and repeated calls with retained buffers. Both random sources
+are tested directly and through <code>WorldgenRandom</code>. Complete registry membership,
+biome sampling integration and chunk decoration remain pending.</p>
+<h2 id="decoration-feature-scheduling">Decoration feature scheduling</h2>
+<p><code>FeatureDecorationPlan</code> owns immutable biome generation lists and their globally
+ordered step features. It reads the surrounding nine chunks in X-first order,
+intersects their resident biomes with the generator's possible-biome set and
+executes the sorted union of global feature indices for each step. Each root
+receives its decoration/feature seed and a shared placer. False results do not
+skip subsequent roots. Errors retain previous work and the current-feature
+marker; successful completion clears the marker.</p>
+<p>Run <code>python3 tools/test_decoration_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-decoration-2026-10-06/scoped-parity.json">decoration report</a>
+records <strong>337,398 matching lines per JAR</strong> across 2,188 fixtures and 4,376 requested
+decoration calls. Actual <code>ChunkGenerator.applyBiomeDecoration</code> runs with
+structures disabled, resident <code>ProtoChunk</code> biome palettes and traced feature
+sinks. All 67 bundled biome feature lists participate. Sparse selections,
+excluded biomes, step gaps, cycles, coordinate overflow, biome-check modifiers,
+false returns and query/placement/progress failures are compared. Rust bounds
+extreme signed chunk neighborhoods and input work explicitly. Structure
+decoration, real feature payloads in this suite and full chunk lifecycle remain
+pending.</p>
+<h2 id="decoration-over-resident-chunks">Decoration over resident chunks</h2>
+<p><code>BiomeRegion</code> connects quart biome sections to seeded block-position biome zoom.
+<code>TerrainRegion::biome_at</code> checks the selected chunk's generation stage before
+reading its biome. Premature reads fail even if raw palette values already exist;
+decoration's initial palette collection can still inspect those raw values.</p>
+<p>Run <code>python3 tools/test_decoration_region_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-decoration-region-2026-10-06/scoped-parity.json">resident decoration report</a>
+records <strong>36,173,951 matching lines per JAR</strong> for 240 fixtures and 480 requested
+decoration calls. Java's actual decoration entry point places three basic
+features, configured fill-layer sequences, replacements and scattered ore into
+nine <code>ProtoChunk</code>s. Uniform/mixed biome palettes, biome zoom, global scheduling,
+feature seeds, biome filters, named biome-set and volume predicates, live
+heightmaps, repeated decoration and rejected
+or failed writes execute together. Every final raw block and heightmap word is
+compared, including EMPTY, BIOMES and TERRAIN stage behavior. Workspace tests,
+Clippy and 137 Python tests passed after this integration.</p>
+<p>The world transport supplies storage mutation. Actual <code>WorldGenRegion</code> write
+zones, retrogen, POIs, block entities, postprocessing, lighting, structures and
+the complete noise-to-decoration lifecycle remain pending.</p>
+<h2 id="block-state-providers">Block-state providers</h2>
+<p><code>BlockStateProvider</code> supports simple states, weighted states, random blocks,
+rotation, property copying, randomized integer properties, three noise-based
+providers and rule-based selection. Direct decoding preserves the exclusive choice
+between a full state object and a typed provider. Random block choices retain
+holder/tag order and duplicates. Empty choices return no optional state, while
+ordinary sampling reads the existing world state. Rotation chooses a direction
+before sampling its nested provider, changes only compatible axis/facing
+properties and preserves other properties. Fixed directions consume no direction
+draw. Property copying preserves only compatible property families. Integer
+sampling leaves states without the named integer property unchanged without
+drawing a value; invalid sampled values fail after consuming the draw. Shared
+compact state layouts avoid rebuilding property maps during these transforms.</p>
+<p>Noise providers use independently seeded legacy noise and preserve the native
+float/double coordinate conversions. Threshold selection preserves conditional
+random draws. Dual noise computes the selected candidate directly: the other
+candidates are pure noise queries without random or world side effects.
+Rule-based providers evaluate conditions in order, continue after empty optional
+results and sample their fallback only after all rules are exhausted. Current
+conditions cover true, not, all-of, any-of, world bounds, height ranges, block tags
+volume matching and registry-bound block/fluid/biome sets. Height-range predicates reconstruct generation bounds per
+evaluation; volume matching visits X, Z, then Y and stops on the first failure.
+World adapters supply tag membership and fallible generation-bound queries. The
+height-range comparison currently exercises ordinary LevelAccessor bounds; the
+WorldGenLevel server/generator lookup branch is not covered by this fixture.</p>
+<p>Interrupted runs can be resumed with <code>python3 tools/test_state_provider_parity.py --resume</code>.
+The runner verifies source, environment, fixture and compiled-artifact hashes
+before reusing completed stages. A changed output is regenerated; changed inputs
+require a fresh run without <code>--resume</code>. Checkpoints stay under <code>.local</code>, and
+a parity report is written only after both native comparisons pass.</p>
+<p>Run <code>python3 tools/test_state_provider_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-state-provider-2026-10-06/scoped-parity.json">provider report</a>
+records <strong>257,299,719 matching lines per JAR</strong>, with 356,935 codec inputs
+and 79,473,574 requested samples across ten provider kinds. Every pinned state is decoded and tested
+under all six fixed rotations; random/nested rotations, both sampling methods,
+empty tags, weighted boundaries, fallback query failures and four random-stream
+combinations are compared. Every target state is also tested against
+representatives of all compatible property values, including cross-block copies
+and integer-property boundaries. The native harness verifies that the pinned
+property-family signatures are unambiguous; Rust validates the Cartesian state
+tables before binding their transitions. Noise cases include all eight bundled
+provider definitions, coordinate boundaries, extreme scales, variety
+selection and malformed codec inputs. Rule cases cover ordered empty results,
+fallbacks, nested rules, bound-query failures and wrapping coordinates. Block-tag
+cases cover every tag against all block defaults and the two bundled rule-based
+definitions against every state. Volume comparisons include exact read order and
+early exits, while Rust-only tests bound pathological nested evaluation work. Workspace
+tests, Clippy and 137 Python tests passed at this stage.</p>
+<p>The unobstructed predicate validates its optional integer-vector offset but
+ignores it during evaluation, matching the pinned Java implementation. The
+comparison checks exact translated unit-block bounds, a null excluded entity,
+true/false world results, nested volumes and query failures.</p>
+<p><code>BiomePredicateBindings</code> resolves biome names and holder tags to IDs in the
+world's owning registry snapshot. The comparison covers every pinned biome and
+every bundled biome tag, empty sets, missing names, query failures and nested
+volume/short-circuit conditions. Decoration shares the same <code>BiomeId</code> identity.</p>
+<p><code>FluidStateTable</code> derives fluid identity, amount, falling/source flags and own
+height from the pinned block descriptors. The harness compares every state,
+including falling source water in all eight waterlogged copper grates. Fluid
+predicates compare all five fluid kinds, holder lists and every bundled fluid tag
+against every block state. This covers contained fluid state, not spreading or
+entity interactions.</p>
+<p><code>StateProviderCatalog</code> resolves named holder references from an immutable resource
+snapshot. Holder, direct and typed entry points retain their distinct decoding
+semantics, including ambiguous state/provider objects. The comparison registers
+all eight bundled definitions plus nested fixture resources and checks missing
+names, nested references and later random draws. Unused resources are not
+evaluated; Rust tests reject reachable cycles, duplicate canonical names and
+excessive expansion. Full datapack registry loading/reloading remains separate.</p>
+<p>Recursive provider decoding is bounded to depth 128 and shares a 65,536-node
+budget with rules, predicates and integer providers; holder/rule lists are bounded
+to 8,192 entries. Additional predicates, complete registry loading, block survival
+and complete feature placement remain pending.</p>
+<p>Solid and replaceable predicates now bind immutable property tables to the same
+block registry as provider and feature decoding. Their offsets, state reads,
+short-circuit composition, empty optional-child fallthrough and read failures
+are compared across the entire state registry. Together with the earlier kinds,
+<strong>14 block-predicate kinds</strong> are covered in the state-provider report. Full
+workspace tests, warning-free Clippy and <strong>139 Python tests</strong> passed at this
+integration snapshot. Face support and block survival still need implementation.</p>
+<p>The has-sturdy-face predicate now decodes native directions and bounded offsets,
+then delegates the ordered state/support query to its placement world. The
+state-provider comparison covers all <strong>35,524 cached states</strong>, six directions,
+read failures and composed predicates, bringing the scoped corpus to <strong>15
+predicate kinds</strong>. Dynamic state support is not established by this integration
+report; unavailable world behavior remains an explicit query error. Workspace
+tests, warning-free Clippy and <strong>140 Python tests</strong> passed at this snapshot.</p>
+<p>Unified block-support dispatch now extends that predicate corpus to all <strong>35,723
+states</strong>, including the <strong>199 dynamic states</strong> with absent block entities and
+injected block-entity query failures. The updated provider report covers the
+combined path. Shulker animation snapshots are covered separately by the dynamic
+support suite; active moving-piston shape generation and block-entity lifecycle
+remain outside this integration snapshot. Workspace tests, Clippy and <strong>141
+Python tests</strong> passed.</p>
+<p>The <code>would_survive</code> predicate now decodes a candidate block state and bounded
+offset, then invokes survival at the translated position without placing it.
+Both provider and feature bindings use the shared block-state codec; placement
+chains forward the survival query. The refreshed provider report records
+<strong>257,299,719 matching lines per JAR</strong>, <strong>356,935 inputs</strong>, <strong>79,473,574 requested
+samples</strong> and <strong>16 predicate kinds</strong>. Its survival snapshot now covers all
+<strong>51 pinned survival families, 1,286 definitions and 35,723 states</strong>. Behavior
+representatives run against the entire neighbor-state registry, with malformed
+definitions, wrapped offsets, brightness thresholds, short-circuit conditions,
+optional-child fallthrough and query failures. Dynamic support and empty-context
+collision use absent block entities in this integration corpus; animated shulker
+and active-piston snapshots have separate geometry comparisons. This establishes
+the recorded provider/predicate integration, while full block placement, updates
+and gameplay remain pending. Workspace tests, warning-free Clippy and the
+<strong>147-test Python suite</strong> passed.</p>
+<h2 id="simple-block-placement">Simple-block placement</h2>
+<p><code>SimpleBlockFeature</code> combines holder-aware state providers, candidate survival,
+precompiled placement transitions and optional scheduled ticks. Ordinary writes
+retain native flags and ignore a rejected write's boolean result. Double plants
+first check the block above for air or matching replaceable fluid, then copy
+waterlogging independently into each half. Pale moss carpet derives side states
+from support/collision queries, consumes the world's separate random stream for
+its topper and recomputes lower sides after the upper write. Scheduled ticks use
+the block actually stored after placement, including rejected writes.</p>
+<p><code>FeatureBlockBindings::with_state_providers</code> binds these operations and provider
+resources to the same registry. <code>FeatureDefinition</code> and <code>FeatureCatalog</code> compose
+simple blocks with named holders, selectors, sequences and placement modifiers.
+Provider decoding shares the enclosing graph's bounded work/depth budget; compiled
+placement tables are shared by immutable reference-counted handles.</p>
+<p>Run <code>python3 tools/test_simple_block_parity.py</code> against the pinned JARs. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-simple-block-2026-10-06/scoped-parity.json">simple-block report</a>
+records <strong>9,613,872 matching output lines per JAR</strong> across <strong>492,554 fixtures</strong>.
+It covers every candidate state, double-plant obstructions, waterlogging, moss
+attachment/topper combinations, ordered reads/writes, both random streams,
+rejected writes, partial failures, wrapped coordinates and nested composition.
+Workspace tests and all-target Clippy passed. Native chunk updates, scheduled tick
+execution and complete playable integration remain pending.</p>
+<h2 id="block-columns">Block columns</h2>
+<p><code>BlockColumnFeature</code> samples all layer heights before checking space. Its first
+obstruction query is one step beyond the origin. It removes excess height from
+the base or tip in native order, then evaluates providers while writing the
+remaining layers from the original position. Empty optional providers use their
+ordinary fallback read; rejected writes still advance the position. A completely
+zero-height sample returns false, while obstruction that trims every layer to
+zero still returns true.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-block-column-2026-10-06/scoped-parity.json">block-column report</a>
+records <strong>1,204,081 matching lines per JAR</strong> over <strong>64,120 fixtures</strong>. Run
+<code>python3 tools/test_block_column_parity.py</code> to compare all candidate descriptors,
+six directions, both truncation priorities, provider and predicate composition,
+wrapped coordinates, codec bounds and partial mutations. This uses the same
+feature/catalog integration and mutable-world harness as simple-block placement.
+Layer/decode limits and a million-operation runtime budget reject pathological
+workloads explicitly; complete resident-world integration remains pending.</p>
+<h2 id="vertical-pillars">Vertical pillars</h2>
+<p>The single-block pillar feature checks its replacement predicate, consumes its
+continuation draw, and then checks build height before evaluating and writing
+each provider state. Its cap runs one step opposite the stopping position,
+including when no pillar block was written. Rejected writes still advance the
+pillar, and a cap's false result does not make the pillar return false. Named caps
+and nested pillars use the same feature catalog and graph work budget.</p>
+<p>Run <code>python3 tools/test_pillar_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-pillar-2026-10-06/scoped-parity.json">pillar report</a> records
+<strong>921,111 matching lines per JAR</strong> across <strong>41,746 fixtures</strong>, including every
+candidate descriptor, both vertical directions, continuation boundaries,
+signed-zero probability rejection, replacement conditions, cap composition,
+failures, rejected writes and random
+stream tails. Workspace tests and all-target Clippy passed. Resident world
+updates and complete generation/gameplay remain unfinished.</p>
+<h2 id="neighbor-based-spreading">Neighbor-based spreading</h2>
+<p>The random-neighbor-spread feature evaluates and writes its origin provider before
+sampling attempts or testing replacement. Each attempt samples X, Y and Z offsets
+in order, checks replacement, then visits neighbors in native direction order.
+Exactly one accepted neighbor allows placement; finding a second stops the scan.
+Rejected writes preserve the same subsequent queries and random consumption.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-neighbor-spread-2026-10-06/scoped-parity.json">neighbor-spread report</a>
+records <strong>2,650,856 matching lines per JAR</strong> across <strong>79,580 fixtures</strong>. Run
+<code>python3 tools/test_neighbor_spread_parity.py</code> to compare all candidate and neighbor
+states, all direction masks, bounded integer providers, named/empty holder sets,
+mutable repeated attempts, partial failures and nested feature/modifier calls.
+Workspace tests and all-target Clippy passed. These feature algorithms still
+require complete chunk mutation, neighbor updates and gameplay integration.</p>
+<h2 id="additional-verified-feature-algorithms">Additional verified feature algorithms</h2>
+<p>The executable feature graph also includes overlay composition, block piles,
+disks, block blobs, springs, vines and underwater magma. Their version-specific
+reports and remaining integration limits are recorded in <a href="rust-parity.html#overlay-feature-composition">Rust rewrite status</a>.
+These comparisons cover ordered world requests; complete world updates and
+playable gameplay remain pending.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/feature-placement.md"><code>docs/feature-placement.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#modifier-chains">Modifier chains</a></li><li class="l2"><a href="#heightmap-queries">Heightmap queries</a></li><li class="l2"><a href="#noise-based-counts">Noise-based counts</a></li><li class="l2"><a href="#layered-placement">Layered placement</a></li><li class="l2"><a href="#initial-block-writing-features">Initial block-writing features</a></li><li class="l2"><a href="#predicate-filters-and-environment-scans">Predicate filters and environment scans</a></li><li class="l2"><a href="#resident-feature-regions">Resident feature regions</a></li><li class="l2"><a href="#inline-feature-composition">Inline feature composition</a></li><li class="l2"><a href="#named-feature-resources">Named feature resources</a></li><li class="l2"><a href="#configured-fill-layers">Configured fill layers</a></li><li class="l2"><a href="#replacement-rules">Replacement rules</a></li><li class="l2"><a href="#single-block-replacement">Single-block replacement</a></li><li class="l2"><a href="#scattered-ore">Scattered ore</a></li><li class="l2"><a href="#bulk-section-access">Bulk section access</a></li><li class="l2"><a href="#biome-feature-ordering">Biome feature ordering</a></li><li class="l2"><a href="#world-generation-random-streams">World-generation random streams</a></li><li class="l2"><a href="#biome-placement-filtering">Biome placement filtering</a></li><li class="l2"><a href="#decoration-feature-scheduling">Decoration feature scheduling</a></li><li class="l2"><a href="#decoration-over-resident-chunks">Decoration over resident chunks</a></li><li class="l2"><a href="#block-state-providers">Block-state providers</a></li><li class="l2"><a href="#simple-block-placement">Simple-block placement</a></li><li class="l2"><a href="#block-columns">Block columns</a></li><li class="l2"><a href="#vertical-pillars">Vertical pillars</a></li><li class="l2"><a href="#neighbor-based-spreading">Neighbor-based spreading</a></li><li class="l2"><a href="#additional-verified-feature-algorithms">Additional verified feature algorithms</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

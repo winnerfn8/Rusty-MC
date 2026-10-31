@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rusty Minecraft native client · Rusty Minecraft docs</title>
+<meta name="description" content="Rusty Minecraft native client: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html" aria-current="page">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="rusty-minecraft-native-client">Rusty Minecraft native client</h1>
+<p><code>horizon-client</code> is the playable Rust client for Minecraft Java Edition 26.3.
+It streams a world around the player on worker threads, renders every vanilla
+block model with smooth lighting and biome tints, and runs the validated player
+physics, health and hunger at 20 ticks per second. You can mine with vanilla
+hardness/tool rules, collect drops from the block loot tables, place blocks,
+craft in the 2x2 inventory grid or on a crafting table, and save and reload worlds
+in vanilla's Anvil format.</p>
+<p><strong>Status:</strong> playable; players get it through <a href="repo/launcher/README.html">the launcher</a>. The <a href="repo/README.html#project-status">Java parity table</a>
+in the README scores each subsystem against vanilla and lists what is still
+missing; <a href="rust-parity.html">Rust rewrite status</a> has the details.</p>
+<h2 id="run-from-a-checkout">Run from a checkout</h2>
+<p>Use current stable Rust (1.90+) and JDK 25 (Python 3.10+ only for the development
+harnesses). A checkout never
+downloads the game: resource preparation imports <strong>your own copy</strong> (the 26.3
+client from your official launcher install, and the 26.3 server jar you
+downloaded yourself; see <a href="repo/README.html#build-from-source">Build from source</a>),
+verifies it against the pinned checksums, runs vanilla's data generator and small
+exporters against those jars, and extracts the jar's assets and data into ignored
+<code>.local/horizon-client/26.3/</code>. Sounds (about 380 MB) are copied from your
+launcher's asset store by <code>horizon-prepare sounds</code>, each file checked against the asset
+index's SHA-1. Preparation also tries to replace the JAR's gray 1×1 title panorama
+placeholders with the full textures from that asset store. If the store is missing or
+incomplete, preparation logs a warning and keeps the placeholders. To import the panorama
+later without rerunning the Java exporters, run <code>horizon-prepare panorama</code> (or
+<code>cargo run --release -p horizon-prepare -- panorama</code> in a checkout). Pass
+<code>--minecraft-dir PATH</code> when using a different Minecraft installation.
+Prepared resources are private; never commit them.</p>
+<p>Preparation is <code>horizon-prepare</code> (<code>crates/horizon-prepare</code>, Rust): it needs no Python, only
+the JDK, for the small exporters that call Mojang's own code. Release folders ship it beside
+<code>horizon-client</code>, and the launcher prepares with it and copies the sounds as part of preparing.</p>
+<pre><code class="language-sh">cargo run --release -p horizon-prepare -- --prepare --server-jar ~/Downloads/server.jar
+cargo run --release -p horizon-prepare -- sounds
+cargo run --release -p horizon-client -- --render-distance 12
+</code></pre>
+<p>Development builds that link quickly: <code>cargo build --profile fast -p horizon-client</code>.</p>
+<p>Optional Windows allocator build features are documented in
+<a href="windows-allocators.html">Windows allocator experiments</a>.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--world NAME</code></td>
+<td>World folder under <code>saves/</code> (default &quot;New World&quot;); reopened if it exists</td>
+</tr>
+<tr>
+<td><code>--seed N</code></td>
+<td>Seed for a new world (numbers or text, like vanilla)</td>
+</tr>
+<tr>
+<td><code>--creative</code></td>
+<td>Creative mode (instant breaking, pick block)</td>
+</tr>
+<tr>
+<td><code>--render-distance N</code></td>
+<td>Chunks, 2..128 (default 12)</td>
+</tr>
+<tr>
+<td><code>--resources PATH</code></td>
+<td>Prepared resource directory</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mouse</td>
+<td>Look (vanilla default sensitivity)</td>
+</tr>
+<tr>
+<td>WASD / Space / Left Shift / Left Ctrl</td>
+<td>Move, jump, sneak, sprint</td>
+</tr>
+<tr>
+<td>Left / right click</td>
+<td>Break (hold) / place or use; right click opens crafting tables</td>
+</tr>
+<tr>
+<td>Middle click</td>
+<td>Pick block (creative)</td>
+</tr>
+<tr>
+<td>1–9, scroll</td>
+<td>Select hotbar slot</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Inventory and 2x2 crafting (shift-click to quick-move or craft all)</td>
+</tr>
+<tr>
+<td>Q / Ctrl+Q</td>
+<td>Drop one / drop stack</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>Debug overlay (position, chunk, light, biome, FPS)</td>
+</tr>
+<tr>
+<td>Esc</td>
+<td>Pause menu (Save and Quit)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Worlds autosave every 6000 ticks (5 minutes), when chunks unload and on quit.
+On headless Linux use <code>vscreen start ./target/release/horizon-client</code> and
+<code>vscreen shot</code>.</p>
+<p>Sound: the game prints the output it opened (<code>Rusty Minecraft: audio output ...</code>) or
+why it has none (<code>Rusty Minecraft: no sound: ...</code>). It opens none with
+<code>HORIZON_NO_AUDIO</code> set, nor on a <code>vscreen</code>, where tests run beside someone
+listening; <code>HORIZON_AUDIO=1</code> opens it there anyway, so send it to a null sink
+(<code>PIPEWIRE_PROPS='{ target.object=&lt;sink&gt; node.dont-fallback=true }'</code>). Don't
+mute a test run's stream in the mixer: PipeWire remembers the mute for every
+later <code>horizon-client</code>. The launcher starts the game as &quot;Rusty Minecraft&quot; for that
+reason.</p>
+<h3 id="agent-control-horizon-ctl-and-mcp">Agent control (<code>horizon-ctl</code> and MCP)</h3>
+<p>AI agents and scripts play Rusty Minecraft through <code>horizon-ctl</code>, a command line that
+reads the game as JSON and acts like a player, and <code>horizon-ctl mcp</code>, an MCP
+server with the same commands. <code>--control</code> makes the game accept them on a
+local socket; under control, losing window focus does not pause the game or
+release held keys, so a script can play while you use other windows.</p>
+<pre><code class="language-sh">cargo build --release -p horizon-client --bins
+C=target/release/horizon-ctl
+$C launch --world Survival --seed 5 --wait   # start the game, open or create the world, wait for it
+$C state                                     # player, world, screen, crosshair target
+$C find-block birch_log                      # the 16 nearest loaded logs
+$C goto -0.5 65 -2.5 --near 2.5              # walk there along a path
+$C break -1 65 -3                            # mine it: {&quot;drops&quot;: {&quot;minecraft:birch_log&quot;: 1}, ...}
+$C inventory                                 # hotbar, inventory, armor, offhand, counts
+$C open-inventory                            # craft planks in the 2x2 grid:
+$C click-slot 0; $C click-slot 100 right; $C click-slot 0; $C click-slot 200 shift; $C close
+$C place 2 65 -2 --item birch_planks         # {&quot;changed&quot;: true, &quot;block&quot;: {...}}
+$C pause; $C ui                              # the pause menu's widgets: ids, kinds, labels, bounds
+$C click options; $C set fov 0.75; $C click done   # widgets by id
+$C screenshot /tmp/view.png                  # PNG of the next presented frame
+$C quit                                      # save and exit
+</code></pre>
+<p><code>horizon-ctl help</code> lists the commands by group and <code>horizon-ctl COMMAND --help</code>
+explains one with examples; <code>horizon-ctl help --game</code> lists what the running
+game accepts, test hooks included.</p>
+<ul>
+<li><strong>Observe:</strong> <code>state</code> (position, rotation, velocity, health, food, saturation,
+XP, effects, game mode, dimension, time, weather, the screen and what the
+crosshair points at), <code>looking-at</code>, <code>entities [RADIUS] [TYPE]</code> (mobs with
+ids and health, dropped items, orbs), <code>block X Y Z</code>, <code>blocks X1 Y1 Z1 X2 Y2 Z2</code>, <code>light X1 Y1 Z1 X2 Y2 Z2</code>,
+<code>find-block BLOCK [RADIUS]</code>, <code>inventory</code> (stacks with their components as
+SNBT), <code>screen</code> (the open screen or title menu, its buttons and slots) and
+<code>messages</code> (chat, title, subtitle and action bar).</li>
+<li><strong>Move and act:</strong> <code>move DIR SECONDS</code>, <code>jump</code>, <code>goto X Y Z</code> (A* over standable
+blocks: steps up one block, drops up to three, avoids lava), <code>look</code>,
+<code>look-at</code> a point, block face or entity, <code>attack [ID]</code>, <code>break X Y Z</code>,
+<code>place X Y Z [--item ITEM]</code>, <code>interact X Y Z</code> (doors, chests, crafting
+tables), <code>use-item [--hold S]</code> (eat, drink, throw), <code>select SLOT|ITEM</code>, <code>drop</code>.</li>
+<li><strong>Widgets:</strong> <code>ui</code> lists every widget of the open screen (title menus, pause,
+options pages, inventories and menus): an id, its kind
+(<code>button</code>, <code>slider</code> with its 0..1 <code>value</code>, <code>field</code>, <code>row</code>, <code>tab</code> with
+<code>selected</code>, <code>slot</code> with its stack), the label and its bounds. Ids come from
+labels (<code>FOV: 70</code> is <code>fov</code>, <code>Video Settings...</code> is <code>video-settings</code>, a
+world row is the world's name; a repeat gets <code>-2</code>), else <code>row-0</code>, <code>field-0</code>,
+and slots are <code>slot-ID</code>. <code>click ID [right] [shift]</code> clicks one as the mouse
+would and <code>set ID VALUE</code> moves a slider to 0..1; after a click, the next
+<code>ui</code>, <code>click</code> or <code>set</code> waits for the screen to be redrawn. Design and plans:
+<a href="agent-control.html">agent-control.md</a>.</li>
+<li><strong>Options:</strong> <code>options-get [KEY...]</code> gives every <code>options.txt</code> option by its
+vanilla key with its value and what it accepts (<code>{&quot;type&quot;: &quot;int&quot;, &quot;min&quot;: 30, &quot;max&quot;: 110, &quot;value&quot;: 70}</code>; enums with <code>choices</code>, key bindings as
+<code>key.keyboard.w</code>); <code>options-set KEY VALUE</code> sets one, applies it at once and
+saves <code>options.txt</code> as the options screen does. A value the option refuses
+is an error saying what it accepts, not vanilla's silent reset.</li>
+<li><strong>Waits and events:</strong> <code>wait-for screen NAME|widget ID|loaded|chat TEXT|event KIND [--timeout S] [--since SEQ]</code> replies once the game gets there (a timeout
+is an error with <code>&quot;kind&quot;: &quot;timeout&quot;</code>), so scripts don't poll. <code>events [--since SEQ]</code> lists what happened, oldest first, each with a <code>seq</code> and the <code>tick</code>:
+<code>screen</code> (from, to), <code>chat</code> (text), <code>death</code>, <code>respawn</code>, <code>item</code> (item, delta),
+<code>dimension</code>, <code>world</code> (opened, closed). Take <code>last</code> from <code>events</code> before an
+action whose event you then <code>wait-for --since</code> it, so a fast one isn't missed.</li>
+<li><strong>Screens:</strong> <code>open-inventory</code>, <code>click-slot SLOT [right] [shift]</code> (0-8 hotbar,
+9-35 inventory, 100+ crafting grid, 200 result, 300+ containers, 500-503
+armor, 504 offhand, 600+ stations), <code>close</code>, <code>click-button LABEL</code> (any
+button of any screen or title menu, by its label),
+<code>click-at X Y</code>, <code>type TEXT</code> (on the create-world screen <code>--field name|seed --replace</code>), <code>chat</code>, <code>command</code>, <code>respawn</code>, <code>pause</code>, <code>resume</code>.</li>
+<li><strong>World:</strong> <code>tp</code>, <code>give</code>, <code>time</code>, <code>setblock</code>, <code>summon</code>, <code>wait TICKS</code>, and the
+benchmarking commands <code>bench</code>, <code>stats</code> and <code>fly</code> (below).</li>
+</ul>
+<p>Actions block until they finish or time out and reply with the outcome: <code>goto</code>
+says whether it arrived, <code>break</code> what dropped and what was picked up, <code>place</code>
+the block placed. <code>stop</code> cancels the running action. Every reply is one JSON
+line; errors are <code>{&quot;error&quot;: &quot;...&quot;}</code> objects, and the exit status is 0 on
+success, 1 when the game replied with an error, 2 for a usage error and 3 when
+the game cannot be reached or started. <code>horizon-ctl script FILE</code> (or stdin)
+runs one command per line with shell-like quoting and stops at the first error
+(<code>--keep-going</code> doesn't); <code>sleep S</code> waits. <code>horizon-ctl -</code> is the older form
+that reads stdin and keeps going.</p>
+<p><code>launch</code> finds the game to start: <code>--game PATH</code>, else a <code>horizon-client</code> next
+to <code>horizon-ctl</code> (a build folder or a release folder), else the newest version
+the launcher installed (<code>--version TAG</code> picks another), run with its prepared
+resources from the game home, where the saves are. So after installing with
+the launcher, <code>horizon-ctl launch --world X --wait</code> is all an agent needs.
+Other arguments go to the game; its output goes to a <code>.log</code> file beside the
+socket.</p>
+<p><strong>Logs and crash reports.</strong> Like vanilla, the game writes <code>logs/latest.log</code>
+in the game home (<code>$HORIZON_HOME</code>, else <code>~/.local/share/horizon</code>; the
+dedicated server in its own folder) with lines like
+<code>[12:04:31] [Render thread/INFO]: message</code>, and at start archives the last
+run's as <code>logs/&lt;yyyy-mm-dd&gt;-&lt;n&gt;.log.gz</code> (seven a day). Messages still print on
+stderr as before. A panic on the main thread or a fatal error writes
+<code>crash-reports/crash-&lt;yyyy-mm-dd_HH.MM.SS&gt;-client.txt</code> (the error, its stack,
+the machine, the GPU, render settings, resource packs, the open world and the
+last 50 log lines) and the game exits with a non-zero code. <code>horizon-ctl logs [--lines N]</code> prints the end of latest.log and <code>horizon-ctl logs --crash</code> the
+newest report (the <code>logs</code> MCP tool returns the same). F3 + C held for ten
+seconds crashes the game on purpose, as in vanilla (the world is saved first);
+development builds also crash with <code>HORIZON_DEBUG_CRASH=SECONDS</code>, that long
+after the first frame.</p>
+<p><strong>MCP.</strong> <code>horizon-ctl mcp</code> serves the Model Context Protocol over stdin and
+stdout (JSON-RPC 2.0, one message per line), with one tool per command and a
+JSON schema for each; <code>screenshot</code> returns the frame as an image. Register it
+in an MCP client as a stdio server with the command <code>horizon-ctl</code> and the
+argument <code>mcp</code> (<code>--socket PATH</code> before <code>mcp</code> to pick a socket).</p>
+<p><strong>Transport.</strong> On Linux and macOS the endpoint is a Unix socket:
+<code>$HORIZON_CONTROL</code>, else <code>$XDG_RUNTIME_DIR/horizon-control.sock</code>, or
+<code>--control-socket PATH</code> (<code>horizon-ctl --socket PATH</code>). Windows has no Unix
+sockets: there the game listens on a random <code>127.0.0.1</code> port and writes
+<code>{&quot;transport&quot;:&quot;tcp&quot;,&quot;port&quot;:N,&quot;token&quot;:&quot;...&quot;}</code> to the endpoint path
+(<code>%TEMP%\horizon-control.json</code> by default), readable only by its user; the
+client's first line must be <code>auth TOKEN</code>. Any endpoint path ending in <code>.json</code>
+selects that transport on Linux and macOS too.</p>
+<p><code>tools/agent_control_e2e.py</code> checks it all on a virtual screen: it creates a
+world through the title menus, walks to a tree, breaks a log, crafts planks in
+the inventory screen and places one, through the CLI and through MCP.</p>
+<p><code>fly X1 Y1 Z1 X2 Y2 Z2 SECONDS [PITCH]</code> moves the camera along a line at
+constant speed and replies with the same summary as <code>bench</code> (avg/1%-low FPS and
+p50/p95/p99/max frame times), plus CPU and GPU time per frame; <a href="graphics.html#benchmark">the graphics
+benchmark</a> is built on it. Frame times include waits for
+presentation, so <code>bench</code> reports what is on screen.</p>
+<h3 id="discord-rich-presence">Discord Rich Presence</h3>
+<p>While Discord runs on the same computer, the player's Discord profile shows
+&quot;Playing Horizon&quot; and what they are doing: &quot;In the menus&quot;, &quot;Singleplayer&quot;,
+&quot;Multiplayer&quot; or &quot;Hosting a world&quot; (with the party size, of 8), the dimension
+(&quot;In the Nether&quot;) and the time since they entered the world. It never shows a
+world's name or a server's address. Rusty Minecraft Settings has the switch
+(<strong>Discord Rich Presence</strong>, on by default; <code>discordPresence</code> in
+<code>horizon-extras.txt</code>), and <code>HORIZON_NO_DISCORD=1</code> turns it off for one run.</p>
+<p><code>crates/horizon-client/src/discord_presence.rs</code> speaks Discord's local IPC
+itself (the <code>discord-ipc-N</code> socket or named pipe, no SDK) from a thread of its
+own: the frame only hands it a status when it changes. It retries every 15 s
+while Discord isn't running and stays within Discord's 5 updates per 20 s.
+Dedicated servers never start it, and automated runs (offscreen, benchmarks)
+only talk to a fake Discord: <code>lab.game_env</code> sets <code>HORIZON_NO_DISCORD=1</code>, and
+<code>tools/discord_presence_e2e.py</code> points games at a fake server with
+<code>HORIZON_DISCORD_IPC_DIR</code> (title, world, Nether and quit on both single-player
+paths; a LAN host and guest; the switch; a Discord started after the game).
+<code>DISCORD_APP_ID</code> is Discord's &quot;Rusty Minecraft&quot; application, whose <code>horizon</code> image is
+the large one; there are no game-mode images yet.</p>
+<h3 id="play-on-another-of-your-machines">Play on another of your machines</h3>
+<p>Rusty Minecraft targets Linux on x86-64 with an NVIDIA GPU (Vulkan); macOS and Windows
+are out of scope. To play on another Linux machine
+without Rust, JDK or prepared resources, package a release build where they exist:</p>
+<pre><code class="language-sh">cargo build --release -p horizon-client
+python3 tools/package_native_client.py --out ~/builds/horizon
+</code></pre>
+<p>The archive holds the binary, the prepared resources and <code>horizon.sh</code>. Copy it
+to the target machine (same OS and architecture), unpack it and run
+<code>horizon/horizon.sh</code>; <code>horizon.sh --install</code> adds an application menu entry.
+Saves and <code>options.txt</code> go to <code>~/.local/share/horizon</code> (or <code>$HORIZON_HOME</code>), so
+unpacking an update keeps them. The archive contains Mojang assets: keep it
+private.</p>
+<h2 id="how-it-fits-together">How it fits together</h2>
+<ul>
+<li><code>streaming.rs</code>: worker pool that generates or loads, lights and meshes chunk
+columns closest-first; stale results are discarded by sequence number.</li>
+<li><code>light.rs</code>: vanilla sky/block light rules (sky sources down to the first
+occluding edge, <code>max(1, dampening)</code> falloff) over a 3x3 chunk region.</li>
+<li><code>mesher.rs</code>: blockstate models with neighbour culling, <code>ModelBlockRenderer</code>
+smooth lighting/ambient occlusion, <code>BlockTintSources</code> tints with 5x5 biome
+blending, and <code>FluidRenderer</code> water/lava surfaces.</li>
+<li><code>gfx.rs</code> + <code>terrain.wgsl</code>: camera-relative section rendering with frustum
+culling, the vanilla lightmap formula, timeline-driven sky/fog, and
+solid/cutout/translucent passes; <code>entity.wgsl</code> draws dropped items.</li>
+<li><code>environment.rs</code>: the data-driven day timeline (sky colour, light factor,
+celestial angles) sampled with vanilla's keyframe/easing rules.</li>
+<li><code>items.rs</code>, <code>crafting.rs</code>: item components from vanilla's reports, tool
+mining rules, loot tables and crafting recipes from the data pack.</li>
+<li><code>save.rs</code>: Anvil region files and <code>level.dat</code>.</li>
+</ul>
+<h2 id="validation">Validation</h2>
+<p>The client loads a separate, registry-checked collision-shape export alongside
+render resources. <code>SceneCollisions</code> feeds its actual <code>TerrainChunk</code> instances
+into registered shape selection, block scanning, world movement resolution and
+occupancy checks. The scene has no other entities, block entities or border;
+entity-dependent queries report an error until an entity runtime is supplied.
+Camera collision uses a position context and disables stepping. The walking
+binding uses the current pose bounds, descending input and registered step-height
+attribute. Sneaking invokes ledge backoff before collision resolution. The
+complete authoritative player tick remains unfinished.</p>
+<pre><code class="language-sh">cargo run --release -p horizon-prepare
+python3 tools/test_native_scene_collision.py
+</code></pre>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-scene-collision-2026-10-07/scoped-parity.json">scene collision comparison</a>
+checks <strong>14,150 movement requests</strong>, each with before/after occupancy queries,
+against both pinned reference JARs. Native code independently builds the nine-
+and twenty-five-chunk scenes and all sixteen gallery placements. Movement
+components compare by exact double bits. Cases include partial blocks, pyramid
+ledges, ceilings, initial overlaps, negative and missing chunk boundaries, tiny
+and zero movement, and varied step heights. This verifies the scene adapter;
+it does not establish player locomotion or complete gameplay parity.</p>
+<p>The movement binding stores a player's position, velocity, pose bounds,
+ground/support state, collision flags, movement history and live registered
+attributes. <code>MotionWorld</code> composes the existing air-travel, jumping, collision,
+ground-support, restitution and block-coefficient code over the same scene.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-scene-motion-2026-10-07/scoped-parity.json">stored-motion comparison</a>
+checks 42,257 operations across 637 evolving scenarios against actual native
+<code>Player.travel</code>, jumping and movement, using real native attributes and chunks.
+It compares every resulting position, velocity and bounding-box component by
+exact bits, along with support, climbing and collision state and both separate
+velocity/position synchronization flags.</p>
+<p>The dry movement tick additionally binds small-velocity cleanup, float input
+damping, held-jump delay and server frost-modifier removal. The expanded
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-motion-tick-2026-10-07/scoped-parity.json">tick comparison</a>
+checks 47,393 operations in 847 scenarios against both pinned JARs, including
+direct calls to the actual <code>LivingEntity.aiStep</code> body. It compares lazy attribute
+instance creation, stored base/cache/dirty state, modifier values and permanence,
+and pending update/sync membership alongside the motion fields. Queue iteration
+order depends on runtime identity hashes and is outside this scene comparison.
+The test caught an omission where matching positions concealed a retained
+powder-snow modifier and missing attribute notifications; dry ticks now remove
+that modifier after travel, as vanilla does.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-walking-2026-10-07/scene-motion.json">walking movement comparison</a>
+extends this to 65,893 operations in 947 scenarios, invoking actual
+<code>Player.aiStep</code> with empty inventory/equipment and no nearby entities. It checks
+head yaw, jump-trigger countdown and speed refresh after movement. Prepared
+input is supplied at the native virtual input boundary. Separately, the
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-walking-2026-10-07/local-input.json">local input comparison</a>
+checks 13,988 cases against actual <code>KeyboardInput.tick</code> and
+<code>LocalPlayer.modifyInput</code>, covering every key combination, diagonal adjustment,
+item/riding/sneaking speed gates, signed zero and nonfinite values. This verifies
+input arithmetic; the sprint and crouch integration checks below extend it.
+The full <code>LocalPlayer</code> lifecycle remains unfinished.</p>
+<p>The fixed-rate driver limits work per rendered frame while retaining overdue
+ticks. Clock tests cover varied frame schedules and long stalls. The development
+focus pause is explicit; no vanilla pause-menu or multiplayer timing is claimed.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-walking-2026-10-07/interactive-smoke.json">Linux walking smoke check</a>
+enabled F5, landed at ground height 4, walked, jumped, switched modes and exited
+with Ctrl+Q. Ground, moved and airborne screenshots were visually inspected;
+the run recorded 207 movement ticks and finished grounded without an error.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-walking-2026-10-07/startup-smoke.json">renderer startup check</a>
+also passes after the movement integration.</p>
+<pre><code class="language-sh">cargo run --release -p horizon-prepare
+python3 tools/test_native_scene_motion.py
+python3 tools/test_local_input_parity.py
+</code></pre>
+<p>This binding is not yet a complete player tick or input controller. Its current
+domain is the dry resident scene with standing/crouching/crawling dimensions,
+zero frozen ticks, empty inventory/equipment, and no entity interpolation,
+vehicles or status effects. Selected <code>Player.aiStep</code> phases are bound; the full tick and local input
+lifecycle remain unfinished.
+Landing now accumulates and resets the stored fall distance, clears climbing
+state on ground, and invokes registered block fall/bounce reactions. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-landing-2026-10-07/scene-motion.json">composed landing comparison</a>
+checks 73,025 operations in 1,449 scenarios against both pinned JARs. It compares
+fall state, impulse exemptions, attributes and ordered damage, statistic,
+particle, sound and hit-ground requests alongside the previous motion fields.
+Actual native <code>LivingEntity.checkFallDamage</code>, registered block methods and
+<code>Player</code>/<code>LivingEntity.causeFallDamage</code> execute in the reference harness.
+The cases include hay, honey, slime, powder snow, pointed dripstone, farmland,
+turtle eggs and shelf mushrooms, with seeded world randomness. Farmland pushes
+the stored player and changes the resident block to dirt; repeated egg changes
+preserve hatch state. The resulting block state is checked after each operation.</p>
+<p>The client refreshes its mesh after a resident block revision changes. This is
+a complete scene rebuild for now, with no performance improvement claimed.
+Damage requests are counted in runtime reports, and the health binding described
+below applies them synchronously. Full death/respawn, audiovisual playback and
+networking still need consumers. Block writes currently update
+resident storage; neighbor updates, drops and block-entity lifecycle remain
+unfinished. Block-inside effects such as cobweb slowdown and the full entity
+lifecycle are also unfinished. The reference harness explicitly controls these
+boundaries, which remain outside the comparison's scope.
+The earlier <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-scene-motion-2026-10-07/collision-regression.json">scene collision comparison</a>
+and <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-scene-motion-2026-10-07/startup-smoke.json">renderer startup</a>
+also pass with this binding and the additional prepared movement resources.</p>
+<p>The accompanying <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-scene-collision-2026-10-07/startup-smoke.json">startup check</a>
+passes after sharing scene loading between the GUI and headless collision probe.
+An <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-scene-collision-2026-10-07/interactive-smoke.json">interactive Linux check</a>
+enables F4, holds Shift to descend, verifies that the camera stops at the terrain
+surface, and exits with Ctrl+Q. The window was visually inspected on Vulkan
+llvmpipe; this is not a hardware performance measurement.</p>
+<p>The separate <code>horizon-assets</code> crate decodes the pinned 26.3 cuboid model format.
+Its native comparison covers all <strong>2,883 block-model JSON files</strong> in the client
+JAR plus <strong>2,457 synthetic cases</strong>: element bounds, optional geometry, nullable
+children, face UVs and quarter turns, single-axis/Euler rotations, texture
+references and translucency materials, light emission, display transforms and
+inheritance markers. Floating-point fields compare by their exact bits. The
+comparison also covers primitive coercion, integer truncation/wraparound and
+selected strict-reader numeric/syntax limits. The numeric scanner also preserves
+vanilla's rejection when its wrapping integer accumulator hits zero before
+another digit, including in ignored fields. Twenty newly exposed acceptance
+mismatches were corrected; the complete comparison now covers 5,340 models.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-resource-number-scanner-2026-10-06/model-resolution.json">resolution</a>,
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-resource-number-scanner-2026-10-06/model-baking.json">baking</a> and
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-resource-number-scanner-2026-10-06/sprite-animation.json">animation</a>
+comparisons also pass with the shared scanner correction.</p>
+<pre><code class="language-sh">python3 tools/test_cuboid_model_parity.py
+</code></pre>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-resource-number-scanner-2026-10-06/model-decoding.json">archived decoder result</a>
+records source, fixture and reference hashes. The oracle uses actual client
+classes; those rendering APIs are absent from the server. The decoder, parent
+resolver and baker now feed the development gallery. Blockstate selection, transformed
+models and UV locking have the separate checks described below. Rendered
+appearance still needs its own checks.</p>
+<p><code>ModelLibrary</code> resolves parent geometry, ambient occlusion, GUI lighting and
+each display context. It shares inherited elements rather than cloning them.
+Texture aliases bind after child overrides are applied; successful and failed
+alias walks are cached. Missing resources use the native missing-model cube;
+parent cycles invalidate their descendants. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-model-resolution-2026-10-06/scoped-parity.json">resolution comparison</a>
+matches <strong>5,648 requested roots across 439 graphs</strong>, including the full bundled
+block-model catalog, missing parents, 702 cyclic roots, 1,024-model parent chains,
+512-slot alias chains, explicit empty geometry and identity/null transforms.
+It calls native <code>ModelDiscovery</code>, <code>ResolvedModel</code> and <code>TextureSlots</code> APIs.</p>
+<pre><code class="language-sh">python3 tools/test_model_resolution_parity.py
+cargo +stable test --locked -p horizon-assets
+</code></pre>
+<p>Cuboid baking now produces positions in block units, normalized unit-atlas UVs,
+face winding and facing, material references, tint indices, shade overrides and
+light-emission metadata. It supports single-axis and Euler element rotations
+with the pinned rescaling rule. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-model-baking-2026-10-06/scoped-parity.json">baking comparison</a>
+matches <strong>7,100 roots across 440 graphs</strong>, using native <code>FaceBakery</code> with a real
+sprite and the default JOML math options. All bundled block models bake without
+errors. Synthetic coverage includes reversed/degenerate bounds, signed zero,
+arbitrary rotations, rescaling, null geometry children and parent cycles.
+Position, UV and matrix fields compare by exact float bits for these fixtures.</p>
+<pre><code class="language-sh">python3 tools/test_model_baking_parity.py
+</code></pre>
+<p>That comparison uses the identity blockstate transform. Atlas packing,
+transparency classification, actual tint/light evaluation and GPU rendering
+remain separate from the geometry result. Other operating systems still need
+their native validation runs.</p>
+<p><code>BlockModelTransform</code> now prepares all 64 XYZ quarter-turn combinations once
+and shares them across baked models. It rotates geometry around the block center,
+rotates culling directions and applies UV locking in the original face basis.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-blockstate-transforms-2026-10-06/scoped-parity.json">transformed baking comparison</a>
+checks every distinct model/rotation/UV-lock tuple in bundled blockstates and
+all 128 rotation/lock combinations on 81 synthetic models, plus further arbitrary
+element rotations. Positions, UVs and every orientation/inverse-face matrix
+compare by exact float bits: 19,704 roots and 148,439 quads match, including
+7,884 bundled model/transform tuples. Quaternion basis rounding and numeric identity
+rechecking are retained. This remains geometry validation; atlas packing and pixel parity are separate work.</p>
+<pre><code class="language-sh">python3 tools/test_blockstate_transform_parity.py
+</code></pre>
+<p>Blockstate resources now decode into ordered variant selectors and multipart
+conditions. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-blockstate-model-decoding-2026-10-06/scoped-parity.json">native blockstate comparison</a>
+covers all 1,288 bundled definitions and 1,351 synthetic cases (2,639 total,
+468 expected rejections). It uses the same <code>StrictJsonParser</code> and
+<code>BlockStateModelDispatcher.CODEC</code> as the pinned loader. The Rust representation
+preserves single versus weighted variants, all three quarter-turn axes, UV-lock
+flags, positive weights and total-weight limits, ordered selectors, nested
+AND/OR conditions and per-term negation.</p>
+<pre><code class="language-sh">python3 tools/test_blockstate_model_parity.py
+</code></pre>
+<p>Property binding now selects variant roots or multipart part indices for an
+ordered native state list. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-blockstate-model-binding-2026-10-06/scoped-parity.json">binding comparison</a>
+covers all 1,288 bundled definitions against 35,723 registered block states plus
+the four special item-frame states, followed by synthetic overlap, malformed
+selector and predicate cases: 3,802 definitions and 687,466 state results match,
+with 220 expected binding errors. It checks the native replacement-before-abort
+behavior for overlapping variants, eager multipart validation even when variants
+cover every state, integer-property aliases, nested conditions and empty part
+selections. The controlled chunk renderer now uses this binder for its model
+catalog.</p>
+<p>The Java integer-property parser is shared by <code>horizon-core</code>, client binding and
+world-state decoding. Its <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-blockstate-model-binding-2026-10-06/shared-integer-codec.json">codec regression</a>
+matches 221,261 output lines against each authenticated client/server JAR.</p>
+<pre><code class="language-sh">python3 tools/test_blockstate_binding_parity.py
+</code></pre>
+<p><code>CompiledChoices</code> prepares cumulative weights once per definition and shares
+those choices across bound states. Selecting an ordinary single variant consumes
+no random draw; a weighted singleton still does. Multipart collection draws a
+seed even for an empty subset and resets the same stream before each chosen
+part. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-blockstate-model-choice-2026-10-06/scoped-parity.json">native choice comparison</a>
+uses actual <code>WeightedVariants.collectParts</code> and <code>MultiPartModel.collectParts</code>
+with inert observable leaves. All seven distinct bundled weight patterns,
+synthetic large weights and random multipart graphs produce matching selections
+and subsequent random values: 6,960 fixtures, 111,360 collections, both legacy
+and xoroshiro streams. The development gallery now bakes and renders selected
+models using the legacy stream and the default block position seed. Specialized
+block seed callbacks remain separate work.</p>
+<pre><code class="language-sh">python3 tools/test_model_choice_parity.py
+</code></pre>
+<p>The sprite animation module reproduces the pinned metadata codec's integer
+conversion, strict primitive types, optional null fields and frame dimensions.
+It preserves repeated frames, filters out-of-image frame indices, and treats
+sequences with fewer than two valid entries as static physical frame zero.
+Frame lookup uses cumulative durations and binary search, so skipped rendering
+frames do not require replaying all elapsed animation ticks. The native oracle
+also checks dirty flags, draw requirements and interpolation timing, including
+transitions near the maximum Java integer duration. Interpolation pixel output
+and resource-loader failure recovery are outside this comparison.</p>
+<pre><code class="language-sh">python3 tools/test_sprite_animation_parity.py
+</code></pre>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-sprite-animation-2026-10-06/scoped-parity.json">animation comparison</a>
+records 907 fixtures and 258,996 native tick states from the actual client codec
+and <code>SpriteContents.AnimationState.tick</code>, including all 63 bundled animated
+texture metadata sections and synthetic boundary cases. The associated
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-sprite-animation-2026-10-06/startup-smoke.json">startup report</a>
+checks the renderer using this shared implementation. Images, input
+fixtures and native traces stay private under <code>.local/</code>.</p>
+<pre><code class="language-sh">cargo +stable test -p horizon-client
+cargo +stable clippy --workspace --all-targets -- -D warnings
+python3 tools/test_native_client.py
+# Headless Linux alternative:
+python3 tools/test_native_client.py --vscreen
+</code></pre>
+<p>The mesh tests compare expanded rectangles against independently enumerated
+exposed voxel faces, including solid neighbors, cavities, material boundaries,
+negative chunk origins and random surroundings. The startup runner launches a
+nine-chunk scene, requires 30 presented frames and a clean exit, verifies 3,169
+greedy cube rectangles and 179 other model faces across 18 sprite layers, and writes GPU,
+platform, binary and source information to ignored
+<code>.local/horizon-client/startup-smoke.json</code>. It has an external timeout as well as
+the application's frame deadline. These checks do not establish gameplay or
+pixel parity with Java. Source and resource fingerprints must remain unchanged
+during the run. An animation test covers duration boundaries, wrapping and
+repeated physical frames independently of render frequency.</p>
+<p>Initial local validation uses Linux x86_64, a headless Wayland compositor and
+Vulkan llvmpipe software rendering. Textured geometry and resizing were visually
+inspected; movement, arrow rotation and Ctrl+Q were exercised using virtual
+physical key codes. Captured relative mouse movement and Escape release were
+exercised through a virtual pointer. Physical-GPU runtime tests on the target
+machine remain pending. Software-renderer frame rates
+are not evidence of a hardware speedup.</p>
+<p>The model gallery was also inspected at close range on Linux/Vulkan llvmpipe.
+With the camera stationary, screenshot differences were confined to the lantern
+as its frames changed. The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-model-client-2026-10-06/startup-smoke.json">model-client startup report</a>
+records the bounded presentation check and the scope of this visual inspection.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-blockstate-client-2026-10-06/startup-smoke.json">blockstate-client report</a>
+also checks all 16 gallery placements against actual Java registry binding, root
+baking and model collection using <code>state.getSeed(position)</code>. A tagged empty
+geometry adapter identifies the 20 selected model parts and their transforms;
+the separate baking gate covers actual quad geometry. Preparation exports typed
+property domains and canonical state order, which the Rust loader checks against
+its imported registry before binding. Each distinct transformed model is baked
+once during gallery preparation and reused across positions. The selected state
+IDs, properties, positions and models are recorded in the startup report.</p>
+<p><a href="face-visibility.html">Neighbor-face visibility</a> now has native client/server
+coverage across all registered states and suppression-rule families. Integrating
+that result with resident chunk model meshing is now covered by the scene check
+below.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-chunk-models-2026-10-06/startup-smoke.json">resident-model report</a>
+checks all 10,919 occupied cells in the bounded startup scene against a separately
+constructed native scene. Actual Java state-model selection, parent geometry,
+rotated culling directions and <code>Block.shouldRenderFace</code> produce the same 5,991
+visible and 59,636 culled model faces. The sixteen featured model selections also
+retain their direct native comparison. Expanded greedy-rectangle tests cover
+rotated and mirrored UV bases, texture and shade boundaries, negative origins,
+neighbor seams and cavities; cube projection tests cover all XYZ quarter turns.
+These checks cover CPU mesh behavior and GPU startup, not native shader pixels
+or a hardware performance comparison.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-landing-2026-10-07/interactive-smoke.json">landing interactive smoke check</a>
+exercises F5 walking from the initial camera position. The player lands at y=4,
+resets fall distance and records one damage request of 9.0. That historical
+checkpoint preceded the health integration below. The Linux window exits cleanly after visual inspection.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-health-2026-10-07/scene-motion.json">health integration comparison</a>
+connects actual server-player hurt to the same live attributes, synchronized
+health/absorption storage and hunger state used by the resident player. It checks
+90,065 operations in 1,881 scenarios against both pinned JARs. Repeated hits,
+absorption, armor/toughness, health limits, damage cooldown boundaries, lethal
+hits and nonfinite incoming damage retain native results and event order.
+Travel reads the live movement-speed attribute through the actual native player
+getter, independently of the base-living stored speed field. This removes a
+controlled getter from the older movement harness and corrects the runtime
+query. Dead-or-dying state disables movement input and jumping. Server-player jumps now
+add the native exhaustion amount and queue a jump statistic, including when
+jump strength prevents upward motion. The damage-clock fields advance at 20 Hz;
+clock operations in the comparison establish elapsed-time state rather than
+invoking complete native tick methods. That checkpoint preceded the hunger
+integration below.</p>
+<p>The scene loads native-decoded damage definitions, damage tags and health field
+IDs from the pinned private resources. Statistics, combat records, sound,
+network broadcasts and advancement criteria are queued service requests. The
+death consumer marks the stored actor dead and queues a request; drops, removal,
+respawn and the death screen are unfinished. F5 constructs a fresh development
+actor when walking is enabled. This is not vanilla respawn behavior.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-health-2026-10-07/interactive-smoke.json">health interactive smoke check</a>
+enables walking and F3 diagnostics, lands from the initial position, then walks
+and jumps before exiting. Health falls from 20 to 11, matching the single damage
+request of 9.0; the cooldown expires to zero. The final report is grounded at y=4
+with 110 movement ticks and no error. The ground view was visually inspected.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-health-2026-10-07/startup-smoke.json">startup check</a>
+also passes with the additional health resources. These are Linux development
+checks, not release acceptance or a hardware performance comparison.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-hunger-2026-10-07/scene-motion.json">hunger integration comparison</a>
+checks 196,489 operations in 2,837 scenarios against both pinned references.
+The resident simulation now ticks hunger after movement. It binds actual food,
+saturation, exhaustion and timer fields to the same live health and attribute
+storage, including regeneration and starvation through registered damage sources.
+The damage callback borrows the FoodData currently being ticked, so exhaustion
+writes remain visible before its timer resets. Peaceful recovery also runs in
+the native Player.aiStep phase before movement. Difficulty and natural
+regeneration settings live with the resident world.</p>
+<p>The reference executes actual <code>FoodData.tick</code>, <code>ServerPlayer.tickRegeneration</code>,
+health setters, armor/absorption and hurt methods. Cases cover all four
+difficulties, starvation health limits, absorption during starvation, changing
+regeneration rules, fast/slow healing timers, timer overflow, signed zero,
+nonfinite food state and combined falling/movement/food ticks. Explicit clock
+setup supplies elapsed-time fields; complete enclosing <code>tick</code>/<code>doTick</code> methods
+remain outside this comparison. The default walking scene uses Normal
+difficulty with natural regeneration enabled. At that checkpoint food item use,
+movement-distance exhaustion, effect ticks, full death/respawn services and save integration remained
+unfinished.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-hunger-2026-10-07/interactive-smoke.json">interactive hunger check</a>
+enabled walking and F3 diagnostics on Linux. After one landing damage request
+of 9, stored health recovered from 11 to 12.5 as saturation fell from 5 to 3;
+food remained 20 and exhaustion ended at 1. The player remained alive and
+grounded at <code>[25, 4, 25]</code>, with an expired hurt cooldown, after 42 movement ticks.
+The ground view was visually inspected and the client exited without an error.
+The development client pauses movement without focus, so wall time is not
+simulation time. This checks the resident simulation and window, not full
+gameplay, release acceptance or hardware performance.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-movement-statistics-2026-10-07/scene-motion.json">movement statistics comparison</a>
+checks 215,204 operations in 5,510 scenarios against both pinned references.
+The resident simulation now feeds the change in player position to the movement
+statistics method after movement and before hunger ticking. Sprint distance
+adds exhaustion to the same stored food state; ordinary walking adds zero.
+Climbing and airborne distance also produce their native statistic requests.
+Statistics persistence and scoreboard delivery remain unfinished.</p>
+<p>Vanilla invokes <code>ServerPlayer.checkMovementStatistics</code> from its packet listener
+when accepting movement, separately from <code>Entity.move</code> and travel. The resident
+scene directly accepts its resolved local displacement at this boundary; its
+comparison invokes the actual native statistics method. It does not yet run the
+packet listener's acceptance, rejection or scheduling logic. The shared kernel
+also covers swimming, underwater walking, water-surface walking, crouching and
+gliding. Direct method fixtures check all 512 overlapping query-flag combinations,
+invulnerable abilities, float-versus-double centimeter rounding, integer overflow,
+zero and nonfinite deltas. Those query overrides are restricted to statistics
+fixtures; that checkpoint used dry, standing resident physics. Combined scenes exercise
+repeated movement, sprint-state changes, jumps, hunger consumption and healing.
+That checkpoint preceded the local sprint controls described below.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-movement-statistics-2026-10-07/interactive-smoke.json">Linux window check</a>
+enabled walking, showed diagnostics and held W for 650 ms. The player moved from
+<code>[25, 4, 25]</code> to <code>[23.12939004788537, 4, 23.12939004788537]</code>, remained grounded
+and alive, and exited without an error after 82 movement ticks. Health recovered
+to 14 after the initial fall. The ground view was visually inspected; this is a
+client smoke check, while statistic amounts and exhaustion are checked by the
+native comparisons above.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-sprint-2026-10-07/sprint-input.json">sprint input comparison</a>
+checks 502,112 evolving steps in 146,648 scenarios. It executes the actual
+<code>LocalPlayer.aiStep</code> prefix, including <code>KeyboardInput.tick</code> and the private
+sprint eligibility and stop methods. A sentinel ends execution at the riding
+boundary before parent movement. The fixtures supply environmental, effect,
+vehicle and UI queries; actual food/ability storage and item <code>USE_EFFECTS</code>
+components supply the remaining conditions. The comparison covers all combinations
+of 17 condition flags, keyboard states and previous input, food thresholds,
+timer boundaries, sprint windows from 0 to 10, and double-tap sequences. It
+checks each ordered sprint setter request, including repeated requests.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-sprint-2026-10-07/sprint-scene.json">combined sprint scene</a>
+then checks 13,387 operations in 419 scenarios. Its Java input actor shares the
+native scene actor's food and collision state, and its sprint setters update
+that actor's real attributes. Actual input preparation, movement, distance
+exhaustion, hunger and healing follow. Snapshots compare the sprint timer and
+previous input alongside position, velocity, modifiers and health/food fields.
+Cases include collisions, releasing the sprint key while moving, double taps,
+jumps, and hunger crossing the sprint threshold. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-sprint-2026-10-07/scene-motion.json">common scene check</a>
+also passes against both pinned references.</p>
+<p>The walking client now samples sprint input on each simulation tick and uses
+the default seven-tick double-tap window. The live food and collision fields
+control eligibility; sprint changes update the existing movement-speed
+attribute. The F3 title shows sprint state, and exit reports include sprint
+ticks and movement-distance counters. These counters are diagnostics, not saved
+statistics. Fluid movement, vehicles, effects, item use, input remapping and the
+complete client/server tick remain unfinished. The input comparison tests those
+eligibility queries in isolation; the sprint checkpoint used dry, standing
+actors with empty equipment. The crouch integration below extends that domain.</p>
+<pre><code class="language-sh">python3 tools/test_sprint_input_parity.py
+python3 tools/test_native_scene_motion.py --sprint-input
+</code></pre>
+<p>Linux window checks exercised both <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-sprint-2026-10-07/sprint-key-smoke.json">Left Ctrl</a>
+and <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-sprint-2026-10-07/double-tap-smoke.json">double-tap W</a>.
+The Ctrl run recorded 71 sprint ticks and 1,948 sprint centimeters. The double-tap
+run visibly showed <code>Sprint true</code> during the second press and <code>Sprint false</code>
+after releasing W. Both runs ended grounded and alive without an error, and
+their views were visually inspected. These are development client checks;
+release acceptance on the target machine and complete gameplay remain pending.</p>
+<h2 id="crouching-and-dry-pose-transitions">Crouching and dry pose transitions</h2>
+<p>Left Shift now binds crouching to the resident player. Local crouch selection
+uses the previous keyboard state before the new input is sampled; that local
+state controls slowdown and sprint eligibility. The current Shift input controls
+ledge backoff, descending collision context, bounce suppression and ladder
+sliding. After movement, pose-fit checks choose standing, crouching or crawling
+and refresh the cached bounds and eye height. Releasing Shift under a ceiling
+does not force the actor into a standing volume that cannot fit.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-crouch-2026-10-07/input-scene.json">combined input scene</a>
+checks 21,241 operations in 514 scenarios against the pinned client, including
+the actual <code>LocalPlayer.aiStep</code> input prefix and <code>modifyInput</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-crouch-2026-10-07/scene-motion.json">shared scene comparison</a>
+checks 223,645 operations in 5,605 scenarios against both pinned JARs. It invokes
+actual native pose selection, dimension refresh and edge backoff. The new cases
+include low ceilings, blocked pose changes, scale and sneaking-speed attributes,
+diagonal ledges, step-height thresholds, jumping, release transitions and landing
+on different materials. Seven output lines per operation compare motion,
+attributes, events, health, hunger, input history and pose/dimension bits.
+The existing <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-crouch-2026-10-07/sprint-input.json">isolated sprint comparison</a>
+also passes after updating its scene controller.</p>
+<p>The native fixture controls pose storage and invokes the actual dimension-refresh
+body when the pose changes. Full synchronized pose data and network notifications
+remain unfinished. That checkpoint used explicit dimension refreshes; the
+pending attribute integration below adds the simulation tick phase. Crawling here means dry collision
+pose selection; swimming physics, sleeping, flight and death poses are unbound.</p>
+<p>The client camera follows the cached eye height with the inspected native float
+smoothing arithmetic. Full camera behavior and pixel parity are not established.
+The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-crouch-2026-10-07/interactive-smoke.json">Linux window check</a>
+visibly switched from crouching to standing after releasing Shift. It recorded
+100 crouching ticks and 613 crouching centimeters, ending alive and grounded
+without an error. Both views were inspected. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-crouch-2026-10-07/startup-smoke.json">renderer startup check</a>,
+seven client tests and all-target client Clippy also passed. These checks do not
+establish full vanilla gameplay or final Linux release acceptance on the target machine.</p>
+<h2 id="pending-attribute-updates">Pending attribute updates</h2>
+<p>The resident simulation now dispatches pending attribute callbacks after movement
+and before pose selection, matching their position in <code>LivingEntity.tick</code> and
+<code>Player.tick</code>. Reducing maximum health or absorption clamps the stored value;
+changing scale rebuilds the cached player dimensions even when the pose stays
+the same. The update set clears after the callbacks finish, while attribute
+synchronization stays queued. Existing modifier, cache and dirty-state behavior
+is preserved.</p>
+<p>The scene oracle invokes the actual private native refresh method and the
+<code>ServerPlayer.onAttributeUpdated</code> override. Waypoint transmit/receive changes
+produce ordered manager requests; waypoint management and network delivery remain
+unbound. Health and absorption use the same synchronized float storage as damage
+and hunger. The full enclosing player/entity tick is still incomplete.</p>
+<p>Callback order depends on native attribute-instance identity hashes. The oracle
+now exports each reference process's holder and instance identities, and the Rust
+probe replays them. The check compares ordered health/waypoint events and validates
+that the same number of attribute instances is allocated. It does not sort those
+events to conceal ordering differences. Registry snapshots still compare map and
+modifier contents independently of iteration order.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-attribute-updates-2026-10-07/scene-motion.json">shared scene check</a>
+passes 234,949 operations in 5,801 scenarios against both pinned JARs. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-attribute-updates-2026-10-07/input-scene.json">combined input scene</a>
+passes 30,025 operations in 710 scenarios against the client. New cases combine
+health and absorption limits, scale, both waypoint ranges, permanent/transient
+modifiers, repeated refreshes and nonfinite values. Low-tunnel histories exercise
+movement, releasing Shift under a ceiling and changing scale between ticks.</p>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-attribute-updates-2026-10-07/interactive-smoke.json">Linux walking check</a>
+recorded 36 sprinting ticks and 36 crouching ticks, ending grounded and alive
+without an error. Its view was inspected. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-native-attribute-updates-2026-10-07/startup-smoke.json">startup check</a>,
+seven client tests and all-target client Clippy passed. Full gameplay parity and
+playable Linux release acceptance on the target machine remain pending.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/native-client.md"><code>docs/native-client.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#run-from-a-checkout">Run from a checkout</a></li><li class="l3"><a href="#agent-control-horizon-ctl-and-mcp">Agent control (horizon-ctl and MCP)</a></li><li class="l3"><a href="#discord-rich-presence">Discord Rich Presence</a></li><li class="l3"><a href="#play-on-another-of-your-machines">Play on another of your machines</a></li><li class="l2"><a href="#how-it-fits-together">How it fits together</a></li><li class="l2"><a href="#validation">Validation</a></li><li class="l2"><a href="#crouching-and-dry-pose-transitions">Crouching and dry pose transitions</a></li><li class="l2"><a href="#pending-attribute-updates">Pending attribute updates</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

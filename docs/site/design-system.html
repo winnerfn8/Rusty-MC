@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rusty Minecraft&#x27;s design system · Rusty Minecraft docs</title>
+<meta name="description" content="Rusty Minecraft&#x27;s design system: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details open><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html" aria-current="page">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="rusty-minecrafts-design-system">Rusty Minecraft's design system</h1>
+<p>One design language for the launcher, the website and the few overlays the game draws that
+vanilla has no screen for (the on-screen keyboard a controller types with). Every game screen
+and the HUD are not part of it: they are vanilla's, because parity is the point of the game, and
+Rusty Minecraft's own settings are pages built from vanilla's widgets, the way mods add theirs.</p>
+<p>The tokens live in one place, <code>crates/horizon-theme</code>. The launcher (<code>launcher/src/theme.rs</code>)
+and the game (<code>crates/horizon-client/src/ui_theme.rs</code>) read them as Rust constants, and the
+website reads them as CSS custom properties generated from the same crate
+(<code>cargo run -p xtask -- tokens</code> writes <code>crates/horizon-theme/tokens.css</code>, which the website's build
+reads from main; a test fails when the file is out of date). Change a value in the crate and all three follow.</p>
+<h2 id="where-it-comes-from">Where it comes from</h2>
+<p>The direction was set by <a href="https://mkdir.directory/">mkdir.directory</a>, a directory site that is
+almost nothing but type. What we take from it is its restraint rather than its content:</p>
+<ol>
+<li><strong>Type is the interface.</strong> One family, Geist, and its mono. Large, tight display type
+(medium weight, -2 % tracking) carries the hierarchy, so there is no need for boxes, icons or
+colour to say what matters. Instrument Serif is gone.</li>
+<li><strong>Lists, not cards.</strong> Content is a numbered list: a small mono index on the left (<code>01</code>,
+<code>02</code>…), the name large, a mono detail on the right, and a 1 px rule between rows. Versions,
+settings, worlds, servers, release notes and the parity table are all this one component.</li>
+<li><strong>One accent, used once.</strong> Neutrals do the work. The violet marks the single main action on a
+screen (Play, Download), focus, links and progress; selection is shown in ink, not in colour.</li>
+<li><strong>Space instead of borders.</strong> Generous margins (64 px on wide screens, 16 px on phones), no
+shadows, no gradients, no outlines around groups. A surface tint appears only under the
+pointer or behind something that must stand apart (a console, a dialog).</li>
+<li><strong>Quiet motion.</strong> Things arrive with a short fade and an 8 px rise, a few tens of
+milliseconds apart, eased out, never bouncy. Hovers fade a soft plate in behind the row.</li>
+<li><strong>A signature.</strong> A giant, faint wordmark: at the foot of the website, behind the launcher's
+opening and the game's title screen.</li>
+</ol>
+<h2 id="tokens">Tokens</h2>
+<h3 id="colour">Colour</h3>
+<p>Cool, slightly blue neutrals in two appearances with the same restraint, and Rusty Minecraft's violet.
+Every text colour passes WCAG AA (4.5:1) on every background it is used on; the tests in
+<code>horizon-theme</code> check each pair in both palettes.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Light</th>
+<th>Dark</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page</code></td>
+<td><code>#fafafc</code></td>
+<td><code>#0d0e13</code></td>
+<td>the background</td>
+</tr>
+<tr>
+<td><code>plate_soft</code></td>
+<td><code>#f3f3f8</code></td>
+<td><code>#181a22</code></td>
+<td>hover plate, fields, segmented track, console</td>
+</tr>
+<tr>
+<td><code>plate</code></td>
+<td><code>#ebecf4</code></td>
+<td><code>#20222c</code></td>
+<td>pressed plate, switch off, the faint wordmark</td>
+</tr>
+<tr>
+<td><code>surface</code></td>
+<td><code>#ffffff</code></td>
+<td><code>#16181f</code></td>
+<td>dialogs and menus that sit above the page</td>
+</tr>
+<tr>
+<td><code>rule</code></td>
+<td><code>#e2e3ea</code></td>
+<td><code>#24262f</code></td>
+<td>1 px rules between rows, tracks</td>
+</tr>
+<tr>
+<td><code>ink</code></td>
+<td><code>#16181f</code></td>
+<td><code>#ecedf3</code></td>
+<td>text, selection, slider fill, the inverted segment</td>
+</tr>
+<tr>
+<td><code>ink_soft</code></td>
+<td><code>#3b3e49</code></td>
+<td><code>#c5c7d1</code></td>
+<td>secondary text, values</td>
+</tr>
+<tr>
+<td><code>muted</code></td>
+<td><code>#646875</code></td>
+<td><code>#8b8f9c</code></td>
+<td>labels, descriptions, mono indices and details</td>
+</tr>
+<tr>
+<td><code>accent</code></td>
+<td><code>#5b3fd6</code></td>
+<td><code>#9a86ff</code></td>
+<td>the main action, links, focus, progress</td>
+</tr>
+<tr>
+<td><code>on_accent</code></td>
+<td><code>#ffffff</code></td>
+<td><code>#0d0e13</code></td>
+<td>text on the accent</td>
+</tr>
+<tr>
+<td><code>danger</code></td>
+<td><code>#b4372a</code></td>
+<td><code>#f07a68</code></td>
+<td>errors, the crash notice's dot</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td><code>#1d7a48</code></td>
+<td><code>#45c27a</code></td>
+<td>&quot;Matches vanilla&quot;, &quot;Ready&quot;</td>
+</tr>
+</tbody>
+</table></div>
+<p>The game's menus draw over the live title backdrop, always in the dark palette, with the page
+colour as a flat veil so text keeps its contrast whatever the world shows: <code>VEIL</code> (0.90) on
+every page and in a world, <code>HOME_VEIL</code> (0.80) on the title's home page, which shows more of the
+world and keeps to <code>ink</code> and <code>ink_soft</code>. Muted text over the backdrop is <code>BACKDROP_MUTED</code>
+(<code>#9fa3ae</code>). A test holds every pair to AA over a backdrop of luminance 0.77 (the snowiest title
+panorama measured reaches 0.49), on the bare veil and on a selected row's plate. Their plates
+are the dark <code>ink</code> at 8 % and 14 % rather than <code>plate_soft</code> and <code>plate</code>: over the veil they come
+out the same, and they stay visible over a bright backdrop.</p>
+<h3 id="type">Type</h3>
+<p>Geist (400, 500, 600) and Geist Mono (400), bundled under the SIL Open Font License.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Token</th>
+<th>App px</th>
+<th>Web (min–max px)</th>
+<th>Line</th>
+<th>Tracking</th>
+<th>Weight</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>micro</code></td>
+<td>11</td>
+<td>11</td>
+<td>1.5</td>
+<td>+0.04em</td>
+<td>mono</td>
+<td>indices (<code>01</code>), counts, timestamps</td>
+</tr>
+<tr>
+<td><code>caption</code></td>
+<td>12</td>
+<td>12</td>
+<td>1.5</td>
+<td>0</td>
+<td>400</td>
+<td>footnotes, help under a control</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>13</td>
+<td>13</td>
+<td>1.5</td>
+<td>0</td>
+<td>400</td>
+<td>row labels, nav, buttons</td>
+</tr>
+<tr>
+<td><code>ui</code></td>
+<td>14</td>
+<td>14</td>
+<td>1.5</td>
+<td>0</td>
+<td>400</td>
+<td>body text in the apps</td>
+</tr>
+<tr>
+<td><code>body</code></td>
+<td>15</td>
+<td>15–17</td>
+<td>1.6</td>
+<td>0</td>
+<td>400</td>
+<td>paragraphs</td>
+</tr>
+<tr>
+<td><code>heading</code></td>
+<td>20</td>
+<td>20–24</td>
+<td>1.3</td>
+<td>-0.01em</td>
+<td>500</td>
+<td>section heads</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>28</td>
+<td>32–48</td>
+<td>1.05</td>
+<td>-0.02em</td>
+<td>500</td>
+<td>list item names</td>
+</tr>
+<tr>
+<td><code>display</code></td>
+<td>44</td>
+<td>34–64</td>
+<td>1.05</td>
+<td>-0.025em</td>
+<td>500</td>
+<td>page titles</td>
+</tr>
+<tr>
+<td><code>wordmark</code></td>
+<td>220</td>
+<td>18vw</td>
+<td>0.8</td>
+<td>-0.04em</td>
+<td>500</td>
+<td>the faint signature</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="space-shape-and-lines">Space, shape and lines</h3>
+<ul>
+<li>Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64, 96. Page gutter 64 (apps and wide web), 16 on
+phones. Text measure at most 56 characters for paragraphs.</li>
+<li>Radii: 8 for fields and small controls, 12 for plates (hover rows, console, dialogs), full for
+buttons, segmented controls and switches.</li>
+<li>Lines: 1 px, <code>rule</code>. No other borders.</li>
+<li>Heights: control 32, large control (Play) 40, segment 28, list row 64 (apps), 86 (web).</li>
+</ul>
+<h3 id="motion">Motion</h3>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Duration</th>
+<th>Easing</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>quick</code></td>
+<td>150 ms</td>
+<td><code>cubic-bezier(.4, 0, .2, 1)</code></td>
+<td>hovers, presses, colour</td>
+</tr>
+<tr>
+<td><code>move</code></td>
+<td>240 ms</td>
+<td><code>cubic-bezier(.23, 1, .32, 1)</code></td>
+<td>selection sliding, switches, page changes</td>
+</tr>
+<tr>
+<td><code>enter</code></td>
+<td>600 ms</td>
+<td><code>cubic-bezier(.23, 1, .32, 1)</code></td>
+<td>content arriving: opacity 0→1, rise 8 px</td>
+</tr>
+<tr>
+<td><code>stagger</code></td>
+<td>40 ms</td>
+<td></td>
+<td>delay between list rows arriving</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>prefers-reduced-motion</code> (web) turns <code>enter</code> into a plain fade.</p>
+<h2 id="components">Components</h2>
+<ul>
+<li><strong>Index list</strong> (the signature): <code>micro</code> mono index in <code>muted</code> (left, 40 px column), the name
+in <code>title</code> (or <code>ui</code>/<code>label</code> for dense lists such as settings), details in <code>micro</code> mono
+<code>muted</code> on the right, a <code>rule</code> under every row. Hover: a <code>plate_soft</code> plate with radius 12
+fades in, extending 16 px past the row on each side, and the index turns <code>ink</code>.</li>
+<li><strong>Buttons</strong>: pill shaped, <code>label</code> size, medium weight, 32 high (40 for the one large action).
+<em>Primary</em> is accent with <code>on_accent</code> text, at most one per screen. <em>Secondary</em> is
+<code>plate_soft</code> with <code>ink</code> text. <em>Ghost</em> is <code>muted</code> text that turns <code>ink</code> with a <code>plate_soft</code>
+plate under the pointer. Pressed: <code>plate</code> (or the accent at 85 %). Disabled: 40 % opacity.</li>
+<li><strong>Fields</strong>: 36 high, <code>plate_soft</code>, radius 8, no border; focus draws a 1 px accent ring.
+Monospace for paths and commands.</li>
+<li><strong>Switch</strong>: 36×20 pill, <code>plate</code> when off, accent when on, a white 16 px knob that slides over
+<code>move</code>.</li>
+<li><strong>Slider</strong>: a 2 px <code>rule</code> track, the filled part <code>ink</code>, a 14 px <code>ink</code> knob. The value is
+written in mono beside the label, not on the track.</li>
+<li><strong>Segmented control / tabs</strong>: a <code>plate_soft</code> pill; the selected segment is an <code>ink</code> pill with
+<code>page</code> text that slides over <code>move</code>.</li>
+<li><strong>Navigation</strong>: text only. Launcher: a top bar with the mark and &quot;Rusty Minecraft&quot; on the left and
+the pages on the right, <code>label</code> size, <code>muted</code>, the current one <code>ink</code> on a soft pill. Game
+menus keep their sidebar layout (it suits a controller), but as a plain column of text items
+under the mark, with no panel tint and no border: the current one <code>ink</code> on a soft pill that
+slides to it.</li>
+<li><strong>Page header</strong>: <code>display</code> title, then one <code>body</code> line in <code>muted</code>, 56 characters at most.</li>
+<li><strong>Notices and dialogs</strong>: a <code>plate_soft</code> plate, radius 12, 16–24 padding, no border; a 6 px dot
+in <code>danger</code> (or <code>accent</code>) leads the title. Actions are buttons in a row below.</li>
+<li><strong>Progress</strong>: a 2 px <code>rule</code> track and an <code>accent</code> fill; indeterminate work shuttles a 30 %
+segment.</li>
+<li><strong>Console</strong>: <code>plate_soft</code> plate, radius 12, <code>micro</code>/<code>caption</code> mono in <code>ink_soft</code>, newest line
+at the bottom, the command field inside the plate under a <code>rule</code>.</li>
+<li><strong>Empty states</strong>: a short <code>muted</code> sentence and one secondary button, centred in the space.</li>
+</ul>
+<h2 id="surfaces">Surfaces</h2>
+<ul>
+<li><strong>Launcher</strong> (<code>launcher/</code>): moving to the Night look below, screen by screen; screens not rebuilt
+yet draw the Blocks parts in the night's colours (<code>Night::blocks</code>). A top bar (wordmark, the pages as
+tabs, the account chip, Settings), a sidebar (the instances, the hosted servers, the launcher's
+own version and channel at its foot), and the page over a stone texture. Home opens on a pixel
+landscape banner with the hero, the version picker and Play; Mods holds the mod, resource pack
+and modpack tabs; Versions and Patch notes are lists of panels; Settings is
+grouped panels of rows. Dark by default, Light or System in Settings (Appearance).</li>
+<li><strong>Website</strong> (horizon-rust/horizon-site): the Blocks look below. The same page structure as before (what it
+is, screenshots, parity, launcher, patch notes, community), headings in Pixelify Sans, lists as
+stacks of panels, the stone texture behind the page and Rusty Minecraft's pixel landscape (a dawn or a
+sunset) behind the hero. Light and dark follow the system, with a toggle. A giant wordmark in
+pixels sits in the footer.</li>
+<li><strong>Game</strong>: vanilla's screens. The on-screen keyboard is a rounded plate of keys in the page
+colour, the focused key in the accent.</li>
+</ul>
+<h2 id="blocks">Blocks</h2>
+<p>A blocky, Minecraft-like look in Rusty Minecraft's purple, for the website and the redesigned launcher:
+Minecraft's inventory rather than a document. Its colours are <code>horizon_theme::Blocks</code>
+(<code>BLOCKS_LIGHT</code>, <code>BLOCKS_DARK</code>), which <code>tokens.css</code> carries under the same names as before plus
+<code>--panel</code>, <code>--raised</code>, <code>--button</code>, <code>--well</code>, <code>--bevel</code>, <code>--lip</code>, <code>--outline</code> and the <code>--face</code>
+of the main action. The game's menus keep <code>LIGHT</code> and <code>DARK</code>.</p>
+<ul>
+<li><strong>Pixel type for what names and what you act on.</strong> Headings, navigation, buttons and the
+wordmark use Pixelify Sans (OFL; Medium, SemiBold, Bold); paragraphs and numbers stay in Geist
+and Geist Mono so long text reads easily. The bundled copies add the three uppercase Cyrillic
+letters upstream leaves out, О, П and І: the Latin O's glyph, the lowercase п lifted to that
+weight's cap height, and the Latin I's glyph, so a Russian or Ukrainian heading stays in the
+pixel face.</li>
+<li><strong>Blocks, not rounded cards.</strong> Every surface is square: a 2 px dark outline, a 2 px light bevel
+along the top and a darker lip along the bottom. The main action is the violet face with its own
+bevel and a 4 px lip; it sinks a pixel when pressed. Code and fields are sunk wells.</li>
+<li><strong>Inventory tabs</strong> switch the kinds in Mods: the open tab joins the panel under it.</li>
+<li><strong>Slots</strong> hold pictures: a mod's or pack's own icon and gallery images from its source,
+downloaded when first shown and kept on disk (<code>launcher/src/browser/images.rs</code>); the launcher
+ships no third-party pictures. The Rusty Minecraft instance shows a grass block drawn from the player's
+own prepared Minecraft textures. Sources are named in text (&quot;from Modrinth&quot;): Modrinth's logo is
+all rights reserved, so it is not shown.</li>
+<li><strong>Partner banner</strong>: the one exception to shipping no third-party pictures. Sculk, a server host,
+sponsors Rusty Minecraft: its banner (<code>launcher/assets/sculk-banner.webp</code>, <code>launcher/src/partner.rs</code>) sits
+under a muted mono &quot;Partner&quot; label at the end of the Servers page and opens Sculk's page in the
+browser. The sidebar of the other pages shows a card made for its width instead: Sculk's characters
+and logo cropped from the same banner, and the text drawn by the launcher in its language, so it
+stays readable; it keeps Sculk's dark card, cyan and rounded corners in both themes, as an ad does,
+and turns compact (characters beside the text) when the window is too short. The website shows the
+banner the same way on Home and the hosting docs, as a <code>rel=&quot;sponsored&quot;</code> link.</li>
+<li><strong>Pixel art drawn in code.</strong> The stone behind the pages is close shades of the page colour
+(<code>TILE_SHADES</code>), never Minecraft's stone; the landscape is a banded sky, a sun cut in slices like
+the mark, hills and square trees (a sunset in dark, a dawn in light). The launcher bakes them in
+<code>launcher/src/art.rs</code> at the window's scale so each texel covers whole device pixels; the website
+draws them in its <code>scripts/art.mjs</code>.</li>
+<li><strong>Icons</strong>: Pixelarticons (MIT), 24 unit pixel SVGs in <code>crates/horizon-theme/icons/pixel/</code>, tinted
+with the text colour.</li>
+<li><strong>Contrast</strong>: every text colour meets WCAG AA (4.5:1) on the panels, the page and the lightest
+stone shade in both palettes (<code>blocks_text_meets_wcag_aa_in_both_appearances</code>).</li>
+</ul>
+<h2 id="night">Night</h2>
+<p>The launcher's look from 0.3: a pixel night sky that turns to a sunset at the horizon, with the
+content on top. Its tokens are <code>horizon_theme::night</code> (<code>NIGHT</code>, and <code>DAWN</code> for players who pick
+Light); <code>tokens.css</code> carries them as <code>--night-*</code>. The game's menus don't use it.</p>
+<ul>
+<li><strong>The sky is the brand, the content is the UI.</strong> The sky, the stepped sun, the banded clouds and
+the skyline are pixel art drawn in code on one grid per layer, edges crisp, never smoothed. On
+top of it the screen is made of what the player owns: instance icons, world thumbnails, server
+icons, their skin's head, mods and counts. No ornaments, no empty cards.</li>
+<li><strong>Plates only where text needs them.</strong> A plate is <code>card</code> at its opacity with a 1 px <code>stroke</code>;
+<code>card_hi</code> for a selected or raised one. Text sits on the bare sky only over its upper stops
+(<code>UNCARDED_STOPS</code>): the sunset is too bright for light text. A plate cuts each corner in two 4 px
+steps (<code>PIXEL_CORNER</code>), like the art, and its stroke follows the steps. The main action cuts one
+step; other controls round at 8 (at 1x a step vanishes on a pale fill and looks notched on a thin
+ring: compared in the specimen).</li>
+<li><strong>One accent.</strong> <code>accent</code> fills the one main action (Play, Create, Install) and progress;
+<code>accent_hi</code> is the accent as text and the 2 px focus ring. Everything else is ink on plates.</li>
+<li><strong>Bricolage Grotesque</strong> (SIL OFL 1.1, <code>fonts/OFL-BricolageGrotesque.txt</code>), cut from upstream's
+variable font by <code>tools/bake_bricolage.py</code>: the UI family at optical size 14 (Regular, Medium,
+SemiBold, Bold) and <code>Bricolage Grotesque Display</code> (Bold at optical size 72) for instance and page
+names. Geist Mono stays for paths, codes and counts. Upstream has no Cyrillic, so the bake merges
+Geist's (OFL, <code>fonts/OFL-Geist.txt</code>) into every cut: the letters drawn like Latin ones reuse
+Bricolage's, the others are Geist's scaled to Bricolage's cap and x-heights at a matching weight.</li>
+<li><strong>Two or three sizes per screen</strong>, from <code>night::TYPE</code>:</li>
+</ul>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Token</th>
+<th>App px</th>
+<th>Line</th>
+<th>Tracking (web)</th>
+<th>Weight</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>night-display</code></td>
+<td>56</td>
+<td>1.0</td>
+<td>-0.035em</td>
+<td>700</td>
+<td>instance and page names (display cut)</td>
+</tr>
+<tr>
+<td><code>night-title</code></td>
+<td>20</td>
+<td>1.25</td>
+<td>-0.01em</td>
+<td>700</td>
+<td>section and card heads</td>
+</tr>
+<tr>
+<td><code>night-ui</code></td>
+<td>14</td>
+<td>1.45</td>
+<td>-0.005em</td>
+<td>500</td>
+<td>text, rows, buttons, navigation</td>
+</tr>
+<tr>
+<td><code>night-caption</code></td>
+<td>12</td>
+<td>1.4</td>
+<td>0</td>
+<td>400</td>
+<td>one-line states and details</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Colour</strong> (night / dawn). Every text colour reaches AA on both plates over every stop of the sky,
+and on the upper stops, the page and the sidebar (<code>night_text_meets_wcag_aa_over_the_sky</code>).</li>
+</ul>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Night</th>
+<th>Dawn</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sky-0…5</code></td>
+<td><code>#07061a</code> <code>#140f38</code> <code>#2a1656</code> <code>#5b2a78</code> <code>#b0477d</code> <code>#f08a5d</code></td>
+<td><code>#c9d3f2</code> <code>#dcd8f3</code> <code>#ead5ec</code> <code>#f5d3d8</code> <code>#f9d6bd</code> <code>#fbe4c6</code></td>
+<td>the sky, top to horizon</td>
+</tr>
+<tr>
+<td><code>card</code></td>
+<td><code>#15112e</code> at 84 %</td>
+<td><code>#fdfcff</code> at 86 %</td>
+<td>plates</td>
+</tr>
+<tr>
+<td><code>card-hi</code></td>
+<td><code>#231c4a</code> at 90 %</td>
+<td><code>#ffffff</code> at 94 %</td>
+<td>a selected or raised plate</td>
+</tr>
+<tr>
+<td><code>stroke</code>, <code>rule</code></td>
+<td><code>#b9acff</code> at 12 %, 10 %</td>
+<td><code>#3b2f78</code> at 12 %, 10 %</td>
+<td>a plate's inner stroke, rules between rows</td>
+</tr>
+<tr>
+<td><code>ink</code></td>
+<td><code>#f4f2ff</code></td>
+<td><code>#1b1530</code></td>
+<td>text</td>
+</tr>
+<tr>
+<td><code>ink-soft</code></td>
+<td><code>#cfc9ea</code></td>
+<td><code>#3b3354</code></td>
+<td>secondary text</td>
+</tr>
+<tr>
+<td><code>muted</code></td>
+<td><code>#a59fc6</code></td>
+<td><code>#585071</code></td>
+<td>labels, details</td>
+</tr>
+<tr>
+<td><code>accent</code></td>
+<td><code>#7656fa</code></td>
+<td><code>#5b3fd6</code></td>
+<td>the main action, progress</td>
+</tr>
+<tr>
+<td><code>accent-hi</code></td>
+<td><code>#a08cff</code></td>
+<td><code>#5333c9</code></td>
+<td>accent text, focus ring</td>
+</tr>
+<tr>
+<td><code>success</code>, <code>warn</code>, <code>danger</code></td>
+<td><code>#5fd39a</code> <code>#f5b45a</code> <code>#ff8a78</code></td>
+<td><code>#136336</code> <code>#7a4f00</code> <code>#a3301d</code></td>
+<td>Ready, updates, errors</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Motion that means something</strong>: the sky drifts slowly and stops when the window is hidden or
+unfocused; the interface moves only to show cause and effect (a row arrives where it was added,
+progress fills). Reduced motion: nothing moves. The launcher's sky (<code>launcher/src/sky.rs</code>) moves
+in whole texels on a half-second beat, so it asks for two frames a second at most;
+<code>HORIZON_LAUNCHER_MOTION=off</code> stills it, <code>always</code> keeps it moving unfocused (for recordings).</li>
+<li><strong>Copy says what happens</strong> (&quot;Downloads 26.3 and Java 21, about 600 MB&quot;), never praises.</li>
+<li>The specimen (<code>HORIZON_LAUNCHER_PAGE=specimen horizon-launcher</code>) draws the type and colours in the
+launcher itself.</li>
+<li><strong>The frame</strong> (<code>launcher/src/shell.rs</code>): the sidebar is one plate from the window's top to its
+bottom (the wordmark, instances by group, servers, the launcher's version); the top bar over the
+pages has no plate, only a rule. A selected row or tab sits on <code>card_hi</code> cut in steps (two for
+rows, one for tabs and icon buttons); a hovered one gets the same shape at half its opacity,
+eased in. A row's second line is its state, after a small square in the state's colour.</li>
+<li><strong>Home</strong> (<code>launcher/src/home.rs</code>): the selected instance's name in the display cut over the bare
+sky, a caption above it naming what it plays and its state (the same square), and when it was
+played below. Play is the main action (<code>night::PLAY</code> tall, cut in one step); the version picker
+is a raised control of the same height; Mods and Folder are quiet buttons. A Rusty Minecraft instance
+gets a plate on the right: a release's notes in one line (not a Nightly's) and Join a friend.
+While it gets ready, Play names it (&quot;Getting ready… 34%&quot;) beside Cancel, and below sit the
+bar, what is happening with the time left, and the steps (game files, Java, sounds, prepare,
+play), the current one lit, those done ticked: steps, never the log
+(<code>HORIZON_LAUNCHER_PAGE=getting-ready</code> shows it for screenshots, nothing runs).</li>
+<li><strong>Instance icons</strong> (<code>launcher/src/instance_icons.rs</code>): the sidebar's rows, Home's hero (beside
+the name) and the instance dialog show the same icon. Its own picture first (<code>icon.png</code> in its
+game folder: one the player chose with Choose image…, scaled to 128 pixels, or its modpack's
+icon from where it was installed), else the block or colour chosen in the dialog, else its
+mark: the loader's logo (Fabric, Quilt, Forge, NeoForge), the grass block for plain Minecraft,
+Rusty Minecraft's for Rusty Minecraft. The letter tile is the last resort. The New instance dialog's loader
+cards show the same logos. Pixel-art logos are scaled by whole
+pixels; each is decoded once per size.</li>
+<li><strong>The instance's tabs</strong> (<code>launcher/src/home_tabs.rs</code>): under Home's hero, one tab at a time
+instead of one long page: Overview (what Play needs: the instance, the game or its resources,
+the account), Worlds, Multiplayer, Packs, then Screenshots and Console once they have something.
+A tab names how many it holds (&quot;Worlds 3&quot;); its own buttons (Add server, Open folder) sit at the
+strip's end, where a list's header would put them (<code>HORIZON_LAUNCHER_PAGE=worlds</code>, <code>packs</code>...
+opens one for screenshots).</li>
+<li><strong>The Mods tab</strong> (<code>launcher/src/instance_mods.rs</code>): the instance's mods on one nearly opaque
+card, its loader in the header (&quot;Fabric mods&quot;, &quot;Rusty Minecraft mods&quot;) beside a filter. A row is the
+mod's own icon (Modrinth's, else its jar's, else a glyph), its name and version, where it comes from (Modrinth,
+&quot;needed by another mod&quot;, or a local file by name), an update as an amber pill when the browser
+found one, and a switch (a Java jar turned off is renamed <code>.disabled</code>). Update all and Add mods
+sit at the strip's end (<code>HORIZON_LAUNCHER_PAGE=instance-mods</code>).</li>
+<li><strong>Sign in with Microsoft</strong> (<code>launcher/src/microsoft.rs</code>): every button that signs in is
+Microsoft's own, drawn as Microsoft publishes it: 41 pixels tall, its four-square symbol, the text
+semibold at 15 pixels, <code>#2F2F2F</code> with white text at night, white with <code>#5E5E5E</code> text and a
+<code>#8C8C8C</code> border at dawn, square corners. Not one of the launcher's cut plates: Microsoft's
+guidelines ask for the button as it is.</li>
+<li><strong>The sign-in sheet</strong> (<code>launcher/src/owner_page.rs</code>, the owner gate): an opaque plate over the
+dimmed launcher, never instead of it. It says why (the account that owns Java Edition, no install
+needed), the code in mono on a raised box with Copy, and Open link as the main action; the window
+goes on by itself once Microsoft answers (<code>HORIZON_LAUNCHER_PAGE=sign-in</code> shows it with a made-up
+code for screenshots).</li>
+<li><strong>New instance</strong> (<code>launcher/src/new_instance.rs</code>): an opaque plate over the dimmed launcher,
+tabs for the kind (Rusty Minecraft, Vanilla, Modded). A Java kind lists Mojang's versions (search,
+Snapshots, Old; the newest release chosen), Modded adds the loader (Fabric or Quilt, at its newest
+stable version), and the name follows the choice (&quot;Fabric 1.21.4&quot;) until the player types one.
+Create is the main action.</li>
+</ul>
+<h2 id="the-mark">The mark</h2>
+<p><strong>Rusty Minecraft line.</strong> A sun half set below a horizon, drawn as three horizontal bars of 4, 8 and
+10 units over a 12 unit line, on a 16 unit grid. The bars are the sun cut by the horizon into
+slices, which also reads as layers of terrain and as a nod to voxels without drawing a block. It
+is built on whole units of the 16 px grid so it stays sharp at 16 px, and it scales without
+detail to 1024 px.</p>
+<ul>
+<li>Monochrome: the mark in <code>ink</code> on light, in <code>ink</code> (dark) on dark; the line can take the accent.</li>
+<li>App icon: the mark in <code>#ecedf3</code> with the line in <code>#9a86ff</code>, on a <code>#16181f</code> rounded square
+(macOS grid: 824 px tile with 185 px corners in a 1024 canvas; Windows and Linux use the full
+square with 22 % corners).</li>
+<li>Exports and where they go: <code>docs/media/brand/README.md</code>.</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/design-system.md"><code>docs/design-system.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#where-it-comes-from">Where it comes from</a></li><li class="l2"><a href="#tokens">Tokens</a></li><li class="l3"><a href="#colour">Colour</a></li><li class="l3"><a href="#type">Type</a></li><li class="l3"><a href="#space-shape-and-lines">Space, shape and lines</a></li><li class="l3"><a href="#motion">Motion</a></li><li class="l2"><a href="#components">Components</a></li><li class="l2"><a href="#surfaces">Surfaces</a></li><li class="l2"><a href="#blocks">Blocks</a></li><li class="l2"><a href="#night">Night</a></li><li class="l2"><a href="#the-mark">The mark</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

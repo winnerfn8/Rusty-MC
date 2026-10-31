@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rusty Minecraft scheduled ticks · Rusty Minecraft docs</title>
+<meta name="description" content="Rusty Minecraft scheduled ticks: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details open><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html" aria-current="page">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="rusty-minecraft-scheduled-ticks">Rusty Minecraft scheduled ticks</h1>
+<p>The Rust scheduler targets the repository-pinned <strong>Minecraft Java Edition
+26.3</strong>. It implements scheduled block/fluid queue mechanics and saved tick
+lists. Actual block/fluid updates, random ticks, block events, neighbor updates,
+redstone behavior and a running game world remain unimplemented.</p>
+<h2 id="behavior">Behavior</h2>
+<p><code>horizon_core::ticks</code> supplies <code>TickPriority</code>, <code>ScheduledTick</code>, <code>SavedTick</code>,
+<code>ChunkTicks</code> and <code>LevelTicks</code>. A numeric <code>TickTypeId</code> represents a registry-owned
+block or fluid type. Block and fluid scheduling use separate <code>LevelTicks</code>
+instances. Callers supply identities, game time, sub-tick counters, eligibility,
+per-call tick limits and behavior callbacks.</p>
+<p>The first request for a type and position wins, even if a duplicate has an
+earlier trigger time or a higher priority. A chunk queue orders by signed
+trigger time, then one of seven priorities, then signed sub-tick order. Once
+heads are due, <strong>different chunks compete by priority and sub-tick order</strong>.
+Consequently, globally sorting every tick by trigger time changes execution.
+Within the selected chunk, draining stops when its next head loses to the
+competing chunk head, exceeds the time bound, or exhausts the tick limit.</p>
+<p>Equal comparator keys follow the pinned Java array heap behavior. Deadline
+traversal follows the pinned fastutil long-map layout, including resizing,
+collision shifts and wrapped iterator removals. These details matter when
+loaded ticks in different chunks share priority and negative sub-tick order.
+They are covered by differential tests rather than replaced with a new tie
+breaker. The heap stores tick records inline and retains collection capacity
+between frames. Area operations probe small chunk grids directly and visit
+only loaded chunks for large sparse areas, preserving X/Z traversal order.
+No game FPS or memory gain has been measured.</p>
+<p>Collection happens before callbacks. A callback can schedule, query, clear,
+copy, disable or unload chunks; newly scheduled ticks wait for the next
+collection. <code>has_scheduled</code> covers container queues and pending saved ticks;
+<code>will_tick_this_tick</code> covers the remaining collected queue. The current callback
+has already moved to the already-run list. Vanilla's lazily built membership
+set can remain stale after an area clear; that behavior is preserved until
+cleanup. Area copying includes already-run, collected and queued ticks and
+places copied sub-tick orders after the copied source range with wrapping
+signed-long arithmetic.</p>
+<p>Disabled chunks retain due entries. Removing a container returns its queue
+for saving or later reinsertion; collected callbacks still run. Scheduling into
+an absent chunk returns <code>MissingChunk</code> and does not enqueue. The Rust API adds
+invariant checks for duplicate chunk insertion, wrong-chunk contents and invalid
+collection phase transitions. These checks differ from Java's unchecked API
+and logging, while preserving the tested valid lifecycle.</p>
+<h2 id="persistence-and-use">Persistence and use</h2>
+<p>Saved ticks hold a signed 32-bit relative delay. Packing narrows the wrapped
+time difference as Java does and stably sorts active ticks by sub-tick order.
+Pending saved entries precede active entries. Unpacking assigns orders from
+<code>-saved_count</code> through <code>-1</code> and adds delays with signed-long wrapping. Vanilla
+does not deduplicate a saved list during unpack; duplicate entries and their
+membership behavior are retained.</p>
+<p><code>horizon_world::tick_data</code> bridges the vanilla <code>i</code>, <code>x</code>, <code>y</code>, <code>z</code>, <code>t</code>, <code>p</code>
+fields to type IDs through caller-supplied names. <code>ChunkData::saved_ticks</code>
+loads a pending container and filters out positions belonging to other chunks;
+<code>set_saved_ticks</code> writes packed entries while preserving unrelated root data.
+The separate block/fluid name lookup is required because their IDs are not
+the resident section's block-state IDs.</p>
+<pre><code class="language-rust">use horizon_core::{position::ChunkPos, ticks::{LevelTicks, ScheduledTick}};
+use horizon_world::{chunk::ChunkData, tick_data::TickKind};
+
+fn run_saved_blocks(
+    chunk: &amp;mut ChunkData,
+    now: i64,
+    resolve: impl FnMut(&amp;str) -&gt; Option&lt;horizon_core::ticks::TickTypeId&gt;,
+    name: impl FnMut(horizon_core::ticks::TickTypeId) -&gt; Option&lt;String&gt;,
+    run: impl FnMut(&amp;mut LevelTicks, ScheduledTick),
+) -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    let pos: ChunkPos = chunk.position();
+    let mut pending = chunk.saved_ticks(TickKind::Block, resolve)?;
+    pending.unpack(now);
+    let mut level = LevelTicks::default();
+    level.add_chunk(pos, pending)?;
+    level.tick(now, 65_536, |_| true, run)?;
+    let pending = level.remove_chunk(pos).unwrap();
+    chunk.set_saved_ticks(TickKind::Block, &amp;pending.pack(now), name)?;
+    Ok(())
+}
+</code></pre>
+<p>The caller supplies the behavior callback. A game integration must check the
+current block/fluid type, invoke its actual behavior,
+apply resulting state/neighbor/light changes, and persist remaining queues
+through the chunk lifecycle. The scheduler alone does not provide gameplay.</p>
+<h2 id="validation">Validation</h2>
+<pre><code class="language-sh">cargo test --workspace
+cargo clippy --workspace --all-targets -- -D warnings
+python3 tools/test_tick_parity.py --prepare
+</code></pre>
+<p>The runner authenticates both official reference JARs and dependencies against
+the repository lock and bundled hashes. An original Java adapter invokes the
+actual <code>LevelTicks</code>, <code>LevelChunkTicks</code>, <code>ScheduledTick</code>, <code>SavedTick</code> and
+<code>TickPriority</code> classes; expected traces are not computed by another port.</p>
+<p>The corpus has <strong>25,815 commands</strong>, including <strong>2,096 tick invocations</strong>, and
+produces <strong>97,776 matching output lines per reference JAR</strong>. It covers:</p>
+<ul>
+<li>All priorities, overdue chunk competition, exact comparator ties, duplicate
+requests and signed time/order extremes.</li>
+<li>Map growth/shrink, collisions crossing the table boundary, limited draining,
+disabled chunks, unloading and restoration.</li>
+<li>Pending-list duplicates, save packing, negative load orders and repeated
+save/reload with changed game time.</li>
+<li>Membership queries and rescheduling, clearing, copying, unloading or
+disabling chunks during callbacks.</li>
+<li>Eight deterministic randomized scenarios with queue snapshots, saves,
+eligibility changes and area operations.</li>
+</ul>
+<p>A separate adapter uses the actual block and fluid <code>SavedTick</code> registry codecs.
+Rust loads, filters, unpacks, polls, reschedules and saves <strong>251 block ticks and
+251 fluid ticks</strong>. Vanilla checks the resulting NBT and a Rust-written region
+chunk. Fixtures include duplicate saved entries, out-of-chunk coordinates,
+negative delays, overflowing times and numeric NBT coercions including NaNs,
+infinities and narrowed longs.</p>
+<p>Offline tests cover phase guards, eligibility, callback deferral, ordering,
+area membership, copying, invalid data and atomic saved-list updates. CI runs
+this suite alongside core and world-data comparisons. Evidence stays under
+<code>.local/rust-tick-parity/</code>; success reports are cleared before each run and
+source hashes must remain unchanged during validation. The checked-in
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-ticks-2026-10-05/scoped-parity.json">scoped report</a> contains
+metadata and hashes only. Line counts are corpus observations, not gameplay
+coverage percentages or proof of complete vanilla parity.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/scheduled-ticks.md"><code>docs/scheduled-ticks.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#behavior">Behavior</a></li><li class="l2"><a href="#persistence-and-use">Persistence and use</a></li><li class="l2"><a href="#validation">Validation</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

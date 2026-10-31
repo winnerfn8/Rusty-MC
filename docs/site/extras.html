@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rusty Minecraft extras · Rusty Minecraft docs</title>
+<meta name="description" content="Rusty Minecraft extras: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html" aria-current="page">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="rusty-minecraft-extras">Rusty Minecraft extras</h1>
+<p>Optional conveniences built into the client: fullbright, dynamic lights, your own name tag, auto-reconnect,
+Mouse Tweaks-style inventory controls and inventory sorting. <strong>Every one is off by default</strong>: a fresh
+install looks and behaves exactly like vanilla 26.3, and turning an extra off
+again restores vanilla's behaviour completely.</p>
+<h2 id="where-they-live">Where they live</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Settings, parsing and saving</td>
+<td><code>crates/horizon-client-render/src/extras.rs</code></td>
+</tr>
+<tr>
+<td>FPS and click counters (for native mods)</td>
+<td><code>extras.rs</code> (pure logic, unit tested)</td>
+</tr>
+<tr>
+<td>Dynamic lights: item glow, nearest sources</td>
+<td><code>crates/horizon-client-render/src/dynamic_light.rs</code> (unit tested), <code>game/dynamic_lights.rs</code>, <code>terrain.wgsl</code> and <code>entity.wgsl</code> (<code>dynamic_block_light</code>)</td>
+</tr>
+<tr>
+<td>HUD drawing (a native mod's minimap, corner stacking)</td>
+<td><code>crates/horizon-client/src/extras_hud.rs</code></td>
+</tr>
+<tr>
+<td>Minimap colours, tiles and image (for the Minimap native mod)</td>
+<td><code>crates/horizon-client-render/src/minimap.rs</code></td>
+</tr>
+<tr>
+<td>Reconnect policy and backoff</td>
+<td><code>crates/horizon-client/src/reconnect.rs</code></td>
+</tr>
+<tr>
+<td>Game glue (input hooks, per-frame update)</td>
+<td><code>crates/horizon-client/src/game/extras.rs</code></td>
+</tr>
+<tr>
+<td>Mouse Tweaks-style controls, sort buttons</td>
+<td><code>crates/horizon-client/src/game/tweaks.rs</code></td>
+</tr>
+<tr>
+<td>Sort order and its clicks</td>
+<td><code>crates/horizon-client/src/inv_sort.rs</code> (pure, unit tested)</td>
+</tr>
+<tr>
+<td>The settings page</td>
+<td><code>options_ui.rs</code> (<code>Page::Extras</code>): <strong>Options → Rusty Minecraft Settings... → Extras...</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>The settings are grouped by extra, under a header each, two buttons to a row as
+vanilla's options lists are, and each says what it does in its tooltip. An
+extra's own settings (its key, corner, size...) are greyed out while its switch
+is off (<code>Item::parent</code>).</p>
+<p><code>game.rs</code> only gets one-line hooks (key, wheel, mouse, frame, HUD), so the
+extras stay out of the way of other input and options work.</p>
+<h2 id="options-storage">Options storage</h2>
+<p><code>horizon-extras.txt</code> beside <code>options.txt</code>, in the same <code>key:value</code> format as
+<code>horizon-graphics.txt</code>. <code>options.txt</code> is untouched, so a vanilla client can share
+the folder. Unknown or broken lines fall back to the defaults.</p>
+<p>Extras' keys (the sort key) are Rusty Minecraft settings stored in that file and bound on
+the Extras page, not in vanilla's Key Binds screen: Rusty Minecraft has no Rusty Minecraft category
+in Controls, and adding one would put a non-vanilla mapping into <code>options.txt</code>.</p>
+<h2 id="the-extras">The extras</h2>
+<h3 id="fullbright-fullbright-default-off">Fullbright (<code>fullbright</code>, default off)</h3>
+<ul>
+<li>Displays blocks and entities with a fully bright lightmap, including in dark caves.</li>
+<li>Turning it off restores the normal lightmap using the current brightness,
+time of day and effects. The brightness slider keeps its normal range.</li>
+</ul>
+<h3 id="dynamic-lights-dynamiclights-default-off">Dynamic lights (<code>dynamicLights</code>, default off)</h3>
+<ul>
+<li>A light source held by a player or mob (main or off hand), dropped as an item, or an entity on
+fire lights the blocks, entities and hand around it, as dynamic-light mods do. Not
+in vanilla; the idea is ported, not a mod's code (issue #814).</li>
+<li>An item glows like its block's default state (<code>getLightEmission</code>): torches 14, lanterns,
+glowstone, sea lanterns and jack o'lanterns 15, soul torches 10, a redstone torch 7; a lava bucket
+15. An entity on fire gives 15.</li>
+<li>Client-only, at render time: the light engine, meshes, saves and other players never see it.
+Each frame the game picks the 16 sources nearest the camera (within 96 blocks,
+<code>dynamic_light::select</code>); terrain.wgsl and entity.wgsl raise each vertex's block light to the
+source's level minus its distance in blocks when that is brighter, then light it through the
+lightmap as usual. The light doesn't stop at walls.</li>
+<li>Off: nothing is gathered and the shaders' loop runs zero times (the count is 0), so it costs
+nothing measurable (numbers in the pull request, #814).</li>
+</ul>
+<h3 id="moved-to-native-mods">Moved to native mods</h3>
+<p>The <strong>FPS counter</strong>, <strong>Keystrokes</strong>, <strong>Zoom</strong> and the <strong>Minimap</strong> are official native mods now (in
+horizon-rust/horizon-mods under <code>native/&lt;name&gt;/</code>, <a href="mods.html#rusty-minecrafts-official-mods">mods.md</a>), with the same look and
+options. Players install them from the launcher's Mods page, and the launcher builds them into the game
+(<a href="native-mods.html">native-mods.md</a>). The game keeps
+the hook points they use (<code>crates/horizon-client/src/game/native_hooks.rs</code>), and <code>horizon-extras.txt</code> keeps the old
+keys and <code>movedToMods</code>.</p>
+<p>The game still draws the minimap, for the native mod (<code>native_minimap</code> in <code>native_hooks.rs</code>, <a href="mods.html">mods.md</a>):</p>
+<ul>
+<li>a corner map (top right by default), square or round, small/medium/large, zoom 0.5 to 4 blocks per pixel, rotating
+with the player or north up, with the player arrow (vanilla's map decoration sprite);</li>
+<li>vanilla's <code>MapColor</code> per block, as map items use, with the map item's height shading and water-depth dithering;</li>
+<li>underground, in the Nether and under any roof, the floor around the player's height instead of the top block;</li>
+<li>one cached 16x16 tile per loaded chunk (packed map colour and height), filled nearest first and refreshed when
+blocks change within 0.3 ms a frame; the 128x128 image is recomposed only when the view moved or a tile changed, and
+uploaded into a dedicated atlas slot. With no mod showing a map, nothing runs.</li>
+</ul>
+<h3 id="own-name-tag-ownnametag-default-off">Own name tag (<code>ownNameTag</code>, default off)</h3>
+<ul>
+<li>In third person (F5, either view), the player's own name shows above its head,
+as other players see it: the profile name in its team's prefix, suffix and
+colour, the below-name score under it within 10 blocks, faded and without the
+see-through copy while crouching. Vanilla never names the camera entity
+(<code>LivingEntityRenderer.shouldShowName</code>).</li>
+<li>Hidden in first person, while sleeping, in spectator mode, while invisible, and
+whenever the team's name tag visibility would hide it, exactly as the other
+players' tags (<code>game/names.rs</code>, <code>own_name_tag</code>). Client-only: nothing is sent.</li>
+</ul>
+<h3 id="auto-reconnect-autoreconnect-default-off">Auto-reconnect (<code>autoReconnect</code>, default off)</h3>
+<ul>
+<li>On the &quot;Connection lost&quot; screen after a multiplayer connection drops, a
+countdown &quot;Reconnecting in N s&quot; with a Cancel button, then a new connection
+to the same address.</li>
+<li>Backoff 5, 10, 20, 40, 60 s; at most 5 attempts, then it stops. The count
+only resets after staying connected for a minute, so a server that drops
+players at once never causes an endless loop.</li>
+<li>Never after a kick, a ban, a whitelist or version refusal, a duplicate login,
+an online-mode refusal (no account signed in), or a session refusal from the
+account's login (invalid session, banned from playing online, multiplayer
+disabled, the server failing to verify the username). Unreachable session
+servers, on either side, are retried with the same backoff.</li>
+<li>Online-mode servers: the retry joins with the account the game signed in
+with, held in memory for the whole run (<code>auth::current()</code>); nothing is
+written to disk.</li>
+</ul>
+<h3 id="mouse-tweaks-controls-mousetweaks-default-off-mousetweakswheel-default-on">Mouse Tweaks controls (<code>mouseTweaks</code>, default off; <code>mouseTweaksWheel</code>, default on)</h3>
+<p>In the player inventory, chest-like containers (chests, barrels, ender chests,
+shulker boxes, hoppers, dispensers and droppers), furnaces (also blast furnaces
+and smokers) and crafting tables, in singleplayer and on servers. Anvils,
+enchanting tables, merchants, beacons, brewing stands, crafters and the other
+workstations keep vanilla's controls:</p>
+<ul>
+<li>Right-drag holding a stack: one item goes into each slot entered, at once
+(slots holding another item, or full, are skipped).</li>
+<li>Left-drag holding a stack: each slot entered that holds the same item is
+gathered into the hand, when it all fits. This takes over only while
+vanilla's drag covers one slot, so a left-drag across empty slots still
+splits the stack as vanilla does.</li>
+<li>Shift + left-drag: every slot entered is quick-moved (with a stack in hand,
+only the slots of its item).</li>
+<li>The wheel over a slot, with an empty hand (<code>mouseTweaksWheel</code>): down moves
+one item where a Shift click would send it (vanilla's <code>quickMoveStack</code>: fuel
+to the fuel slot, a smeltable to the input, into the crafting grid, across a
+container, between hotbar and main inventory, an armour piece onto the
+player), up brings one of the same item from the other side.</li>
+<li>Nothing goes into a result slot. The wheel down over one takes one craft, or a
+furnace's whole output, to the inventory when it all fits (a result can't be
+split or put back); the wheel up over one does nothing, and it isn't a source
+for the wheel up elsewhere. A right-drag skips it, and a right press on it is
+vanilla's.</li>
+</ul>
+<p>Every action is ordinary slot clicks (<code>ContainerClick</code> on a server), so a
+vanilla server sees nothing unusual. With the extra off, the hooks return at
+once and the screens click exactly as vanilla's (<code>tools/test_menu_click_parity.py</code>
+and the container screen tests are unchanged).</p>
+<h3 id="sorting-sort-default-off-sortkey-unbound">Sorting (<code>sort</code>, default off; <code>sortKey</code>, unbound)</h3>
+<ul>
+<li>A small button right of the container's title (chests, barrels, ender
+chests, shulker boxes) and one right of the &quot;Inventory&quot; line (the main
+inventory; the hotbar is left alone). The key, when bound on the Extras
+page, sorts the part under the cursor (the container when over no slot).</li>
+<li>Partial stacks of one item merge, then the stacks go in creative tab order
+(the search tab's), then by name; full stacks before the partial one,
+empty slots last. It needs an empty hand.</li>
+<li>Done with ordinary left clicks planned by <code>inv_sort::plan</code>, so a vanilla
+server accepts it; a unit test replays the planned clicks through the menu
+engine on random chests.</li>
+</ul>
+<h2 id="shared-rules">Shared rules</h2>
+<ul>
+<li>All extras are hidden with F1 and drawn in the HUD layer: under screens, over
+the world, like vanilla's HUD. Extras in the top left corner give way to the
+debug screen (F3), which shows the FPS anyway.</li>
+<li>Corners stack: extras placed in the same corner stack downward (top corners)
+or upward (bottom corners) in the order a mod's minimap, then mods' panels. The top
+right corner starts below the status effect icons.</li>
+</ul>
+<h2 id="perf-budget">Perf budget</h2>
+<p>Off: a flag check per frame per extra (no allocations, no world access).
+A mod's minimap stays under 0.3 ms of CPU
+per frame (tile budget) plus a 64 KiB texture upload when its image changes.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/extras.md"><code>docs/extras.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#where-they-live">Where they live</a></li><li class="l2"><a href="#options-storage">Options storage</a></li><li class="l2"><a href="#the-extras">The extras</a></li><li class="l3"><a href="#fullbright-fullbright-default-off">Fullbright (fullbright, default off)</a></li><li class="l3"><a href="#dynamic-lights-dynamiclights-default-off">Dynamic lights (dynamicLights, default off)</a></li><li class="l3"><a href="#moved-to-native-mods">Moved to native mods</a></li><li class="l3"><a href="#own-name-tag-ownnametag-default-off">Own name tag (ownNameTag, default off)</a></li><li class="l3"><a href="#auto-reconnect-autoreconnect-default-off">Auto-reconnect (autoReconnect, default off)</a></li><li class="l3"><a href="#mouse-tweaks-controls-mousetweaks-default-off-mousetweakswheel-default-on">Mouse Tweaks controls (mouseTweaks, default off; mouseTweaksWheel, default on)</a></li><li class="l3"><a href="#sorting-sort-default-off-sortkey-unbound">Sorting (sort, default off; sortKey, unbound)</a></li><li class="l2"><a href="#shared-rules">Shared rules</a></li><li class="l2"><a href="#perf-budget">Perf budget</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Upgrading a 26.2 data pack to 26.3 · Rusty Minecraft docs</title>
+<meta name="description" content="Upgrading a 26.2 data pack to 26.3: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html" aria-current="page">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="upgrading-a-262-data-pack-to-263">Upgrading a 26.2 data pack to 26.3</h1>
+<p>26.3 reworked the world generation registries, and vanilla 26.3 refuses a
+worldgen data pack written for 26.2 (registry errors on load). Rusty Minecraft
+targets 26.3, so such a pack has to be rewritten first:</p>
+<pre><code class="language-sh">cargo run --release -p horizon-port-pack -- upgrade-datapack PACK.zip --world &lt;world folder&gt;
+# or into any folder:
+cargo run --release -p horizon-port-pack -- upgrade-datapack PACK.zip OUT/
+</code></pre>
+<p><code>--world</code> writes the upgraded pack to <code>&lt;world&gt;/datapacks/&lt;pack name&gt;-26.3/</code>.
+The input is a zip or a folder; nothing is downloaded, and the pack stays on
+your machine (packs are often All Rights Reserved: do not commit or share an
+upgraded copy).</p>
+<p>Rusty Minecraft does not apply a data pack's world generation yet (see
+<a href="mod-browser.html">the mod browser</a>); the upgraded pack loads in vanilla 26.3,
+and the checks below run it there.</p>
+<p>The command prints what it rewrote, what it could not rewrite faithfully
+(<code>not faithful</code>) and the types it does not know (<code>left as it is</code>).</p>
+<h2 id="what-changes">What changes</h2>
+<p>Each rewrite is the one vanilla's own data went through between 26.2 and
+26.3 (checked by <code>tools/datapack_upgrade_rosetta.py</code>, below), and the parts
+26.2 hard-coded are spelled out as data so the 26.3 pack generates what the
+26.2 pack did.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>26.2</th>
+<th>26.3</th>
+<th>How it is checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noise <code>firstOctave</code>, <code>amplitudes</code></td>
+<td><code>base_octave</code>, <code>octave_count</code>, <code>amplitude_modifiers</code> and the <code>base_amplitude</code> of vanilla's <code>NormalNoise.createParity</code> (keeps 26.2's normalisation)</td>
+<td>all 63 vanilla noises identical to 26.3's, bit for bit</td>
+</tr>
+<tr>
+<td>density <code>argument</code>, <code>argument1</code>/<code>argument2</code></td>
+<td><code>input</code>, <code>left</code>/<code>right</code></td>
+<td>Rosetta, and generated terrain</td>
+</tr>
+<tr>
+<td><code>invert</code></td>
+<td><code>reciprocal</code></td>
+<td>codec</td>
+</tr>
+<tr>
+<td><code>y_clamped_gradient</code> (<code>from_y</code>, <code>to_y</code>)</td>
+<td><code>gradient</code> on axis <code>y</code></td>
+<td>Rosetta</td>
+</tr>
+<tr>
+<td><code>shifted_noise</code></td>
+<td><code>noise</code> with <code>shift_x</code>/<code>shift_y</code>/<code>shift_z</code> (same sampling)</td>
+<td>Rosetta</td>
+</tr>
+<tr>
+<td><code>flat_cache</code></td>
+<td><code>cache</code>, around <code>slice</code> at y = 0 when the input depends on y (26.2's flat cache held each column's value at y = 0)</td>
+<td>unit test</td>
+</tr>
+<tr>
+<td><code>cache_2d</code>, <code>cache_once</code>, <code>cache_all_in_cell</code></td>
+<td><code>cache</code> (26.3's caches only memoise)</td>
+<td>Rosetta</td>
+</tr>
+<tr>
+<td><code>end_islands</code></td>
+<td><code>end_outer_islands</code></td>
+<td>Rosetta</td>
+</tr>
+<tr>
+<td><code>constant</code> <code>{argument}</code></td>
+<td>the number</td>
+<td>codec</td>
+</tr>
+<tr>
+<td><code>interpolated</code> (cell from the noise settings' <code>size_horizontal * 4</code>, <code>size_vertical * 4</code>)</td>
+<td><code>interpolated</code> with <code>cell_size_xz</code>/<code>cell_size_y</code>, from the settings whose router reaches the function</td>
+<td>Rosetta: vanilla's 4 x 8</td>
+</tr>
+<tr>
+<td>noise settings <code>noise.size_*</code></td>
+<td>dropped (on each <code>interpolated</code>)</td>
+<td>Rosetta</td>
+</tr>
+<tr>
+<td>router <code>final_density</code> (26.2 added the beardifier in <code>NoiseChunk</code>)</td>
+<td><code>add(final_density, beardifier)</code></td>
+<td>as vanilla's <code>overworld/final_density</code></td>
+</tr>
+<tr>
+<td>router <code>barrier</code>, <code>fluid_level_*</code>, <code>lava</code>, <code>aquifers_enabled</code></td>
+<td><code>aquifers</code> object; <code>exclusion</code> spells out 26.2's <code>isDeepDarkRegion</code> (erosion &lt; -0.225 and depth &gt; 0.9) from the pack's own erosion and depth; <code>surface_level</code> is the preliminary surface</td>
+<td>as vanilla's</td>
+</tr>
+<tr>
+<td>router <code>preliminary_surface_level</code></td>
+<td>named function, <code>aquifers.surface_level</code>, and <code>chunk_surface_level</code> = <code>interpolated</code> 16 x 1 of it (26.2's per-chunk surface interpolation)</td>
+<td>as vanilla's</td>
+</tr>
+<tr>
+<td>router <code>vein_toggle</code>, <code>vein_ridged</code>, <code>vein_gap</code>, <code>ore_veins_enabled</code></td>
+<td>two <code>ore_vein</code> material rules (copper, iron) that reproduce 26.2's <code>OreVeinifier</code>: same heights, thresholds, edge roundoff, solidness, richness and gap</td>
+<td>written from <code>OreVeinifier</code>; terrain</td>
+</tr>
+<tr>
+<td><code>surface_rule</code></td>
+<td><code>material_rule</code> (same node types), named <code>&lt;settings&gt;/upgraded/material_rule</code>, after the ore veins: 26.2 placed veins while filling the noise and its surface pass only replaced the default block</td>
+<td>terrain</td>
+</tr>
+<tr>
+<td><code>spawn_target</code> climate names</td>
+<td>the router's density functions by id (<code>depth</code> and <code>offset</code> dropped as vanilla did)</td>
+<td>as vanilla's</td>
+</tr>
+<tr>
+<td>block states <code>{Name, Properties}</code></td>
+<td><code>{id, properties}</code>, or the id alone</td>
+<td>Rosetta</td>
+</tr>
+<tr>
+<td><code>configured_carver/</code></td>
+<td><code>carver/</code>, <code>config</code> unwrapped; the cave carvers' hard-coded count, thickness and room scale written out (<code>nether_cave</code> is a <code>cave</code>); canyon <code>yScale</code> into <code>shape.y_scale</code>; <code>lava_level</code>, <code>replaceable</code>, <code>debug_settings</code> dropped</td>
+<td>all 4 vanilla carvers identical to 26.3's</td>
+</tr>
+<tr>
+<td><code>configured_feature/</code></td>
+<td><code>feature/</code>, <code>config</code> unwrapped, block state providers renamed (<code>simple_state_provider</code> is its state)</td>
+<td>Rosetta</td>
+</tr>
+<tr>
+<td>placement <code>random_offset</code> (<code>xz_spread</code>, <code>y_spread</code>)</td>
+<td><code>offset</code> with <code>x</code>, <code>y</code>, <code>z</code></td>
+<td>Rosetta</td>
+</tr>
+<tr>
+<td>biome <code>spawners</code>, <code>spawn_costs</code></td>
+<td>attribute <code>minecraft:gameplay/natural_mob_spawns</code> (overlay), counts as int providers; empty categories kept so none comes from the dimension's defaults</td>
+<td>Rosetta (vanilla leaves empty ones out)</td>
+</tr>
+<tr>
+<td>biome <code>creature_spawn_probability</code></td>
+<td>attribute <code>minecraft:gameplay/creature_world_gen_spawn_probability</code> (left out at the default 0.1)</td>
+<td>Rosetta</td>
+</tr>
+<tr>
+<td>structure <code>spawn_overrides</code> <code>minCount</code>/<code>maxCount</code></td>
+<td><code>count</code></td>
+<td>Rosetta</td>
+</tr>
+<tr>
+<td>dimension type <code>bed_rule.explodes</code></td>
+<td><code>bed_rule.destroy_on_use</code></td>
+<td>Rosetta</td>
+</tr>
+<tr>
+<td><code>pack.mcmeta</code></td>
+<td>pack format 121</td>
+<td>vanilla loads it</td>
+</tr>
+</tbody>
+</table></div>
+<p>Not rewritten: the feature types 26.3 replaced by compositions of other
+features (<code>seagrass</code>, <code>kelp</code>, <code>basalt_columns</code>, <code>nether_forest_vegetation</code>
+and others; listed by the command), a <code>cache_2d</code> around a function of y, a
+<code>y_clamped_gradient</code> with <code>from_y == to_y</code> (a step instead of 26.2's NaN at
+that y), carvers' custom <code>lava_level</code>/<code>replaceable</code>, and noises with more
+than 32 octaves or negative amplitudes.</p>
+<h2 id="checking-an-upgrade">Checking an upgrade</h2>
+<pre><code class="language-sh">python3 tools/datapack_upgrade_rosetta.py
+python3 tools/datapack_upgrade_fidelity.py                              # calibration: vanilla 26.2 against 26.3
+python3 tools/datapack_upgrade_fidelity.py --old-pack PACK.zip --new-pack OUT/
+</code></pre>
+<p>The Rosetta check writes vanilla 26.2's own worldgen out as a pack, upgrades
+it and compares it with 26.3's file by file. Files whose format changed and
+whose content did not must come out the same. It needs the 26.2 server jar
+(<code>.local/vanilla-26.2/server-game.jar</code>, from the launcher's 26.2 version
+manifest).</p>
+<p>The fidelity check starts vanilla's 26.2 and 26.3 dedicated servers on the
+same seed, the first with the original pack and the second with the upgrade,
+force loads the same chunks and compares the saved blocks. Without packs it
+measures what 26.3 itself changed, which the upgrade cannot be blamed for.
+The server logs must hold no data pack or registry errors.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/datapack-upgrade.md"><code>docs/datapack-upgrade.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#what-changes">What changes</a></li><li class="l2"><a href="#checking-an-upgrade">Checking an upgrade</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

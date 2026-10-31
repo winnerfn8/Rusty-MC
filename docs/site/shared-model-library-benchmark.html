@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shared model library benchmark · Rusty Minecraft docs</title>
+<meta name="description" content="Shared model library benchmark: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details open><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html" aria-current="page">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="shared-model-library-benchmark">Shared model library benchmark</h1>
+<p><code>model_library_bench</code> measures <code>Assets::load</code> followed by item preparation using
+that asset snapshot. It includes filesystem traversal, JSON decoding, blockstate
+binding, block model resolution/baking, sprite preparation, item definitions,
+entity parts and item registry setup. Timing stops before the optional parity
+probe. The Python driver's <code>wait4</code> resource accounting reports process peak RSS
+on Linux. For latency runs, allocation tracking is compiled out. For separate
+retained-memory runs, compile with <code>HORIZON_BENCH_COUNT_ALLOCATIONS=1</code>; the counting
+system allocator reports live requested bytes after both loads. A zero
+<code>retained_bytes</code> with tracking disabled is not a heap measurement.</p>
+<p>Use real prepared resources; no game files belong in Git. Build the baseline
+at <code>89b58991bbc02eb79b6965fc4ca56357fe2297d9</code> with the benchmark example copied in
+and <code>ItemRenderer::load(root)</code> in its item stage. Save that binary, then build
+this branch with <code>ItemRenderer::load_with_library(root, assets.model_library.clone())</code>.
+Both builds use <code>cargo build --locked --profile fast -p horizon-client --example model_library_bench</code> with <code>HORIZON_BENCH_COUNT_ALLOCATIONS</code> unset (<code>opt-level=3</code>, LTO disabled, 16 codegen units). Set
+<code>CARGO_BUILD_JOBS=2</code>. On the optimization machine, hold
+<code>/tmp/horizon-optimizations-20261015-heavy.lock</code> for each entire build or paired
+measurement session. Reuse a shared Cargo target only under that lock.</p>
+<pre><code class="language-sh">flock /tmp/horizon-optimizations-20261015-heavy.lock \
+  python3 tools/model_library_bench.py BASELINE_BINARY CANDIDATE_BINARY RESOURCE_ROOT
+BASELINE_BINARY RESOURCE_ROOT --parity
+CANDIDATE_BINARY RESOURCE_ROOT --parity
+</code></pre>
+<p>Run the parity probes under the same lock. The driver runs two warmups for each
+binary, followed by ten samples per binary in alternating order. Every sample
+uses a fresh process, including setup and allocation costs. Filesystem caches
+are warm; these measurements do not represent cold disk, GPU initialization or
+entire time to title. The library is built during asset preparation, so compare
+the combined time rather than either stage alone. Block-only callers of
+<code>Assets::load</code> now prepare and retain item models too; standalone
+<code>ItemRenderer::load</code> remains available for callers without an asset snapshot.</p>
+<p>The optional parity probe hashes every bound registry state's selected variants
+and baked block faces at two fixed positions, then every resource model's baked
+item geometry, lighting, transforms and particle material. It complements the
+synthetic test for malformed/missing parents, cycles, child overrides, built-in
+models, shared geometry and reload isolation. It is a baseline comparison, not
+a replacement for vanilla differential harnesses.</p>
+<h2 id="results">Results</h2>
+<p>Prepared 26.3 resources contain 4,192 model JSON files. Both binaries use the
+optimized <code>fast</code> profile and the same resource root on this Linux machine
+(12 logical CPUs, 31 GiB RAM; rustc 1.99.0, b940084d7). Tracking is compiled out
+for these ten samples.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Median</th>
+<th style="text-align:right">Baseline</th>
+<th style="text-align:right">Shared</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Assets (ms)</td>
+<td style="text-align:right">450.1310</td>
+<td style="text-align:right">477.4105</td>
+</tr>
+<tr>
+<td>Items (ms)</td>
+<td style="text-align:right">83.1180</td>
+<td style="text-align:right">36.2980</td>
+</tr>
+<tr>
+<td>Combined (ms)</td>
+<td style="text-align:right">532.6055</td>
+<td style="text-align:right">514.1075</td>
+</tr>
+<tr>
+<td>Peak RSS (KiB)</td>
+<td style="text-align:right">275440.0000</td>
+<td style="text-align:right">277018.0000</td>
+</tr>
+</tbody>
+</table></div>
+<p>Combined startup preparation improves by 18.4980 ms (3.47%). The
+candidate is faster in all ten pairs. Stage medians do not necessarily add to
+the median combined time. Peak RSS increases by 1578 KiB (0.57%).</p>
+<p>Combined sample times in milliseconds, in paired order:</p>
+<pre><code class="language-text">baseline: 531.090, 528.995, 523.807, 534.564, 538.876, 529.148, 531.804, 533.407, 541.323, 539.934
+candidate: 514.767, 513.659, 514.896, 506.912, 516.291, 514.556, 510.443, 513.191, 510.017, 519.038
+</code></pre>
+<p>Separate builds with allocation counting enabled report the same retained
+requested heap in every sample: 129,921,272 versus 129,921,320 bytes (+48 bytes)
+after both loaders. After assets alone, the values are
+115,873,670 versus 122,249,411 bytes (+6.08 MiB). The shared models
+are prepared earlier, so block-only asset consumers pay this retained-memory
+and loading-time cost even when no item renderer follows.</p>
+<p>The baseline and current candidate resource probes both produce
+<code>86a447cfd3f535c2</code> over all 4,192 item models and the block selections/faces at
+two fixed positions. The focused test additionally preserves item-only error
+timing, so invalid item identifiers do not change resource-pack rollback.</p>
+<h2 id="integration-check-against-updated-upstream">Integration check against updated upstream</h2>
+<p>After merging upstream <code>c6eb50f10b04a6fa01fffe1ca94a8420cc148342</code>, including its
+model-state schema reuse, the same protocol compares that upstream commit
+against this implementation on top. Build and paired measurement use separate
+heavy-lock acquisitions. The allocation tracker remains compiled out for latency.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Median</th>
+<th style="text-align:right">Updated upstream</th>
+<th style="text-align:right">Shared</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Assets (ms)</td>
+<td style="text-align:right">410.753</td>
+<td style="text-align:right">434.221</td>
+</tr>
+<tr>
+<td>Items (ms)</td>
+<td style="text-align:right">83.7835</td>
+<td style="text-align:right">36.578</td>
+</tr>
+<tr>
+<td>Combined (ms)</td>
+<td style="text-align:right">495.526</td>
+<td style="text-align:right">471.568</td>
+</tr>
+<tr>
+<td>Peak RSS (KiB)</td>
+<td style="text-align:right">238280</td>
+<td style="text-align:right">239944</td>
+</tr>
+</tbody>
+</table></div>
+<p>Combined preparation improves by 23.958 ms (4.83%), faster in all ten pairs.
+Peak RSS increases by 1664 KiB (0.70%). Separate counting builds again retain
+129,921,272 versus 129,921,320 bytes (+48 bytes) after both loaders, and
+115,873,670 versus 122,249,411 bytes after assets alone. The baseline and candidate
+probes still match <code>86a447cfd3f535c2</code> over 4,192 models.</p>
+<pre><code class="language-text">baseline: 498.655, 498.148, 494.521, 493.105, 492.193, 501.778, 493.373, 494.278, 496.531, 497.549
+candidate: 470.865, 469.526, 481.467, 475.666, 471.591, 472.186, 479.168, 469.798, 471.545, 469.152
+</code></pre>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/shared-model-library-benchmark.md"><code>docs/shared-model-library-benchmark.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#results">Results</a></li><li class="l2"><a href="#integration-check-against-updated-upstream">Integration check against updated upstream</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

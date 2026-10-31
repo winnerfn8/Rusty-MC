@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Block behaviours and ticking: parity status · Rusty Minecraft docs</title>
+<meta name="description" content="Block behaviours and ticking: parity status: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="../repo/README.html">Rusty Minecraft</a></li><li><a href="../java-mod-translation.html">Java mod translation</a></li><li><a href="../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="../repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../website.html">The documentation website</a></li><li><a href="../repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="../repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="../repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../native-client.html">Rusty Minecraft native client</a></li><li><a href="../hosting.html">Host a server</a></li><li><a href="../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../server-next.html">The next server: design</a></li><li><a href="../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../graphics.html">Graphics: settings and performance</a></li><li><a href="../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../extras.html">Rusty Minecraft extras</a></li><li><a href="../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../mods.html">Rusty Minecraft mods</a></li><li><a href="../native-mods.html">Native mods (experimental)</a></li><li><a href="../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../versioning.html">Versioning</a></li><li><a href="../resource-packs.html">Resource packs: what works</a></li><li><a href="../telemetry.html">Opt-in data collection</a></li><li><a href="../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="../api/README.html">Rusty Minecraft APIs</a></li><li><a href="../api/stability.html">API stability and versioning</a></li><li><a href="../play-with-friends.html">Play with friends</a></li></ul></details><details open><summary>Parity</summary><ul><li><a href="../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../parity-workflow.html">Parity workflow</a></li><li><a href="blocks.html" aria-current="page">Block behaviours and ticking: parity status</a></li><li><a href="meshing.html">Section meshing parity</a></li><li><a href="../port-ledger.html">Port ledger</a></li><li><a href="../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../world-generation.html">World generation</a></li><li><a href="../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../density-functions.html">Compiled density evaluation</a></li><li><a href="../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../biome-lookup.html">Biome lookup</a></li><li><a href="../biome-temperatures.html">Biome temperatures</a></li><li><a href="../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../material-conditions.html">Numeric material conditions</a></li><li><a href="../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../vertical-anchors.html">Vertical anchors</a></li><li><a href="../value-providers.html">World-generation value providers</a></li><li><a href="../carving.html">Carving</a></li><li><a href="../heightmaps.html">Heightmaps</a></li><li><a href="../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../world-data.html">Rusty Minecraft world data</a></li><li><a href="../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="../api/agent-control.html">Agent control API</a></li><li><a href="../api/data-formats.html">Data formats</a></li><li><a href="../api/launch-reference.html">Launch API reference</a></li><li><a href="../api/launch.html">Launch API</a></li><li><a href="../api/launcher.html">Launcher API</a></li><li><a href="../api/mod-index.html">The registry index and .hpack</a></li><li><a href="../api/server-reference.html">Server reference</a></li><li><a href="../api/server.html">Server API</a></li><li><a href="../api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="../api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="../repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="../repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="../repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="../repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="../repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="../repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="../repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="../repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="../repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="../repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="../repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="../repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="../repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="../repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="../repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="../repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="../repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="../repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="../repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="../repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="../repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="../repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="../repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../controllers.html">Controllers</a></li><li><a href="../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../known-issues.html">Known issues</a></li><li><a href="../launcher-commands.html">Launcher commands</a></li><li><a href="../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../release-flow.html">Release flow</a></li><li><a href="../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../save-batch-entities.html">Block entity save batches</a></li><li><a href="../security.html">Security</a></li><li><a href="../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="block-behaviours-and-ticking-parity-status">Block behaviours and ticking: parity status</h1>
+<p>Area: random and scheduled block ticks, growth, bone meal, TNT and
+explosions, hoppers, dispensers and droppers, comparators reading
+containers, weather-driven blocks. The library code lives in
+<code>crates/horizon-world/src/level/</code>. The client glue lives in
+<code>crates/horizon-client/src/game/</code> (<code>growth.rs</code>, <code>tnt.rs</code>, <code>explosion.rs</code>,
+<code>machines.rs</code>, <code>blockctl.rs</code>).</p>
+<h2 id="implemented-ported-from-the-263-sources">Implemented (ported from the 26.3 sources)</h2>
+<ul>
+<li>
+<p><strong>Growth through live feature placement.</strong> <code>worldgen/live.rs</code> decodes
+configured and placed features by name from the worldgen bundle. It shares
+the generator's <code>GeneratorData</code>. <code>level/feature_world.rs</code> runs features on
+the live level as a <code>FeatureWorld</code> and <code>PlacementContext</code>, and writes
+blocks through <code>Behaviours::set_block</code> with the feature's flags. Tree
+placement also calls <code>updateShapeAtEdge</code>.</p>
+</li>
+<li>
+<p><strong><code>TreeGrower.growTree</code></strong> (<code>level/growth.rs</code>) covers every vanilla grower:
+oak and its bee variants (with the flower check), spruce, birch, jungle,
+acacia, cherry, mangrove, azalea and poplar. It also covers the 2×2 forms:
+dark oak, pale oak, mega spruce and pine, and mega jungle. It keeps the
+random draw order: mega feature, then flowers, then feature. Saplings are
+removed with flags 818 and restored with flags 260 when the tree does not
+fit. Saplings, propagules and azaleas grow both on random ticks and with
+bone meal.</p>
+</li>
+<li>
+<p><strong>Bone meal</strong> (<code>level/bonemeal.rs</code>) ports <code>BoneMealItem.useOn</code>,
+<code>growCrop</code> and <code>growWaterPlant</code>, including coral from bone meal in warm
+ocean biomes. It also ports every vanilla <code>BonemealableBlock</code>:</p>
+<ul>
+<li>saplings, propagules, mushrooms, fungi and azaleas</li>
+<li>grass (with the biome's <code>getBoneMealFeatures</code>), nylium, netherrack and
+moss</li>
+<li>rooted dirt, mangrove leaves, crops (including beetroot and torchflower
+increments) and stems</li>
+<li>pitcher, bamboo and bamboo sapling, cocoa and sweet berries</li>
+<li>tall grass and fern, tall flowers, bush and firefly bush, flower beds</li>
+<li>kelp, twisting and weeping vines, cave vines (head and body), seagrass
+and sea pickles</li>
+<li>big and small dripleaf, glow lichen (<code>MultifaceSpreader</code>), hanging moss
+and pale moss carpet</li>
+<li>short and tall dry grass, and shelf mushroom</li>
+</ul>
+<p>Level event 1505 plays the bone meal sound.</p>
+</li>
+<li>
+<p><strong>Fixes to existing ticks.</strong> Torchflower crops now mature into
+torchflowers. Kelp grows into any water block, as in vanilla.</p>
+</li>
+<li>
+<p><strong>Primed TNT</strong> (<code>game/tnt.rs</code>):</p>
+<ul>
+<li>It has an 80-tick fuse, gravity 0.04, 0.98 drag and the 0.7/−0.5 ground
+bounce.</li>
+<li>It explodes with power 4 at <code>y + 0.06125</code>.</li>
+<li>It renders with the <code>TntRenderer</code> swell and a white flash every 5 ticks
+(entity overlay 4 in <code>entity.wgsl</code>).</li>
+<li>TNT is primed by redstone, fire, flint and steel or fire charges
+(<code>TntBlock.useItemOn</code>), and by players breaking unstable TNT.</li>
+<li>Explosions prime TNT with a random short fuse (chain reactions).</li>
+<li>Dispensers prime TNT too.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>ServerExplosion</code></strong> (<code>game/explosion.rs</code>):</p>
+<ul>
+<li>It marches 1352 rays through a Java <code>HashSet&lt;BlockPos&gt;</code>
+(<code>java_hash_map</code>), so iteration and the <code>Util.shuffle</code> draws match
+vanilla.</li>
+<li>Each block costs <code>max(block, fluid)</code> resistance.</li>
+<li>Damage and knockback scale with exposure for the player, mobs, items
+and TNT. Creative players take no damage.</li>
+<li>TNT explosions drop every block. Mob explosions use drop decay.</li>
+<li>Drops merge in stacks of up to 16. Container contents spill.</li>
+</ul>
+</li>
+<li>
+<p><strong>Hoppers</strong> (<code>game/machines.rs</code>):</p>
+<ul>
+<li>They push and pull through <code>HopperBlockEntity.tryMoveItems</code>.</li>
+<li>The 8-tick cooldown applies, with the transfer cooldown hand-off between
+hoppers.</li>
+<li>They insert into furnace faces (<code>WorldlyContainer</code> slots, fuel and
+bucket rules) and into double chests (right half first).</li>
+<li>They respect <code>does_not_block_hoppers</code> and pick up item entities from the
+suck box.</li>
+<li>The <code>enabled</code> property stops them.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dispensers and droppers.</strong> They use <code>getRandomSlot</code> and the drop
+position and velocity from <code>DefaultDispenseItemBehavior.spawnItem</code>. The
+dispense behaviours are:</p>
+<ul>
+<li>bone meal</li>
+<li>TNT</li>
+<li>flint and steel (fire, TNT, campfires and candles)</li>
+<li>water and lava buckets (including waterlogging)</li>
+<li>empty buckets (fluids, waterlogged blocks and powder snow)</li>
+<li>arrows (power 1.1, uncertainty 6)</li>
+</ul>
+<p>Droppers insert into containers. Clicks and failure sounds play.</p>
+</li>
+<li>
+<p><strong>Comparators reading containers.</strong> <code>GameLevel</code> answers
+<code>block_entity_analog_signal</code> with
+<code>AbstractContainerMenu.getRedstoneSignalFromContainer</code>. Chests blocked by
+a conductor read 0. Double chests are combined. Container changes from
+hoppers, dispensers and the player call <code>container_changed</code>, which runs
+<code>updateNeighbourForOutputSignal</code>.</p>
+</li>
+<li>
+<p><strong>Weather</strong> (<code>level/weather.rs</code>) uses biome temperatures from the worldgen
+bundle, with the height adjustment and frozen noise. They feed
+<code>ServerLevel.tickPrecipitation</code>: ice formation, snow accumulation, and
+cauldrons filling with water or powder snow. They also feed
+<code>Level.isRainingAt</code>, which drives farmland moisture and fire going out in
+rain.</p>
+</li>
+<li>
+<p><strong>Day-timeline blocks</strong> (<code>level/timeline.rs</code>):</p>
+<ul>
+<li>Eyeblossoms open and close, and potted eyeblossoms follow. Neighbours are
+scheduled in the <code>BlockScanUtils</code> scan order.</li>
+<li>Turtle eggs crack and hatch on sand, using the dawn hatch chance.</li>
+<li>Dried ghasts hydrate while waterlogged.</li>
+</ul>
+</li>
+<li>
+<p><strong>Landing writes.</strong> Farmland trampling and turtle eggs crushed by landing
+now run neighbour and shape updates, so crops on trampled farmland pop.</p>
+</li>
+<li>
+<p><strong>Smaller fixes.</strong></p>
+<ul>
+<li>Hopper, dispenser and dropper block entities save with their own ids.
+Barrels and trapped chests do too.</li>
+<li>Their screens use the vanilla hopper and dispenser layouts.</li>
+<li><code>GameLevel::max_y</code> is exclusive, as <code>LevelAccess</code> documents.</li>
+</ul>
+</li>
+<li>
+<p><strong>Block entity removal</strong> (<code>level/removal.rs</code>, <code>game/spill.rs</code>):
+<code>LevelChunk.setBlockState</code> runs <code>BlockEntity.preRemoveSideEffects</code> when a
+block's block entity goes with it. Containers spill through
+<code>Containers.dropItemStack</code>, jukeboxes and lecterns pop their item, shulker
+boxes keep theirs, copper chests and statues keep theirs across weathering.
+<code>Block.dropResources</code> draws when the behaviour calls it and awards ore,
+sculk and spawner experience; the item entities join the world before the
+behaviour returns.</p>
+</li>
+<li>
+<p><strong>Copper golems</strong> (<code>mobs/copper_golem.rs</code>, <code>game/copper_golems.rs</code>): built
+from a pumpkin on a copper block (<code>CopperChestBlock.getFromCopperBlock</code>),
+sheared and equipped by dispensers, weathering, waxing, statues.</p>
+</li>
+</ul>
+<h2 id="verification">Verification</h2>
+<ul>
+<li>
+<p><code>tools/test_block_removal_parity.py</code>: 4,000 replacements, destructions and
+removals of block entity holders with contents match vanilla. The dispenser
+harness builds, shears and equips copper golems (6,000 cases match).</p>
+</li>
+<li>
+<p>Unit tests in <code>crates/horizon-world/src/level/growth_tests.rs</code> cover:</p>
+<ul>
+<li>every sapling kind, including the 2×2 trees</li>
+<li>azalea and mangrove growth</li>
+<li>random-tick stage advance followed by growth</li>
+<li>grass bone meal with flowers</li>
+<li>huge mushrooms and crimson fungi</li>
+<li>crop ages, torchflowers, ferns and tall flowers</li>
+<li>snow, ice and rain answers</li>
+<li>eyeblossoms and turtle eggs</li>
+</ul>
+<p>They need the feature block exports in <code>worldgen/blocks</code>
+(<code>block-properties.nbt</code>). The shared <code>.local</code> bundle lacks those files, so
+run the tests with <code>HORIZON_RESOURCES</code> pointing at a complete prepared
+bundle. Without one, the tests skip.</p>
+</li>
+<li>
+<p>Client tests cover the Java <code>Vec3i</code> hash and compare order and the
+explosion stack merging.</p>
+</li>
+<li>
+<p>In the game on the virtual screen, driven by <code>horizon-ctl</code>:</p>
+<ul>
+<li>Bone meal on oak, birch, cherry, 2×2 dark oak, spruce and jungle
+saplings grew all of them.</li>
+<li>Flint and steel on a TNT cluster: the TNT flashed white and chain
+exploded, leaving a crater with drops.</li>
+<li>A redstone block primed TNT.</li>
+<li>A chest drained through a hopper chain into a chest at 2.5 items/s. The
+comparator lit a lamp.</li>
+<li>A dispenser bone-mealed a sapling into a tree. A dropper ejected an item.</li>
+<li>Landing on farmland turned it to dirt and popped the wheat.</li>
+<li>The hopper screen shows the vanilla layout.</li>
+</ul>
+<p>New <code>horizon-ctl</code> commands drive these checks: <code>setblock</code>, <code>fill</code>,
+<code>getblock</code> and <code>container</code>.</p>
+</li>
+</ul>
+<h2 id="known-gaps">Known gaps</h2>
+<ul>
+<li><strong>Random draws.</strong>
+<ul>
+<li>Features placed from block behaviour draw from a copy of the level
+random. Their <code>next_world_*</code> draws and any draws in neighbour updates
+during placement do not reach the real stream.</li>
+<li>The client picks randomly ticking sections from their palettes, so a
+section whose palette still lists a ticking state no block uses any more
+gets random ticks that vanilla's exact counts would skip.</li>
+</ul>
+</li>
+<li><strong>Explosion details.</strong> Exposure uses full-collision blocks only.
+<code>getEntities</code> order is approximate. Experience orbs, falling blocks and
+arrows are not pushed.</li>
+<li><strong>Missing entities.</strong>
+<ul>
+<li>Dispensers have no behaviour for fire charges, other projectiles,
+armour, shulker boxes, boats, minecarts or spawn eggs. Fire charges and
+most other items drop instead; projectiles, boats, minecarts and spawn
+eggs are not entities in Rusty Minecraft.</li>
+<li>Turtle hatchlings and happy ghastlings are reported as <code>BlockEvent</code>s and
+not spawned.</li>
+<li>Hoppers do not see minecart containers. Item entities do not trigger the
+hopper's <code>entityInside</code>; suction covers the same box on the hopper tick.</li>
+</ul>
+</li>
+<li><strong>Not implemented.</strong> The sculk vibration system (sensors, shriekers,
+catalyst spread) and creaking hearts. Lightning (<code>tickThunder</code>).
+Particles for bone meal, explosions and TNT smoke.</li>
+<li><strong>Not saved.</strong> Primed TNT and hopper cooldowns (<code>TransferCooldown</code>).</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/parity/blocks.md"><code>docs/parity/blocks.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#implemented-ported-from-the-263-sources">Implemented (ported from the 26.3 sources)</a></li><li class="l2"><a href="#verification">Verification</a></li><li class="l2"><a href="#known-gaps">Known gaps</a></li></ul></nav>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

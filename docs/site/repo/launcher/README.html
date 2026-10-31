@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rusty Minecraft launcher · Rusty Minecraft docs</title>
+<meta name="description" content="Rusty Minecraft launcher: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/tokens.css">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details open><summary>Start here</summary><ul><li><a href="../README.html">Rusty Minecraft</a></li><li><a href="../../java-mod-translation.html">Java mod translation</a></li><li><a href="../../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="README.html" aria-current="page">Rusty Minecraft launcher</a></li><li><a href="../../website.html">The documentation website</a></li><li><a href="../ROADMAP.html">Horizon roadmap</a></li><li><a href="../roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="../AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../../native-client.html">Rusty Minecraft native client</a></li><li><a href="../../hosting.html">Host a server</a></li><li><a href="../../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../../server-next.html">The next server: design</a></li><li><a href="../../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../../graphics.html">Graphics: settings and performance</a></li><li><a href="../../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../../extras.html">Rusty Minecraft extras</a></li><li><a href="../../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../../mods.html">Rusty Minecraft mods</a></li><li><a href="../../native-mods.html">Native mods (experimental)</a></li><li><a href="../../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../../versioning.html">Versioning</a></li><li><a href="../../resource-packs.html">Resource packs: what works</a></li><li><a href="../../telemetry.html">Opt-in data collection</a></li><li><a href="../../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="../../api/README.html">Rusty Minecraft APIs</a></li><li><a href="../../api/stability.html">API stability and versioning</a></li><li><a href="../../play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="../../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../../parity-workflow.html">Parity workflow</a></li><li><a href="../../parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="../../parity/meshing.html">Section meshing parity</a></li><li><a href="../../port-ledger.html">Port ledger</a></li><li><a href="../../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../../world-generation.html">World generation</a></li><li><a href="../../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../../density-functions.html">Compiled density evaluation</a></li><li><a href="../../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../../biome-lookup.html">Biome lookup</a></li><li><a href="../../biome-temperatures.html">Biome temperatures</a></li><li><a href="../../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../../material-conditions.html">Numeric material conditions</a></li><li><a href="../../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../../vertical-anchors.html">Vertical anchors</a></li><li><a href="../../value-providers.html">World-generation value providers</a></li><li><a href="../../carving.html">Carving</a></li><li><a href="../../heightmaps.html">Heightmaps</a></li><li><a href="../../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../../world-data.html">Rusty Minecraft world data</a></li><li><a href="../../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../../profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="../../api/agent-control.html">Agent control API</a></li><li><a href="../../api/data-formats.html">Data formats</a></li><li><a href="../../api/launch-reference.html">Launch API reference</a></li><li><a href="../../api/launch.html">Launch API</a></li><li><a href="../../api/launcher.html">Launcher API</a></li><li><a href="../../api/mod-index.html">The registry index and .hpack</a></li><li><a href="../../api/server-reference.html">Server reference</a></li><li><a href="../../api/server.html">Server API</a></li><li><a href="../../api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="../../api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="../benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="../benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="../benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="../benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="../benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="../benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="../benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="../benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="../CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="../THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="../roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="../crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="../crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="../crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="../crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="../crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="../crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="../crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="../crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="../crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="../packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="../tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../../controllers.html">Controllers</a></li><li><a href="../../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../../known-issues.html">Known issues</a></li><li><a href="../../launcher-commands.html">Launcher commands</a></li><li><a href="../../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../../release-flow.html">Release flow</a></li><li><a href="../../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../../save-batch-entities.html">Block entity save batches</a></li><li><a href="../../security.html">Security</a></li><li><a href="../../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="rusty-minecraft-launcher">Rusty Minecraft launcher</h1>
+<p>A small desktop app that installs Rusty Minecraft builds, prepares them from your own copy of
+Minecraft, and starts the client or a dedicated server. Built with <a href="https://www.gpui.rs">GPUI</a>,
+Zed's UI framework; it has its own Cargo workspace and is not part of the game's builds.</p>
+<p><img src="https://github.com/winnerfn8/Rusty-Minecraft/raw/HEAD/launcher/docs/play.png" alt="Play" /></p>
+<p>The opening, then Play (<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/launcher/docs/opening.webm">clip</a>):</p>
+<p><img src="https://github.com/winnerfn8/Rusty-Minecraft/raw/HEAD/launcher/docs/opening-1.png" alt="Opening" /></p>
+<h2 id="what-it-does">What it does</h2>
+<ul>
+<li><strong>Versions</strong>: lists the published builds of horizon-rust/horizon (the current Nightly, the last
+week's, then the releases from before), installs the build for this platform into its own
+folder, and removes it again.</li>
+<li><strong>Play</strong>: prepares resources as <code>PLAY.txt</code> describes (your launcher's 26.3 install, the
+26.3 server jar from that version's own json, and Java 25) and copies its sounds from your
+launcher's asset store (<code>horizon-prepare sounds</code>; a launcher install without them only
+leaves the game silent), then starts the client. Preparing is
+horizon-prepare: linked into the launcher, used in-process when a version ships the same
+preparer sources, else that version's own <code>horizon-prepare</code>; versions released before it
+still prepare with their Python script and need Python 3.10+. Before importing,
+preparation reuses checksum-verified game jars and libraries from the current
+or another installed Rusty Minecraft version, so the original Minecraft install is
+only required when no valid imported copy exists.</li>
+<li><strong>Download and prepare</strong>: for a signed-in account that owns the game (asked again first),
+the launcher downloads the pinned version from Mojang itself (piston-meta, piston-data,
+libraries.minecraft.net, resources.download.minecraft.net; never a mirror) into <code>minecraft/</code>
+in its data folder, in the official launcher's layout: the version file, the client jar, this
+system's libraries, the asset index and the assets. Every file must have the size and sha1
+Mojang lists. The Play page shows how far it is and has Cancel; files already whole are kept,
+so the next try goes on from there. <strong>From my install</strong> prepares from the player's own launcher
+instead, and an install that lacks the version falls back to the download. <strong>Play</strong> on a version
+not prepared yet does it all for an owner, as the official launcher does: it prepares from the
+install when there is one, else downloads (with Mojang's Java when no Java 25 is installed), then
+starts the game. With no install on the computer the Play page offers the download alone and the
+Minecraft folder row says none is needed. Without an owner,
+the Play page asks to sign in first. <code>horizon-launcher prepare --download</code>.</li>
+<li><strong>Mods</strong>: <strong>Mods</strong> and <strong>Shader packs</strong> search Rusty Minecraft's own registry (a Java instance's mods
+come from Modrinth), <strong>Resource packs</strong> searches Modrinth, each marked Works, Partly or Doesn't
+run in Rusty Minecraft; Modrinth's data packs aren't usable yet and have no tab. Install puts a file in the game folder only after its checksum matches, and a
+modpack (the sidebar's +) goes to the Modpacks page; installed packs show their source and checksum, with Update,
+<strong>Update all</strong> and Remove (<a href="../../mod-browser.html">docs/mod-browser.md</a>).</li>
+<li><strong>Modpacks</strong>: import a Java modpack (a Modrinth <code>.mrpack</code>, a CurseForge zip, or a Prism,
+MultiMC or CurseForge instance folder) and see its coverage report: per mod, ported, partial,
+not yet or not needed, with the reason (<a href="../../modpacks.html">docs/modpacks.md</a>). <strong>Port</strong>
+gets the jars of what this computer can port today (content mods with data and assets only)
+the player's own way: copied from a folder they have, or downloaded from the pack's own links
+or the same file on Modrinth's CDN, hash checked; files only CurseForge has come from your
+installed instance (CurseForge downloads are coming soon). It carries them over for the selected version, and
+<strong>Play</strong> starts the game as the pack's own profile (<code>ports/&lt;pack&gt;/home/</code> in the game's home:
+its own saves and options) with those mods. Nothing is uploaded or shared: mod jars and ports
+stay on this computer.</li>
+<li><strong>Servers</strong>: host a world for friends with buttons. <strong>Create a server</strong> asks for a name, a world
+(a new one, with an optional seed, or a copy of one of your single-player worlds), the game mode,
+difficulty, most players, who can join (friends only, the default, or anyone with the address)
+and your agreement to the Minecraft EULA; with the defaults (tick the EULA, press Create) you get
+a friends-only survival world with you as its operator. Each server then has <strong>Start</strong>, <strong>Stop</strong> and <strong>Restart</strong>, its state (also
+when it crashed and was restarted), players online with their heads, TPS, MSPT and RAM, the
+address friends on your network type with <strong>Copy</strong>, a console that takes commands, <strong>Open the
+web panel</strong>, and four tabs: <strong>Overview</strong>; <strong>Players</strong> (online players with Make operator, Kick
+and Ban; who may join, with Friends only, Let in and Remove; Unban); <strong>Settings</strong> (the message
+in the server list, game mode, difficulty, PvP, most players, view and simulation distance,
+port, account checks, <strong>Run in the background and at login</strong>); <strong>Backups</strong> (Back up now, the
+list with dates and sizes, Restore with a confirmation, Back up automatically, and <strong>Updates</strong>:
+Check for updates, Update now with its automatic rollback, and how many older versions to
+keep). Changes the running game can take apply at once, the others say &quot;Restart to apply&quot;.
+Everything goes through <code>horizon-server</code> itself (<a href="../../hosting.html">docs/hosting.md</a>):
+the launcher copies a prepared version's programs and game files into <code>server-runtime/</code> laid
+out as <code>install.sh</code> does, runs <code>horizon-server init</code>, <code>config</code>, <code>start</code>, <code>backup</code>, <code>restore</code>,
+<code>update</code> and <code>service</code> there, and talks to a running server through its control API. Problems
+are said in plain words, with a button when there's a fix (another port, the game files, the
+EULA).
+<strong>Friends over the internet</strong> (on Overview) uses Tailscale: it says whether Tailscale is
+installed and signed in (with Install, Sign in and Check again; signing in is always yours, in
+Tailscale's own app or page), shows this computer's Tailscale name and address with <strong>Copy</strong>,
+and invites a friend to this one computer: in the admin console, or here with an access token
+you make there (kept in the system keychain), which also lists invitations with Withdraw /
+Stop sharing and offers <strong>Limit them to Minecraft</strong>: when your tailnet has Tailscale's default
+access controls, one click changes them so friends you share with reach only the server's
+port (Remove the limit undoes it); custom access controls are never rewritten, the page gives
+the rule to add instead. Rusty Minecraft never turns on Funnel.</li>
+<li><strong>Instances</strong>: separate game folders, each with its own worlds, options and packs. The game's
+folder stays the first one, &quot;Rusty Minecraft&quot;, exactly where it was; imported and registry modpacks are
+instances too, in their own folders as before; new ones go to <code>instances/&lt;name&gt;/</code> in the game's
+folder, empty but for the player's options and name, or a copy of another instance (never its
+sign-in sessions, logs or data collection state). Names, icons (a block or item texture from the
+player's prepared files, or a colour) and groups are kept in <code>instances.json</code> in the launcher's
+data folder, so renaming moves nothing. Every instance follows the launcher's data collection
+answer and No AI. In the window, <strong>+</strong> beside Instances makes one, the sidebar lists them by
+group (click one to play it), and Home's Instance row has Edit (name, group, icon), Copy and
+Open folder. The Instance row shows its play time and when it was last played: every run started
+from the window or <code>horizon-launcher play</code> adds to it (<code>instance list</code> shows it too). Each
+instance plays the launcher's version, which follows updates, unless the Play page's version
+picker keeps it on another installed one (to keep an old world on the version it was made
+with); picking the version marked &quot;follows updates&quot; lets it follow again.</li>
+<li><strong>Export</strong>: Home's Instance row has <strong>Export…</strong>: the selected instance (or a port) as a <code>.mrpack</code>
+(Modrinth's modpack format: resource packs the browser installed from Modrinth are listed by
+their download, the rest is in <code>overrides/</code>) or a <code>.zip</code> of the game folder's layout, with the
+worlds switched on. It is written to <code>exports/</code> in the launcher's data folder (<strong>Show in
+folder</strong>). Only settings (options.txt, horizon-*.txt, servers.dat), resource and shader packs,
+<code>horizon-mods/</code> and <code>config/</code> go in: never logs, screenshots, backups, caches or account files;
+a world goes without <code>playerdata/</code>, <code>stats/</code> and <code>advancements/</code>, and its level.dat without the
+player's UUID. <code>horizon-launcher instance export [&lt;instance&gt;] [--format mrpack|zip] [--world &lt;w&gt;]… [--out &lt;file&gt;]</code>.</li>
+<li><strong>Import by dropping a file</strong>: a file dropped anywhere on the window is imported for what it is
+(<code>horizon_launcher::import</code>). A shared instance (a <code>.mrpack</code> that needs no mod loader, such as
+Export writes, or a game folder <code>.zip</code>) becomes a new instance, opened on Home. Its <code>.mrpack</code>
+downloads come from Modrinth with their SHA-512 checked, and only what an instance keeps is
+taken, inside its folder. A Java modpack goes to the Modpacks import, and a resource or shader
+pack into the selected instance. A data pack is pointed at the world rows, and the Packs section
+and the world rows keep taking their own drops. A note in the corner says what happened.
+<code>horizon-launcher instance import &lt;file&gt;</code>.</li>
+<li><strong>Launch options</strong>: Home's Instance row has <strong>Launch…</strong>: per instance, a shell command run in its
+folder before the game (the game starts only if it succeeds), a wrapper the game runs through
+(<code>nice -n 5</code>), and environment variables (<code>NAME=value OTHER=&quot;two words&quot;</code>), kept in
+<code>instances.json</code> (<code>horizon_launcher::launch</code>). The game stays one process the launcher follows:
+on Unix <code>/bin/sh</code> runs the command and then <code>exec</code>s the wrapper and the game, whose words pass
+through <code>&quot;$@&quot;</code> untouched; on Windows <code>cmd /C</code> runs <code>&lt;command&gt; &amp;&amp; &lt;game&gt;</code>. Both the window's Play
+and <code>play</code> use them. <code>horizon-launcher instance launch &lt;instance&gt; [--pre-launch …] [--wrapper …] [--env …]</code> (an MCP agent needs <code>confirm: true</code>: it sets commands Play runs).
+On Linux the panel also has switches for what the computer has: <strong>GameMode</strong> (<code>gamemoderun</code>
+on the PATH), <strong>MangoHud</strong> (<code>mangohud</code>), and, with two graphics cards under
+<code>/sys/class/drm</code>, the <strong>dedicated graphics card</strong> (<code>DRI_PRIME=1</code>, or NVIDIA's
+<code>__NV_PRIME_RENDER_OFFLOAD</code>, <code>__VK_LAYER_NV_optimus</code> and <code>__GLX_VENDOR_LIBRARY_NAME</code> when its
+driver is loaded). A switch whose tool is gone does nothing. <code>instance launch --gamemode on|off --mangohud on|off --dedicated-gpu on|off</code>; <code>HORIZON_LAUNCHER_LINUX_TOOLS</code> makes any
+system show them, for tests.</li>
+<li><strong>Desktop shortcut</strong>: Home's Instance row has <strong>Shortcut</strong>: a shortcut on the desktop that plays
+the selected instance without opening the launcher (<code>horizon-launcher play --instance &lt;id&gt;</code>).
+A <code>.desktop</code> file on Linux (also put in the applications menu, and marked trusted with <code>gio</code>
+where it exists), a small app with Rusty Minecraft's icon on macOS, a <code>.lnk</code> on Windows
+(<code>horizon_launcher::shortcut</code>). <strong>Remove shortcut</strong> moves it to the trash; it is found by the
+instance id inside it, so a rename doesn't lose it. <code>horizon-launcher instance shortcut [instance] [--remove]</code>; <code>HORIZON_LAUNCHER_DESKTOP</code> points it at another folder.</li>
+<li><strong>Accounts and quick switch</strong>: the top bar's account chip opens a menu of everyone who can play:
+each signed-in Microsoft account, the offline names the player keeps, and the name the game
+made up (<code>horizon-player.txt</code>). Picking one plays as it from the next Play. Offline names play
+only while an account that owns the game is signed in (<a href="#microsoft-accounts">Microsoft accounts</a>);
+signing the last one out keeps them, unplayable until one is back. Settings &gt; Account
+adds offline names (3 to 16 letters, digits or <code>_</code>; the game gets <code>--name</code>) and forgets them,
+skin and cape files included, and rolls the game's made-up name for a new one; the Console's
+Share log takes the names out of the log too. <code>horizon-launcher account offline [NAME]</code>, <code>account select &lt;name&gt;</code> (an account or an offline name), <code>account forget-offline &lt;name&gt;</code>.</li>
+<li><strong>Accent and Home background</strong>: on top of Dark, Light or System, Settings &gt; Launcher picks an
+accent (Rusty Minecraft's violet, blue, teal, green, amber, red or pink) and a picture of the player's
+own behind Home (PNG, JPEG or WebP, cropped to fill; <strong>Landscape</strong> brings Rusty Minecraft's back). An
+accent turns the violet tokens to its hue, then darkens or lightens them just enough to keep
+white on the Play button at 4.5:1 and the accent at 3:1 on every background (a test holds every
+accent in both looks to it). The picture is copied into the data folder.
+<code>horizon-launcher settings accent NAME</code>, <code>settings background PATH|default</code>.</li>
+<li><strong>Language</strong>: English, French, Russian, German, Simplified Chinese, Spanish, Ukrainian and Polish.
+The window follows the system's language unless the player picks one in Settings &gt; Launcher
+(each named in itself); a string a table lacks shows in English. The tables are
+<code>launcher/lang/&lt;code&gt;.json</code>, English text to its translation, Rusty Minecraft's own; a test fails when
+the code asks <code>tr(&quot;…&quot;)</code> for a string a table lacks, or a table keeps one the code dropped.
+<code>horizon-launcher settings language system|en|fr|ru|de|zh|es|uk|pl</code>.</li>
+<li><strong>Skin and cape</strong>: each offline name's <strong>Skin…</strong> in Settings &gt; Account shows the front of its
+skin and cape, takes a skin PNG (64×64, or the older 64×32) and a cape PNG (64×32), and picks
+classic or slim arms. The launcher keeps copies in its <code>skins/</code> folder and gives the game
+<code>HORIZON_OFFLINE_SKIN</code>, <code>HORIZON_OFFLINE_SKIN_MODEL</code> and <code>HORIZON_OFFLINE_CAPE</code> when that name
+plays; the game draws the default skins until it reads them. A Microsoft account's skin and
+cape: coming soon, with sign-in. <code>horizon-launcher account skin &lt;name&gt; [FILE] [--model classic|slim] [--cape FILE] [--no-skin] [--no-cape]</code>.</li>
+<li><strong>Console</strong>: Home's Console shows the game's output of this run as it comes: a search (every
+word, any case), Follow to keep the newest line in view, Copy, and Open logs folder. Warnings
+and errors stand out. <strong>Share log…</strong> uploads the log to <a href="https://mclo.gs">mclo.gs</a>, a paste
+service for Minecraft logs, only after the player confirms; the home folder, the user name and
+the account names are taken out first (<code>horizon_launcher::game_log</code>), and <strong>Delete it</strong> removes
+the paste. <code>horizon-launcher share-log [--instance]</code> and <code>unshare-log &lt;id:token&gt;</code>;
+<code>HORIZON_LAUNCHER_PASTE_URL</code> points it at a test server.</li>
+<li><strong>Worlds</strong>: Home lists the selected instance's worlds (picture, mode, version, last played,
+size). <strong>Back up</strong> zips one into the instance's <code>backups/</code> as the game's Make Backup does
+(<code>&lt;date&gt;_&lt;time&gt;_&lt;folder&gt;.zip</code>); <strong>Copy</strong> puts &quot;<name> (1)&quot; beside it; <strong>Delete</strong> moves it to the
+system's trash after a confirmation; <strong>Open folder</strong>. The same from the command line:
+<code>horizon-launcher worlds [list|backup|copy|delete] [--instance &lt;name&gt;]</code>.
+<strong>Play</strong> on a world starts the game straight into it. <strong>Data packs</strong> opens the world's
+<code>datapacks/</code> under its row: what is there (and which the game has turned off), <strong>Add data pack…</strong>,
+and <strong>Remove</strong> (to the trash); a data pack <code>.zip</code> dropped on a world goes into it. The game turns
+a new one on when the world opens. From the command line: <code>horizon-launcher worlds datapack-list|datapack-add|datapack-remove &lt;world&gt; …</code>. <code>horizon-launcher mods search --kind datapack</code>
+finds them on Modrinth and <code>mods install &lt;pack&gt; --world &lt;world&gt;</code> installs one, saying what of it
+runs in Rusty Minecraft.</li>
+<li><strong>Packs</strong>: Home lists the selected instance's resource packs and shader packs, each with a switch.
+The choice is the game's own: <code>resourcePacks</code> in options.txt (a pack turned on goes on top, as
+the game's Resource Packs screen does) and <code>pickedShaderPack</code> in <code>horizon-graphics.txt</code> (one shader
+pack at a time). <strong>Add pack…</strong> or a <code>.zip</code> / <code>.hshader</code> dropped on the section copies it into the
+right folder; <strong>Remove</strong> turns it off and moves it to the trash after a confirmation. From the
+command line: <code>horizon-launcher packs [list|add|on|off|remove] [--kind resource|shader] [--instance &lt;name&gt;]</code>.</li>
+<li><strong>Screenshots</strong>: Home shows the selected instance's newest screenshots (what F2 saves in its
+<code>screenshots/</code> folder) and all of them on request. Clicking one opens it over the window (← and →
+step through) with <strong>Copy</strong> (the picture, to the clipboard), <strong>Open</strong>, <strong>Show in folder</strong> and
+<strong>Delete</strong> (to the trash, after a confirmation). From the command line:
+<code>horizon-launcher screenshots [list|delete] [--instance &lt;name&gt;]</code>.</li>
+<li><strong>Java</strong> (for the Minecraft: Java Edition instances to come): the runtime a version's JSON asks for
+(<code>javaVersion</code>: its major exactly, Java 8 before that field), found among Mojang's runtimes Rusty Minecraft
+downloaded (<code>minecraft/runtime/</code> in its data folder, the one preparing uses) and the Java homes installed
+on this computer, read from their <code>release</code> files without starting them; when none has that major,
+Mojang's runtime is downloaded; an instance may name its own Java home instead.
+<code>horizon-launcher java [list|install]</code>.</li>
+<li><strong>Multiplayer</strong>: Home lists the selected instance's servers, the game's own Multiplayer list
+(<code>servers.dat</code>, each with the picture the game last saw). <strong>Join</strong> starts the game straight into
+one; <strong>Add server</strong> and <strong>Remove</strong> (after a confirmation) change the file the game reads,
+keeping every field the launcher doesn't show and the servers joined with Direct Connection. The
+same from the command line: <code>horizon-launcher multiplayer [list|add|remove] [--instance &lt;name&gt;]</code>
+and <code>horizon-launcher play --server &lt;address or name&gt;</code>.</li>
+<li><strong>Patch notes</strong>: each release's notes, newest first, with a link to GitHub Sponsors. Quiet &quot;Sponsor&quot;, &quot;Discord&quot; and &quot;Website&quot; links sit in the sidebar footer.</li>
+</ul>
+<p>Data lives in the platform's data directory (<code>~/.local/share/horizon-launcher</code> on Linux,
+<code>~/Library/Application Support/horizon-launcher</code> on macOS, <code>%APPDATA%\horizon-launcher</code> on
+Windows): <code>versions/&lt;tag&gt;/</code>, <code>server-jars/</code>, <code>server/</code>, <code>settings.json</code>, and for the Servers
+page <code>servers.json</code> (the list), <code>servers/&lt;name&gt;/</code> (the servers created there) and
+<code>server-runtime/</code> (the programs and game files they run).</p>
+<ul>
+<li><strong>Settings</strong>: install new Rusty Minecraft versions automatically (on unless you turn it off; the
+selected version only moves to the new one if you were on the newest), the opening animation,
+what the window does while you play (stays by default; Minimise, or Hide on macOS, puts it away
+when the game starts and brings it back to the front when the game closes; <code>settings while-playing stay|minimize|hide</code>), the game's extra command-line arguments, an HTTP proxy for
+downloads, and the launcher's own version and update state.</li>
+<li><strong>Updates</strong>: Rusty Minecraft ships only the Nightly (since 2026-10-28, docs/release-flow.md). The
+launcher installs the current one (the <code>nightly</code> pre-release, checksums signed for the Nightly
+channel) as <code>nightly-&lt;date&gt;-&lt;commit&gt;</code> and selects it when the player was on a Nightly, on the
+newest release or on nothing; a version picked by hand or pinned by an instance stays. Older
+Nightlies are removed once nothing plays them. Worlds are never touched: they live in the game's
+folder, not in a version's. The last week's Nightlies (<code>nightly-&lt;date&gt;</code>), the <code>vX.Y.Z</code>
+releases and the old Alpha pre-releases stay on the Versions page to install by hand, never as
+an update. The &quot;Nightly builds&quot; setting and its <code>nightly</code> key are gone (an old key is ignored);
+its &quot;Nightly&quot; instance stays and keeps following the Nightly. The <code>update_channel</code> and
+<code>beta_builds</code> keys older launchers wrote are ignored and dropped on the next save.</li>
+<li><strong>Game arguments</strong>: extra arguments added to the game's command line (for example
+<code>--server-thread</code>), one line where quotes group a word with spaces. They are appended after the
+launcher's own arguments, kept as <code>game_args</code> in <code>settings.json</code>, and apply the next time the
+game starts. <code>horizon-launcher game-args &quot;&lt;line&gt;&quot;</code> sets them too, and <code>play --arg &lt;ARG&gt;</code> passes
+one for a single run.</li>
+<li><strong>Proxy</strong>: when the internet here needs one (a school's, an office's, a country where a host is
+unreachable), Settings' Proxy takes the <code>http://host:port</code> address your proxy app listens on, and
+every download goes through it: Rusty Minecraft's releases and the launcher's own update, Minecraft's
+files and Java from Mojang, Modrinth, CurseForge, Rusty Minecraft's mod registry, pictures, Microsoft
+sign-in, and the jars a modpack import fetches. It is kept as <code>proxy</code> in <code>settings.json</code>, and
+<code>horizon-launcher settings proxy http://127.0.0.1:7890</code> sets it too (&quot;default&quot; removes it).
+Without one, <code>HTTPS_PROXY</code> and <code>HTTP_PROXY</code> are used when the launcher is started with them, and
+<code>NO_PROXY</code> names the hosts to reach directly, a modpack import's jars included. A server on this
+computer never goes through it.</li>
+<li><strong>Links</strong>: the Discord invite, the Sponsors page and the website come from <code>launcher/links.json</code> on main
+(<code>{&quot;discord&quot;: &quot;...&quot;, &quot;sponsor&quot;: &quot;...&quot;, &quot;website&quot;: &quot;...&quot;}</code>), so they change without a launcher release. Offline,
+the launcher uses the same values built in; an empty address hides its button.</li>
+</ul>
+<p>Long pages, dialogs, the server console and data previews have a visible scrollbar when
+their content overflows. Drag the thumb or click the track to navigate without a mouse wheel.</p>
+<p>Pages and Home's landscape fill the window as it resizes. Windows uses a matching title
+bar with native dragging, resizing, Snap,
+minimize, maximize/restore and close; macOS and Linux keep their system title bars.</p>
+<h2 id="updates">Updates</h2>
+<p>The launcher looks for a newer Nightly when it starts and every 30 minutes while it is open, and
+shows a small &quot;available, Install&quot; line on Play.</p>
+<p>It also updates itself from GitHub releases tagged <code>launcher@X.Y.Z</code> (the game's are <code>nightly</code>, and
+<code>vX.Y.Z</code> before 2026-10-28; neither is ever taken for the other). Before 0.2 they were <code>launcher-vX.Y.Z</code> and <code>vYYYY.MM.DD</code>:
+every 0.2 tag counts as newer than all of those (docs/versioning.md). It downloads the new build, replaces its
+own binary, and offers &quot;Restart&quot; in the footer. Development builds and
+<code>HORIZON_LAUNCHER_NO_SELF_UPDATE=1</code> never replace themselves.</p>
+<p>On Linux a release build that starts writes its applications-menu entry only when there is
+none, or when the program the entry starts (its <code>TryExec</code>, else its <code>Exec</code>) no longer exists.
+An entry pointing at another launcher that works is left alone, so a test or development build
+never takes it over. Turning the Settings switch on, or <code>horizon-launcher desktop-entry</code>,
+points the entry at this launcher whatever is there.</p>
+<p>Linux packagers can set <code>HORIZON_LAUNCHER_DESKTOP_EXEC</code> to a wrapper's absolute path.
+Menu entries the launcher writes then start that wrapper, which can
+set <code>HORIZON_LAUNCHER_NO_SELF_UPDATE=1</code> to keep launcher updates with the package manager.</p>
+<p>Launcher releases are automatic (docs/release-flow.md in the repository): when main changes the
+launcher, <code>horizon-prepare</code> or <code>horizon-theme</code>, the <code>launcher</code> workflow builds Linux, macOS and
+Windows and publishes <code>launcher-vX.Y.Z</code> (the next patch, or the next minor after a pull request
+labelled <code>feature</code>) with <code>horizon-launcher-linux-x86_64.tar.gz</code>, <code>horizon-launcher-macos-arm64.zip</code>
+and <code>horizon-launcher-windows-x64.zip</code>, never marked latest. The version is built in from the tag
+(<code>HORIZON_LAUNCHER_VERSION</code>); <code>Cargo.toml</code>'s version is only what local builds report.</p>
+<h2 id="command-line">Command line</h2>
+<p>The same binary is a command-line tool; without a subcommand it opens the window. On Windows it
+is a windowed program, so a desktop start opens no terminal; a subcommand writes to the terminal
+it was typed in, or to the pipes and files it was given (MCP keeps its stdio). Interactive <code>cmd</code>
+and PowerShell don't wait for a windowed program: they show the prompt again before its output
+and don't set <code>%ERRORLEVEL%</code> / <code>$LASTEXITCODE</code>. Scripts that need the exit code use
+<code>start /wait horizon-launcher …</code> or <code>Start-Process -Wait</code>, or read its output through a pipe.</p>
+<pre><code>horizon-launcher versions [--installed]       releases on GitHub, or what is installed (* = selected)
+horizon-launcher install &lt;tag|latest&gt;
+horizon-launcher remove &lt;tag&gt;
+horizon-launcher prepare [--minecraft &lt;dir&gt;] [--version &lt;tag&gt;]
+horizon-launcher play [--version &lt;tag&gt;] [--instance &lt;name&gt;] [--arg &lt;ARG&gt;]...   start the client; --arg passes an extra argument through (repeatable)
+horizon-launcher server [--dir &lt;dir&gt;] [--version &lt;tag&gt;] [--accept-eula]
+horizon-launcher notes [&lt;tag&gt;]                  patch notes as plain text
+horizon-launcher links                          the Discord, sponsor and website links
+horizon-launcher game-args [&lt;line&gt;]             show or set the extra arguments the game starts with
+horizon-launcher update [--check]               Rusty Minecraft and the launcher
+horizon-launcher logs [--lines N] [--crash]     the end of the game's log, or its newest crash report
+horizon-launcher account [list]                 the Microsoft accounts signed in (* = plays)
+horizon-launcher account sign-in                sign in in your browser with a code
+horizon-launcher account sign-out &lt;name&gt;
+horizon-launcher account select &lt;name&gt;          play as this account
+horizon-launcher account offline                play without an account
+horizon-launcher instance [list]                the instances and their game folders (* = Play starts it)
+horizon-launcher instance create &lt;name&gt; [--copy &lt;instance&gt;]   empty, or a copy of one's worlds, options and packs
+horizon-launcher instance create &lt;name&gt; --minecraft &lt;1.21.4|latest|latest-snapshot&gt;   a Minecraft: Java Edition instance
+horizon-launcher instance versions [--snapshots] [--old]   the Java Edition versions, from Mojang's list (kept for offline)
+horizon-launcher instance java &lt;instance&gt; [--home &lt;dir&gt;|--auto] [--memory &lt;MiB&gt;] [--args &quot;&lt;jvm args&gt;&quot;]
+horizon-launcher instance rename|icon|group &lt;instance&gt; &lt;value&gt;  icon: a block or item name, #rrggbb or none
+horizon-launcher instance select &lt;instance&gt;     make Play start it
+horizon-launcher instance version &lt;instance&gt; &lt;tag|latest&gt;   keep it on one installed version, or follow updates
+horizon-launcher worlds [list] [--instance &lt;name&gt;]        an instance's worlds
+horizon-launcher worlds backup|copy|delete &lt;world&gt; [--instance &lt;name&gt;]   delete moves it to the trash
+horizon-launcher packs [list] [--kind resource|shader] [--instance &lt;name&gt;]   resource and shader packs, on or off
+horizon-launcher packs add &lt;file&gt; | on|off|remove &lt;pack&gt; [--kind shader]
+horizon-launcher screenshots [list] [--instance &lt;name&gt;]   an instance's screenshots, the newest first
+horizon-launcher screenshots delete &lt;name&gt; [--instance &lt;name&gt;]   moves it to the trash
+horizon-launcher java [list]          Java runtimes: Mojang's (downloaded by Rusty Minecraft) and installed ones
+horizon-launcher java install &lt;21|java-runtime-delta&gt;   downloads Mojang's runtime, each file sha1-checked
+horizon-launcher multiplayer [list] [--instance &lt;name&gt;]   the servers in an instance's Multiplayer list
+horizon-launcher multiplayer add &lt;address&gt; [--name &lt;name&gt;] | remove &lt;server&gt;
+horizon-launcher modpack [list]                 the imported packs and their coverage
+horizon-launcher modpack import &lt;pack&gt;          a .mrpack, CurseForge zip or instance folder
+horizon-launcher modpack port &lt;pack&gt; [--from &lt;dir&gt;] [--version &lt;tag&gt;]   get the jars and carry them over
+horizon-launcher modpack play &lt;pack&gt; [--version &lt;tag&gt;]                 play it as its own profile
+horizon-launcher modpack remove &lt;pack&gt;
+horizon-launcher mods [list]                    what the mod browser installed (docs/mod-browser.md)
+horizon-launcher mods search &lt;text&gt; [--kind resource|shader|modpack] [--everything] [--source modrinth]
+horizon-launcher mods install &lt;id or slug&gt;      checksum checked, with what it needs; a modpack is imported
+horizon-launcher mods update [&lt;pack&gt;] [--check]
+horizon-launcher mods remove &lt;pack&gt;
+horizon-launcher servers [list]                 the servers hosted from the launcher, and whether they run
+horizon-launcher servers create [--name N] [--seed S | --copy-world DIR] [--mode M] [--difficulty D]
+                 [--max-players N] [--open] [--offline] [--player NAME]... --accept-eula
+horizon-launcher servers set-up [--version &lt;tag&gt;]   copy a prepared version's programs and game files for servers
+horizon-launcher servers run &lt;server&gt; -- &lt;horizon-server command&gt;   for example: servers run &quot;My server&quot; -- start
+horizon-launcher servers forget &lt;server&gt;        take it off the list (its folder stays)
+horizon-launcher benchmark [--repeats N]        measure the launcher (see Performance log)
+horizon-launcher data [status]                  what data collection is allowed, the install ID, what waits
+horizon-launcher data allow|deny &lt;kinds|all&gt;    performance, crashes, bugs, benchmarks
+horizon-launcher data show                      exactly what would be sent
+horizon-launcher data delete                    delete what was sent and what waits; new install ID
+horizon-launcher data bug &quot;&lt;text&gt;&quot; [--log]      a bug report, printed for you to confirm first
+horizon-launcher data benchmark &lt;report.json&gt;   upload a benchmark report, printed first
+</code></pre>
+<p><code>--json</code> prints JSON where there is something to report (<code>versions</code>, <code>install</code>, <code>notes</code>,
+<code>next</code>, <code>links</code>, <code>game-args</code>, <code>update --check</code>, <code>logs</code>, <code>account</code>, <code>benchmark</code>, <code>data</code>, <code>modpack</code>). Errors go to stderr with exit code 1. <code>server</code> runs in the terminal,
+so lines you type reach its console. <code>HORIZON_LAUNCHER_HOME</code> replaces the data folder (for
+scripts and tests). Test runs also set <code>HORIZON_LAUNCHER_TRASH=&lt;folder&gt;</code> and
+<code>HORIZON_LAUNCHER_CLIPBOARD=&lt;file&gt;</code> inside their scratch folders: what Delete would move to the
+system's trash goes into that folder, and what Copy would put on the clipboard is written to that
+file, so a test never touches the real trash or clipboard.</p>
+<h2 id="ai-agents-mcp">AI agents (MCP)</h2>
+<p><code>horizon-launcher mcp</code> is a Model Context Protocol server over stdio. <code>horizon-launcher agent-config</code> prints the config for Claude Code, Codex, Cursor and any MCP client, and the
+command that adds it; for Claude Code:</p>
+<pre><code>claude mcp add --scope user horizon -- horizon-launcher mcp
+</code></pre>
+<p>(with the full path to the binary if it is not on your <code>PATH</code>). Every CLI command is a tool of the
+same name and arguments, generated from the CLI's definition (<code>src/cli_tools.rs</code>): <code>versions</code>,
+<code>install</code>, <code>remove</code>, <code>prepare</code>, <code>settings</code>, <code>mods_search</code>, <code>mods_install</code>, <code>modpack_import</code>,
+<code>servers_create</code>, <code>data_status</code>... A call runs that command with <code>--json</code> and returns its
+output. Tools that delete something (<code>remove</code>, <code>mods_remove</code>, <code>modpack_remove</code>,
+<code>servers_forget</code>, <code>account_sign_out</code>, <code>data_delete</code>) need <code>confirm: true</code>. The session runs a few
+itself, under the CLI's names: <code>play</code>, <code>server</code> with <code>server_command</code>, <code>server_log</code> and
+<code>server_stop</code>, <code>account_list</code> and <code>account_sign_in</code> (returns the link and code for the player;
+the sign-in finishes in the background). A server started through MCP stops (cleanly, with
+<code>stop</code>) when the session ends. Starting one needs <code>accept_eula</code>, which an agent should only pass
+with the player's consent.</p>
+<p>The same server also plays the game: <code>play</code> starts it with a local control socket (<code>world</code>,
+<code>creative</code>, <code>join</code> and <code>offscreen</code> are optional), and every <code>horizon-ctl</code> tool of the selected
+version is offered as <code>game_&lt;name&gt;</code>: <code>game_state</code>, <code>game_ui</code> (every widget of the open screen),
+<code>game_click</code>, <code>game_goto</code>, <code>game_break</code>, <code>game_inventory</code>, <code>game_screenshot</code> (an image) and the
+rest of <a href="../../horizon-ctl-commands.html">horizon-ctl's commands</a>. The launcher runs that
+version's <code>horizon-ctl mcp</code> and passes the calls through; while no game runs, they answer with an
+error saying to call <code>play</code>.</p>
+<p><code>horizon-launcher no-ai on</code> (the Settings page's No AI switch) hides and turns off every AI
+feature: <code>mcp</code> and <code>agent-config</code> refuse, the game opens no control socket and <code>horizon-ctl</code>
+refuses. Every other command keeps working.</p>
+<p>The window, the command line and the MCP server all call the same core, <code>src/backend.rs</code>.</p>
+<h2 id="microsoft-accounts">Microsoft accounts</h2>
+<p>The launcher starts the game only while a Microsoft account that owns Minecraft: Java Edition is
+signed in, as other launchers do: without one, Play (Home, instances, <code>horizon-launcher play</code>, the
+MCP's <code>play</code>) says &quot;Sign in with a Microsoft account that owns Minecraft: Java Edition to play&quot;
+and starts nothing. Settings → Accounts signs in: the launcher shows a code, you enter it at
+microsoft.com/link, and the launcher checks that the account owns the game. It asks again at every
+Play, with the token renewal; with no network the last answer stands, and a &quot;doesn't own&quot; blocks
+at once. The account also plays online-mode servers under your own name and skin; offline names
+play LAN and offline-mode servers beside it. The game binary started directly (<code>horizon-client</code>,
+<code>horizon-ctl launch</code>), the harnesses and the servers don't go through this check. Tokens live in the system keychain (Keychain,
+Credential Manager, or the Secret Service on Linux), never in a file, a log or the command line;
+<code>accounts.json</code> in the data folder keeps only names and UUIDs. Without a keychain you stay signed
+in until the launcher closes. When the game starts, it gets the session in a private file it
+deletes as soon as it has read it. Sign out removes the tokens.</p>
+<p>Sign-in needs Rusty Minecraft's own Azure app registration: its client ID is built in from
+<code>HORIZON_MSA_CLIENT_ID</code> (and <code>HORIZON_MSA_CLIENT_ID</code> at run time overrides it; empty = not
+configured). How it works: <a href="../../microsoft-account.html">docs/microsoft-account.md</a>.</p>
+<h2 id="logs-and-crash-reports">Logs and crash reports</h2>
+<p>The game writes its log to <code>logs/latest.log</code> in the game folder (<code>HORIZON_HOME</code>, else
+<code>~/.local/share/horizon</code>, <code>~/Library/Application Support/horizon</code> or <code>%APPDATA%\horizon</code>), and
+archives the previous one at start as <code>logs/&lt;date&gt;-&lt;n&gt;.log.gz</code>, as Minecraft does. When it
+crashes it writes <code>crash-reports/crash-&lt;date&gt;_&lt;time&gt;-client.txt</code> beside them. When a game the
+launcher started crashes, the Play page says so, with buttons to open or copy the report, open the
+logs folder and report it on Discord; Settings has the logs folder too. A crash report leaves the
+machine only if you turn on crash reports (below).</p>
+<h2 id="data-collection">Data collection</h2>
+<p>The first time it opens, the launcher asks whether you want to send performance statistics,
+crash reports, bug reports and benchmark uploads, each on its own switch and all off until you
+turn one on (&quot;Send nothing&quot; is one click). Settings → Data collection changes them any time, shows
+exactly what would be sent (the JSON), and deletes everything sent from your install. It asks
+again only when what is collected changes. The game obeys the same answer, kept in
+<code>telemetry/consent.json</code> in the game folder. What waits is sent when the launcher starts and
+closes. Every field, the caps and the format: <a href="../../telemetry.html">docs/telemetry.md</a>.</p>
+<h2 id="performance-log">Performance log</h2>
+<p>Each session writes its own measurements to <code>benchmarks/launcher-&lt;time&gt;-session.json</code> in the
+launcher's data folder, in the <a href="../../benchmark-report.html">benchmark report format</a>: start to the
+first frame, the release list fetch, installs and updates (download and unpack), preparing, Play to
+the game's first frame, memory, UI frame times and the binary's size, with the machine's CPU, RAM
+and OS (read on a thread after the first frame: on Windows those queries take seconds). Attach it
+to an issue about the launcher being slow. <code>horizon-launcher benchmark</code> measures on purpose: it starts the launcher <code>--repeats</code> times (5; the first start is the cold one, as far
+as the OS's file cache allows), switches pages for a few seconds in each, rests 3 seconds to
+measure idle CPU, fetches the release list 3 times, and writes one report there with means and
+95% confidence intervals. Its window has to be on a screen that is awake. Session logs stay on
+your machine; a <code>benchmark</code> report is uploaded, dated to the day, only if you allowed benchmark
+uploads (<a href="../../telemetry.html">data collection</a>).</p>
+<p>Long lists on Mods (results, installed entries, coverage reports and project versions), Versions
+and Patch notes build only nearby rows, including on their first frame. Variable row heights
+are measured as they enter view; hidden ranges share spacers in the existing page scrollbar.
+On Windows, <code>cargo test --bin horizon-launcher desktop_list_renders_the_viewport_after_scrollbar_jumps -- --ignored</code> checks 10,000 rows of different heights in a real GPUI window (requires an awake desktop/GPU).</p>
+<h2 id="building">Building</h2>
+<pre><code>cargo build --release
+</code></pre>
+<p>On NixOS, <code>nix-shell</code> in this folder provides the libraries GPUI links to (Wayland, X11,
+xkbcommon, Vulkan, fontconfig). macOS needs Xcode's command line tools. The <code>launcher</code>
+workflow builds all three platforms on every push to the <code>launcher</code> branch (or a
+<code>launcher-*</code> one), then installs the latest Rusty Minecraft into a temporary folder and checks that the
+client starts (<code>--help</code>) and that the binaries import only system libraries (Windows).</p>
+<pre><code>cargo test --lib    # tag separation, version order, update selection, notes as text,
+                    # the auto-install default, the links fallback
+</code></pre>
+<p>Geist and Geist Mono (SIL Open Font License, <code>crates/horizon-theme/fonts/OFL-*.txt</code>, shared with the game's on-screen keyboard) are
+bundled so the type is the same on every platform.</p>
+<h2 id="screenshots">Screenshots</h2>
+<p><img src="https://github.com/winnerfn8/Rusty-Minecraft/raw/HEAD/launcher/docs/servers.png" alt="Servers" />
+<img src="https://github.com/winnerfn8/Rusty-Minecraft/raw/HEAD/launcher/docs/servers-tailscale.png" alt="Friends over the internet" />
+<img src="https://github.com/winnerfn8/Rusty-Minecraft/raw/HEAD/launcher/docs/modpacks.png" alt="Modpacks" />
+<img src="https://github.com/winnerfn8/Rusty-Minecraft/raw/HEAD/launcher/docs/versions.png" alt="Versions" />
+<img src="https://github.com/winnerfn8/Rusty-Minecraft/raw/HEAD/launcher/docs/patch-notes.png" alt="Patch notes" />
+<img src="https://github.com/winnerfn8/Rusty-Minecraft/raw/HEAD/launcher/docs/settings.png" alt="Settings" /></p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/launcher/README.md"><code>launcher/README.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#what-it-does">What it does</a></li><li class="l2"><a href="#updates">Updates</a></li><li class="l2"><a href="#command-line">Command line</a></li><li class="l2"><a href="#ai-agents-mcp">AI agents (MCP)</a></li><li class="l2"><a href="#microsoft-accounts">Microsoft accounts</a></li><li class="l2"><a href="#logs-and-crash-reports">Logs and crash reports</a></li><li class="l2"><a href="#data-collection">Data collection</a></li><li class="l2"><a href="#performance-log">Performance log</a></li><li class="l2"><a href="#building">Building</a></li><li class="l2"><a href="#screenshots">Screenshots</a></li></ul></nav>
+</div>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

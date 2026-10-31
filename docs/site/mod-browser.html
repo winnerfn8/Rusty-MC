@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The launcher&#x27;s mod browser · Rusty Minecraft docs</title>
+<meta name="description" content="The launcher&#x27;s mod browser: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details open><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html" aria-current="page">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="the-launchers-mod-browser">The launcher's mod browser</h1>
+<p>Search Modrinth (CurseForge support is coming soon) for Java mods, modpacks, resource packs and data packs, and Rusty Minecraft's
+registry for Rusty Minecraft's own mods, modpacks, resource packs and shader packs; see how well each one runs before installing it, and install it with its checksum checked. This is item 16 of the roadmap and issue #577. The code is in
+<code>launcher/src/browser.rs</code> and <code>launcher/src/browser/</code>.</p>
+<h2 id="what-it-offers">What it offers</h2>
+<p>Rusty Minecraft doesn't run Java code (<a href="mods.html">mods.md</a>). It ports what a Java mod
+carries as data (blocks, items, recipes, loot tables, tags, worldgen, textures, names) with <code>horizon-port-pack</code>, and
+says before install which of the mod's features that leaves out. Rusty Minecraft's own mods (content mods, <code>.hmod</code>, and native
+mods, <code>.hnmod</code>) aren't on Modrinth or CurseForge yet (Modrinth has no <code>horizon</code> loader).</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Goes to</th>
+<th>How well it runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java mods (Fabric, NeoForge, Forge, Quilt)</td>
+<td>ported into <code>horizon-mods/&lt;mod id&gt;/</code> and turned on</td>
+<td>Checked from its jar before install: <strong>Works</strong>, <strong>Partly</strong> or <strong>Doesn't run</strong> (<a href="#java-mods">below</a>)</td>
+</tr>
+<tr>
+<td>Resource packs</td>
+<td><code>resourcepacks/</code> beside <code>options.txt</code></td>
+<td><strong>Works</strong> when made for 26.3 (<a href="resource-packs.html">resource-packs.md</a> lists what Rusty Minecraft reads). Older packs are <strong>Partly</strong>: they load with vanilla's compatibility warning</td>
+</tr>
+<tr>
+<td>Modpacks (<code>.mrpack</code>, CurseForge zip)</td>
+<td>the Modpacks page's import</td>
+<td><strong>Partly</strong>: Rusty Minecraft runs the mods it can port, from the player's own downloads (<a href="modpacks.html">modpacks.md</a>)</td>
+</tr>
+<tr>
+<td>Shader packs (<code>.hshader</code>, Rusty Minecraft's registry only)</td>
+<td><code>shaderpacks/</code> beside <code>options.txt</code></td>
+<td><strong>Works</strong> when made for 26.3: checked by the game's own check before install (<a href="shaders.html">shaders.md</a>). The <code>shaders/</code>-format packs on Modrinth and CurseForge are not offered</td>
+</tr>
+<tr>
+<td>Data packs (Modrinth)</td>
+<td><code>datapacks/</code> of the world picked on the <strong>Data packs</strong> tab (<code>mods install &lt;pack&gt; --world &lt;world&gt;</code>); not in the Installed list: each world's list on Home has them</td>
+<td><strong>Partly</strong>: Rusty Minecraft runs a data pack's functions, function tags, predicates and item modifiers, not yet its recipes, loot tables, advancements, other tags or worldgen. The install reads the zip and says what of it runs; a pack with none of those (worldgen only, such as Tectonic) is refused</td>
+</tr>
+</tbody>
+</table></div>
+<p>Mods, resource packs and shader packs go into the game folder of the instance selected in the sidebar, and the
+Installed list, updates and Remove are that instance's: picking another instance reads its list. The page says which
+instance it installs into when there is more than one. The CLI's <code>mods list|install|update|remove|enable|disable</code> take
+<code>--instance &lt;name&gt;</code> (default: the selected one). A modpack becomes an instance of its own.</p>
+<p>By default a search shows only what runs: Java mods made for 26.3, resource packs made for 26.3, and every modpack. <strong>Show everything</strong> lists the rest of the kind too, each marked with how well it runs; what doesn't run is
+never offered for install.</p>
+<h2 id="java-mods">Java mods</h2>
+<p>Before a mod is offered for install, the launcher reads its jar. For each result it picks the version it would
+install (the newest for 26.3; with <strong>Show everything</strong>, else the newest for 1.21 or later, the versions port-pack
+upgrades from), downloads that file with the checks below, and runs <code>horizon-port-pack check</code> on it
+(<a href="modpacks.html#the-pipeline-horizon-port-pack">modpacks.md</a>): the jar is carried over into a folder content mod and its
+class files are read, not run, for what the carry can't take. Two checks run at once; the row says <strong>Checking</strong> until
+its answer comes.</p>
+<ul>
+<li><strong>Works</strong>: content only. Its blocks, items, recipes, loot, tags and worldgen port, and its code only registers
+them. Blocks take the closest vanilla block's shape, hardness and sounds (a block's numbers live in Java code; the
+NeoForge oracle that reads them for modpacks is a developer tool).</li>
+<li><strong>Partly</strong>: the content ports; the row lists what doesn't: blocks with no vanilla block to copy, recipes of the
+mod's own types, block entities (machines, containers), menus, mobs and entities, blocks and items with behaviour
+of their own, worldgen written in Java, Mixins, the game events it reacts to.</li>
+<li><strong>Doesn't run</strong>: nothing to port (performance mods, libraries, everything in code), a jar made for 1.20 or older,
+or a mod id with characters Rusty Minecraft mods can't use (<code>fabric-api</code>). Never offered for install.</li>
+</ul>
+<p>The answer is kept in <code>mod-browser/checks-1/&lt;checksum&gt;/</code> under the game folder, with the carry when something
+ports; the jar itself isn't kept. A file is checked once. On ten 26.3 jars a check took 0.2 to 3 s (24 s for an
+18 MB jar with 9,360 recipes).</p>
+<p><strong>Install</strong> copies the carry into <code>horizon-mods/&lt;mod id&gt;/</code>, turns it on in <code>horizon-mods.txt</code> (the game's Options &gt;
+Mods lists it) and records it in <code>mod-browser.json</code> with its verdict and what didn't port, which the Installed list
+shows. Its required mods that port are installed with it; one with nothing to port (a library such as Cloth Config
+or GeckoLib) is listed as not ported. A mod that shares its id or a namespace with an installed one is refused. The
+game reads mod content when it starts: start it again after installing. <strong>Remove</strong> deletes the folder and turns it
+off.</p>
+<h3 id="end-to-end-check">End-to-end check</h3>
+<p><code>tools/mod_browser_harness.py [--mod SLUG] [--query TEXT] [--keep]</code> runs the whole path a player takes, in a scratch
+game folder: the launcher's <code>mods search --kind mod</code>, <code>mods check</code> and <code>mods install</code> (Modrinth), then the game
+opens a survival world with the mod offscreen (horizon-ctl), places one of its blocks, and crafts one of its recipes
+from vanilla ingredients on a crafting table and takes the result. It times the world's load with and without the
+mod and prints a JSON summary; it exits 1 when a step fails. It needs the launcher, the game and horizon-ctl built
+and the prepared 26.3 resources in <code>.local</code>.</p>
+<p>On the Mac mini (M4 Pro, offscreen) with Macaw's Fences and Walls (the default): check 4.0 s, install 3.1 s, world
+load 5.4 s without mods and 7.3 s with it (resources 1.1 s and 2.6 s: the mod content folder is built on the first
+start); the hedge places and its recipe crafts 4.</p>
+<h2 id="checks-on-every-download">Checks on every download</h2>
+<ul>
+<li>The file must come from Modrinth's or CurseForge's file servers (<code>cdn.modrinth.com</code>, <code>edge.forgecdn.net</code>,
+<code>mediafilez.forgecdn.net</code>), over HTTPS.</li>
+<li>Its name must be one plain file name (no folders, <code>..</code>, hidden names or reserved characters).</li>
+<li>It is written as <code>.&lt;name&gt;.part</code>, hashed as it arrives, and renamed into place only when its size and checksum match
+what the source lists: SHA-512 on Modrinth, SHA-1 on CurseForge (the strongest hash CurseForge publishes). Anything
+else removes the part file and installs nothing.</li>
+<li>A file whose source lists no checksum is refused.</li>
+</ul>
+<h2 id="the-mods-page">The Mods page</h2>
+<p>The launcher's <strong>Mods</strong> page has three tabs: <strong>Mods</strong> and <strong>Shader packs</strong> search Rusty Minecraft's registry (a Java
+instance's Mods tab searches Modrinth for its version), <strong>Resource packs</strong> searches Modrinth. Modrinth's Java mods and
+data packs aren't usable yet, so the Mods tab has no source switch and Data packs has no tab; the CLI still reaches
+them (<code>mods search --kind ...</code>). The Modpacks tab shows only while the sidebar's modpacks or its + button have it
+open. Resource packs and Modpacks have a search field (Enter searches), <strong>Show everything</strong> and the source: Modrinth or
+Rusty Minecraft, with <strong>CurseForge (coming soon)</strong> beside it, disabled. Each result is an index row: its summary, author,
+downloads, source and licence, how well it runs (and why), <strong>Page</strong> (the project's page on its source) and
+<strong>Install</strong> (<strong>Import</strong> for a modpack). The Modpacks tab lists the imported packs first, with their coverage
+report, <strong>Port</strong> and <strong>Play</strong> (<a href="modpacks.html">modpacks.md</a>). Installed packs are listed above the results with their version, source,
+file and the checksum they were checked against, with <strong>Update to …</strong> when a newer version runs and <strong>Remove</strong>
+(asked twice). <strong>Update all (N)</strong> above the list updates every pack a newer version was found for, of every kind,
+one after the other; one that fails is named and doesn't stop the others.</p>
+<h3 id="project-pages-filters-and-icons">Project pages, filters and icons</h3>
+<p>A result's title opens its page inside the launcher, not in a web browser: its icon, authors, downloads, followers,
+last update, licence and source, how well it runs (for a Java mod, what ports and what doesn't, from its check) with
+<strong>Install</strong> or <strong>Import</strong>, the project's links (its page on the source, source code, issues, wiki, Discord,
+donations; <code>https://</code> only, opened in the system browser), then three tabs: <strong>Description</strong> (the project's Markdown,
+drawn by the launcher's renderer), <strong>Gallery</strong> and <strong>Versions</strong> (each version's date, loaders, game versions, file
+and size, and the verdict of any version already checked). The data is <code>browser::details</code> (<code>Source::details</code>; on
+Modrinth <code>GET /project/{id}</code> and <code>/project/{id}/members</code>, then <code>/project/{id}/version</code>).</p>
+<p><strong>Filters</strong> sit above the results: the order (best match, relevance, downloads, follows, newest, updated) and, under
+<strong>Filters</strong>, the loader, game version, environment (client, server) and categories, with the values the source lists
+for the kind (Modrinth's <code>/tag/category</code>, <code>/tag/loader</code>, <code>/tag/game_version</code>, asked once per run). A loader or version
+picked replaces the default (Java mod loaders and 26.3 for mods); a version other than 26.3 checks and installs the
+newest file for 1.21 or later, as <strong>Show everything</strong> does. Changing tabs clears the filters. CurseForge support
+is coming soon; its source already maps the order and the game version.</p>
+<p><strong>Icons and gallery images</strong> are the projects' own, fetched at run time from the source's image server
+(<code>browser::images</code>): HTTPS from <code>cdn.modrinth.com</code> (or CurseForge's <code>media.forgecdn.net</code> / <code>edge.forgecdn.net</code>) only,
+at most 8 MB each, decoded (PNG, JPEG, WebP, GIF, at most 8192 pixels a side), scaled (icons 128 px, list rows 80 px,
+gallery 960 px) and kept as PNGs in <code>mod-browser/images/</code> under the launcher's data folder, which is kept under 128 MB
+by dropping the oldest files. After a week an image is asked for again with its server's <code>ETag</code> and <code>Last-Modified</code>:
+an unchanged one costs a 304 and is kept; offline, the cached one stays. A plate with the project's initial stands in
+until the icon arrives. Nothing of a project's art is in the launcher or the repository.</p>
+<p><strong>Installed mods' icons</strong> (Home's Mods tab, the Mods page's installed list): Modrinth's project icon for what the
+browser installed from it, the URLs asked for in one request (<code>GET /projects?ids=[…]</code>) and kept in
+<code>mod-browser/project-icons.json</code> so they show offline; else the icon a jar names for itself
+(<code>fabric.mod.json</code>/<code>quilt.mod.json</code> <code>icon</code>, <code>mods.toml</code> <code>logoFile</code>), read from the jar off the UI thread and scaled to
+the row; else a generic glyph. The tab builds only the rows near the view, so a pack of hundreds costs what a few do.</p>
+<p><strong>Vanilla Minecraft</strong> is marked with a grass block drawn at run time from the player's own prepared game files
+(<code>assets/minecraft/textures/block/grass_block_*.png</code>, tinted with the plains grass colour): the game-version filter
+shows it. No Mojang file or logo is in the launcher or the repository.</p>
+<p><strong>Source logos.</strong> Modrinth's logo is not shown: Modrinth's own repository says its branding is all rights reserved and
+&quot;the use of Modrinth branding elements, including but not limited to the wrench-in-labyrinth logo, ... is strictly
+prohibited without explicit written permission from Rinth, Inc.&quot; (<code>packages/assets/COPYING.md</code> in
+<a href="https://github.com/modrinth/code/blob/main/packages/assets/COPYING.md">modrinth/code</a>), and its
+<a href="https://modrinth.com/legal/terms">terms</a> ask for prior written permission to use its marks. Results name their source
+in text (&quot;from Modrinth&quot;) until Rinth, Inc. agrees. CurseForge support, and so its logo, is coming soon.</p>
+<h2 id="installing-updating-removing">Installing, updating, removing</h2>
+<p><code>mod-browser.json</code> beside <code>options.txt</code> lists every file the browser installed: its source, project, version, file
+and the checksum it was checked against. The browser replaces or removes only the files it lists; a file of the
+same name the player put there is never overwritten.</p>
+<ul>
+<li><strong>Install</strong> picks the newest version that runs, then its required dependencies, checked before any download: a
+dependency that isn't a pack Rusty Minecraft loads (a Java mod) stops the install. Dependencies go in first. A resource
+pack still has to be turned on in the game's Resource Packs screen, as in vanilla, and a shader pack picked in
+the game's Shader Packs page.</li>
+<li><strong>Update</strong> installs the newer version and removes the old file.</li>
+<li><strong>Update all</strong> does the same for each pack with a newer version (<code>horizon-launcher mods update</code> with no pack name).</li>
+<li><strong>Remove</strong> deletes the file and its entry. Packs installed as dependencies stay.</li>
+<li><strong>A modpack</strong> is downloaded (checked the same way) into <code>ports/downloads/</code>, imported, and ported straight away
+for the selected version when it is prepared (<code>modpacks::import_and_port</code>): the jars of the mods Rusty Minecraft can carry
+over come from the pack's links or Modrinth, and the message says how many of its files play. <strong>Play</strong> on the
+Modpacks tab starts it with every ported mod on together. A ported mod that owns a namespace an earlier one owns
+(the game would refuse it) is left off before the game starts and listed under the pack (&quot;Left off: ...&quot;); the
+coverage list says why each mod that didn't port didn't. A port that fails leaves the pack imported, with <strong>Port</strong>
+to try again. Measured on three packs in <a href="modpacks.html#three-packs-through-the-mod-browser-measured">modpacks.md</a>.</li>
+</ul>
+<p>From a terminal (or an agent):</p>
+<pre><code class="language-sh">horizon-launcher mods search faithful                 # --kind mod|modpack|resource|shader, --everything, --source
+horizon-launcher mods check macaws-fences-and-walls   # a Java mod's verdict, what ports and what doesn't (--json)
+horizon-launcher mods install faithful-32x            # id or slug; a Java mod is ported, a modpack imported and ported
+horizon-launcher mods list                            # --json
+horizon-launcher mods update [faithful-32x] [--check]
+horizon-launcher mods remove faithful-32x
+</code></pre>
+<h2 id="sources">Sources</h2>
+<p><strong>Rusty Minecraft's registry.</strong> Content mods (<code>.hmod</code>), native mods (<code>.hnmod</code>), modpacks (<code>.hpack</code>), resource packs and shader packs (<code>.hshader</code>) made for Rusty Minecraft, reviewed as pull requests in
+<a href="https://github.com/horizon-rust/horizon-mods">horizon-rust/horizon-mods</a> (<a href="api/mod-index.html">api/mod-index.md</a>). The
+launcher reads its <code>index.json</code> (<code>browser/horizon.rs</code>; <code>HORIZON_MOD_INDEX=&lt;file or https address&gt;</code> reads a test
+registry instead, whose files may then be on disk) at most every ten minutes, and keeps the last copy in
+<code>mod-browser/horizon-index.json</code>. Before a result is installed it shows whether its files are signed and, for a mod,
+what it may do, in the words of the game's Options &gt; Mods. A download goes to <code>mod-browser/downloads/</code> and is moved
+into place only after <code>horizon_mods::index::check_file</code> passes (size, SHA-256, the author's signature when the project
+has a key, the file's own manifest against the index). A content mod becomes <code>horizon-mods/&lt;id&gt;.hmod</code>, turned on; a native mod becomes
+<code>horizon-native-mods/&lt;id&gt;.hnmod</code>, and the launcher builds it into the game (<a href="native-mods.html">native-mods.md</a>);
+<code>mods disable</code> and <code>mods enable</code> switch it in <code>horizon-mods.txt</code>. When the index takes a file down, the launcher turns
+it off the next time it reads the index or starts the game, says why, and refuses to install it or turn it back on.
+A Rusty Minecraft modpack (<code>.hpack</code>) installs as its own profile (<code>browser/horizon/pack.rs</code>): <code>horizon-packs/&lt;id&gt;/</code> holds the
+checked pack, <code>pack.json</code> and <code>home/</code>, the profile's game folder, where each of the pack's mods is downloaded and checked
+like any registry mod and turned on or off as the pack says; its overrides (settings, resource packs, a mod's saved
+settings) are copied in on the first install only, so the player's changes survive updates. A pack whose mod was taken
+down installs nothing. It is listed on the Modpacks tab with <strong>Play</strong> and <strong>Remove</strong>, and plays like an imported pack
+(<code>modpacks::apply_profile</code>). A shader pack goes to <code>shaderpacks/&lt;file&gt;</code> once <code>check_file</code> has run the game's own
+check on it (<code>horizon_shader_api::check</code>); a taken-down one is named, for the player to remove.
+A registry <code>.hmod</code> with any capability besides <code>registries</code> is neither listed nor installed alone. A modpack that
+requires one still installs, and the launcher lists the mod as not running, with that reason, and leaves out its code.</p>
+<pre><code class="language-sh">horizon-launcher mods search --source horizon --kind mod &lt;words&gt;   # with whether it is signed and what it may do
+horizon-launcher mods install --source horizon &lt;id&gt;
+horizon-launcher mods disable &lt;id&gt;
+horizon-launcher mods install --source horizon cozy               # a modpack: its own profile
+horizon-launcher modpack play cozy
+</code></pre>
+<p><strong>Modrinth.</strong> The public API (<code>api.modrinth.com/v2</code>) needs no key. The launcher names itself in its user agent, as
+Modrinth asks.</p>
+<h3 id="curseforge-coming-soon">CurseForge (coming soon)</h3>
+<p>CurseForge support is coming soon. Its API (<code>api.curseforge.com/v1</code>) needs a paid key, so for now the launcher
+doesn't use it: the Mods page shows <strong>CurseForge (coming soon)</strong> beside the Modrinth switch, disabled, and no search
+or install goes to CurseForge (<code>browser::sources()</code> is Modrinth only; <code>horizon-launcher mods ... --source curseforge</code>
+says it is coming soon). The CurseForge source (<code>browser/curseforge.rs</code>) is kept for when it comes.</p>
+<p>A CurseForge modpack zip or instance the player already has still imports, since that needs no key: its jars come
+from the player's installed instance or, when Modrinth has the same file, from Modrinth. A jar only CurseForge serves
+is listed under the pack as &quot;CurseForge downloads coming soon&quot;.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/mod-browser.md"><code>docs/mod-browser.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#what-it-offers">What it offers</a></li><li class="l2"><a href="#java-mods">Java mods</a></li><li class="l3"><a href="#end-to-end-check">End-to-end check</a></li><li class="l2"><a href="#checks-on-every-download">Checks on every download</a></li><li class="l2"><a href="#the-mods-page">The Mods page</a></li><li class="l3"><a href="#project-pages-filters-and-icons">Project pages, filters and icons</a></li><li class="l2"><a href="#installing-updating-removing">Installing, updating, removing</a></li><li class="l2"><a href="#sources">Sources</a></li><li class="l3"><a href="#curseforge-coming-soon">CurseForge (coming soon)</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

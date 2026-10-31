@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rusty Minecraft shader packs · Rusty Minecraft docs</title>
+<meta name="description" content="Rusty Minecraft shader packs: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html" aria-current="page">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="rusty-minecraft-shader-packs">Rusty Minecraft shader packs</h1>
+<p>Rusty Minecraft has its own shader packs: WGSL written against stages of Rusty Minecraft's renderer, checked before they run. This page
+is the guide for pack authors. The design and the pack format are in <a href="api/shaders.html">api/shaders.md</a>; every stage's
+signature, input, resource and limit is in the generated <a href="api/shaders-reference.html">api/shaders-reference.md</a>.</p>
+<p>Shader packs in the Iris/OptiFine format are a separate feature with its own loader; this page is only about
+Rusty Minecraft's own format.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Where</th>
+<th>State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Format, stages, check</td>
+<td><code>crates/horizon-shader-api</code></td>
+<td>API 0.1, experimental</td>
+</tr>
+<tr>
+<td>Authoring tool</td>
+<td><code>horizon-shader</code> (same crate)</td>
+<td><code>new</code>, <code>check</code>, <code>pack</code></td>
+</tr>
+<tr>
+<td>Templates</td>
+<td><code>crates/horizon-shader-api/templates/</code></td>
+<td>post, sky, material</td>
+</tr>
+<tr>
+<td>Example pack</td>
+<td><code>crates/horizon-shader-api/packs/golden_hour</code></td>
+<td>a warm sky and two post passes</td>
+</tr>
+<tr>
+<td>In the game: every stage</td>
+<td>Options &gt; Rusty Minecraft Settings &gt; Shader Packs</td>
+<td>sky, material, post passes, hot reload</td>
+</tr>
+<tr>
+<td>The registry and the launcher</td>
+<td><code>shader</code> kind (<a href="api/mod-index.html">api/mod-index.md</a>); the Mods page's Shader packs tab</td>
+<td>checked, then installed into <code>shaderpacks/</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="quick-start">Quick start</h2>
+<pre><code class="language-sh">cargo install --path crates/horizon-shader-api      # or: cargo run -p horizon-shader-api --bin horizon-shader -- &lt;command&gt;
+horizon-shader new my_pack --template post          # also: --template sky, --template material; --name &quot;My Pack&quot;
+horizon-shader check my_pack                        # what the game, the launcher and the registry will check
+horizon-shader pack my_pack                         # check, then write my_pack-0.1.0.hshader beside the folder
+</code></pre>
+<p><code>check</code> prints each stage with its cost, and the pack's SHA-256:</p>
+<pre><code>golden_hour 1.0.0 (shader API 0.1): ok
+  sky       Warm horizon                     99 expressions, 0 texture reads
+  post      Glow                            192 expressions, 3 texture reads
+  post      Colour grade                    201 expressions, 2 texture reads
+  sha256 b5e0d98c...
+</code></pre>
+<p>or every problem, at its file, line and column:</p>
+<pre><code>my_pack 0.1.0 (shader API 0.1): FAILED
+  post.wgsl:9:1: expected `;`, found &quot;}&quot;
+</code></pre>
+<p><code>--json</code> prints the same for tools (<code>ok</code>, <code>id</code>, <code>version</code>, <code>api</code>, <code>sha256</code>, <code>stages</code>, <code>problems</code>).</p>
+<h2 id="trying-a-pack-in-the-game">Trying a pack in the game</h2>
+<p>Put the pack folder (or its <code>.hshader</code>) in <code>shaderpacks/</code> beside <code>options.txt</code> (Open Pack Folder opens it) and pick
+it on Options &gt; Rusty Minecraft Settings &gt; Shader Packs, which lists Rusty Minecraft's packs, marked (Rusty Minecraft), beside packs in the
+<code>shaders/</code> format; one runs at a time, and clicking it again turns it off. <code>HORIZON_SHADER_PACK=&lt;its folder or file name&gt;</code> runs a pack whatever the page says, for development. The game checks the pack first, and refuses one that
+fails, with its problems in the chat. While it runs, the game looks at the pack twice a second: save a file
+and the pack is checked and rebuilt in place (&quot;Shader pack ... reloaded&quot;); if the new version fails, the chat says
+where and the last good version keeps drawing. All three stages run.</p>
+<h2 id="a-pack">A pack</h2>
+<p>A folder (or the same files zipped as a <code>.hshader</code>) with <code>horizon-shaders.toml</code> and WGSL files:</p>
+<pre><code class="language-toml">schema = 1
+id = &quot;my_pack&quot;
+name = &quot;My Pack&quot;
+version = &quot;0.1.0&quot;
+api = &quot;0.1&quot;
+
+[[post]]
+file = &quot;post.wgsl&quot;
+
+[[options]]
+id = &quot;saturation&quot;
+name = &quot;Saturation&quot;
+type = &quot;float&quot;
+default = 1.15
+min = 0.0
+max = 2.0
+</code></pre>
+<p>Every key is in <a href="api/shaders.html#the-pack-format-schema-1">api/shaders.md</a>.</p>
+<h2 id="stages">Stages</h2>
+<p>A stage is one function your file defines. Rusty Minecraft puts its prelude (the structs, <code>frame</code>, the stage's resources and
+helpers) before your file and calls the function from its own pass, so the world is still culled, batched and meshed
+by Rusty Minecraft: a pack changes how things look, not how they are drawn.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Your function</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[sky]</code></td>
+<td><code>fn sky(input: SkyInput) -&gt; vec4&lt;f32&gt;</code></td>
+<td>the sky's colour along each view ray, opaque (alpha is ignored), drawn where vanilla draws its sky dome (the Overworld's sky; not the Nether's or the End's); the sun, moon, stars and clouds are drawn over it</td>
+</tr>
+<tr>
+<td><code>[material]</code></td>
+<td><code>fn material(input: MaterialInput) -&gt; Surface</code></td>
+<td>the lit colour of each point of a block's surface, before the alpha test and fog: every terrain section and distant tile, solid, cutout and translucent (not entities, block entities or particles)</td>
+</tr>
+<tr>
+<td><code>[[post]]</code></td>
+<td><code>fn post(input: PostInput) -&gt; vec4&lt;f32&gt;</code></td>
+<td>a full-screen pass over the world's picture (up to 8, in order), under the hand and HUD</td>
+</tr>
+</tbody>
+</table></div>
+<p>A pack has at least one stage; a stage it leaves out keeps vanilla's look. Each input says what vanilla would draw
+(<code>input.color</code> in the sky and post stages; <code>albedo * tint * vec4(lightmap, 1.0)</code> for a material), so a pack can start
+from vanilla and change only what it means to.</p>
+<p>Every stage can read <code>frame</code>: the camera's matrices and position, the sun and moon directions, the time of day,
+vanilla's sky and fog colours, rain and thunder, fog distances, the light at the camera, effects and the dimension.
+Post passes also read <code>scene_color</code>, <code>scene_depth</code>, <code>previous</code> (the last pass's output), two samplers and the helpers
+<code>depth_at(uv)</code> and <code>view_position(uv, depth)</code>.</p>
+<p>Rules the check enforces: your files declare no bindings (<code>@group</code>/<code>@binding</code>), no entry points and no names starting
+with <code>horizon_</code>. Code shared by several stages goes in files listed in <code>shared</code>, put before every stage.</p>
+<h2 id="options">Options</h2>
+<p>Each <code>[[options]]</code> entry is a WGSL <code>override</code> of the same name, set when the game builds the pipeline: no text
+substitution, no recompiling a different program per value.</p>
+<pre><code class="language-wgsl">override saturation: f32 = 1.15;   // type = &quot;float&quot;; bool → bool, int → i32, choice → u32 (the value's index)
+</code></pre>
+<p>The game shows the options on the pack's settings screen. Branches on an option are on a constant, so the GPU
+skips the side that isn't taken.</p>
+<h2 id="what-the-check-does">What the check does</h2>
+<p>The game runs the same check when it loads a pack (a pack that fails is refused with the message, and the last good
+one keeps drawing), the launcher before it installs one, and the registry's CI before a pack is listed:</p>
+<ol>
+<li>The manifest and the package: known keys, valid ids, every file used, sizes.</li>
+<li>Each stage built as the renderer builds it and validated by naga.</li>
+<li>The stage function's signature, and the rules above.</li>
+<li>Each <code>override</code> matches its option's type (or has a default); each option is used.</li>
+<li>Budgets: 20 000 expressions and 64 texture reads per stage.</li>
+<li>Every entry point translated for Vulkan (SPIR-V), Metal and DirectX 12 (HLSL), with the options at their
+defaults, minimums and maximums.</li>
+</ol>
+<p><code>[budget] gpu_ms</code> is the GPU time your pack aims to add to a frame. To compare, open F3 in the game: while it is
+open, each pass is timed on the GPU and the overlay shows the pack's total and its costliest passes, by their <code>name</code>
+(the median of the last 15 timed frames). Timing waits for nothing, so it does not slow the game. In a timed frame the sky
+stage draws in a pass of its own (it shares the world's pass otherwise), so its time includes clearing the picture. The
+material stage runs inside terrain's own draws, so it has no time of its own: compare the frame's GPU time with and
+without the pack.</p>
+<h2 id="next">Next</h2>
+<p>The overlay, lighting and shadow stages, and option values other than the defaults.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/shaders.md"><code>docs/shaders.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#quick-start">Quick start</a></li><li class="l2"><a href="#trying-a-pack-in-the-game">Trying a pack in the game</a></li><li class="l2"><a href="#a-pack">A pack</a></li><li class="l2"><a href="#stages">Stages</a></li><li class="l2"><a href="#options">Options</a></li><li class="l2"><a href="#what-the-check-does">What the check does</a></li><li class="l2"><a href="#next">Next</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

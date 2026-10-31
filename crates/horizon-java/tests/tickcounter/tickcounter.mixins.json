@@ -1,0 +1,6 @@
+{
+  "required": true,
+  "package": "dev.example.tickcounter.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["TickMixin", "MiningMixin"]
+}

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rusty Minecraft mods · Rusty Minecraft docs</title>
+<meta name="description" content="Rusty Minecraft mods: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html" aria-current="page">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="rusty-minecraft-mods">Rusty Minecraft mods</h1>
+<p>Two kinds of mod run in Rusty Minecraft:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>File</th>
+<th>What it is</th>
+<th>Where it runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Content mod</strong></td>
+<td><code>.hmod</code></td>
+<td>Data and assets: blocks, items, recipes, loot, tags, models, textures, structures. No code.</td>
+<td>Read when the game starts</td>
+</tr>
+<tr>
+<td><strong>Native mod</strong></td>
+<td><code>.hnmod</code></td>
+<td>A <a href="https://github.com/horizon-rust/horizon-mixins">horizon-mixins</a> bundle: Rust that changes the game's own source before it is compiled.</td>
+<td>In a game the launcher builds for the player (<a href="native-mods.html">native-mods.md</a>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Fabric and NeoForge jars do <strong>not</strong> run as they are: their code calls and patches Minecraft's Java classes, and
+Rusty Minecraft has none. What carries over is the data and assets inside a jar (<a href="modpacks.html">modpacks.md</a>). A jar put in
+the game folder's <code>mods/</code> is translated into a content mod when the game starts
+(<a href="java-mod-translation.html">java-mod-translation.md</a>).</p>
+<p>Mods are <strong>off by default</strong>. A fresh install has no <code>horizon-mods</code> folder and plays exactly like vanilla 26.3.</p>
+<h2 id="playing-with-mods">Playing with mods</h2>
+<ol>
+<li>Install a mod from the launcher's Mods page (<a href="mod-browser.html">mod-browser.md</a>), or put its files by hand in the
+game folder (the one holding <code>options.txt</code>): a content mod's <code>.hmod</code> (or a folder holding <code>horizon-mod.toml</code>) in
+<code>horizon-mods/</code>. Native mods go in <code>horizon-native-mods/</code>, and the launcher builds them
+(<a href="native-mods.html">native-mods.md</a>).</li>
+<li>Options &gt; <strong>Mods</strong> lists them with what each may do (&quot;May add blocks, items and mob effects to your worlds&quot;) and a
+switch. They start off. The choice is kept in <code>horizon-mods.txt</code> (<code>mod.&lt;id&gt;:true</code>).</li>
+<li>A content mod's blocks, items and mob effects load once, when the game starts: restart the game after a switch.</li>
+<li>A mod that can't load shows why, in red, on its row.</li>
+</ol>
+<p>Two turned-on content mods never own the same namespace: the first by file name loads, and the other stays out with
+the reason in the log.</p>
+<p>Benchmarks (<code>--benchmark</code>) never load mods.</p>
+<h2 id="making-a-content-mod">Making a content mod</h2>
+<pre><code class="language-sh">cargo install --git https://github.com/horizon-rust/horizon cargo-horizon-mod
+cargo horizon-mod new my-mod        # a content mod: manifest, one block with its model, loot and recipe
+cd my-mod
+cargo horizon-mod run               # build my-mod.hmod, then start the game with it turned on
+cargo horizon-mod build             # only build: target/horizon-mod/my_mod.hmod
+cargo horizon-mod check target/horizon-mod/my_mod.hmod   # the registry's checks; --json for JSON
+</code></pre>
+<ul>
+<li><code>new &lt;path&gt; [--name &quot;Name&quot;]</code> writes the template. It makes content mods only: any other <code>--template</code> is refused.</li>
+<li><code>build</code> packs <code>horizon-mod.toml</code>, <code>assets/</code> and <code>data/</code> into <code>target/horizon-mod/&lt;id&gt;.hmod</code>, with the same checks
+the game makes when it reads the content. It refuses a folder with a <code>Cargo.toml</code> (code is native now) and a
+manifest without capability <code>registries</code>.</li>
+<li><code>run</code> builds, then starts <code>horizon-client</code> (on <code>PATH</code>, or <code>--game PATH</code>, or <code>HORIZON_CLIENT</code>) with
+<code>--dev-mod target/horizon-mod/&lt;id&gt;.hmod</code>, always on. Arguments after <code>--</code> go to the game. The game reads content once
+at start, so rebuild and run again after an edit.</li>
+<li><code>check &lt;file&gt;</code> runs what the registry runs: the file's size and SHA-256, its manifest and content, and a signature
+with <code>--key &lt;public key&gt; --signature &lt;file&gt;.minisig</code>. It reads <code>.hmod</code>, <code>.hnmod</code>, <code>.hpack</code>, resource pack <code>.zip</code>
+and <code>.hshader</code> files.</li>
+<li><code>registry build|review|check|list|release|page</code> is the registry repository's CI (<a href="api/mod-index.html">api/mod-index.md</a>).</li>
+</ul>
+<h3 id="the-manifest">The manifest</h3>
+<pre><code class="language-toml">id = &quot;my_mod&quot;                # [a-z0-9_]{1,64}: settings key, log name
+name = &quot;My mod&quot;
+version = &quot;0.1.0&quot;
+description = &quot;...&quot;
+authors = [&quot;...&quot;]
+api = &quot;0.2&quot;                  # content mods
+side = &quot;both&quot;
+capabilities = [&quot;registries&quot;]
+namespaces = []              # optional: more namespaces the mod's files use (below)
+</code></pre>
+<p>Unknown keys are refused, so a typo is an error, not a silently ignored permission.</p>
+<h3 id="content-mods-api-02">Content mods (API 0.2)</h3>
+<p>A content mod has capability <code>registries</code> and carries <code>assets/</code> and <code>data/</code> in the <code>.hmod</code>. It adds blocks and items
+by declaring them in <code>data/&lt;id&gt;/horizon/block/*.json</code> and <code>data/&lt;id&gt;/horizon/item/*.json</code>, each copying a vanilla
+template (<a href="modpacks.html#registries-02-data-driven-blocks-items-and-mob-effects">modpacks.md</a>), and mob effects (below):</p>
+<pre><code class="language-json">{ &quot;template&quot;: &quot;minecraft:iron_block&quot;,
+  &quot;properties&quot;: { &quot;hardness&quot;: 4.0, &quot;light&quot;: 3, &quot;sounds&quot;: &quot;minecraft:amethyst_block&quot; },
+  &quot;item&quot;: true }
+</code></pre>
+<p>An item copies its template's data components, with <code>max_stack_size</code> and
+<code>rarity</code> changed, and any other 26.3 component set or removed in
+<code>components</code>, written as a data component patch is: <code>minecraft:&lt;type&gt;</code> sets
+one, <code>!minecraft:&lt;type&gt;</code> with <code>{}</code> removes it. That is how a modded sword
+gets its own damage and durability, or a tool its mining speed:</p>
+<pre><code class="language-json">{ &quot;template&quot;: &quot;minecraft:iron_sword&quot;,
+  &quot;components&quot;: {
+    &quot;minecraft:max_damage&quot;: 900,
+    &quot;minecraft:attribute_modifiers&quot;: [{ &quot;type&quot;: &quot;minecraft:attack_damage&quot;,
+      &quot;id&quot;: &quot;minecraft:base_attack_damage&quot;, &quot;amount&quot;: 7.0,
+      &quot;operation&quot;: &quot;add_value&quot;, &quot;slot&quot;: &quot;mainhand&quot; }],
+    &quot;!minecraft:repairable&quot;: {} } }
+</code></pre>
+<p>A block's item takes the same <code>components</code>, over the components of its
+template block's item; a block with <code>&quot;item&quot;: false</code> can't have them. Block files
+have no <code>max_stack_size</code> or <code>rarity</code> keys, so those two go in <code>components</code> here
+(an integer 1 to 99, and one of <code>common</code>, <code>uncommon</code>, <code>rare</code>, <code>epic</code>):</p>
+<pre><code class="language-json">{ &quot;template&quot;: &quot;minecraft:iron_block&quot;,
+  &quot;components&quot;: {
+    &quot;minecraft:max_stack_size&quot;: 16,
+    &quot;minecraft:damage_resistant&quot;: { &quot;types&quot;: &quot;#minecraft:is_fire&quot; } } }
+</code></pre>
+<p>A component type no vanilla item has is refused, so a misspelt one fails
+the load instead of doing nothing. Behaviour the game ties to a vanilla
+item's id doesn't come along yet: a copy of the trident doesn't throw
+(<a href="https://github.com/horizon-rust/horizon/issues/3305">#3305</a>).</p>
+<p>A mod effect is declared in <code>data/&lt;id&gt;/horizon/mob_effect/&lt;name&gt;.json</code> with what vanilla's <code>MobEffect</code> takes: its
+category (<code>beneficial</code>, <code>harmful</code> or <code>neutral</code>) and its RGB colour (0 to <code>0xFFFFFF</code>), which its particles take:</p>
+<pre><code class="language-json">{ &quot;category&quot;: &quot;harmful&quot;, &quot;color&quot;: 9154528 }
+</code></pre>
+<p>It is the effect <code>&lt;id&gt;:&lt;name&gt;</code>: <code>/effect give @s ruby:glow 30</code> gives it, saves and mobs keep it, and it reaches LAN and
+dedicated server players who run the same mods (its network id follows vanilla's). Its name is the translation
+<code>effect.&lt;id&gt;.&lt;name&gt;</code> from the mod's <code>assets/&lt;id&gt;/lang/</code>. Its icon is not drawn yet: the HUD shows the effect's frame and
+the inventory its frame and name, without an icon. It does nothing on its own yet: no tick behaviour and no attribute
+modifiers. A world opened without the mod drops the effect from its players and mobs. Clients join a server only with
+the same mods' effects, as with its blocks.</p>
+<p><code>crafting_remainder</code> names what the item leaves in the crafting grid when a
+recipe uses it, as a milk bucket leaves a bucket (vanilla's
+<code>Item.Properties.craftRemainder</code>, not a data component): a vanilla item or
+one of the mod's own, refused at load otherwise. It holds on the crafting
+table, the inventory grid and the crafter, not yet as furnace fuel or in a
+brewing stand. What the item leaves once eaten
+or drunk is the <code>minecraft:use_remainder</code> component instead:</p>
+<pre><code class="language-json">{ &quot;template&quot;: &quot;minecraft:mushroom_stew&quot;, &quot;crafting_remainder&quot;: &quot;minecraft:bowl&quot; }
+</code></pre>
+<p>The fence: files go in the mod's own namespaces (<code>assets/&lt;id&gt;/</code>,
+<code>data/&lt;id&gt;/</code>, and those its manifest lists), plus additions to vanilla tags
+(<code>data/minecraft/tags/</code>) and to the convention tags NeoForge and Fabric mods
+share (<code>data/c/tags/</code>).
+Templates and <code>sounds</code> name vanilla blocks; unknown keys are refused.</p>
+<p>Some Java mods ship their files under other names than their mod id (Towns and Towers, mod id <code>t_and_t</code>, under
+<code>kaisyn</code> and <code>towns_and_towers</code>). A content mod lists those in its manifest:</p>
+<pre><code class="language-toml">id = &quot;t_and_t&quot;
+api = &quot;0.2&quot;
+capabilities = [&quot;registries&quot;]
+namespaces = [&quot;kaisyn&quot;, &quot;towns_and_towers&quot;]
+</code></pre>
+<p>A listed namespace is the mod's as its id is: its <code>assets/</code> and <code>data/</code> files load, and the game reads its tags,
+recipes, names and loot. Blocks, items and mob effects are declared in <code>data/&lt;id&gt;/horizon/</code> only. <code>minecraft</code>, <code>c</code> and
+<code>horizon</code> cannot be listed. Two mods that are on may not own the same namespace (one's id or listed namespace being
+the other's): the game keeps the first in load order and leaves the other's content out, with &quot;mods A and B both use
+the namespace N; turn one of them off&quot; in the log. Paths use vanilla's resource characters, at most 65,536 files, 16
+MiB each and 512 MiB in all. A mod whose content is refused is left out, with the reason in the log. The game reads
+this content into its block and item tables (<code>horizon_client::mod_content</code>, <a href="modpacks.html">modpacks.md</a>). A tag entry
+naming an id nobody registers (a block a port left out, another mod's item) is dropped, so the rest of the tag still
+loads; vanilla would drop the whole tag.</p>
+<p>Tags merge as a data pack's do. Every mod's file for one tag (vanilla's <code>data/minecraft/tags/</code>, the convention
+<code>data/c/tags/</code>, or another mod's) adds its values after vanilla's and the mods' before it, in load order. A file with
+<code>&quot;replace&quot;: true</code> first drops what came before it, vanilla's entries and the earlier mods', and the mods after it
+still add theirs, as a higher data pack does. Since the result depends on load order, the game says so in the log:
+&quot;mod towns replaces data/minecraft/tags/worldgen/biome/has_structure/village_plains.json: vanilla's entries and those
+of adds are left out, ...&quot;. Tags are the only <code>minecraft</code> files a mod may hold: its other content stays in its own
+namespaces.</p>
+<p>A mod adds to structure sets and template pools that are not its own (vanilla's villages, another mod's houses) with
+a set or pool file in its own namespace holding <code>horizon:add_to</code>, a key vanilla data never has. Its entries are
+appended to each set or pool named, after every mod's own files, in mod and file order; the file is no set or pool
+itself. A name nobody defines is skipped.</p>
+<pre><code class="language-json">{ &quot;horizon:add_to&quot;: &quot;minecraft:villages&quot;,
+  &quot;structures&quot;: [ { &quot;structure&quot;: &quot;mymod:village_beach&quot;, &quot;weight&quot;: 10 } ] }
+</code></pre>
+<p>A pool addition holds <code>&quot;elements&quot;</code> as a pool does. <code>horizon-port-pack carry</code> writes these from the Lithostitched
+modifiers <code>add_structure_set_entries</code> and <code>add_template_pool_elements</code>.</p>
+<p>A structure (and any of its pool elements, in place of the structure's) may hold
+<code>horizon:enhanced_terrain_adaptation</code>: MoogsStructureLib's terrain kernel, which carves or buries terrain around the
+pieces on top of vanilla's <code>terrain_adaptation</code>. <code>kernel_size</code> and <code>kernel_distance</code> shape the kernel; <code>top</code> and
+<code>bottom</code> (<code>carve</code>, <code>bury</code> or <code>none</code>) act above and below a piece's floor; <code>bottom_offset</code>, <code>padding</code> (<code>x</code>, <code>top</code>,
+<code>bottom</code>, <code>z</code>) and MoogsStructureLib's <code>band</code> (<code>bottom</code>, <code>top</code>, <code>piece_heights</code>) move the box it measures from. On a
+structure, <code>rigid_junctions</code> adds rigid pieces' junctions as well and <code>inflate</code> grows the start's box by the kernel
+radius. <code>kernel_size</code> 0 is none.</p>
+<pre><code class="language-json">{ &quot;horizon:enhanced_terrain_adaptation&quot;: { &quot;kernel_size&quot;: 24, &quot;kernel_distance&quot;: 24,
+    &quot;top&quot;: &quot;carve&quot;, &quot;bottom&quot;: &quot;none&quot;, &quot;rigid_junctions&quot;: true, &quot;inflate&quot;: true } }
+</code></pre>
+<h2 id="native-mods">Native mods</h2>
+<p>Behaviour that needs code (a new key, a HUD, a tool that changes how mining works) is a native mod. It is a bundle of
+a <code>horizon-mixin.toml</code> and a few <code>.rs</code> helpers that hook into named functions of the game. Start from
+<a href="https://github.com/horizon-rust/horizon-native-mod-template">horizon-native-mod-template</a>. How the launcher builds
+one, what it pins and why it is not sandboxed: <a href="native-mods.html">native-mods.md</a>.</p>
+<p>A native mod's config files go in the game's shared <code>config/</code> folder, beside <code>options.txt</code> (on a dedicated server,
+beside <code>server.properties</code>), as Fabric and NeoForge mods' do: the mod picks its own file names, such as
+<code>config/&lt;mod id&gt;.json</code>. It asks for the folder with <code>Game::native_config_dir()</code> (hook points API 26), which needs no
+game, so it works from any hook, and makes the folder when missing. Settings kept with <code>native_set_setting</code> stay where they were, in <code>horizon-mods/.horizon-mod-data/&lt;id&gt;/</code>.</p>
+<h2 id="publish-your-mod">Publish your mod</h2>
+<p>Rusty Minecraft's registry lists mods, modpacks (<code>.hpack</code>) and resource packs made for Rusty Minecraft. <strong>A project is reviewed
+once, when it is listed; its later releases are checked by machine, not read by a person.</strong> Players find them at
+<a href="https://playhorizon.dev/mods">playhorizon.dev/mods</a> and in the launcher (Mods, then <strong>Rusty Minecraft</strong> beside Modrinth),
+which checks every file before it installs it.</p>
+<ol>
+<li>Run <code>cargo horizon-mod check</code> on the file (above): the registry runs the same checks.</li>
+<li>Put the source in a public GitHub repository, under a licence that lets players run it. A native mod's <code>.hnmod</code> is
+its source.</li>
+<li>Publish a <strong>GitHub release</strong> in it with the file as an asset (<code>.hmod</code>, <code>.hnmod</code>, <code>.hpack</code>, <code>.hshader</code>, or a resource
+pack's <code>.zip</code>), and its <code>.minisig</code> beside it if you sign. The release notes are the changelog.</li>
+<li>List the project once: open <a href="https://playhorizon.dev/mods/submit">playhorizon.dev/mods/submit</a>, sign in with GitHub
+and give the repository and the page (name, summary, licence, optionally a minisign public key). It opens a pull
+request in <a href="https://github.com/horizon-rust/horizon-mods">horizon-rust/horizon-mods</a> adding <code>mods/&lt;id&gt;.toml</code>, with
+you as owner. A reviewer reads the repository and its source and merges it.</li>
+</ol>
+<p><strong>Releasing a version is only step 3.</strong> Publish a GitHub release (not a draft or a pre-release); within the hour the
+registry reads it, runs the checks a submission runs (the file's own, the signature, the id and the version in the
+file's manifest), and lists it. A release that fails is skipped and reported in an issue of the registry, never
+published. Nobody opens a pull request and nobody reviews it. The version is the one in the file's manifest (the tag
+when the file has none), the date and the changelog are the release's, the SHA-256 is computed by the registry, and
+the launcher downloads the asset from your repository and refuses any other bytes. A published file never changes:
+publish a new version. <code>revoked.toml</code> takes a bad one down.</p>
+<p>Once it is published, its page and its card in the launcher show its rating: players signed in with GitHub on its
+page give it 1 to 5 stars, one rating per account, which they can change. Its owners can't rate it, and nobody sees
+who rated.</p>
+<p>Your page can live in your repository too: a <code>horizon-registry.toml</code> at its root (on the newest release's tag) with
+<code>name</code>, <code>summary</code>, <code>description</code>, <code>authors</code> and <code>license</code> fills what the registry's entry leaves out; the entry's own
+words win. Its owners, key, kind and icon are the registry's, changed by a pull request. Projects listed before this
+(<code>versions</code> in their entry) keep their hosted versions. The formats: <a href="api/mod-index.html">api/mod-index.md</a>.</p>
+<h3 id="integrity-and-signing">Integrity and signing</h3>
+<ul>
+<li><strong>Integrity.</strong> Every download is checked against the SHA-256 the index lists before the file reaches the game
+folder.</li>
+<li><strong>Signing.</strong> Authors sign files with an Ed25519 key (minisign format: a <code>.minisig</code> beside the file); the index pins
+each project's public key, so an update signed by another key is refused. Unsigned local files stay allowed, with an
+&quot;unsigned&quot; mark.</li>
+<li><strong>Takedowns.</strong> A file the registry takes down (<code>revoked.toml</code>) is refused by the launcher and turned off where
+installed.</li>
+</ul>
+<h2 id="rusty-minecrafts-official-mods">Rusty Minecraft's official mods</h2>
+<p>Rusty Minecraft's own mods are native. They live in
+<a href="https://github.com/horizon-rust/horizon-mods">horizon-rust/horizon-mods</a> under <code>native/&lt;name&gt;/</code>:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Folder</th>
+<th>Replaces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FPS Counter</td>
+<td><code>native/fps-overlay</code></td>
+<td>Extras &gt; FPS counter</td>
+</tr>
+<tr>
+<td>Keystrokes</td>
+<td><code>native/keystrokes</code></td>
+<td>Extras &gt; Keystrokes</td>
+</tr>
+<tr>
+<td>Zoom</td>
+<td><code>native/zoom</code></td>
+<td>Extras &gt; Zoom</td>
+</tr>
+<tr>
+<td>Minimap</td>
+<td><code>native/minimap</code></td>
+<td>Extras &gt; Minimap</td>
+</tr>
+<tr>
+<td>Recipes</td>
+<td><code>native/recipes</code></td>
+<td>The Recipes mod (item panel and recipe pages, on hook points version 2)</td>
+</tr>
+<tr>
+<td>Coordinates HUD</td>
+<td><code>native/coords-hud</code></td>
+<td>A small example mod (position and facing, <code>/where</code>, <code>/coords</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The game keeps the parts that must be fast, such as drawing the minimap's map, and a native mod picks the options
+(<a href="extras.html">extras.md</a>). Far View is not a mod any more: its distance and detail are Graphics &gt; LOD Distance and Far
+Detail (<a href="graphics.html">graphics.md</a>).</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/mods.md"><code>docs/mods.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#playing-with-mods">Playing with mods</a></li><li class="l2"><a href="#making-a-content-mod">Making a content mod</a></li><li class="l3"><a href="#the-manifest">The manifest</a></li><li class="l3"><a href="#content-mods-api-02">Content mods (API 0.2)</a></li><li class="l2"><a href="#native-mods">Native mods</a></li><li class="l2"><a href="#publish-your-mod">Publish your mod</a></li><li class="l3"><a href="#integrity-and-signing">Integrity and signing</a></li><li class="l2"><a href="#rusty-minecrafts-official-mods">Rusty Minecraft&#x27;s official mods</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contributing to Rusty Minecraft · Rusty Minecraft docs</title>
+<meta name="description" content="Contributing to Rusty Minecraft: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="README.html">Rusty Minecraft</a></li><li><a href="../java-mod-translation.html">Java mod translation</a></li><li><a href="../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../website.html">The documentation website</a></li><li><a href="ROADMAP.html">Horizon roadmap</a></li><li><a href="roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../native-client.html">Rusty Minecraft native client</a></li><li><a href="../hosting.html">Host a server</a></li><li><a href="../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../server-next.html">The next server: design</a></li><li><a href="../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../graphics.html">Graphics: settings and performance</a></li><li><a href="../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../extras.html">Rusty Minecraft extras</a></li><li><a href="../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../mods.html">Rusty Minecraft mods</a></li><li><a href="../native-mods.html">Native mods (experimental)</a></li><li><a href="../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../versioning.html">Versioning</a></li><li><a href="../resource-packs.html">Resource packs: what works</a></li><li><a href="../telemetry.html">Opt-in data collection</a></li><li><a href="../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="../api/README.html">Rusty Minecraft APIs</a></li><li><a href="../api/stability.html">API stability and versioning</a></li><li><a href="../play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../parity-workflow.html">Parity workflow</a></li><li><a href="../parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="../parity/meshing.html">Section meshing parity</a></li><li><a href="../port-ledger.html">Port ledger</a></li><li><a href="../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../world-generation.html">World generation</a></li><li><a href="../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../density-functions.html">Compiled density evaluation</a></li><li><a href="../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../biome-lookup.html">Biome lookup</a></li><li><a href="../biome-temperatures.html">Biome temperatures</a></li><li><a href="../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../material-conditions.html">Numeric material conditions</a></li><li><a href="../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../vertical-anchors.html">Vertical anchors</a></li><li><a href="../value-providers.html">World-generation value providers</a></li><li><a href="../carving.html">Carving</a></li><li><a href="../heightmaps.html">Heightmaps</a></li><li><a href="../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../world-data.html">Rusty Minecraft world data</a></li><li><a href="../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="../api/agent-control.html">Agent control API</a></li><li><a href="../api/data-formats.html">Data formats</a></li><li><a href="../api/launch-reference.html">Launch API reference</a></li><li><a href="../api/launch.html">Launch API</a></li><li><a href="../api/launcher.html">Launcher API</a></li><li><a href="../api/mod-index.html">The registry index and .hpack</a></li><li><a href="../api/server-reference.html">Server reference</a></li><li><a href="../api/server.html">Server API</a></li><li><a href="../api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="../api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details open><summary>Project</summary><ul><li><a href="CONTRIBUTING.html" aria-current="page">Contributing to Rusty Minecraft</a></li><li><a href="THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../controllers.html">Controllers</a></li><li><a href="../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../known-issues.html">Known issues</a></li><li><a href="../launcher-commands.html">Launcher commands</a></li><li><a href="../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../release-flow.html">Release flow</a></li><li><a href="../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../save-batch-entities.html">Block entity save batches</a></li><li><a href="../security.html">Security</a></li><li><a href="../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="contributing-to-rusty-minecraft">Contributing to Rusty Minecraft</h1>
+<p>Thanks for helping. Rusty Minecraft is Minecraft: Java Edition 26.3 rewritten in Rust, and the one rule that shapes
+everything is that <strong>it plays exactly like vanilla</strong>. This page is the short version of how we work; questions are
+welcome on <a href="https://discord.gg/HcTeMZxe5E">Discord</a>.</p>
+<p>This repository holds the game and the launcher, plus the tools, tests and docs that build, check and release them.
+The website (playhorizon.dev) is built in a separate repository from this one's README, <code>docs/api/</code> and roadmap. Anything else (videos, Discord and other community material) lives elsewhere.</p>
+<p><strong>Where to start: <a href="https://playhorizon.dev/hub">playhorizon.dev/hub</a>.</strong> It shows what is being done now and next
+(<a href="ROADMAP.html">ROADMAP.md</a> in the repository), the work board, good first tasks, and the forms to report a bug or
+suggest something. A pull request for a roadmap item carries its <code>roadmap:&lt;id&gt;</code> label; ideas go to the suggestion
+queue (the hub, or <code>/suggest</code> on Discord) rather than to issues, which are for bugs.</p>
+<h2 id="build-it">Build it</h2>
+<p>You need Rust (stable), Python 3.10+, JDK 25, and on Linux the ALSA and udev headers (<code>libasound2-dev libudev-dev</code>).
+Rusty Minecraft never downloads the game: it prepares its resources from your own copy of Minecraft 26.3, as described in
+<a href="README.html#build-from-source">Build from source</a>.</p>
+<pre><code class="language-sh">cargo run --release -p horizon-prepare -- --prepare --server-jar ~/Downloads/server.jar
+cargo run --release -p horizon-client
+</code></pre>
+<p>The launcher is its own Cargo workspace in <code>launcher/</code> (<code>cd launcher &amp;&amp; cargo run</code>; on NixOS, <code>nix-shell</code> first).</p>
+<h2 id="vanilla-first">Vanilla first</h2>
+<p>Wherever vanilla has a feature, vanilla is the specification, down to the order of random calls. &quot;Parity&quot; here
+means Rusty Minecraft gives the same results as the pinned 26.3 client and server for the same inputs, checked by a
+<strong>harness</strong>: a <code>tools/test_*_parity.py</code> script that runs a small Java oracle against the real game and a Rust
+probe against Rusty Minecraft, and compares their outputs. There are about 290 of them.</p>
+<ul>
+<li><strong>Read the vanilla code before writing Rusty Minecraft's.</strong> <code>tools/rea_vanilla.py</code> queries the pinned game bytecode:
+<code>python3 tools/rea_vanilla.py method net.minecraft.world.level.block.DispenserBlock dispenseFrom</code>.
+Say in your pull request which vanilla classes and methods you followed.</li>
+<li><strong>Gameplay changes come with a harness</strong>, new or extended, so the next change can't silently break them.
+<a href="../parity-workflow.html">The parity workflow</a> shows how harnesses run; copy a nearby one.</li>
+<li><strong>Rusty Minecraft's own features</strong> (the launcher, the new menus) follow <a href="../design-system.html">the design system</a> and are
+off by default wherever they would change the vanilla look.</li>
+<li><strong>Everything players run is Rust.</strong> Python and Java are fine for dev tools and harness drivers in <code>tools/</code>, never
+for player-facing code. The one exception is the optional Java layer for Java mods (<a href="../java-mod-runtime.html">java-mod-runtime.md</a>):
+a JVM embedded through JNI, behind the <code>java-mods</code> cargo feature, off by default (a switch in Settings), on a
+Java the player already has. Nothing is bundled, and the game's own code stays Rust.</li>
+</ul>
+<p>Never commit game files, decompiled source or prepared resources (<code>.local/</code>): <code>tools/check_public_tree.py</code> rejects
+them (<code>git config core.hooksPath .githooks</code> runs it before every commit).
+The pre-push hook checks the full history reachable from the branches and tags being pushed. Run
+<code>python3 tools/check_public_tree.py --history</code> to audit the history of all local refs.</p>
+<h2 id="only-original-code-or-code-whose-license-allows-it">Only original code, or code whose license allows it</h2>
+<p>Rusty Minecraft is MIT. Its code is written from Minecraft 26.3 itself and from public documentation. Since 30 October 2026
+another project's source may also be read and used, <strong>only when that project's license allows it</strong>:</p>
+<ul>
+<li><strong>Allowed:</strong> MIT, MIT-0, BSD-2-Clause, BSD-3-Clause, 0BSD, ISC, zlib, Apache-2.0, Unlicense, and the CC0-1.0
+public-domain dedication. That code may be read, copied or adapted.</li>
+<li><strong>Everything else is off limits, even to read:</strong> GPL, LGPL (Iris), AGPL, MPL, EPL, Polyform (Sodium), the Creative
+Commons licenses (CC BY, CC BY-SA, CC BY-NC and the others; CC0 is a public-domain dedication, not one of them),
+custom or &quot;source available&quot; licenses, all rights reserved (OptiFine), and any project with no license or an
+unclear one. Don't read, copy, translate or paraphrase their source, and don't send code an AI tool
+wrote from it. Being able to download a mod or a pack does not give you the right to read its files.</li>
+<li><strong>Check the license yourself.</strong> Read the LICENSE file at the commit you use and the header of each file you take:
+some repositories mix licenses, and a file under another license is off limits. A license that changed: the one
+at your commit counts. In doubt, don't: ask in #contributors first.</li>
+<li><strong>Say it in the pull request:</strong> the project, a link to the commit, its license, and what you read or copied. A
+pull request that used another project's source without saying so is closed.</li>
+<li><strong>Copied or adapted code</strong> keeps its copyright line and license notice at the top of the file, and gets an entry
+in <a href="THIRD_PARTY_NOTICES.html">THIRD_PARTY_NOTICES.md</a>. Apache-2.0 code also keeps its NOTICE text and says what
+was changed.</li>
+</ul>
+<p>User documentation and file formats are fine to read, and packs and mods are fine to run and observe, whatever
+their license. Shader packs were removed on 24 October 2026 (#1561) because their code had been written from
+another project's source; they come back only as a clean-room rewrite from a written description of the pack
+format.</p>
+<h2 id="before-asking-for-review">Before asking for review</h2>
+<p>Run the self-check and paste the block it prints into your pull request:</p>
+<pre><code class="language-sh">python3 tools/pr_ready.py --base upstream/main   # or origin/main if you work on the main repository
+</code></pre>
+<p>It looks at what your branch changes and runs what matters: rustfmt, clippy with warnings denied, the tests of the
+crates you touched (and the launcher's), generated files, <code>Cargo.lock</code>, the Python tests, and the vanilla harnesses
+your change can affect. Without the vanilla data on your machine it lists those harnesses instead; CI runs them.
+<code>--quick</code> skips the harnesses. It exits non-zero when something fails.</p>
+<p>For the game workspace, Clippy checks all targets of the touched crates and their transitive workspace dependents,
+including examples. The dependency scope includes optional, platform, build and development dependencies.
+Tests run library, binary, integration and doc tests without building unrelated example executables. Shared Cargo
+configuration and toolchain changes select the whole workspace; CI also keeps its workspace-wide checks.</p>
+<h2 id="claim-before-you-start">Claim before you start</h2>
+<p>Work is tracked in GitHub issues, and an issue that is assigned is taken (so is one with the <code>in progress</code> label:
+claimed on Discord with Kira's <code>/claim</code>): pick another, or ask its holder in the thread. Before you start, comment
+<strong><code>/claim</code></strong> on the issue; you are assigned at once, no role needed. No issue for your work yet? Open one (a line is
+enough), then claim it. <code>/unclaim</code> gives it back.</p>
+<p>A claim with no open pull request linking the issue (<code>Fixes #123</code> in the description, or a draft) is released after
+5 days, with a comment: open a draft early. You can hold 8 open issues at a time, not counting the ones your
+pull requests already fix. Agents claim the same way.</p>
+<p>When your pull request changes the same functions as another open one, or closes the same issue, a bot comment names
+it (edited on every push, never repeated): talk to its author in the thread before you both finish the same work.</p>
+<h2 id="pull-requests">Pull requests</h2>
+<ul>
+<li><strong>Small.</strong> One change per pull request, under about 500 lines of code where you can; split bigger work into
+pieces that each make sense alone. Small pull requests get reviewed and merged the same day.</li>
+<li><strong>Fill in the template</strong>: what and why, the vanilla reference, the pr_ready block, screenshots for anything you
+can see.</li>
+<li><strong>Tick &quot;Allow edits by maintainers&quot;.</strong> When something small is left (a lint, a rebase, a nit) we push the fixup
+ourselves instead of sending it back to you; only design questions come back.</li>
+<li><strong>Tick its kind</strong> in the template: <code>parity</code> (Rusty Minecraft now does what vanilla does), <code>bug</code> (a crash or breakage),
+<code>perf</code>, <code>feature</code> (new for players), <code>extra</code> (Rusty Minecraft-only, off by default), <code>tooling</code> or <code>docs</code>. A workflow sets
+that label, and area labels (<code>launcher</code>, <code>mobs</code>, <code>worldgen</code>, <code>rendering</code>...) from the paths you change.
+<code>label:parity</code> is the list of real progress toward vanilla.</li>
+<li><strong>Release labels</strong> (we set them if you can't): <code>feature</code> also puts it under &quot;New&quot; in the release notes,
+<code>skip-release</code> when players see no change (tooling, docs, tests), nothing for a fix.
+<code>release-now</code> is for crash fixes that shouldn't wait. pr_ready suggests one.</li>
+</ul>
+<p>Who reviews and merges: the Rusty Minecraft Team, on CI for ordinary pull requests; risky ones (saves, network, world
+generation, the launcher's updates) wait for a local proof first (<a href="../release-flow.html#merging">merging</a>).</p>
+<p>Every merge to main is released automatically (<a href="../release-flow.html">release flow</a>), so main always stays playable.
+How agents, checks, releases and signed updates keep this safe: <a href="../security.html">security</a>.</p>
+<h2 id="parity-checks-on-forks">Parity checks on forks</h2>
+<p>The <code>verify</code> check (formatting, lints, tests) runs on every pull request. The <code>parity</code> check runs the affected
+harnesses on a maintainer's machine, which holds the game files, so it never runs a fork's code on its own: a
+maintainer reads your change, then adds the <code>run-parity</code> label, which runs it once on your current commit. After
+new pushes, we add it again.</p>
+<h2 id="talk-to-us">Talk to us</h2>
+<p><a href="https://discord.gg/HcTeMZxe5E">Discord</a> for questions and ideas, <a href="https://github.com/horizon-rust/horizon/issues">issues</a>
+for bugs. To take something on, <code>/claim</code> its issue (<a href="#claim-before-you-start">above</a>).</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#build-it">Build it</a></li><li class="l2"><a href="#vanilla-first">Vanilla first</a></li><li class="l2"><a href="#only-original-code-or-code-whose-license-allows-it">Only original code, or code whose license allows it</a></li><li class="l2"><a href="#before-asking-for-review">Before asking for review</a></li><li class="l2"><a href="#claim-before-you-start">Claim before you start</a></li><li class="l2"><a href="#pull-requests">Pull requests</a></li><li class="l2"><a href="#parity-checks-on-forks">Parity checks on forks</a></li><li class="l2"><a href="#talk-to-us">Talk to us</a></li></ul></nav>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

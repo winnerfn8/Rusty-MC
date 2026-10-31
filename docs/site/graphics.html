@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graphics: settings and performance · Rusty Minecraft docs</title>
+<meta name="description" content="Graphics: settings and performance: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html" aria-current="page">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="graphics-settings-and-performance">Graphics: settings and performance</h1>
+<h2 id="settings">Settings</h2>
+<p>Rusty Minecraft's graphics settings are two screens built from vanilla's widgets, opened from the top of <strong>Video Settings</strong> (<strong>Rusty Minecraft Graphics...</strong> and <strong>Advanced Graphics...</strong>) or from <strong>Options → Rusty Minecraft Settings...</strong>:</p>
+<ul>
+<li><strong>Graphics</strong> (Simple): a preset (Performance, Balanced, Quality, Ultra or Custom) and LOD distance.</li>
+<li><strong>Advanced Graphics</strong>: every Rusty Minecraft setting, grouped under Rendering, Quality, Display, Preferences, Performance and Overlay.</li>
+</ul>
+<p>Vanilla's own settings (render distance, FOV, framerate, VSync, GUI scale, smooth lighting...) stay where vanilla has them, in Video Settings; both screens leave them out.</p>
+<p>Every row has a one-line description and its cost in frame time (none, low, medium, high, or saves time for culling that makes frames faster), and applies at once, except worker threads, which apply at the next start. A preset sets the quality settings together; changing one of them turns it into Custom. Display preferences (FOV, framerate, VSync, GUI scale, fullscreen, present mode, pacing) leave the preset as it is.</p>
+<p><img src="../media/settings-simple.png" alt="Video Settings, with Rusty Minecraft's buttons at the top" />
+<img src="../media/settings-advanced.png" alt="Advanced Graphics" /></p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Setting</th>
+<th>Stored in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rendering</td>
+<td>render distance, simulation distance, entity distance</td>
+<td><code>options.txt</code> (vanilla keys)</td>
+</tr>
+<tr>
+<td></td>
+<td>LOD distance, cave culling, chunk updates per frame</td>
+<td><code>horizon-graphics.txt</code></td>
+</tr>
+<tr>
+<td>Quality</td>
+<td>smooth lighting, mipmap levels, biome blend, clouds, cloud distance, weather radius, particles, entity shadows, cutout leaves</td>
+<td><code>options.txt</code></td>
+</tr>
+<tr>
+<td></td>
+<td>sky, fog, weather, animated textures</td>
+<td><code>horizon-graphics.txt</code></td>
+</tr>
+<tr>
+<td>Display</td>
+<td>FOV, max framerate, VSync, fullscreen, GUI scale</td>
+<td><code>options.txt</code></td>
+</tr>
+<tr>
+<td></td>
+<td>resolution scale, anti-aliasing (FXAA or TAA), TAA upscaling, present mode, frame pacing</td>
+<td><code>horizon-graphics.txt</code></td>
+</tr>
+<tr>
+<td>HDR (its own screen, from Display)</td>
+<td>HDR, black level, peak brightness, paper white, UI brightness, a shortcut key to the screen</td>
+<td><code>horizon-graphics.txt</code></td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>battery mode, worker threads, upload budget per frame</td>
+<td><code>horizon-graphics.txt</code></td>
+</tr>
+<tr>
+<td>Overlay</td>
+<td>performance overlay: FPS, frame/CPU/GPU times, frame-time graph</td>
+<td><code>horizon-graphics.txt</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><code>options.txt</code> keeps exactly vanilla's keys and values, so the options harness still compares it with vanilla; Rusty Minecraft's settings live in <code>horizon-graphics.txt</code> beside it. Their defaults render as vanilla does: cave culling on, no upload budgets, sky, fog and weather on, 100% resolution, no anti-aliasing, HDR off, the present mode following VSync. VSync on always waits for the display (Fifo), in a window and in fullscreen, as in vanilla; the present mode setting chooses how frames are shown only while VSync is off. Frame pacing defaults to Efficient: the limiter sleeps through the last half millisecond where vanilla spins, which changes timing, not pixels.</p>
+<p><strong>Battery mode</strong> (Performance, off by default) is for laptops and handhelds: at most 60 frames per second in a world, 30 in menus without a world or while another window has focus, and half the automatic worker threads (chunks load slower). It changes only when frames are drawn: what they show and the game's 20 ticks per second stay as they are.</p>
+<p><strong>HDR</strong> (off by default) lives on its own screen, Graphics: HDR, behind <strong>HDR Settings...</strong> under Display, which is greyed where the display path offers no HDR output (so players without an HDR display don't take its settings for their display's); there the switch comes first and the sliders below it only while it is on. It presents to an HDR10 swapchain (<code>Rgb10a2Unorm</code>, BT.2020 with the PQ curve) or, where only that is offered, an scRGB one (<code>Rgba16Float</code>, extended linear sRGB), on displays and compositors that offer either; <code>HORIZON_HDR_OUTPUT=pq</code> or <code>scrgb</code> allows only one. The frame is drawn exactly as in SDR, in vanilla's gamma space, and a last pass (<code>hdr.wgsl</code>) decodes it to linear light at the <strong>Paper White</strong> and lifts light sources (blocks that emit light, lava, the sun and the moon) towards the <strong>Peak Brightness</strong>; everything else stays as in SDR. The mesher puts the light a block's face emits in its vertex colour's alpha (<code>EMISSION_BITS</code>), the frame's alpha carries the mark, and only pixels that still show the world before the hand and HUD are lifted. On Vulkan, <code>horizon-hdr</code> sends HDR metadata (MaxCLL, mastering luminance), which wgpu doesn't: without it a compositor may clip everything above SDR white. Paper White and Peak Brightness are <strong>Auto</strong> by default: they follow what the system reports for the display. On Wayland that's the compositor's preferred image description of the window (<code>wp_color_management_v1</code>, in <code>horizon-hdr</code>'s <code>wayland.rs</code>), asked and then watched while HDR output is on (with HDR off the game doesn't ask), so a move to another output or a recalibrated desktop applies at once. KWin maps the content's reference white (203 nits) onto the desktop's SDR white, so Auto puts Paper White at 203 and Peak Brightness at the display's peak over that ratio; Hyprland (0.57) doesn't: it reports the standard 203 as reference white, so Auto puts Paper White at 203, and it shows HDR windows below its own SDR white (<code>sdr_max_luminance</code>, which it doesn't report): in a test, a white browser page was brighter than both the game's white and a 1000-nit patch in mpv. Other compositors are unchecked. On Windows Auto takes what wgpu reads from the OS (<code>Surface::display_hdr_info</code>: DXGI's <code>MaxLuminance</code> and the SDR white level of Windows' SDR content brightness slider, both absolute nits), read again every 2 seconds since no event says they changed; these often come from the display's EDID and may run optimistic, and this is untested so far. Where nothing is reported, Auto is 203 and 1000 nits, and the Graphics: HDR screen asks the player to calibrate. <strong>Black Level</strong> (0 by default, for an OLED's true black) is the display's darkest black, in nits: the last pass lifts the shadows onto it with ITU-R BT.2390's black level lift in PQ, which leaves the peak where it is and fades out by the fourth power above black, and the metadata gives it as the minimum luminance; at 0 the picture is unchanged. <strong>UI Brightness</strong> (100% by default) sets the HUD and menus against paper white: once the world is kept for the last pass, the frame's alpha is zeroed, everything drawn after raises it where it covers the world, the first-person hand's is then scaled down to 1/255 (it stays at the world's brightness), and the last pass scales the rest by UI Brightness and lifts none of it (so text over the sun stays text). With HDR on, F2 writes vanilla's screenshot as always and an HDR10 copy beside it (<code>…-hdr.png</code>): the HDR pass drawn once more into a 10-bit PQ target, whatever the swapchain is, saved as a 16-bit PNG tagged BT.2020 with PQ (<code>cICP</code>, PNG's third edition) and the peak and paper white as content light levels (<code>cLLI</code>); viewers that read <code>cICP</code> show it in HDR, others show it washed out. Not lifted yet: translucent blocks (the nether portal), distant LOD terrain.</p>
+<p>HDR's light sources shine by the kind of light rather than its level (<code>mesher::hdr_tier</code>): the sun most, then glowstone, campfires and the soul fires, then flames and lava, torch and candle flames among them (particles too), then faint glowers such as a redstone torch or magma; glow lichen stays as in SDR. Each tier has its share of the headroom and the brightness its lift starts and ends at (<code>gfx/hdr.rs</code> <code>TIERS</code>); <code>HORIZON_HDR_DEBUG=1</code> greys what isn't lifted and tints what is magenta.</p>
+<p>Which settings each screen shows, their descriptions and costs are in <code>crates/horizon-client-render/src/graphics_ui.rs</code> (<code>rows</code>); <code>graphics_style.rs</code> draws them.</p>
+<h2 id="distant-terrain">Distant terrain</h2>
+<p><strong>LOD Distance</strong> is off by default. Enable it in Simple or Advanced graphics settings and choose 64, 128, 256, 512 or 1024 chunks. With LODs enabled, <strong>Full Detail Distance</strong> controls the nearby normal chunks; LOD Distance controls the outer view. Keep the nearby range modest, for example 12 chunks with a 256-chunk LOD distance. Increasing the distant range does not increase simulation distance.</p>
+<p>Distant terrain uses progressively coarser voxel columns. Columns retain separate material layers and air gaps; matching exposed faces are merged, with block-scale texture repeats. Complete chunk data is reduced once on the terrain worker and cached at each supported scale, across each cell’s area instead of enlarging its corner column. Material votes combine different light levels of the same block; reduced cells retain the brightest sampled sky and block light separately. Finer tiles replace only their own footprints in a loading fallback, and a movement margin limits rapid resolution changes at tile boundaries. When Full Detail Distance shrinks, the chunks it no longer covers stay drawn until the tiles planned there are ready, so the coarsest loaded tiles never stand in for them. Local Overworld, Nether and End worlds and a LAN world you host can supply their generator. Remote servers do not supply the client's world-generation seed or generator configuration.</p>
+<p>Unknown areas are sampled directly from the dimension's seed-bound density and surface rules, with shared per-tile scratch and material evaluation. A small pool samples tiles independently of meshing. Refinement prioritizes visible screen error; high aerial views use the distance to the world height range to avoid unnecessary close detail below the camera. Initial vegetation uses the world's configured tree types, placement densities and biome assignments at every distance level, and chorus plants on the End's end stone in the same way. The End's small islands are estimated above the void from the <code>end_island_decorated</code> feature. Tree, chorus and island positions, shapes and large-cell coverage are visual approximations, not a replay of native feature placement; chorus is drawn only while its cells stay small enough to read as a plant.</p>
+<p>A separate bounded worker refines the nearest LOD levels with disposable ordinary chunk generation, including supported carvers, structures and decoration. Groups of 4×4 chunks share their generation halos, and each chunk is published once every neighbouring feature center has completed. Farther tiles use direct sampling rather than waiting for every intervening ordinary chunk. Saved and visited blocks take precedence over both paths. These temporary chunks never enter gameplay, simulation or normal save queues. Generated-column caches and request queues are bounded; far data is regenerated after reopening a world.</p>
+<p>Coverage and detail improve progressively; a large selected radius does not mean all its target detail is already resident. Far sampling runs behind the game's frame and tick threads; on machines with 12 or more threads it uses up to 6 sampling threads once the nearby chunks have loaded (a quarter of the threads, at most 3, elsewhere). The control status reports target and sampled target tile counts separately. Direct far sampling approximates vertical noise interpolation, fluid boundaries and lighting; surface slopes and column extensions, small features and partial block shapes can differ. Unexplored distant structures are not synthesized by the direct path, and native decoration order can differ from subsequent gameplay generation. Rusty Minecraft-supported data-driven noise and tree configurations can be reused; this does not execute arbitrary Fabric/NeoForge worldgen or structure mods.</p>
+<p>Ordinary Overworld atmospheric fog extends with the selected LOD distance. Fog Off disables distance haze at large ranges too; fluid, darkness and boss fog retain their limits.</p>
+<p>The setting is stored as <code>lodDistance</code> in <code>horizon-graphics.txt</code>; <code>0</code> disables it. Far Detail (Full or Reduced) sets how finely the distant terrain is drawn (Reduced draws about a quarter of the far quads). Existing <code>renderDistance</code> in <code>options.txt</code> keeps its normal meaning for full chunks.</p>
+<p>Anti-aliasing cycles Off, FXAA and TAA (<code>fxaa</code> and <code>taa</code> in <code>horizon-graphics.txt</code>). TAA jitters the world's projection by a sub-pixel offset each frame (Halton 2, 3 over 8 frames) and blends the frame into a history reprojected through the depth buffer, clamped to the frame's 3×3 neighbourhood. Its motion vectors come from the camera alone, so mobs and other moving things rely on the clamp and can trail slightly. It runs at the resolution scale, before the hand and HUD, and is off under a shader pack, which does its own.</p>
+<p>Upscaling (<code>upscaling</code> in <code>horizon-graphics.txt</code>) renders the world smaller than the resolution scale's size and lets TAA rebuild it at that size: Native 1×, Quality 1.5×, Balanced 1.7×, Performance 2× and Ultra Performance 3× fewer pixels along each axis (FSR's and DLSS's ratios). The jitter then runs over 8 frames per output pixel, and each frame counts in an output pixel by how near its sample lands. The button shows only while Anti-aliasing is TAA; leaving TAA goes back to Native. Textures keep the mipmap level of the smaller frame, so far blocks are softer than at Native.</p>
+<p>Not implemented: anisotropic filtering (wgpu needs linear magnification for it, which blurs close blocks), MSAA (FXAA or TAA instead) and exclusive fullscreen (fullscreen is borderless).</p>
+<h2 id="benchmark">Benchmark</h2>
+<p><code>tools/graphics_bench.py</code> opens a fresh creative world (seed 1234) on a virtual screen and flies the camera along four fixed 192-block paths, over a village, a forest, the ocean and a mountain, at render distances 8, 16 and 32, one game per distance. Each flight takes 12 seconds and reports average FPS, 1% lows, frame-time percentiles, CPU time per frame (frame time minus waits for the GPU, the display and the limiter), the split of that CPU time (world update, ticks, frame preparation, renderer) for all frames and for the slowest 1%, and GPU time per frame from timestamp queries.</p>
+<pre><code class="language-sh">cargo build --release -p horizon-client --bins
+python3 tools/graphics_bench.py --label mine                 # lavapipe on vscreen: CPU-side numbers
+python3 tools/graphics_bench.py --label mine-gpu --offscreen  # the desktop's RTX 4080
+python3 tools/graphics_bench.py --compare baseline-4080 mine-gpu   # markdown table
+</code></pre>
+<p>vscreen is a headless compositor whose frames are software-rendered (lavapipe), so its frame times measure the CPU, rasterisation included. <code>--offscreen</code> (<code>horizon-client --offscreen</code>) renders into a texture on the most powerful GPU instead of the window, which measures the RTX 4080 under the same compositor. <code>--distances</code>, <code>--scenes</code> and <code>--build</code> pick a subset or another build. Results go to <code>benchmarks/graphics/&lt;label&gt;.json</code>, with the load average before and after: the desktop is shared, and other sessions' builds move the numbers.</p>
+<p>Two tools find where a slow frame goes: <code>HORIZON_SPIKES=MS</code> prints the timed spans (ticks by system, streaming, uploads, saving, renderer) of every frame slower than MS milliseconds, with the render thread's CPU time in the frame and, after a span that mostly waited (for the GPU, a lock or a core), its CPU time (<code>submit 30.2/0.1</code>), and a frame-pointer build (<code>RUSTFLAGS=&quot;-C force-frame-pointers=yes&quot;</code>) profiles with <code>perf record --call-graph fp</code>.</p>
+<h2 id="results">Results</h2>
+<p>Baseline <code>27a32cc3</code> (main) against <code>9006566b</code>, the same full run (render distances 8, 16 then 32 in one fresh world), on ludodesktop.</p>
+<p>RTX 4080, <code>--offscreen</code> (<code>benchmarks/graphics/baseline-4080.json</code>, <code>after-4080.json</code>):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>RD</th>
+<th>scene</th>
+<th>avg FPS</th>
+<th>1% low FPS</th>
+<th>p99 ms</th>
+<th>CPU ms/frame</th>
+<th>GPU ms/frame</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>village</td>
+<td>363 → 2409</td>
+<td>21.6 → 160.8</td>
+<td>37 → 1</td>
+<td>2.7 → 0.4</td>
+<td>0.42 → 0.10</td>
+</tr>
+<tr>
+<td>8</td>
+<td>forest</td>
+<td>613 → 1099</td>
+<td>49.6 → 82.9</td>
+<td>10 → 10</td>
+<td>1.6 → 0.9</td>
+<td>0.40 → 0.26</td>
+</tr>
+<tr>
+<td>8</td>
+<td>ocean</td>
+<td>323 → 687</td>
+<td>5.4 → 47.5</td>
+<td>33 → 16</td>
+<td>2.7 → 1.4</td>
+<td>0.24 → 0.37</td>
+</tr>
+<tr>
+<td>8</td>
+<td>mountain</td>
+<td>28 → 344</td>
+<td>7.4 → 30.0</td>
+<td>111 → 33</td>
+<td>12.4 → 1.6</td>
+<td>0.46 → 0.34</td>
+</tr>
+<tr>
+<td>16</td>
+<td>village</td>
+<td>8 → 1041</td>
+<td>2.4 → 64.0</td>
+<td>409 → 10</td>
+<td>138.3 → 1.0</td>
+<td>3.59 → 0.23</td>
+</tr>
+<tr>
+<td>16</td>
+<td>forest</td>
+<td>28 → 316</td>
+<td>0.5 → 49.6</td>
+<td>159 → 18</td>
+<td>37.9 → 3.2</td>
+<td>2.68 → 0.75</td>
+</tr>
+<tr>
+<td>16</td>
+<td>ocean</td>
+<td>59 → 385</td>
+<td>10.5 → 72.0</td>
+<td>85 → 12</td>
+<td>16.8 → 2.6</td>
+<td>1.96 → 0.68</td>
+</tr>
+<tr>
+<td>16</td>
+<td>mountain</td>
+<td>27 → 220</td>
+<td>7.8 → 30.0</td>
+<td>109 → 33</td>
+<td>20.2 → 3.1</td>
+<td>7.14 → 0.94</td>
+</tr>
+<tr>
+<td>32</td>
+<td>village</td>
+<td>4 → 48</td>
+<td>2.6 → 0.8</td>
+<td>387 → 76</td>
+<td>244.2 → 9.4</td>
+<td>10.36 → 1.77</td>
+</tr>
+<tr>
+<td>32</td>
+<td>forest</td>
+<td>8 → 28</td>
+<td>3.7 → 0.9</td>
+<td>261 → 1108</td>
+<td>118.7 → 40.1</td>
+<td>15.90 → 2.30</td>
+</tr>
+<tr>
+<td>32</td>
+<td>ocean</td>
+<td>2 → 67</td>
+<td>1.6 → 10.1</td>
+<td>626 → 95</td>
+<td>424.8 → 14.7</td>
+<td>9.48 → 2.91</td>
+</tr>
+<tr>
+<td>32</td>
+<td>mountain</td>
+<td>3 → 29</td>
+<td>2.5 → 15.2</td>
+<td>407 → 64</td>
+<td>300.5 → 16.1</td>
+<td>9.73 → 8.47</td>
+</tr>
+</tbody>
+</table></div>
+<p>lavapipe on vscreen, CPU-rendered (<code>baseline-lavapipe.json</code>, <code>after-lavapipe.json</code>); at 16 and 32 chunks most of the frame is software rasterisation, which no change here touches:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>RD</th>
+<th>scene</th>
+<th>avg FPS</th>
+<th>1% low FPS</th>
+<th>p99 ms</th>
+<th>CPU ms/frame</th>
+<th>GPU ms/frame</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>village</td>
+<td>16 → 58</td>
+<td>6.6 → 31.3</td>
+<td>134 → 29</td>
+<td>48.2 → 11.4</td>
+<td>26.73 → 13.52</td>
+</tr>
+<tr>
+<td>8</td>
+<td>forest</td>
+<td>20 → 42</td>
+<td>9.9 → 20.0</td>
+<td>95 → 37</td>
+<td>31.0 → 18.0</td>
+<td>37.27 → 21.36</td>
+</tr>
+<tr>
+<td>8</td>
+<td>ocean</td>
+<td>28 → 60</td>
+<td>1.5 → 34.8</td>
+<td>181 → 27</td>
+<td>25.7 → 10.9</td>
+<td>18.86 → 12.74</td>
+</tr>
+<tr>
+<td>8</td>
+<td>mountain</td>
+<td>27 → 38</td>
+<td>11.2 → 27.3</td>
+<td>75 → 34</td>
+<td>22.5 → 11.5</td>
+<td>23.76 → 14.11</td>
+</tr>
+<tr>
+<td>16</td>
+<td>village</td>
+<td>11 → 21</td>
+<td>4.2 → 8.8</td>
+<td>227 → 75</td>
+<td>69.2 → 31.8</td>
+<td>49.04 → 40.50</td>
+</tr>
+<tr>
+<td>16</td>
+<td>forest</td>
+<td>12 → 18</td>
+<td>5.7 → 11.5</td>
+<td>137 → 81</td>
+<td>58.4 → 36.8</td>
+<td>56.45 → 47.82</td>
+</tr>
+<tr>
+<td>16</td>
+<td>ocean</td>
+<td>8 → 8</td>
+<td>2.6 → 4.8</td>
+<td>385 → 209</td>
+<td>98.4 → 96.7</td>
+<td>71.51 → 57.30</td>
+</tr>
+<tr>
+<td>16</td>
+<td>mountain</td>
+<td>6 → 12</td>
+<td>3.1 → 4.9</td>
+<td>321 → 189</td>
+<td>124.9 → 56.7</td>
+<td>95.47 → 70.81</td>
+</tr>
+<tr>
+<td>32</td>
+<td>village</td>
+<td>3 → 5</td>
+<td>2.0 → 3.6</td>
+<td>497 → 278</td>
+<td>345.6 → 111.2</td>
+<td>85.50 → 121.35</td>
+</tr>
+<tr>
+<td>32</td>
+<td>forest</td>
+<td>2 → 4</td>
+<td>1.5 → 3.4</td>
+<td>656 → 296</td>
+<td>354.8 → 155.5</td>
+<td>201.54 → 192.78</td>
+</tr>
+<tr>
+<td>32</td>
+<td>ocean</td>
+<td>3 → 3</td>
+<td>1.2 → 2.2</td>
+<td>849 → 465</td>
+<td>330.8 → 288.0</td>
+<td>113.80 → 116.97</td>
+</tr>
+<tr>
+<td>32</td>
+<td>mountain</td>
+<td>3 → 4</td>
+<td>1.8 → 2.4</td>
+<td>570 → 414</td>
+<td>325.2 → 171.4</td>
+<td>104.99 → 166.80</td>
+</tr>
+</tbody>
+</table></div>
+<p>Render distance 32 still has long stalls in the forest and village flights: the slowest frames are game ticks (mob AI bursts as chunks load, and thousands of dropped items piling up in some chunks, which the sequential run accumulates), not rendering. Results swing between runs on the shared desktop; the probe runs during the work saw RD 32 forest from 15 to 335 FPS depending on what the world had accumulated.</p>
+<h2 id="what-changed">What changed</h2>
+<p>The baseline was CPU-bound everywhere: on the RTX 4080 the GPU spent 0.2 to 16 ms per frame, the CPU 2 to 425.</p>
+<ul>
+<li><strong>Ticking</strong>: mobs, minecarts and dropped items outside the entity-ticking chunks (the simulation distance, as <code>DistanceManager.inEntityTickingRange</code>) only check despawning, as in <code>ServerLevel.tick</code>; every loaded one used to tick, so render distance 32 ticked seven times as many as vanilla. Villager POI searches skip sections whose palette holds no POI block. Sky darkening is sampled once per time and weather instead of once per mob, and the world's chunk map uses a fast hash.</li>
+<li><strong>Stalls</strong>: chunks and entity chunks unloaded while moving are encoded and written by a background region writer (loads see queued records first, saves wait for the queue); deleting entity chunks a region doesn't hold no longer rewrites the region file; unloading drops block entities in one pass instead of one per chunk.</li>
+<li><strong>Rendering</strong>: terrain sections share one vertex arena drawn with one indirect multi-draw per pass, instead of a buffer and draw call each; the cave-culling search runs on dense arrays; mobs are culled by the view frustum and vanilla's per-entity render distance, block entities by the frustum; per-frame scratch buffers are reused.</li>
+<li><strong>Streaming</strong>: its bookkeeping uses the fast hash, and a column's readiness for meshing is checked once per frame rather than once per dirty section.</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/graphics.md"><code>docs/graphics.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#settings">Settings</a></li><li class="l2"><a href="#distant-terrain">Distant terrain</a></li><li class="l2"><a href="#benchmark">Benchmark</a></li><li class="l2"><a href="#results">Results</a></li><li class="l2"><a href="#what-changed">What changed</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

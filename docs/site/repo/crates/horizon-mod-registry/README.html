@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>horizon-mod-registry · Rusty Minecraft docs</title>
+<meta name="description" content="horizon-mod-registry: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../assets/tokens.css">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../../../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="../../README.html">Rusty Minecraft</a></li><li><a href="../../../java-mod-translation.html">Java mod translation</a></li><li><a href="../../../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="../../launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../../../website.html">The documentation website</a></li><li><a href="../../ROADMAP.html">Horizon roadmap</a></li><li><a href="../../roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="../../AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../../../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../../../native-client.html">Rusty Minecraft native client</a></li><li><a href="../../../hosting.html">Host a server</a></li><li><a href="../../../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../../../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../../../server-next.html">The next server: design</a></li><li><a href="../../../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../../../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../../../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../../../graphics.html">Graphics: settings and performance</a></li><li><a href="../../../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../../../extras.html">Rusty Minecraft extras</a></li><li><a href="../../../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../../../mods.html">Rusty Minecraft mods</a></li><li><a href="../../../native-mods.html">Native mods (experimental)</a></li><li><a href="../../../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../../../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../../../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../../../versioning.html">Versioning</a></li><li><a href="../../../resource-packs.html">Resource packs: what works</a></li><li><a href="../../../telemetry.html">Opt-in data collection</a></li><li><a href="../../../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="../../../api/README.html">Rusty Minecraft APIs</a></li><li><a href="../../../api/stability.html">API stability and versioning</a></li><li><a href="../../../play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="../../../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../../../parity-workflow.html">Parity workflow</a></li><li><a href="../../../parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="../../../parity/meshing.html">Section meshing parity</a></li><li><a href="../../../port-ledger.html">Port ledger</a></li><li><a href="../../../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../../../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../../../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../../../world-generation.html">World generation</a></li><li><a href="../../../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../../../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../../../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../../../density-functions.html">Compiled density evaluation</a></li><li><a href="../../../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../../../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../../../biome-lookup.html">Biome lookup</a></li><li><a href="../../../biome-temperatures.html">Biome temperatures</a></li><li><a href="../../../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../../../material-conditions.html">Numeric material conditions</a></li><li><a href="../../../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../../../vertical-anchors.html">Vertical anchors</a></li><li><a href="../../../value-providers.html">World-generation value providers</a></li><li><a href="../../../carving.html">Carving</a></li><li><a href="../../../heightmaps.html">Heightmaps</a></li><li><a href="../../../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../../../world-data.html">Rusty Minecraft world data</a></li><li><a href="../../../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../../../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../../../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../../../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../../../profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="../../../api/agent-control.html">Agent control API</a></li><li><a href="../../../api/data-formats.html">Data formats</a></li><li><a href="../../../api/launch-reference.html">Launch API reference</a></li><li><a href="../../../api/launch.html">Launch API</a></li><li><a href="../../../api/launcher.html">Launcher API</a></li><li><a href="../../../api/mod-index.html">The registry index and .hpack</a></li><li><a href="../../../api/server-reference.html">Server reference</a></li><li><a href="../../../api/server.html">Server API</a></li><li><a href="../../../api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="../../../api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="../../benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="../../benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="../../benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="../../benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="../../benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="../../benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="../../benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="../../benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../../../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../../../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../../../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../../../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../../../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../../../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../../../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../../../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../../../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../../../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../../../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="../../launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="../../CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="../../THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="../../roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details open><summary>Crates, launcher and tools</summary><ul><li><a href="../horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="../horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="README.html" aria-current="page">horizon-mod-registry</a></li><li><a href="../horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="../horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="../horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="../horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="../horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="../horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="../../packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="../../tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../../../controllers.html">Controllers</a></li><li><a href="../../../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../../../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../../../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../../../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../../../known-issues.html">Known issues</a></li><li><a href="../../../launcher-commands.html">Launcher commands</a></li><li><a href="../../../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../../../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../../../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../../../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../../../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../../../release-flow.html">Release flow</a></li><li><a href="../../../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../../../save-batch-entities.html">Block entity save batches</a></li><li><a href="../../../security.html">Security</a></li><li><a href="../../../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../../../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="horizon-mod-registry">horizon-mod-registry</h1>
+<p>The service behind the registry's submission form (<code>playhorizon.dev/mods/submit</code>). A creator signs in with GitHub and
+<strong>lists a project by its GitHub repository and a page</strong> (<code>repo</code> plus name, summary, licence...): the service checks that the
+repository is public and opens a pull request adding <code>mods/&lt;id&gt;.toml</code> to
+<a href="https://github.com/horizon-rust/horizon-mods">horizon-rust/horizon-mods</a>, where a reviewer reads the repository once.
+<strong>It takes no versions for such a project</strong>: they are the repository's GitHub releases, read and checked by that
+repository's CI with no pull request (&quot;publish a GitHub release in <repo>&quot;, a 409). Projects listed before that
+(no <code>repo</code>) can still be sent as a file: the service runs the file's own checks
+(<code>horizon_mods::index::inspect</code>, the signature, the entry's fields), uploads it to the <code>staging</code> release as
+<code>&lt;sha256&gt;.&lt;extension&gt;</code> and opens a pull request adding or updating the entry. Formats and rules:
+<a href="../../../api/mod-index.html">docs/api/mod-index.md</a>.</p>
+<p>Signed-in players also rate published projects, 1 to 5 stars: one rating per GitHub account and project, which they can
+change, never their own project's. That is the only data it keeps, in one SQLite file (<code>REGISTRY_DB</code>); it only ever
+shows totals, never who rated. A session is a signed cookie holding the GitHub login and id, and the user's OAuth token
+is used once, to read them, and dropped. The sign-in asks for no scope.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Route</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /api/mods/auth/login</code></td>
+<td>Starts the GitHub sign-in; <code>?back=/mods/&lt;id&gt;</code> (or <code>/mods</code>) comes back to that page</td>
+</tr>
+<tr>
+<td><code>GET /api/mods/auth/callback</code></td>
+<td>GitHub's redirect: sets the session, back to <code>/mods/submit</code> or the <code>back</code> page</td>
+</tr>
+<tr>
+<td><code>POST /api/mods/auth/logout</code></td>
+<td>Ends it</td>
+</tr>
+<tr>
+<td><code>GET /api/mods/me</code></td>
+<td><code>{login, csrf}</code>, or 401</td>
+</tr>
+<tr>
+<td><code>POST /api/mods/submit</code></td>
+<td>Multipart: <code>entry</code> (JSON: <code>id kind name summary description authors license icon key</code>, and either <code>repo</code> (no file: lists the project) or <code>source signature version game changelog</code> with the <code>file</code> (a project with no <code>repo</code>)); <code>{pull_request}</code> or <code>{error}</code></td>
+</tr>
+<tr>
+<td><code>GET /api/mods/ratings</code></td>
+<td><code>{projects: {&lt;id&gt;: {average, count}}}</code> for every rated project; cached a minute</td>
+</tr>
+<tr>
+<td><code>GET /api/mods/&lt;id&gt;/rating</code></td>
+<td>The signed-in account's own <code>{stars}</code> (null when it hasn't rated), or 401</td>
+</tr>
+<tr>
+<td><code>POST /api/mods/&lt;id&gt;/rating</code></td>
+<td>JSON <code>{stars}</code>, 1 to 5: sets or changes it; <code>{stars, average, count}</code> or <code>{error}</code></td>
+</tr>
+<tr>
+<td><code>GET /healthz</code></td>
+<td><code>ok</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>A submission or a rating must come from <code>REGISTRY_PUBLIC_URL</code>'s origin with the session's <code>X-CSRF-Token</code>. Six
+submissions per account and sixty in all per hour; thirty ratings per account and 600 in all. A project's owners can't
+rate it, and only projects on the registry's <code>main</code> can be rated. Only an entry's <code>owners</code> publish its updates; a key change, an icon in the repository or anything else
+is a pull request by hand.</p>
+<h2 id="owner-updates">Owner updates</h2>
+<p>Only for projects with no <code>repo</code> (a project listed by its repository has no update to send). A reviewer's approval is not needed for an <em>owner update</em>: the submitter's login is in the entry's <code>owners</code> on the
+registry's <code>main</code>, and the only change to the entry is one new version (key, owners, icon, kind, id, name, summary,
+description, authors, licence and source as they were; a signature when the entry has a key). Then, and only when
+<code>REGISTRY_UPDATE_KEY</code> is set, the pull request's body ends with a trailer and it gets the label <code>owner-update</code>:</p>
+<pre><code>&lt;!-- owner-update
+id: coords_hud
+version: 0.1.0
+sha256: &lt;hex&gt;
+file: coords_hud-0.1.0.hmod
+submitter: alice
+hmac: &lt;hex HMAC-SHA256 with REGISTRY_UPDATE_KEY of &quot;owner-update-v1\n&lt;id&gt;\n&lt;version&gt;\n&lt;sha256&gt;\n&lt;file&gt;\n&lt;submitter&gt;&quot;&gt;
+--&gt;
+</code></pre>
+<p>Everything else (a new project, a changed page or key, no secret) opens the pull request as before, for a reviewer.
+The trailer is the only thing that marks an update as the form's own: the horizon-mods repository's <code>owner-update</code>
+workflow verifies it with the same secret, re-checks the diff, waits for the checks and merges with <code>REGISTRY_MERGE_TOKEN</code>
+(its README says how). Without the secret on both sides, nothing is merged by itself.</p>
+<p>A refused submission is always <code>{error}</code> JSON, sent once the upload is over (a browser still sending when the answer
+comes reports a network error instead): 413 for a file over 64 MiB, 504 when GitHub doesn't answer in time (30 s a
+call, 5 minutes for the file's upload), 502 for GitHub's other failures.</p>
+<h2 id="running-it">Running it</h2>
+<pre><code class="language-sh">cargo test                     # against a mock GitHub (tests/submit.rs)
+REGISTRY_PUBLIC_URL=http://localhost:4173 REGISTRY_SESSION_KEY=... GITHUB_CLIENT_ID=... GITHUB_CLIENT_SECRET=... \
+  GITHUB_BOT_TOKEN=... REGISTRY_REPO=you/horizon-mods-test REGISTRY_DB=/tmp/registry.sqlite3 cargo run
+</code></pre>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>REGISTRY_PUBLIC_URL</code></td>
+<td>The site, <code>https://playhorizon.dev</code>: the OAuth callback is <code>&lt;it&gt;/api/mods/auth/callback</code></td>
+</tr>
+<tr>
+<td><code>REGISTRY_SESSION_KEY</code></td>
+<td>32 characters or more, random: signs sessions</td>
+</tr>
+<tr>
+<td><code>GITHUB_CLIENT_ID</code>, <code>GITHUB_CLIENT_SECRET</code></td>
+<td>The OAuth app</td>
+</tr>
+<tr>
+<td><code>GITHUB_BOT_TOKEN</code></td>
+<td>Fine-grained, the registry repository only: Contents and Pull requests read and write</td>
+</tr>
+<tr>
+<td><code>REGISTRY_UPDATE_KEY</code></td>
+<td>Optional, random, 32 characters or more: signs owner updates' trailers (below). Unset: every update waits for a reviewer. The same value is the secret <code>REGISTRY_UPDATE_KEY</code> of horizon-mods</td>
+</tr>
+<tr>
+<td><code>REGISTRY_REPO</code></td>
+<td>Default <code>horizon-rust/horizon-mods</code></td>
+</tr>
+<tr>
+<td><code>REGISTRY_DB</code></td>
+<td>The ratings' SQLite file: default <code>/data/registry.sqlite3</code>, the volume</td>
+</tr>
+<tr>
+<td><code>PORT</code></td>
+<td>Default 8080</td>
+</tr>
+</tbody>
+</table></div>
+<p>On Railway it is the service <code>horizon-mod-registry</code> of the project <code>horizon-site</code>, next to the website: built from
+<code>main</code> with this <code>Dockerfile</code> from the repository root, health check <code>/healthz</code>, no public domain, and the volume
+<code>registry-data</code> at <code>/data</code> for the ratings. The
+website's Caddy sends <code>/api/mods/*</code> to it over Railway's private network (<code>REGISTRY_UPSTREAM</code> on the website service:
+<code>http://horizon-mod-registry.railway.internal:8080</code>). <code>railway.json</code> lists the same settings; Railway reads them from
+the service, not from the file.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/crates/horizon-mod-registry/README.md"><code>crates/horizon-mod-registry/README.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#owner-updates">Owner updates</a></li><li class="l2"><a href="#running-it">Running it</a></li></ul></nav>
+</div>
+<script src="../../../assets/site.js"></script>
+</body>
+</html>

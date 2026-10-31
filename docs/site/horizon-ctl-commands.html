@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>horizon-ctl commands · Rusty Minecraft docs</title>
+<meta name="description" content="horizon-ctl commands: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details open><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html" aria-current="page">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<!-- Generated by `horizon-ctl help --markdown` from the command table in crates/horizon-client/src/bin/horizon-ctl/commands.rs: edit the table, then regenerate. -->
+<h1 id="horizon-ctl-commands">horizon-ctl commands</h1>
+<p>Every command <code>horizon-ctl</code> takes, its MCP tool in <code>horizon-ctl mcp</code> (the launcher's <code>horizon-launcher mcp</code> offers the same tools as <code>game_&lt;tool&gt;</code>, all but <code>launch</code>) and its arguments. Positional arguments come first, in order; <code>--flags</code> after them. <code>horizon-ctl help --game</code> lists the game's own commands, test hooks included. Design rules and the full inventory: <a href="agent-control.html">agent-control.md</a>.</p>
+<h2 id="session">Session</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>MCP tool</th>
+<th>What it does</th>
+<th>Arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>launch [--world NAME] [--seed N] [--creative] [--version TAG] [--game PATH] [--wait] [GAME ARGS...]</code></td>
+<td><code>launch</code></td>
+<td>Start Rusty Minecraft with the control socket and wait until it answers</td>
+<td><code>--world</code> (string): world folder to open or create<br><code>--seed</code> (string): seed for a new world<br><code>--creative</code> (boolean): creative mode for a new world<br><code>--version</code> (string): an installed launcher version tag such as v2026.10.13<br><code>--game</code> (string): path to a horizon-client binary<br><code>--wait</code> (boolean): also wait until the world is ready (default in MCP)<br><code>--offscreen</code> (boolean): render without showing a window (screenshots still work): locked or headless sessions</td>
+</tr>
+<tr>
+<td><code>wait-for screen NAME|widget ID|loaded|chat TEXT|event KIND [--timeout S] [--since SEQ]</code></td>
+<td><code>wait_for</code></td>
+<td>Wait until the game reaches a state, then reply</td>
+<td><code>--timeout</code> (number): seconds (default 30)<br><code>--since</code> (integer): chat and event: count from this event seq<br><code>condition</code> (screen, widget, loaded, chat, event, required): what to wait for<br><code>value</code> (text): the screen name, widget id, chat text or event kind</td>
+</tr>
+<tr>
+<td><code>wait-ready [SECONDS]</code></td>
+<td><code>wait_ready</code></td>
+<td>Wait until the player has spawned and no chunks are pending</td>
+<td><code>seconds</code> (number): how long to wait (default 120)</td>
+</tr>
+<tr>
+<td><code>logs [--lines N] [--crash]</code></td>
+<td><code>logs</code></td>
+<td>The end of the game's log, or its newest crash report</td>
+<td><code>--lines</code> (integer): how many lines of latest.log (default 100)<br><code>--crash</code> (boolean): the newest crash report instead</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>status</code></td>
+<td>Game, renderer and streaming state (the scripting socket's original summary)</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>worlds</code></td>
+<td><code>worlds</code></td>
+<td>The saved worlds, newest first: folder, name, mode, last played, version</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>world-rename FOLDER NAME</code></td>
+<td><code>world_rename</code></td>
+<td>Rename a world, as Edit World does (its folder stays)</td>
+<td><code>folder</code> (string, required): world folder from worlds<br><code>name</code> (text, required): the new name</td>
+</tr>
+<tr>
+<td><code>world-backup FOLDER</code></td>
+<td><code>world_backup</code></td>
+<td>Zip a world into backups/, as Edit World's Make Backup does</td>
+<td><code>folder</code> (string, required): world folder from worlds</td>
+</tr>
+<tr>
+<td><code>world-delete FOLDER --confirm</code></td>
+<td><code>world_delete</code> (destructive)</td>
+<td>Delete a world for good, as Select World's Delete does</td>
+<td><code>folder</code> (string, required): world folder from worlds<br><code>--confirm</code> (boolean, required): true once the player agreed: it cannot be undone</td>
+</tr>
+<tr>
+<td><code>open WORLD [SEED] [creative]</code></td>
+<td><code>open</code></td>
+<td>Open or create a world from the title screen</td>
+<td><code>world</code> (string, required): world folder<br><code>seed</code> (integer): seed for a new world<br><code>mode</code> (creative): creative for a creative world</td>
+</tr>
+<tr>
+<td><code>save</code></td>
+<td><code>save</code></td>
+<td>Save the world</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>quit</code></td>
+<td><code>quit</code></td>
+<td>Save and exit the game</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>screenshot PATH</code></td>
+<td><code>screenshot</code></td>
+<td>Write the next rendered frame as a PNG</td>
+<td>none</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="observe-json-state">Observe (JSON state)</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>MCP tool</th>
+<th>What it does</th>
+<th>Arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>events [--since SEQ]</code></td>
+<td><code>events</code></td>
+<td>What happened since SEQ, oldest first: screens, chat, deaths, respawns, items gained or lost, dimensions, worlds</td>
+<td><code>--since</code> (integer): only events after this seq</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td><code>state</code></td>
+<td>Player, world, screen and crosshair target in one reply</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>looking-at</code></td>
+<td><code>looking_at</code></td>
+<td>The block or entity under the crosshair</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>entities [RADIUS] [TYPE]</code></td>
+<td><code>entities</code></td>
+<td>Mobs, dropped items and experience orbs near the player, nearest first</td>
+<td><code>radius</code> (number): search radius in blocks (default 32)<br><code>type</code> (string): entity type filter</td>
+</tr>
+<tr>
+<td><code>block X Y Z</code></td>
+<td><code>block</code></td>
+<td>The block state at a position</td>
+<td><code>x</code> (integer, required): block X<br><code>y</code> (integer, required): block Y<br><code>z</code> (integer, required): block Z</td>
+</tr>
+<tr>
+<td><code>light X1 Y1 Z1 X2 Y2 Z2</code></td>
+<td><code>light</code></td>
+<td>The stored sky and block light of a box</td>
+<td><code>x1</code> (integer, required): corner X<br><code>y1</code> (integer, required): corner Y<br><code>z1</code> (integer, required): corner Z<br><code>x2</code> (integer, required): opposite X<br><code>y2</code> (integer, required): opposite Y<br><code>z2</code> (integer, required): opposite Z</td>
+</tr>
+<tr>
+<td><code>blocks X1 Y1 Z1 X2 Y2 Z2</code></td>
+<td><code>blocks</code></td>
+<td>The non-air blocks of a box, with counts per block</td>
+<td><code>x1</code> (integer, required): corner X<br><code>y1</code> (integer, required): corner Y<br><code>z1</code> (integer, required): corner Z<br><code>x2</code> (integer, required): opposite X<br><code>y2</code> (integer, required): opposite Y<br><code>z2</code> (integer, required): opposite Z</td>
+</tr>
+<tr>
+<td><code>find-block BLOCK [RADIUS]</code></td>
+<td><code>find_block</code></td>
+<td>The nearest loaded blocks of a kind</td>
+<td><code>block</code> (string, required): block id such as oak_log<br><code>radius</code> (integer): search radius (default 32)</td>
+</tr>
+<tr>
+<td><code>inventory</code></td>
+<td><code>inventory</code></td>
+<td>Hotbar, main inventory, armor, offhand, carried stack and item counts</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>screen</code></td>
+<td><code>screen</code></td>
+<td>The open screen or title menu, its buttons and its slots</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>messages [N]</code></td>
+<td><code>messages</code></td>
+<td>Recent chat and system messages, the title and the action bar</td>
+<td><code>n</code> (integer): how many chat lines (default 20)</td>
+</tr>
+<tr>
+<td><code>menu</code></td>
+<td>CLI only</td>
+<td>The open menu's slots and carried stack, with station details</td>
+<td>none</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="move-and-look">Move and look</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>MCP tool</th>
+<th>What it does</th>
+<th>Arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>move forward|back|left|right SECONDS [--sprint] [--sneak] [--jump]</code></td>
+<td><code>move</code></td>
+<td>Walk in a direction relative to the view for a time</td>
+<td><code>direction</code> (forward, back, left, right, required): direction relative to the view<br><code>seconds</code> (number, required): how long to walk<br><code>--sprint</code> (boolean): sprint<br><code>--sneak</code> (boolean): sneak<br><code>--jump</code> (boolean): keep jumping</td>
+</tr>
+<tr>
+<td><code>goto X Y Z [--near R] [--sprint] [--direct] [--timeout S]</code></td>
+<td><code>goto</code></td>
+<td>Walk to a position, finding a path through loaded terrain</td>
+<td><code>x</code> (number, required): X coordinate<br><code>y</code> (number, required): Y coordinate<br><code>z</code> (number, required): Z coordinate<br><code>--near</code> (number): arrive within this many blocks (default 0.6)<br><code>--sprint</code> (boolean): sprint<br><code>--direct</code> (boolean): walk straight when no path is found<br><code>--timeout</code> (number): give up after this many seconds (default 60)</td>
+</tr>
+<tr>
+<td><code>jump</code></td>
+<td><code>jump</code></td>
+<td>Jump once and reply when landed</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>look YAW PITCH</code></td>
+<td><code>look</code></td>
+<td>Set the view direction in degrees</td>
+<td><code>yaw</code> (number, required): yaw in degrees<br><code>pitch</code> (number, required): pitch in degrees (-90 up .. 90 down)</td>
+</tr>
+<tr>
+<td><code>turn DYAW DPITCH [--over S]</code></td>
+<td><code>turn</code></td>
+<td>Rotate the view by an amount</td>
+<td><code>dyaw</code> (number, required): yaw change in degrees<br><code>dpitch</code> (number, required): pitch change in degrees<br><code>--over</code> (number): turn with mouse motion spread over this many seconds (eased), as a player would</td>
+</tr>
+<tr>
+<td><code>mouse-move DX DY</code></td>
+<td><code>mouse_move</code></td>
+<td>Move the mouse: relative motion that turns the view like a player's mouse</td>
+<td><code>dx</code> (number, required): horizontal motion (positive turns right)<br><code>dy</code> (number, required): vertical motion (positive looks down)</td>
+</tr>
+<tr>
+<td><code>look-at X Y Z | look-at block X Y Z [FACE] | look-at entity ID  [--over S]</code></td>
+<td><code>look_at</code></td>
+<td>Turn to face a point, a block (a visible face of it) or an entity</td>
+<td><code>x</code> (number, required): X coordinate<br><code>y</code> (number, required): Y coordinate<br><code>z</code> (number, required): Z coordinate<br><code>--over</code> (number): turn with mouse motion spread over this many seconds (eased), as a player would</td>
+</tr>
+<tr>
+<td><code>look-at-block X Y Z [FACE] [--over S]</code></td>
+<td><code>look_at_block</code></td>
+<td>Aim the crosshair at a block (same as look-at block)</td>
+<td><code>x</code> (integer, required): block X<br><code>y</code> (integer, required): block Y<br><code>z</code> (integer, required): block Z<br><code>face</code> (down, up, north, south, west, east): which face to aim at<br><code>--over</code> (number): turn with mouse motion spread over this many seconds (eased), as a player would</td>
+</tr>
+<tr>
+<td><code>look-at-entity ID [--over S]</code></td>
+<td><code>look_at_entity</code></td>
+<td>Face an entity (same as look-at entity)</td>
+<td><code>id</code> (integer, required): entity id from entities<br><code>--over</code> (number): turn with mouse motion spread over this many seconds (eased), as a player would</td>
+</tr>
+<tr>
+<td><code>tp X Y Z</code></td>
+<td><code>tp</code></td>
+<td>Teleport the player</td>
+<td><code>x</code> (number, required): X coordinate<br><code>y</code> (number, required): Y coordinate<br><code>z</code> (number, required): Z coordinate</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="act-on-the-world">Act on the world</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>MCP tool</th>
+<th>What it does</th>
+<th>Arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>break X Y Z [--timeout S]</code></td>
+<td><code>break</code></td>
+<td>Mine a block, holding the attack button until it breaks</td>
+<td><code>x</code> (integer, required): block X<br><code>y</code> (integer, required): block Y<br><code>z</code> (integer, required): block Z<br><code>--timeout</code> (number): give up after this many seconds (default 30)</td>
+</tr>
+<tr>
+<td><code>place X Y Z [--item ITEM]</code></td>
+<td><code>place</code></td>
+<td>Place the held item (or ITEM from the hotbar) at an empty position</td>
+<td><code>x</code> (integer, required): block X<br><code>y</code> (integer, required): block Y<br><code>z</code> (integer, required): block Z<br><code>--item</code> (string): hotbar item to select first</td>
+</tr>
+<tr>
+<td><code>interact X Y Z [FACE]</code></td>
+<td><code>interact</code></td>
+<td>Right-click a block: open a chest or crafting table, press a button, open a door</td>
+<td><code>x</code> (integer, required): block X<br><code>y</code> (integer, required): block Y<br><code>z</code> (integer, required): block Z<br><code>face</code> (down, up, north, south, west, east): which face to click</td>
+</tr>
+<tr>
+<td><code>use-item [--hold SECONDS]</code></td>
+<td><code>use_item</code></td>
+<td>Right-click with the held item: eat, drink, throw, draw a bow</td>
+<td><code>--hold</code> (number): hold the button this long</td>
+</tr>
+<tr>
+<td><code>attack [ID]</code></td>
+<td><code>attack</code></td>
+<td>Swing at what the crosshair targets (after facing entity ID)</td>
+<td><code>id</code> (integer): entity id to face first</td>
+</tr>
+<tr>
+<td><code>select SLOT|ITEM</code></td>
+<td><code>select</code></td>
+<td>Select a hotbar slot 1-9, or the hotbar slot holding ITEM</td>
+<td><code>slot</code> (string, required): 1-9 or an item id</td>
+</tr>
+<tr>
+<td><code>drop [all]</code></td>
+<td><code>drop</code></td>
+<td>Drop one of the held item, or the whole stack</td>
+<td><code>all</code> (boolean): drop the whole stack</td>
+</tr>
+<tr>
+<td><code>hold KEY SECONDS</code></td>
+<td>CLI only</td>
+<td>Press a key, wait, release it</td>
+<td><code>key</code> (string, required): key name<br><code>seconds</code> (number, required): how long</td>
+</tr>
+<tr>
+<td><code>key KEY down|up|tap|repeat</code></td>
+<td><code>key</code></td>
+<td>Press, release or auto-repeat a key (w a s d space shift ctrl e q esc f3 1-9 arrows ...)</td>
+<td><code>key</code> (string, required): key name<br><code>action</code> (down, up, tap, repeat, required): what to do</td>
+</tr>
+<tr>
+<td><code>mouse left|right|middle down|up|click</code></td>
+<td><code>mouse</code></td>
+<td>Press or release a mouse button in the world</td>
+<td><code>button</code> (left, right, middle, required): button<br><code>action</code> (down, up, click, required): what to do</td>
+</tr>
+<tr>
+<td><code>interact-entity ID</code></td>
+<td><code>interact_entity</code></td>
+<td>Right-click an entity: trade with a villager, mount a horse, ride a boat, shear a sheep</td>
+<td><code>id</code> (integer, required): entity id from entities</td>
+</tr>
+<tr>
+<td><code>pad BUTTON down|up|tap | pad stick left|right X Y | pad trigger left|right V | pad release | pad status</code></td>
+<td><code>pad</code></td>
+<td>A virtual controller: buttons, sticks and triggers as a real pad would send them</td>
+<td><code>what</code> (string, required): a button name, stick, trigger, release or status<br><code>a</code> (string): down|up|tap, or left|right<br><code>b</code> (number): stick X or trigger value<br><code>c</code> (number): stick Y</td>
+</tr>
+<tr>
+<td><code>release</code></td>
+<td><code>release</code></td>
+<td>Release every key and mouse button</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>stop</code></td>
+<td><code>stop</code></td>
+<td>Cancel the running action (goto, break...) and release every key</td>
+<td>none</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="screens-menus-and-chat">Screens, menus and chat</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>MCP tool</th>
+<th>What it does</th>
+<th>Arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>open-inventory</code></td>
+<td><code>open_inventory</code></td>
+<td>Open the inventory screen (crafting grid 100-103, result 200)</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>click-slot SLOT [right] [shift]</code></td>
+<td><code>click_slot</code></td>
+<td>Click a slot of the open inventory or menu</td>
+<td><code>slot</code> (integer, required): slot id<br><code>right</code> (boolean): right-click<br><code>shift</code> (boolean): shift-click</td>
+</tr>
+<tr>
+<td><code>close</code></td>
+<td><code>close</code></td>
+<td>Close the open menu and return to the game</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>ui</code></td>
+<td><code>ui</code></td>
+<td>Every widget of the open screen: id, kind, label, bounds, value</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>click ID [right|middle] [shift]</code></td>
+<td><code>click</code></td>
+<td>Click a widget of ui by its id, as the mouse would</td>
+<td><code>id</code> (string, required): widget id from ui<br><code>right</code> (boolean): right-click<br><code>middle</code> (boolean): middle-click<br><code>shift</code> (boolean): shift-click (slots)</td>
+</tr>
+<tr>
+<td><code>set ID VALUE</code></td>
+<td><code>set</code></td>
+<td>Move a slider of ui to VALUE (0..1), as a click on its track</td>
+<td><code>id</code> (string, required): slider id from ui<br><code>value</code> (number, required): 0..1 along the track</td>
+</tr>
+<tr>
+<td><code>options-get [KEY...]</code></td>
+<td><code>options_get</code></td>
+<td>The game's options (options.txt) by key, with their type and range or choices</td>
+<td><code>keys</code> (text): option keys (default: all)</td>
+</tr>
+<tr>
+<td><code>options-set KEY VALUE</code></td>
+<td><code>options_set</code></td>
+<td>Set one option, apply it at once and save options.txt, as the options screen does</td>
+<td><code>key</code> (string, required): option key from options-get<br><code>value</code> (text, required): the new value</td>
+</tr>
+<tr>
+<td><code>click-button LABEL</code></td>
+<td><code>click_button</code></td>
+<td>Click a button of the open screen or title menu by its label</td>
+<td><code>label</code> (text, required): button label</td>
+</tr>
+<tr>
+<td><code>click-at X Y [right]</code></td>
+<td><code>click_at</code></td>
+<td>Click at GUI pixel X Y of the window (screen gives button rectangles)</td>
+<td><code>x</code> (number, required): GUI x<br><code>y</code> (number, required): GUI y<br><code>right</code> (boolean): right-click</td>
+</tr>
+<tr>
+<td><code>drag-at [right] X Y X Y...</code></td>
+<td><code>drag_at</code></td>
+<td>Press at the first GUI point, move through the others, release at the last</td>
+<td><code>points</code> (text, required): right, then GUI x y pairs</td>
+</tr>
+<tr>
+<td><code>scroll-at X Y STEPS</code></td>
+<td><code>scroll_at</code></td>
+<td>Turn the mouse wheel at GUI pixel X Y (positive scrolls up)</td>
+<td><code>x</code> (number, required): GUI x<br><code>y</code> (number, required): GUI y<br><code>steps</code> (number, required): wheel steps</td>
+</tr>
+<tr>
+<td><code>type [--field name|seed] [--replace] TEXT</code></td>
+<td><code>type</code></td>
+<td>Type into the focused text field (chat box, world name, anvil, sign...)</td>
+<td><code>--field</code> (name, seed): create-world field to type into<br><code>--replace</code> (boolean): clear the field first<br><code>text</code> (text, required): text to type</td>
+</tr>
+<tr>
+<td><code>chat TEXT</code></td>
+<td><code>chat</code> (network)</td>
+<td>Send a chat line (or a /command) as if typed</td>
+<td><code>text</code> (text, required): message</td>
+</tr>
+<tr>
+<td><code>command TEXT</code></td>
+<td><code>command</code> (network)</td>
+<td>Run a command (the leading / is optional)</td>
+<td><code>command</code> (text, required): command line</td>
+</tr>
+<tr>
+<td><code>respawn</code></td>
+<td><code>respawn</code></td>
+<td>Respawn from the death screen</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>pause</code></td>
+<td><code>pause</code></td>
+<td>Open the pause menu</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>resume</code></td>
+<td><code>resume</code></td>
+<td>Leave the pause menu</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>options [PAGE]</code></td>
+<td><code>options</code></td>
+<td>Open the options screen, or one of its pages (Rusty Minecraft's too)</td>
+<td><code>page</code> (main, video, sound, controls, keybinds, controller, controller-binds, mouse, chat, accessibility, language, font, packs, mods, shader-packs, graphics, graphics-advanced, graphics-hdr, extras, horizon, agent): the page (default: the main options)</td>
+</tr>
+<tr>
+<td><code>book [next|back|take|done]</code></td>
+<td><code>book</code></td>
+<td>The open book or lectern: its page text, or press one of its buttons</td>
+<td><code>action</code> (next, back, take, done): a button to press</td>
+</tr>
+<tr>
+<td><code>signedit X Y Z [front|back]</code></td>
+<td><code>signedit</code></td>
+<td>Open the sign editor of the sign at X Y Z (then type and close)</td>
+<td><code>x</code> (integer, required): block X<br><code>y</code> (integer, required): block Y<br><code>z</code> (integer, required): block Z<br><code>side</code> (front, back): which side</td>
+</tr>
+<tr>
+<td><code>mount-menu</code></td>
+<td><code>mount_menu</code></td>
+<td>Open the inventory of the horse, donkey, mule or llama being ridden</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>chat-log [N]</code></td>
+<td>CLI only</td>
+<td>The newest N chat messages</td>
+<td>none</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="multiplayer-lan-and-friends">Multiplayer, LAN and friends</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>MCP tool</th>
+<th>What it does</th>
+<th>Arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>connect ADDRESS [NAME]</code></td>
+<td><code>connect</code> (network)</td>
+<td>Join a multiplayer server, or a friend's world by its invite code, from the title screen</td>
+<td><code>address</code> (string, required): HOST[:PORT] or friend:CODE<br><code>name</code> (string): player name when offline</td>
+</tr>
+<tr>
+<td><code>disconnect</code></td>
+<td><code>disconnect</code></td>
+<td>Leave the server, back to the server list</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>servers</code></td>
+<td><code>servers</code></td>
+<td>The Multiplayer screen's server list: name and address</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>lan open [PORT] [commands] [force] | lan close | lan status</code></td>
+<td><code>lan</code> (network)</td>
+<td>Open the world to LAN (Open to LAN), stop, or see the guests</td>
+<td><code>action</code> (open, close, status, required): what to do<br><code>port</code> (integer): port for open<br><code>commands</code> (boolean): allow cheats<br><code>force</code> (boolean): force the game mode</td>
+</tr>
+<tr>
+<td><code>friends host|stop|status</code></td>
+<td><code>friends</code> (network)</td>
+<td>Play with Friends: share the open world behind an invite code, stop, or see who joined</td>
+<td><code>action</code> (host, stop, status, required): what to do</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="world-and-cheats">World and cheats</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>MCP tool</th>
+<th>What it does</th>
+<th>Arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>give ITEM [COUNT]</code></td>
+<td><code>give</code></td>
+<td>Add items to the inventory</td>
+<td><code>item</code> (string, required): item id<br><code>count</code> (integer): how many (default 1)</td>
+</tr>
+<tr>
+<td><code>time TICKS</code></td>
+<td><code>time</code></td>
+<td>Set the time of day (0 sunrise, 6000 noon, 13000 night)</td>
+<td><code>ticks</code> (integer, required): day time</td>
+</tr>
+<tr>
+<td><code>setblock X Y Z BLOCK[props]</code></td>
+<td><code>setblock</code> (destructive)</td>
+<td>Set a block (with neighbour updates)</td>
+<td><code>x</code> (integer, required): block X<br><code>y</code> (integer, required): block Y<br><code>z</code> (integer, required): block Z<br><code>block</code> (string, required): block state such as oak_stairs[facing=east]</td>
+</tr>
+<tr>
+<td><code>summon KIND [X Y Z] [baby]</code></td>
+<td><code>summon</code></td>
+<td>Spawn a mob (in front of the player without a position)</td>
+<td><code>kind</code> (string, required): mob type<br><code>x</code> (number): X<br><code>y</code> (number): Y<br><code>z</code> (number): Z<br><code>baby</code> (boolean): a baby</td>
+</tr>
+<tr>
+<td><code>effect ID SECONDS [AMPLIFIER] | effect clear</code></td>
+<td><code>effect</code></td>
+<td>Give a status effect, or clear them all</td>
+<td><code>id</code> (string, required): effect id such as speed, or clear<br><code>seconds</code> (number): duration<br><code>amplifier</code> (integer): level - 1 (default 0)</td>
+</tr>
+<tr>
+<td><code>effects</code></td>
+<td><code>effects</code></td>
+<td>The player's active status effects</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>xp LEVELS</code></td>
+<td><code>xp</code></td>
+<td>Add experience levels (negative removes)</td>
+<td><code>levels</code> (integer, required): levels to add</td>
+</tr>
+<tr>
+<td><code>enchant ID LEVEL</code></td>
+<td><code>enchant</code></td>
+<td>Enchant the held item (a book stores it)</td>
+<td><code>id</code> (string, required): enchantment id<br><code>level</code> (integer, required): level</td>
+</tr>
+<tr>
+<td><code>potion ITEM POTION</code></td>
+<td><code>potion</code></td>
+<td>Give a potion item</td>
+<td><code>item</code> (potion, splash_potion, lingering_potion, tipped_arrow, required): which item<br><code>potion</code> (string, required): potion id</td>
+</tr>
+<tr>
+<td><code>fill X1 Y1 Z1 X2 Y2 Z2 BLOCK</code></td>
+<td><code>fill</code> (destructive)</td>
+<td>Set a box of loaded blocks</td>
+<td><code>x1</code> (integer, required): corner X<br><code>y1</code> (integer, required): corner Y<br><code>z1</code> (integer, required): corner Z<br><code>x2</code> (integer, required): opposite X<br><code>y2</code> (integer, required): opposite Y<br><code>z2</code> (integer, required): opposite Z<br><code>block</code> (string, required): block state</td>
+</tr>
+<tr>
+<td><code>container X Y Z [ITEM COUNT]</code></td>
+<td><code>container</code></td>
+<td>List a container's items, or add items to it</td>
+<td><code>x</code> (integer, required): block X<br><code>y</code> (integer, required): block Y<br><code>z</code> (integer, required): block Z<br><code>item</code> (string): item to add<br><code>count</code> (integer): how many</td>
+</tr>
+<tr>
+<td><code>render-distance N</code></td>
+<td>CLI only</td>
+<td>Chunks, 2..128</td>
+<td><code>chunks</code> (integer, required): render distance</td>
+</tr>
+<tr>
+<td><code>wait TICKS</code></td>
+<td><code>wait</code></td>
+<td>Wait until TICKS game ticks have passed (20 per second)</td>
+<td><code>ticks</code> (integer, required): game ticks</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="scripting-and-benchmarks">Scripting and benchmarks</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>MCP tool</th>
+<th>What it does</th>
+<th>Arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>script [FILE] [--keep-going]</code></td>
+<td>CLI only</td>
+<td>Run commands from FILE (or stdin), one per line</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>sleep SECONDS</code></td>
+<td>CLI only</td>
+<td>Wait (in scripts)</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>mcp</code></td>
+<td>CLI only</td>
+<td>Serve the Model Context Protocol on stdin/stdout, one tool per command</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>bench SECONDS</code></td>
+<td><code>bench</code></td>
+<td>Reset frame stats, wait, reply with the summary</td>
+<td><code>seconds</code> (number, required): how long to measure</td>
+</tr>
+<tr>
+<td><code>stats [reset]</code></td>
+<td><code>stats</code></td>
+<td>Frame-time summary since the last reset</td>
+<td><code>reset</code> (boolean): start counting again</td>
+</tr>
+<tr>
+<td><code>fly X1 Y1 Z1 X2 Y2 Z2 SECONDS [PITCH [raw]]</code></td>
+<td>CLI only</td>
+<td>Fly the camera along a line, then reply with the frame summary</td>
+<td>none</td>
+</tr>
+</tbody>
+</table></div>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/horizon-ctl-commands.md"><code>docs/horizon-ctl-commands.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#session">Session</a></li><li class="l2"><a href="#observe-json-state">Observe (JSON state)</a></li><li class="l2"><a href="#move-and-look">Move and look</a></li><li class="l2"><a href="#act-on-the-world">Act on the world</a></li><li class="l2"><a href="#screens-menus-and-chat">Screens, menus and chat</a></li><li class="l2"><a href="#multiplayer-lan-and-friends">Multiplayer, LAN and friends</a></li><li class="l2"><a href="#world-and-cheats">World and cheats</a></li><li class="l2"><a href="#scripting-and-benchmarks">Scripting and benchmarks</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

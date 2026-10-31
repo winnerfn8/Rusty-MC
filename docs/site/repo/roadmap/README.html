@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The roadmap · Rusty Minecraft docs</title>
+<meta name="description" content="The roadmap: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/tokens.css">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details open><summary>Start here</summary><ul><li><a href="../README.html">Rusty Minecraft</a></li><li><a href="../../java-mod-translation.html">Java mod translation</a></li><li><a href="../../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="../launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../../website.html">The documentation website</a></li><li><a href="../ROADMAP.html">Horizon roadmap</a></li><li><a href="README.html" aria-current="page">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="../AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../../native-client.html">Rusty Minecraft native client</a></li><li><a href="../../hosting.html">Host a server</a></li><li><a href="../../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../../server-next.html">The next server: design</a></li><li><a href="../../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../../graphics.html">Graphics: settings and performance</a></li><li><a href="../../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../../extras.html">Rusty Minecraft extras</a></li><li><a href="../../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../../mods.html">Rusty Minecraft mods</a></li><li><a href="../../native-mods.html">Native mods (experimental)</a></li><li><a href="../../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../../versioning.html">Versioning</a></li><li><a href="../../resource-packs.html">Resource packs: what works</a></li><li><a href="../../telemetry.html">Opt-in data collection</a></li><li><a href="../../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="../../api/README.html">Rusty Minecraft APIs</a></li><li><a href="../../api/stability.html">API stability and versioning</a></li><li><a href="../../play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="../../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../../parity-workflow.html">Parity workflow</a></li><li><a href="../../parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="../../parity/meshing.html">Section meshing parity</a></li><li><a href="../../port-ledger.html">Port ledger</a></li><li><a href="../../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../../world-generation.html">World generation</a></li><li><a href="../../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../../density-functions.html">Compiled density evaluation</a></li><li><a href="../../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../../biome-lookup.html">Biome lookup</a></li><li><a href="../../biome-temperatures.html">Biome temperatures</a></li><li><a href="../../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../../material-conditions.html">Numeric material conditions</a></li><li><a href="../../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../../vertical-anchors.html">Vertical anchors</a></li><li><a href="../../value-providers.html">World-generation value providers</a></li><li><a href="../../carving.html">Carving</a></li><li><a href="../../heightmaps.html">Heightmaps</a></li><li><a href="../../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../../world-data.html">Rusty Minecraft world data</a></li><li><a href="../../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../../profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="../../api/agent-control.html">Agent control API</a></li><li><a href="../../api/data-formats.html">Data formats</a></li><li><a href="../../api/launch-reference.html">Launch API reference</a></li><li><a href="../../api/launch.html">Launch API</a></li><li><a href="../../api/launcher.html">Launcher API</a></li><li><a href="../../api/mod-index.html">The registry index and .hpack</a></li><li><a href="../../api/server-reference.html">Server reference</a></li><li><a href="../../api/server.html">Server API</a></li><li><a href="../../api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="../../api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="../benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="../benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="../benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="../benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="../benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="../benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="../benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="../benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="../launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="../CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="../THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="../crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="../crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="../crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="../crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="../crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="../crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="../crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="../crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="../crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="../packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="../tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../../controllers.html">Controllers</a></li><li><a href="../../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../../known-issues.html">Known issues</a></li><li><a href="../../launcher-commands.html">Launcher commands</a></li><li><a href="../../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../../release-flow.html">Release flow</a></li><li><a href="../../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../../save-batch-entities.html">Block entity save batches</a></li><li><a href="../../security.html">Security</a></li><li><a href="../../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="the-roadmap">The roadmap</h1>
+<p><code>roadmap.toml</code> is the one source of the roadmap. <code>tools/roadmap.py build</code> turns it into
+<a href="../ROADMAP.html">ROADMAP.md</a>; the website's hub (playhorizon.dev/hub) and Kira read the same items. The work
+board stays the task-level view (every issue and pull request); the roadmap is the overview, and each pull
+request carries the <code>roadmap:&lt;id&gt;</code> label of the item it moves.</p>
+<h2 id="an-item">An item</h2>
+<pre><code class="language-toml">[[item]]
+id = &quot;server-dialogs&quot;            # lowercase words joined by dashes; never renamed (votes and links use it)
+title = &quot;Server dialogs and login screens&quot;
+status = &quot;now&quot;                   # now | next | later | help-wanted | shipped
+area = &quot;servers&quot;                 # one of the [[area]] ids, listed in the order of priority
+focus = true                     # optional: one of the 3 to 5 Now items in the overview
+ongoing = true                   # optional: a workstream that goes on after its pull requests merge
+owner = &quot;levzzz5154&quot;             # Now items: the GitHub login who leads it (a person, or the account an agent works as)
+issue = &quot;#3911&quot;                  # Now items: the tracking issue that holds the checklist
+plain = &quot;&quot;&quot;Servers that show dialogs ... will work in Horizon.&quot;&quot;&quot;   # players' words, at most 240 characters
+dev = &quot;&quot;&quot;26.3's dialog packets and model (#1720), ...&quot;&quot;&quot;             # crates, approach, what is left
+links = [&quot;#1720&quot;, &quot;#1734&quot;, &quot;docs/hosting.md&quot;]                       # #N, a repository path, or https://
+shipped_in = &quot;v0.2.58&quot;           # shipped items only: a game tag, launcher@x.y.z, or &quot;website&quot;
+post = &quot;...&quot;                     # optional: the announcement when it ships, if `plain` doesn't read as one
+announce = true                  # optional: when it ships, Kira also posts it on X (`post`, else `plain`)
+</code></pre>
+<ul>
+<li><strong>Short lists</strong> (issue #3859): <strong>Now holds at most 8 items, each with an <code>owner</code> and a tracking <code>issue</code></strong>; Next
+at most 12; everything else is Later or an issue. The owner decides the order of the work inside the item and
+keeps its tracking issue current (agents help). A Now item without anyone on it moves to Next or Later.</li>
+<li><strong>No dates, ever</strong>: Now, Next, Later. The check rejects month names, years, quarters and &quot;next week&quot;.
+&quot;Coming soon&quot; is the only phrase for something waiting on someone else (Microsoft sign-in, CurseForge).</li>
+<li><strong>Only what is decided.</strong> Ideas stay in issues and in the suggestion queue until they are.</li>
+<li><strong>Only what is true in a release</strong> for shipped items: a merged pull request isn't shipped until a release has it.</li>
+<li><code>plain</code> is for players: what they will be able to do, not how. <code>dev</code> is for contributors: the code, the
+vanilla classes, the pull requests, what is left. Both stay public: no machines, accounts or private notes.</li>
+<li>Help wanted items are good first contributions: a clear vanilla behaviour, an issue with steps, a place to
+start in <code>dev</code>.</li>
+</ul>
+<h2 id="keeping-it-current">Keeping it current</h2>
+<p>Whoever moves the work (the orchestrator on each heartbeat, or anyone in their pull request):</p>
+<ol>
+<li><code>python3 tools/roadmap.py sync</code>: every item whose linked pull requests all went out in a release, whose
+linked issues are all closed and that isn't <code>ongoing</code> becomes <code>shipped</code>, with that release in
+<code>shipped_in</code>, on top of the shipped items. It rewrites <code>roadmap.toml</code> and ROADMAP.md; open a pull request
+with the change (<code>skip-release</code>).</li>
+<li><code>python3 tools/roadmap.py check</code>: the file's rules, then GitHub's state of every link. It fails when a
+link is not an issue or pull request, when a tracking issue is not an open issue, when a Now item has no open pull request and none merged in the last
+14 days (link the new work, or move it to Next or Later), and when every link of a Help wanted item is
+closed. It also says which items <code>sync</code> will ship once a release has them.</li>
+<li>When work starts, opens a pull request or is decided: add or move the item, add its links, then
+<code>python3 tools/roadmap.py build</code>. Keep the overview's focus to the 3 to 5 biggest Now items.</li>
+<li><code>python3 tools/roadmap.py labels</code> (after the change merges): creates a <code>roadmap:&lt;id&gt;</code> label for each new
+item, updates their colour (by status) and description, and adds the label to the open pull requests an item
+links. Label a new pull request for an item by hand or by linking it and running <code>labels</code> again. Labels of
+removed items are listed, never deleted.</li>
+<li>Once a week, write the week's summary in <code>roadmap/journal/&lt;year&gt;-&lt;ISO week&gt;.md</code> (for example
+<code>2026-43.md</code>): <code># Title</code>, a paragraph or two for players, then <code>## Technical</code> and the same week for
+contributors, with its pull requests. <code>build</code> puts it into roadmap/roadmap.json, which the website reads from main; the hub's Journal tab
+shows it among the releases, and <code>/data/journal.json</code> carries it to Kira's #updates and to X.
+In the same pass, <code>python3 tools/parity_gaps.py readme --write</code> refreshes the parity headline: the
+player-visible gaps still open in the port ledger's ten lists (#3512 to #3521), on the README and the website.</li>
+<li>Suggestions come only from #horizon-ideas posts on Discord: Kira sends each one to the maintainers' private
+channel. A good one becomes an item in a normal pull request; none is published automatically.</li>
+</ol>
+<p>CI runs <code>tests/test_roadmap.py</code> (in the Python tests), which fails when ROADMAP.md is not what <code>build</code> writes
+or when the file breaks a rule; <code>python3 tools/roadmap.py check --offline</code> runs the same rules without GitHub.</p>
+<h2 id="the-journal">The journal</h2>
+<p>The hub's Journal tab and <code>https://playhorizon.dev/data/journal.json</code> are built with each deploy of the website
+(<code>src/hub.js</code> in horizon-rust/horizon-site). The tab shows every game and launcher release with its notes' changes, each placed under
+the roadmap item it moves (the pull request's <code>roadmap:&lt;id&gt;</code> label, else the item that links it), the merged pull
+requests no release has yet, and the weekly summaries above.</p>
+<p><code>journal.json</code> is what Kira reads for <code>#updates</code> and its X posts (kira's <code>src/journal.js</code>): one flat entry per
+merged pull request, release, shipped item and weekly summary, newest first, the latest 300.</p>
+<pre><code class="language-json">{ &quot;format&quot;: &quot;horizon-journal&quot;, &quot;version&quot;: 2, &quot;generated&quot;: &quot;…&quot;, &quot;url&quot;: &quot;https://playhorizon.dev/hub#journal&quot;,
+  &quot;entries&quot;: [
+    { &quot;id&quot;: &quot;pr-1788&quot;, &quot;kind&quot;: &quot;merge&quot;, &quot;date&quot;: &quot;…&quot;, &quot;title&quot;: &quot;the pull request's title&quot;, &quot;url&quot;: &quot;…&quot;,
+      &quot;number&quot;: 1788, &quot;item&quot;: &quot;discord-presence&quot;, &quot;item_title&quot;: &quot;Discord Rich Presence&quot; },
+    { &quot;id&quot;: &quot;release-v0.2.57&quot;, &quot;kind&quot;: &quot;release&quot;, &quot;date&quot;: &quot;…&quot;, &quot;title&quot;: &quot;…&quot;, &quot;plain&quot;: &quot;one line&quot;, &quot;url&quot;: &quot;…&quot;,
+      &quot;tag&quot;: &quot;v0.2.57&quot; },
+    { &quot;id&quot;: &quot;shipped-server-resource-packs&quot;, &quot;kind&quot;: &quot;shipped&quot;, &quot;date&quot;: &quot;the release's&quot;, &quot;title&quot;: &quot;…&quot;,
+      &quot;plain&quot;: &quot;…&quot;, &quot;url&quot;: &quot;https://playhorizon.dev/hub#server-resource-packs&quot;, &quot;item&quot;: &quot;…&quot;, &quot;item_title&quot;: &quot;…&quot;,
+      &quot;shipped_in&quot;: &quot;v0.2.48&quot;, &quot;post&quot;: &quot;at most 240 characters&quot;, &quot;announce&quot;: false },
+    { &quot;id&quot;: &quot;weekly-2026-43&quot;, &quot;kind&quot;: &quot;weekly&quot;, &quot;date&quot;: &quot;the week's last second&quot;, &quot;title&quot;: &quot;…&quot;, &quot;plain&quot;: &quot;…&quot;,
+      &quot;dev&quot;: &quot;…&quot;, &quot;url&quot;: &quot;https://playhorizon.dev/hub#week-2026-43&quot; } ] }
+</code></pre>
+<ul>
+<li>An <code>id</code> never changes: readers post each one once. <code>merge</code> entries are the pull requests players see (no
+<code>skip-release</code> label), plus any that moves a roadmap item; <code>item</code> is absent when none does.</li>
+<li><code>announce: true</code> (the item's <code>announce</code> key) asks Kira to post the shipped item on X too, with <code>post</code>.</li>
+<li><code>https://playhorizon.dev/data/roadmap.json</code> is <code>roadmap.toml</code> as JSON (<code>areas</code>, <code>items</code> with every key above,
+<code>overview</code>, the weekly summaries); an item's page is <code>https://playhorizon.dev/hub#&lt;id&gt;</code>.</li>
+</ul>
+<h2 id="the-intake-votes-and-bug-reports">The intake: votes and bug reports</h2>
+<p>The hub's forms and vote buttons talk to the telemetry server (<code>https://telemetry.playhorizon.dev</code>,
+<code>crates/horizon-telemetry-server</code>, <code>src/hub.rs</code> and <code>src/intake.rs</code>; its README lists the limits and settings).
+Kira uses the same endpoints, so a bug goes the same way from the site and from Discord.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Body</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /hub/vote</code></td>
+<td><code>{&quot;item&quot;: &quot;&lt;roadmap id&gt;&quot;, &quot;voter&quot;: &quot;&lt;random id, 16 to 64 characters&gt;&quot;, &quot;up&quot;: true}</code></td>
+<td><code>{&quot;item&quot;, &quot;votes&quot;}</code>; <code>&quot;up&quot;: false</code> takes the vote back</td>
+</tr>
+<tr>
+<td><code>GET /hub/votes</code></td>
+<td></td>
+<td><code>{&quot;votes&quot;: {&quot;&lt;item&gt;&quot;: n}}</code>, a minute old at most</td>
+</tr>
+<tr>
+<td><code>POST /hub/report</code></td>
+<td><code>{&quot;title&quot;, &quot;did&quot;, &quot;happened&quot;, &quot;expected&quot;, &quot;version&quot;?, &quot;system&quot;, &quot;name&quot;?}</code></td>
+<td>201 <code>{&quot;id&quot;, &quot;issue&quot;: &quot;&lt;GitHub URL&gt;&quot;}</code>; 202 <code>{&quot;id&quot;, &quot;issue&quot;: null}</code> when GitHub was down (opened later)</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>A report becomes an issue at once, labels <code>bug</code> and <code>from-website</code>, in the <code>#horizon-bugs</code> template (What I did,
+What happened, What I expected, Horizon version, OS, CPU, GPU) with &quot;Reported on playhorizon.dev&quot;. Every field
+but the version and the name is required; mentions, <code>#123</code> references and HTML in people's text are made inert.</li>
+<li>Errors are <code>{&quot;error&quot;: &quot;…&quot;}</code>: 400 names the field (<code>&quot;did: 3 to 2000 characters&quot;</code>), 429 means too many from that
+address, 503 a full day or reports turned off (no GitHub token on the server).</li>
+<li>The page shows the forms and the buttons only once <code>GET /hub/votes</code> answers. Until then it points to GitHub and
+Discord. It keeps a random voter id and the items it voted for in <code>localStorage</code> (<code>hub:voter</code>, <code>hub:voted</code>).</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/roadmap/README.md"><code>roadmap/README.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#an-item">An item</a></li><li class="l2"><a href="#keeping-it-current">Keeping it current</a></li><li class="l2"><a href="#the-journal">The journal</a></li><li class="l2"><a href="#the-intake-votes-and-bug-reports">The intake: votes and bug reports</a></li></ul></nav>
+</div>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

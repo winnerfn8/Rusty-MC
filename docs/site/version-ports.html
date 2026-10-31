@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Version ports: from a new Minecraft release to Rusty Minecraft · Rusty Minecraft docs</title>
+<meta name="description" content="Version ports: from a new Minecraft release to Rusty Minecraft: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details open><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html" aria-current="page">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="version-ports-from-a-new-minecraft-release-to-rusty-minecraft">Version ports: from a new Minecraft release to Rusty Minecraft</h1>
+<p>Goal: every Minecraft Java release is turned into Rust by Rusty Minecraft with as little human work as possible. A new
+release is detected, downloaded and prepared on the Mac mini, compared with the version Rusty Minecraft pins, everything
+data-driven is regenerated, every parity harness runs against it, and what is left is a ranked list of agent-sized
+work items, each a GitHub issue and a Kira card. This page is the design; <code>tools/version_port.py</code> implements it
+(status at the end).</p>
+<p>The downloads are for development only, on the Mac mini: nothing from them is ever committed, published or shipped
+to players. Players still prepare their own copy from their official launcher (<code>horizon-prepare</code>), as today.</p>
+<h2 id="how-rusty-minecraft-pins-and-prepares-263-today">How Rusty Minecraft pins and prepares 26.3 today</h2>
+<ul>
+<li>
+<p><strong>The pin.</strong> <code>research-lock.json</code> <code>minecraft</code>: the version id, the sha1 of Mojang's version JSON (and of the
+republished ones it accepts), the client and server jar sha1s, the Java major version. Vineflower, REA and JADX
+are pinned beside it.</p>
+</li>
+<li>
+<p><strong>The vanilla data.</strong> <code>tools/lab.py prepare</code> imports the client jar, the server jar and the client libraries from
+the user's own launcher install, unpacks the server bundler into <code>server-game.jar</code>, and writes the class
+inventories; <code>tools/lab.py decompile</code> runs Vineflower on both jars. On the Mac mini all of this lives once in
+<code>~/code/horizon-parity/shared-local/</code> (<code>minecraft/26.3/{jars,libraries,sources,reports}</code>, 366 MB), and every
+worktree links to it from <code>.local/</code>. Release builds never do this: <code>horizon-prepare</code> imports the user's copy.</p>
+</li>
+<li>
+<p><strong>The data generator.</strong> <code>horizon-prepare</code> runs <code>java -DbundlerMainClass=net.minecraft.data.Main -jar server.jar --reports</code> into <code>.local/datagen/out/reports/</code>: <code>blocks.json</code>, <code>registries.json</code>, <code>packets.json</code>,
+<code>commands.json</code>, <code>datapack.json</code>, item default components, biome parameters. It also runs Rusty Minecraft's Java
+exporters (<code>mods/horizon/src/test/java/dev/horizonlab/parity/Vanilla*Exporter.java</code>) against the jar for block
+behaviours, worldgen bundles and the like. CI does the same through <code>tools/ci/vanilla-data.sh</code>, keyed by the
+version in <code>research-lock.json</code>.</p>
+</li>
+<li>
+<p><strong>Version facts in the code.</strong> The client jar's own <code>version.json</code> states them (26.3: world version 5023,
+protocol 777, resource pack 97.1, data pack 121.0, Java 25). <code>tools/gen_version_consts.py</code> writes them into
+one generated file, <code>crates/horizon-core/src/version.rs</code> (<code>VANILLA_VERSION</code>, <code>PROTOCOL_VERSION</code>,
+<code>DATA_VERSION</code>, the pack formats, Java, <code>/version</code>'s build time), and every Rust site reads them from there
+(<code>horizon_protocol::PROTOCOL_VERSION</code>, <code>horizon_world::DATA_VERSION</code> and the save's version name are aliases
+of it; the status, the legacy ping, the crash report, <code>/version</code>, the title screens and the default resource
+folder use it). CI checks the file against the pinned jar (<code>--check</code>). Test fixtures that state a version
+(a level.dat to read, a relay message) keep their literals: they test parsing, not the pin.</p>
+</li>
+<li>
+<p><strong>Generated tables</strong> (each has its generator in <code>tools/</code>):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Generator</th>
+<th>Input</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>crates/horizon-core/src/version.rs</code></td>
+<td><code>gen_version_consts.py</code></td>
+<td>the client jar's <code>version.json</code></td>
+</tr>
+<tr>
+<td><code>crates/horizon-protocol/src/ids.rs</code></td>
+<td><code>generate_packet_ids.py</code></td>
+<td><code>packets.json</code> report</td>
+</tr>
+<tr>
+<td><code>crates/horizon-client/src/lan/tracking.rs</code></td>
+<td><code>generate_entity_tracking.py</code></td>
+<td>decompiled <code>EntityTypes</code></td>
+</tr>
+<tr>
+<td><code>crates/horizon-client/src/lan/command_suggestions.rs</code></td>
+<td><code>generate_command_suggestions.py</code></td>
+<td><code>VanillaCommandSuggestionsExporter</code></td>
+</tr>
+<tr>
+<td><code>crates/horizon-client/src/lan/command_order.rs</code></td>
+<td><code>generate_lan_command_order.py</code></td>
+<td>vanilla's command tree</td>
+</tr>
+<tr>
+<td><code>crates/horizon-command/src/vanilla_order.rs</code></td>
+<td><code>generate_command_order.py</code></td>
+<td>command-parse harness export</td>
+</tr>
+<tr>
+<td><code>crates/horizon-world/src/datafix/block_state_data.txt</code></td>
+<td><code>gen_block_state_data.py</code></td>
+<td>decompiled <code>BlockStateData</code></td>
+</tr>
+<tr>
+<td><code>crates/horizon-world/src/datafix/flat_tables.rs</code></td>
+<td><code>gen_flat_tables.py</code></td>
+<td>1.13 flattening fixers (never change)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Everything else data-driven (block behaviours, items, worldgen, models, sounds, languages) is not committed: the
+game reads what <code>horizon-prepare</code> exports from the user's own jar, so it follows a new version by itself as long
+as the exporters still compile and the formats still parse.</p>
+</li>
+<li>
+<p><strong>The proof.</strong> ~300 harnesses (<code>tools/test_*_parity.py</code>) each compare a Rust probe with a Java oracle that calls
+vanilla's own classes; <code>tools/parity.py</code> runs them and records each one's dependencies.</p>
+</li>
+</ul>
+<h2 id="the-pipeline">The pipeline</h2>
+<pre><code>detect ─► prepare NEW ─► diff OLD..NEW ─► regenerate ─► harnesses on NEW ─► port report ─► issues + cards
+ (daily)   (download,     (data, protocol,  (generators   (candidate          (ranked work    (agents port,
+           verify,         registries,       per kind)     worktree)           items)          pin bump PR,
+           datagen,        assets, classes                                                     release)
+           class index)    → Rusty Minecraft map)
+</code></pre>
+<p><code>tools/version_port.py</code> has one subcommand per stage and <code>port NEW</code> runs them all. Each stage writes its result
+under the version store and can be rerun alone.</p>
+<h3 id="the-version-store">The version store</h3>
+<p><code>~/code/horizon-parity/versions/&lt;id&gt;/</code> (<code>HORIZON_VERSIONS</code> overrides it), next to <code>shared-local/</code> and never inside
+it:</p>
+<pre><code>versions/26.4/
+  version.json            Mojang's version JSON (sha1 checked against the manifest)
+  jars/client.jar         sha1 checked against version.json
+  jars/server.jar         the bundler; server-game.jar beside it, unpacked with sha256 checks
+  datagen/reports/...     the data generator's --reports output
+  classes.json            the class index: every class's methods, each with a normalized bytecode hash
+  facts.json              world/protocol/pack/Java versions from the jar's own version.json
+  prepared.json           what was made, with which tool versions
+versions/diff-26.3-26.4/  the diff, the source diffs of changed classes, the port report
+</code></pre>
+<p>About 150 MB a version (jars 120 MB, reports 20 MB, index 10 MB): client libraries are not needed (the data
+generator runs from the bundler, which carries its own) and the full Vineflower tree is not kept (only changed
+classes are decompiled, below). The store keeps at most three versions, the pinned one (whose files already exist in
+<code>shared-local/</code>, so it is only indexed, not copied), the previous one and the candidate; <code>version_port.py gc</code>
+deletes the rest and every scratch directory. Snapshots, if prepared, are deleted when the next one is.</p>
+<h3 id="detect">Detect</h3>
+<p><code>version_port.py detect</code> reads <code>https://piston-meta.mojang.com/mc/game/version_manifest_v2.json</code>, compares the
+latest release (and, with <code>--snapshots</code>, the latest snapshot) with the pin and with
+<code>versions/detect-state.json</code>, and prints what is new; exit status 0 means &quot;nothing new&quot;, 10 &quot;new release&quot;,
+11 &quot;new snapshot&quot;. It needs only the network, so it can run anywhere:</p>
+<ul>
+<li><strong>Mac mini, launchd (chosen):</strong> the agent <code>dev.horizon.version-port</code> (<code>tools/ci/dev.horizon.version-port.plist</code>)
+runs <code>tools/ci/version-port-daily.sh</code> daily at 16:00 Zurich time (14:00 UTC in summer, 15:00 in winter; Mojang
+publishes on weekdays around 10:00-14:00 UTC), in a dedicated worktree of <code>origin/main</code>
+(<code>~/code/horizon-parity/port-main</code>), at nice 10 with low-priority I/O (the plist's <code>Nice</code> and
+<code>LowPriorityIO</code>; <code>~/fleet/load prio low</code> would lower the calling agent session instead). The whole port runs where the vanilla
+data, Java and the harnesses are. See &quot;Turning on the daily agent&quot; below.</li>
+<li><strong>GitHub Actions:</strong> a scheduled job could run <code>detect</code> alone and open a &quot;Minecraft X is out&quot; issue; the Mac mini
+would still have to do the rest, so it adds a hop for nothing. Kept as the fallback if the Mac mini is down for
+long.</li>
+</ul>
+<p>Snapshots are optional and only ever diffed (<code>port --snapshot</code>: prepare, diff, report, no issues), as an early
+warning: agents can read what 26.4 changes weeks before it ships.</p>
+<h3 id="prepare">Prepare</h3>
+<p><code>version_port.py prepare NEW</code>:</p>
+<ol>
+<li>Fetch the manifest, the version JSON (check its sha1 against the manifest), the client and server jars (check
+their sha1s against the version JSON); <code>lab.download</code> already refuses partial or mismatched files. Releases
+since 26.1 ship unobfuscated, so no mappings are fetched; an obfuscated version (<code>client_mappings</code> present)
+stops here, as <code>lab.py prepare</code> does.</li>
+<li>Unpack the server bundler (<code>lab.unpack_server</code>: one version, sha256 per entry).</li>
+<li>Read the jar's <code>version.json</code> into <code>facts.json</code>. If its Java major is newer than the JDK on the Mac mini, stop
+with a single work item, &quot;install JDK N&quot; (a Ludovic task: fleet toolchains).</li>
+<li>Run the data generator (<code>--reports</code>) with that JDK into <code>datagen/reports/</code>.</li>
+<li>Index the classes of <code>client.jar</code> and <code>server-game.jar</code> into <code>classes.json</code>: for each class its superclass,
+interfaces, fields, and methods; each method's hash is over its bytecode with every constant-pool reference
+replaced by what it names (class, member, descriptor, literal), so recompiling unchanged code with a shifted
+constant pool hashes the same, and lambda bodies (<code>lambda$name$N</code>) are folded into the method that declares them
+so renumbered lambdas don't show as changes. This is exact where a decompiled-source diff is noisy, and takes
+seconds instead of the 10 minutes of a full Vineflower run.</li>
+</ol>
+<p>The pinned version is indexed from <code>shared-local/</code> the same way, without copying its jars.</p>
+<h3 id="diff">Diff</h3>
+<p><code>version_port.py diff OLD NEW</code> writes <code>diff.json</code> (and readable sections of the report), one section per kind:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>From</th>
+<th>What it lists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Facts</td>
+<td><code>facts.json</code></td>
+<td>protocol, world (data) version, pack formats, Java</td>
+</tr>
+<tr>
+<td>Packets</td>
+<td><code>packets.json</code></td>
+<td>per state and direction: added, removed, renumbered packets</td>
+</tr>
+<tr>
+<td>Registries</td>
+<td><code>registries.json</code></td>
+<td>per registry: added and removed entries, protocol-id shifts, new registries</td>
+</tr>
+<tr>
+<td>Blocks</td>
+<td><code>blocks.json</code></td>
+<td>added and removed blocks; per block: properties and values, state count, default state</td>
+</tr>
+<tr>
+<td>Item components</td>
+<td><code>components/item</code></td>
+<td>per item: added, removed and changed default components</td>
+</tr>
+<tr>
+<td>Commands</td>
+<td><code>commands.json</code></td>
+<td>added and removed nodes, changed arguments and executability</td>
+</tr>
+<tr>
+<td>Data packs</td>
+<td>jar <code>data/minecraft/**</code></td>
+<td>added, removed, changed files by kind (recipe, loot table, worldgen, tags...), with a JSON path diff for changed files</td>
+</tr>
+<tr>
+<td>Assets</td>
+<td>jar <code>assets/minecraft/**</code></td>
+<td><code>en_us.json</code> keys added, removed, changed; models, blockstates, textures, sounds added, removed, changed (by hash)</td>
+</tr>
+<tr>
+<td>Classes</td>
+<td><code>classes.json</code></td>
+<td>added, removed and changed classes; per changed class the methods added, removed and changed (name and descriptor), field changes, hierarchy changes</td>
+</tr>
+</tbody>
+</table></div>
+<p>Changed classes are then decompiled, only those, on both sides: Vineflower runs on a small jar holding just those
+classes (with the full jar as a library, so types resolve), and a unified diff per class goes into
+<code>diff-OLD-NEW/sources/</code>. These diffs stay on the Mac mini: decompiled game code is never committed or posted
+(<code>tools/check_public_tree.py</code>).</p>
+<h3 id="from-vanilla-classes-to-rusty-minecraft-modules">From vanilla classes to Rusty Minecraft modules</h3>
+<p>The diff matters only through what it changes in Rusty Minecraft. <code>version_port.py map</code> builds <code>vanilla_map.json</code>, from
+the repository alone, in seconds:</p>
+<ol>
+<li><strong>Oracles → classes.</strong> Each Java oracle and exporter under <code>mods/horizon/src/test/java/dev/horizonlab/parity/</code>
+names the vanilla classes it imports and uses (<code>net.minecraft.*</code> imports and fully qualified names).</li>
+<li><strong>Harnesses → oracles and Rust.</strong> Each <code>tools/test_*_parity.py</code> names its oracle class; its probe (a crate's
+example or binary named in the script) and its <code>PARITY_RUST_SCOPE</code> give the Rust files it proves.</li>
+<li><strong>Rust → classes.</strong> Rusty Minecraft's doc comments name the vanilla code they port (<code>/// SharedConstants.getProtocolVersion()</code>,
+<code>//! Fixes of 1.21.6 to 26.3</code>, <code>EntityType.Builder clientTrackingRange</code>...): every CamelCase identifier in a
+comment that is the simple name of exactly one vanilla class (or <code>Outer.Inner</code>, or <code>Class.method</code>) maps that
+Rust file, and the method when named, to the class.</li>
+</ol>
+<p>A changed vanilla class then resolves to the Rusty Minecraft files that port it and the harnesses that prove them; a
+changed method resolves more precisely when a comment names it. A class with Rusty Minecraft code but no harness, or with
+neither, is reported as such.</p>
+<h3 id="regenerate">Regenerate</h3>
+<p><code>version_port.py regen NEW</code> (<code>tools/port_regen.py</code>) makes the candidate and regenerates every table in it:</p>
+<ol>
+<li><strong>The candidate</strong>: a worktree of the branch <code>port/NEW</code> (from <code>--base</code>, default <code>origin/main</code>) in
+<code>~/code/horizon-parity/ports/NEW</code> (<code>HORIZON_PORTS</code>), with <code>research-lock.json</code> pinned to NEW: version, the
+version JSON's sha1, the jars' sha1s, Java. Every tool reads the version from the lock (<code>lab.VERSION</code>,
+<code>lab.GAME</code>, <code>lab.RESOURCES</code>), so nothing else in the tree names the old one.</li>
+<li><strong>Its <code>.local/</code></strong>, a real directory: <code>minecraft/NEW</code> is prepared by <code>tools/lab.py prepare</code> itself, from a
+launcher-shaped copy of the download in the version store (<code>versions/NEW/launcher</code>: the version JSON, the client
+jar and its libraries, verified by sha1) into <code>versions/NEW/game</code>, so the candidate's jars, libraries and
+manifest are exactly what a player's install gives. <code>datagen/out/reports</code> links to NEW's reports, <code>tools</code> to the
+shared tools. Nothing is written into <code>shared-local/</code>.</li>
+<li><strong>Decompiled sources</strong>: only the classes a generator parses (<code>EntityTypes</code>, <code>BlockStateData</code>), each decompiled
+alone with the full jar and its libraries on Vineflower's path, into <code>versions/NEW/sources/</code> (seconds instead of
+a 10-minute full run). The source is not the full run's text (inner classes of the jar's other classes are
+imported, chained calls are not wrapped), but what the generators read from it is: from 26.3's they write the
+committed tables byte for byte.</li>
+<li><strong>The generators</strong>, every row of the table above, each recorded in <code>diff-OLD-NEW/regen.json</code> as unchanged,
+regenerated (with its <code>--numstat</code>) or failed (with the end of its output and, when an exporter or oracle no
+longer compiles, javac's errors one per line: they name the vanilla API that changed). Rust outputs are
+rustfmt'ed. The pin and what regenerated are committed on <code>port/NEW</code>, locally; nothing is pushed.</li>
+</ol>
+<p>The report then lists what was regenerated in its summary and makes each failed generator a rank-1 item, instead of
+guessing which tables the diff made stale. <code>--only NAME...</code> reruns some generators; <code>port NEW</code> runs <code>regen</code> after
+<code>diff</code> (<code>--no-regen</code> for snapshots).</p>
+<p>Three generators run vanilla through Rusty Minecraft's Java oracles (<code>VanillaCommandSuggestionsExporter</code>,
+<code>VanillaCommandParseOracle</code>) and one builds <code>command_parse_fixture</code> (Rusty Minecraft's command tree in its own registration
+order, before <code>vanilla_order.rs</code> reorders it), so <code>regen</code> needs Java and Cargo. <code>horizon-prepare</code> (the resources the
+harnesses read) is the next stage's first step.</p>
+<h3 id="run-every-harness-against-the-new-version">Run every harness against the new version</h3>
+<p><code>version_port.py harnesses NEW [NAME...] --baseline STATE</code> (<code>tools/port_harness.py</code>), in the candidate <code>regen</code>
+made:</p>
+<ol>
+<li>
+<p><strong>horizon-prepare</strong>, built from the candidate and run there: <code>.local/horizon-client/NEW</code> and its exporters'
+outputs. Its <code>sounds</code> and <code>panorama</code> steps read the version store's launcher-shaped copy, whose asset index and the
+objects those steps copy (about 370 MB of sounds) are downloaded once per version from Mojang's resource server,
+each checked against its sha1. Regen's link to the version store's data generator reports is dropped first:
+horizon-prepare runs the generator itself, into the candidate. When the exporters no longer compile against NEW,
+the stage goes on and the report gets a rank-1 item with javac's errors (read from the log horizon-prepare names).</p>
+</li>
+<li>
+<p><strong><code>tools/parity.py --all</code></strong> there (or the harnesses named), from scratch.</p>
+</li>
+<li>
+<p><strong>Each harness classified</strong>:</p>
+<ul>
+<li><strong>pass</strong>: Rusty Minecraft already matches NEW there;</li>
+<li><strong>oracle</strong>: its log has javac errors, so vanilla's API changed under the oracle (javac names the symbol);</li>
+<li><strong>fail</strong>: behaviour changed (or Rusty Minecraft's data reading broke); the log has the first differing case;</li>
+</ul>
+<p>and <strong>newly failing</strong> unless it fails in the baseline too: <code>--baseline</code> is a <code>tools/parity.py</code> <code>state.json</code> from
+a run on the pinned version (the nightly audit's, or any worktree of <code>main</code>), so the known failures of <code>main</code> don't
+count. <code>--no-run</code> classifies the last run again against another baseline.</p>
+</li>
+</ol>
+<p>The result is <code>diff-OLD-NEW/harnesses.json</code>, with the logs of the harnesses that don't pass copied beside it
+(<code>harness-logs/</code>, local only). <code>report</code> reads it: a newly failing harness marks the rank-2 item that names it as
+failing (or &quot;oracle no longer compiles&quot;), a newly failing harness no item names gets its own rank-2 item, and the
+summary counts pass / oracle / fail / newly failing.</p>
+<h3 id="the-port-report">The port report</h3>
+<p><code>diff-OLD-NEW/report.md</code> and <code>report.json</code>:</p>
+<ol>
+<li>
+<p>Summary: facts changed, counts per kind, generators (clean / regenerated / failed), harnesses (pass / oracle
+broken / fail).</p>
+</li>
+<li>
+<p>Work items, ranked. An item is one Rusty Minecraft area, not one vanilla class: changed classes are grouped by the
+Rusty Minecraft module (or, for unported code, by vanilla package) that owns them, so each item is a PR-sized task. Rank:</p>
+<ol>
+<li>blocks the switch: protocol or save format (packets, registries the protocol syncs, data version and the new
+DataFixer schemas), a failed generator, an exporter that no longer compiles;</li>
+<li>a harness that fails or whose oracle no longer compiles;</li>
+<li>a changed class Rusty Minecraft ports but no harness covers (the risky kind: nothing will catch a difference);</li>
+<li>new content in data packs and assets the game reads at runtime (usually nothing to do: listed so it gets a
+look);</li>
+<li>changed vanilla code Rusty Minecraft doesn't port yet (informational, no issue).</li>
+</ol>
+<p>Within a rank, by the number of changed methods. Each item lists the vanilla classes and methods, the Rusty Minecraft
+files and harnesses, the data-diff excerpts that concern it, and the local path of its source diffs.</p>
+</li>
+<li>
+<p>Everything regenerated cleanly, so the reader knows what not to look at.</p>
+</li>
+</ol>
+<p><code>version_port.py publish OLD NEW</code> (<code>tools/port_publish.py</code>) files the report as GitHub issues. <strong>It is a dry run
+by default</strong>: it prints every issue it would create or update and the first bodies (<code>--show N</code>; <code>--check-github</code>
+reads the open issues and labels, read-only, to tell creates from updates). <code>--yes</code> does it; the first <code>--yes</code> run
+and the <code>version-port</code> label are Ludovic's call.</p>
+<ul>
+<li><strong>One issue per item</strong> of rank 1, of rank 2 when a harness newly fails on NEW (or its oracle no longer compiles),
+and of rank 3 when Rusty Minecraft's comments name one of the changed methods: title <code>[NEW] &lt;item&gt;</code>, labels
+<code>version-port</code> and <code>port-NEW</code>. An open issue with the same title is updated, and only its generated part
+(between <code>&lt;!-- version-port: generated --&gt;</code> markers) is replaced: what people wrote around it stays.</li>
+<li><strong>One tracking issue</strong>, <code>[NEW] Port to Minecraft NEW</code>: the facts, the harness counts, a checklist of the item
+issues (made after them, so it has their numbers), and every other item: rank-2 leads no harness confirmed, rank-3
+classes Rusty Minecraft names but none of whose changed methods, new content, unported changes.</li>
+<li><strong>Kira</strong>: the board already shows every open issue as a card in To do, with its labels, so contributors and agents
+claim them there (<code>task_claim</code>); <code>publish</code> adds one Kira card for the port itself, linking the tracking issue
+(<code>~/code/horizon-parity/tools/kira.mjs card_add</code>, skipped if the board has it).</li>
+<li><strong>No decompiled code, ever</strong>: bodies hold names and signatures only (vanilla classes, methods with their JVM
+descriptors, fields, packets, registry entries, harness names, javac's one-line errors about Rusty Minecraft's own oracles,
+Rusty Minecraft paths, and the local path of the diff). Every vanilla-derived string is quoted, and <code>assert_no_code</code>
+refuses a body with a code block, or a line or quoted span that reads like Java (declarations, statements, braces).</li>
+</ul>
+<p>For 26.2 → 26.3 the dry run would file 48 issues (5 of rank 1, 43 of rank 3) and the tracking issue.</p>
+<h3 id="the-switch-and-the-release">The switch and the release</h3>
+<p>Work items are fixed on <code>port/NEW</code> branches stacked on the candidate (or as normal PRs into it). The pin bump PR is
+the candidate branch itself: <code>research-lock.json</code> (version, sha1s, Java), the regenerated tables and
+<code>version_consts</code>, the oracle fixes, and the ports. It merges when the report says no rank 1 or 2 item is left: every
+harness passes against NEW, CI's vanilla data (<code>tools/ci/vanilla-data.sh</code>) and the Mac mini's <code>shared-local/</code> have
+been switched to NEW (the version store's files are copied in, then <code>lab.py decompile</code> runs once for the full
+sources), and a playtest shows a world loads and a vanilla NEW client can join a Rusty Minecraft LAN world.</p>
+<p>A Rusty Minecraft release then ships as usual (<code>docs/release-flow.md</code>), labelled <code>feature</code> with &quot;Minecraft NEW&quot; in its
+title. Its <code>research-lock.json</code> makes <code>horizon-prepare</code> ask for NEW, so players must have played NEW once in the
+official launcher; the launcher already reads each release's game version from its <code>research-lock.json</code>, so players
+who haven't can keep the previous Rusty Minecraft release. Supporting two Minecraft versions in one build is out of scope.</p>
+<h2 id="turning-on-the-daily-agent">Turning on the daily agent</h2>
+<p>Not installed: it runs Mojang downloads, Cargo, Java and every harness on the Mac mini unattended, and its
+<code>publish</code> dry run prepares issues under a new <code>version-port</code> label, so both need Ludovic's approval. What it does
+on each run (<code>tools/ci/version-port-daily.sh</code>):</p>
+<ol>
+<li>update its worktree of <code>origin/main</code> (<code>~/code/horizon-parity/port-main</code>, made on the first run, <code>.local/</code> linking
+the shared data as a parity worktree does);</li>
+<li><code>version_port.py detect --dry-run</code> (<code>--snapshots</code> with <code>HORIZON_PORT_SNAPSHOTS=1</code>): nothing new ends the run;</li>
+<li>for a new release: <code>port NEW</code> (prepare both, diff, regen into <code>ports/NEW</code> on the local branch <code>port/NEW</code>, report),
+<code>tools/parity.py</code> on main as the baseline (only what never passed or changed reruns), <code>harnesses NEW</code> against
+that baseline, <code>report OLD NEW</code>, and <code>publish OLD NEW --check-github</code> (the dry run: the log lists the issues it
+would file). A snapshot is only prepared, diffed and reported;</li>
+<li><code>detect</code> again, so the version is remembered only once its port went through (a failed run retries the next day),
+and a note on Kira card 28 (<code>HORIZON_PORT_KIRA_CARD</code>) saying the report is ready.</li>
+</ol>
+<p>It never runs <code>publish --yes</code>, never pushes and never changes <code>shared-local/</code>. <code>HORIZON_PORT_VERSION=V</code> ports V at
+once (by hand, or to replay a version); <code>HORIZON_PORT_REF</code> checks out another ref than <code>origin/main</code>.</p>
+<p>To turn it on, on the Mac mini (as Ludovic, once approved):</p>
+<pre><code class="language-sh"># 1. The label publish files issues under (once):
+gh label create version-port --repo horizon-rust/horizon --color 5319e7 \
+  --description &quot;Work to port Rusty Minecraft to a new Minecraft release (tools/version_port.py publish)&quot;
+# 2. The script, as a copy from main (it updates its own worktree, so it never runs from a checkout):
+curl -fsSL https://raw.githubusercontent.com/horizon-rust/horizon/main/tools/ci/version-port-daily.sh \
+  -o ~/code/horizon-parity/version-port-daily.sh
+# 3. The agent:
+curl -fsSL https://raw.githubusercontent.com/horizon-rust/horizon/main/tools/ci/dev.horizon.version-port.plist \
+  | sed &quot;s|@HOME@|$HOME|g&quot; &gt; ~/Library/LaunchAgents/dev.horizon.version-port.plist
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.horizon.version-port.plist
+# A run now, to see it work (log: ~/Library/Logs/horizon-version-port.log):
+launchctl kickstart gui/$(id -u)/dev.horizon.version-port
+</code></pre>
+<p>To turn it off: <code>launchctl bootout gui/$(id -u)/dev.horizon.version-port</code> and delete the plist. When the report is
+in, publishing is still by hand: <code>python3 tools/version_port.py publish OLD NEW</code> (dry run), then <code>--yes</code>.</p>
+<h2 id="what-stays-manual-and-how-small-it-gets">What stays manual, and how small it gets</h2>
+<p>Automatic: detecting, downloading, verifying, the data generator, every diff, the class-to-module map, regenerating
+data-driven tables, rerunning every harness, the report, issues and cards, and, once the report is clean, the pin
+bump branch.</p>
+<p>Manual, by agents (and Ludovic's review):</p>
+<ul>
+<li><strong>New mechanics</strong> (a new mob, block behaviour, worldgen feature, UI screen): someone has to port the new code. The
+pipeline hands them the exact classes and methods, the decompiled diff, the Rusty Minecraft module and the harness to
+extend, so the agent starts at the code instead of searching for it.</li>
+<li><strong>Changed behaviour under a failing harness</strong>: the harness names the case, the class diff names the method.</li>
+<li><strong>Oracles whose vanilla API moved</strong>: javac names the symbol; usually a short fix.</li>
+<li><strong>New harnesses</strong> for rank-3 items, where Rusty Minecraft ports code that no harness checks.</li>
+<li><strong>New JDK</strong>: a fleet toolchain install, once per Java bump.</li>
+<li><strong>Judgment on the switch</strong>: merging the pin bump and releasing stay Ludovic's call.</li>
+</ul>
+<h2 id="replay-262--263">Replay: 26.2 → 26.3</h2>
+<p>Rusty Minecraft was written against 26.3 from its first commit, so its code is the ground truth of what porting 26.2 to 26.3
+takes. On the Mac mini, <code>prepare 26.2</code> took 9 s (136 MB), <code>diff 26.2 26.3</code> 6 s and <code>report</code> under a second.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>What 26.3 needed (in Rusty Minecraft's code)</th>
+<th>What the report found</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Protocol 777, DataVersion 5023, pack formats</td>
+<td>rank 1: protocol 776 → 777, world version 4903 → 5023, resource pack 88.0 → 97.1, data pack 107.1 → 121.0, with every site stating them (<code>PROTOCOL_VERSION</code>, both <code>DATA_VERSION</code>s, the <code>&quot;26.3&quot;</code> names)</td>
+</tr>
+<tr>
+<td><code>ids.rs</code>: <code>ADD_TRANSIENT_BLOCK</code>, <code>POST_EFFECTS</code> (configuration and play), <code>SWING_ANIMATION</code>, serverbound <code>PUNCH</code> instead of <code>SWING</code>; handlers in <code>packets/play.rs</code>, <code>lan/hub.rs</code></td>
+<td>rank 1: exactly those packets, 131 renumbered, those files, and &quot;regenerate <code>ids.rs</code>&quot;. Regenerating from 26.3's report reproduces the committed file byte for byte (after rustfmt); from 26.2's it differs by 274 lines</td>
+</tr>
+<tr>
+<td>DataFixers 4996-5016 in <code>datafix/fixes_c.rs</code></td>
+<td>rank 1: schemas V4996, V4996_1, V4997, V5000 and 16 new fixes (<code>MergeTerrainChunkStatusFix</code>, <code>ExplorerMapItemFix</code>, <code>SwingAnimationComponentSplitFix</code>...), with <code>datafix/</code></td>
+</tr>
+<tr>
+<td><code>swing_animation</code> split into <code>attack_animation</code> and <code>interact_animation</code> (<code>first_person.rs</code>, <code>game/hand.rs</code>, <code>item_model.rs</code>)</td>
+<td>rank 1: data component types +13 -2, those files among the ones naming them; per component, 1,537 items affected</td>
+</tr>
+<tr>
+<td><code>lan/tracking.rs</code> and the command tables</td>
+<td>rank 1: regenerate <code>tracking.rs</code>, <code>command_suggestions.rs</code>, <code>command_order.rs</code>, <code>vanilla_order.rs</code></td>
+</tr>
+<tr>
+<td>133 methods that exist only in 26.3 and that Rusty Minecraft's comments name (<code>Minecraft.startAttack</code>, <code>MultiPlayerGameMode.piercingAttack</code>, <code>SkyRenderer.buildEndSky</code>, <code>GameRenderer.render3dHud</code>...)</td>
+<td>all 133: 132 in rank 2-3 items with the method named, on the file that ports it; 1 in the save-format item</td>
+</tr>
+<tr>
+<td>49 classes that exist only in 26.3 and that Rusty Minecraft names (<code>ComputeCommand</code>, <code>PostEffectCommand</code>, <code>LivingEntity.SwingState</code>, <code>BlockTransformer</code>, <code>StrawBedBlock</code>...)</td>
+<td>all 49, in rank 4 &quot;New in <package>&quot; items</td>
+</tr>
+</tbody>
+</table></div>
+<p>The report has 499 items: 10 of rank 1, 311 of rank 2, 96 of rank 3, 80 of rank 4, and 2 rank-5 summaries. Rank 1 is
+exact. Ranks 2 and 3 are leads, not all work: 173 of their 407 items have a changed method that Rusty Minecraft's comments
+name. The rest are classes whose changed methods Rusty Minecraft doesn't name. Many of those are mechanical (26.3 renamed
+<code>GuiGraphics</code> to <code>GuiGraphicsExtractor</code> and reworked the render pipeline), and 105 are &quot;widely named&quot; buckets
+(classes such as <code>Entity</code> that many files mention in passing). Running every harness against the new version is what turns a
+rank-2 lead into a confirmed failure; since the oracles are written against 26.3, the replay runs that stage both ways
+(below).</p>
+<h3 id="regen"><code>regen</code></h3>
+<p><code>regen 26.2</code> from a branch pinned to 26.3, then <code>regen 26.3 --base port/26.2</code>, both from versions downloaded from
+Mojang (<code>prepare --download</code>):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Generator</th>
+<th>26.3 → 26.2</th>
+<th>26.2 → 26.3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>version_consts</code></td>
+<td>regenerated (+8 -8: protocol 776, data version 4903, packs 88.0 / 107.1, build time)</td>
+<td>regenerated, back to the committed file</td>
+</tr>
+<tr>
+<td><code>packet_ids</code></td>
+<td>regenerated (+134 -142)</td>
+<td>regenerated (+142 -134), back to the committed file</td>
+</tr>
+<tr>
+<td><code>entity_tracking</code></td>
+<td>regenerated (+10 -13)</td>
+<td>regenerated (+13 -10), back to the committed file</td>
+</tr>
+<tr>
+<td><code>block_state_data</code></td>
+<td>regenerated (+1 -1: the version in its header; <code>BlockStateData</code> is unchanged)</td>
+<td>regenerated, back to the committed file</td>
+</tr>
+<tr>
+<td><code>lan_command_order</code>, <code>vanilla_command_order</code></td>
+<td>failed: <code>VanillaCommandParseOracle.java:81: no suitable constructor found for CommandSourceStack(...)</code> and 2 more</td>
+<td>unchanged</td>
+</tr>
+<tr>
+<td><code>command_suggestions</code></td>
+<td>failed: <code>ParityData.java:45: cannot find symbol: variable WORLD (class RegistryLayer)</code>, <code>WORLD_REGISTRIES</code></td>
+<td>unchanged</td>
+</tr>
+</tbody>
+</table></div>
+<p>After the round trip, <code>port/26.3</code> equals the branch it started from except <code>research-lock.json</code>'s five lines of
+republished 26.3 version JSONs it accepts (which a port cannot know). So every table Rusty Minecraft commits is what the
+generators make from vanilla's data, and going 26.3 → 26.2 fails exactly where Rusty Minecraft's oracles use 26.3-only API,
+with javac naming it. The report for 26.2 → 26.3 then has 5 rank-1 items instead of 10: the 5 &quot;regenerate&quot; guesses
+are replaced by the generators' results in its summary. Both regens took under three minutes, most of it building
+<code>command_parse_fixture</code>.</p>
+<h3 id="harnesses"><code>harnesses</code></h3>
+<p>The 17 harnesses closest to what 26.3 changed (block_properties, chunk_generation, command_exec, command_parse,
+component_patch, datafix, entity_components, first_person, food, hotbar, item_model, lan, light, options,
+resource_pack, save_roundtrip, sound_event; 22 runs with datafix's 6 shards), on the Mac mini at 2 to 3 jobs while CI
+and other sessions ran:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th></th>
+<th>26.3 → 26.2 (<code>ports/26.2</code>)</th>
+<th>26.2 → 26.3 (<code>ports/26.3</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>horizon-prepare</td>
+<td>failed: <code>VanillaHeightmapOracle.java:33: cannot find symbol: variable FULL_CODEC (class BlockState)</code> (rank 1)</td>
+<td>ok, sounds and panorama from the downloaded assets</td>
+</tr>
+<tr>
+<td>pass</td>
+<td>1 (<code>food</code>)</td>
+<td>17</td>
+</tr>
+<tr>
+<td>oracle no longer compiles</td>
+<td>4: <code>chunk_generation</code> (<code>ServerChunkCache</code> constructor), <code>command_exec</code> (<code>com.mojang.authlib.services</code>), <code>command_parse</code> and <code>hotbar</code> (<code>RegistryLayer.WORLD</code>)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>fail</td>
+<td>12 (Rusty Minecraft's 26.3 packet tables and resources don't build or match 26.2)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>newly failing, against the other direction's run as baseline</td>
+<td>16</td>
+<td>0</td>
+</tr>
+<tr>
+<td>time</td>
+<td>about an hour, most of it datafix's vanilla upgrades</td>
+<td>about 85 min, 10 of them horizon-prepare</td>
+</tr>
+</tbody>
+</table></div>
+<p>So on a real port the stage separates the three cases the report needs: what already works on NEW, oracles whose
+vanilla API moved (javac names the symbol, as for regen), and behaviour that changed; and a candidate that is right
+passes everything it ran. The 26.2 → 26.3 report's summary now reads &quot;harnesses on 26.3: 17 pass, 0 whose oracle no
+longer compiles, 0 fail; 0 newly failing&quot;.</p>
+<h2 id="implementation-status">Implementation status</h2>
+<pre><code class="language-sh">python3 tools/version_port.py detect --snapshots     # exit 10: new release, 11: new snapshot
+python3 tools/version_port.py prepare 26.3           # the pinned version: indexes .local, downloads nothing
+python3 tools/version_port.py prepare 26.4           # downloads, verifies, runs the data generator (about 10 s)
+python3 tools/version_port.py diff 26.3 26.4         # summary; the full diff in versions/diff-26.3-26.4/diff.json
+python3 tools/version_port.py regen 26.4            # ports/26.4 on port/26.4: pinned, every table regenerated
+python3 tools/version_port.py report 26.3 26.4 [--results .local/parity-runner/state.json]   # report.md, report.json
+python3 tools/version_port.py harnesses 26.4 --baseline .local/parity-runner/state.json   # in ports/26.4
+python3 tools/version_port.py publish 26.3 26.4     # dry run: the issues it would file (--yes files them)
+python3 tools/version_port.py port 26.4             # prepare both, diff, regen, report
+python3 tools/version_port.py gc                     # keep the pinned version and the newest two others
+python3 tools/vanilla_map.py versions/26.3/classes.json net.minecraft.world.food.FoodData   # its Rust files and harnesses
+</code></pre>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Slice</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>This design</td>
+<td>this page</td>
+</tr>
+<tr>
+<td><code>detect</code>, <code>prepare</code>, <code>diff</code> (facts, packets, registries, blocks, items, commands, data, assets), <code>gc</code></td>
+<td>done</td>
+</tr>
+<tr>
+<td>Class index (<code>tools/class_index.py</code>), class diff with moves, <code>vanilla_map.json</code> (<code>tools/vanilla_map.py</code>)</td>
+<td>done</td>
+</tr>
+<tr>
+<td>Port report (<code>tools/port_report.py</code>, <code>report</code>), <code>port</code></td>
+<td>done</td>
+</tr>
+<tr>
+<td><code>version_consts</code>: one generated file for the version facts (<code>tools/gen_version_consts.py</code>)</td>
+<td>done</td>
+</tr>
+<tr>
+<td>Tools read the version from the lock (<code>lab.VERSION</code>, <code>lab.GAME</code>, <code>lab.RESOURCES</code>, <code>lab.version_info()</code>)</td>
+<td>done</td>
+</tr>
+<tr>
+<td><code>regen</code> (<code>tools/port_regen.py</code>): candidate worktree, its <code>.local/</code>, the generators' classes decompiled alone, every generator, <code>regen.json</code> in the report</td>
+<td>done</td>
+</tr>
+<tr>
+<td>Candidate harness run (<code>tools/port_harness.py</code>, <code>harnesses</code>): horizon-prepare with sounds, every harness, pass / oracle / fail, newly failing against a baseline, in the report</td>
+<td>done</td>
+</tr>
+<tr>
+<td><code>publish</code> (<code>tools/port_publish.py</code>): dry run by default, issues, tracking issue, Kira card</td>
+<td>done (never run with <code>--yes</code>)</td>
+</tr>
+<tr>
+<td>Daily launchd agent (<code>tools/ci/version-port-daily.sh</code>, <code>tools/ci/dev.horizon.version-port.plist</code>)</td>
+<td>written, not installed: needs Ludovic's approval</td>
+</tr>
+</tbody>
+</table></div>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/version-ports.md"><code>docs/version-ports.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#how-rusty-minecraft-pins-and-prepares-263-today">How Rusty Minecraft pins and prepares 26.3 today</a></li><li class="l2"><a href="#the-pipeline">The pipeline</a></li><li class="l3"><a href="#the-version-store">The version store</a></li><li class="l3"><a href="#detect">Detect</a></li><li class="l3"><a href="#prepare">Prepare</a></li><li class="l3"><a href="#diff">Diff</a></li><li class="l3"><a href="#from-vanilla-classes-to-rusty-minecraft-modules">From vanilla classes to Rusty Minecraft modules</a></li><li class="l3"><a href="#regenerate">Regenerate</a></li><li class="l3"><a href="#run-every-harness-against-the-new-version">Run every harness against the new version</a></li><li class="l3"><a href="#the-port-report">The port report</a></li><li class="l3"><a href="#the-switch-and-the-release">The switch and the release</a></li><li class="l2"><a href="#turning-on-the-daily-agent">Turning on the daily agent</a></li><li class="l2"><a href="#what-stays-manual-and-how-small-it-gets">What stays manual, and how small it gets</a></li><li class="l2"><a href="#replay-262--263">Replay: 26.2 → 26.3</a></li><li class="l3"><a href="#regen">regen</a></li><li class="l3"><a href="#harnesses">harnesses</a></li><li class="l2"><a href="#implementation-status">Implementation status</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

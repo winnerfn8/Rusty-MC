@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Native mods (experimental) · Rusty Minecraft docs</title>
+<meta name="description" content="Native mods (experimental): Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html" aria-current="page">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="native-mods-experimental">Native mods (experimental)</h1>
+<p>Native mods are <strong>mixin bundles</strong> that change the game's own Rust source before it is compiled, with
+<a href="https://github.com/horizon-rust/horizon-mixins">horizon-mixins</a> (MIT, by levzzz5154, made for Rusty Minecraft). A bundle
+is a <code>horizon-mixin.toml</code> and a few <code>.rs</code> helpers that hook into named functions of the game (HEAD, BEFORE_CALL,
+RETURN, MODIFY_ARG, OVERWRITE...; the tool's README lists them). A port such as Veinminer is three HEAD hooks and
+one module. Start a mod from <a href="https://github.com/horizon-rust/horizon-native-mod-template">horizon-native-mod-template</a>.</p>
+<p>Native mods are native code with the player's rights, not sandboxed. The launcher turns them on only when the player
+installs one (after a notice) and builds them only behind a red warning; the registry lists one only after a review (its later releases are checked by machine); and
+they play in a game of their own, built for the instance they are installed in.</p>
+<h2 id="pinned-to-a-nightly">Pinned to a Nightly</h2>
+<p>A native mod builds on one exact Rusty Minecraft commit: <code>[compatibility] horizon_revision</code> in its <code>horizon-mixin.toml</code>,
+and <code>horizon</code> in the <code>horizon-native.json</code> of its registry file (<code>.hnmod</code>, <code>horizon_mods::index::native</code>). Mods
+pin a <strong>Nightly's commit</strong> (or a release's). Every Nightly ships its source and keeps its commit for good as the
+tag <code>nightly-source/&lt;date&gt;-&lt;short&gt;</code> (<a href="release-flow.html#nightly-channel">release-flow.md</a>), so a pinned mod still
+builds after its Nightly is replaced. When the mods of one build pin different commits, the launcher says which
+mod pins which and the commit the build would use, the newest of them, and builds only after the player chooses
+<strong>Build anyway</strong> (<code>native-build --allow-version-mismatch</code>): such mods often still apply and compile. A failed build
+then says the mods were made for other versions. Their horizon-mixins pins may differ too: the build uses the
+newest of them and the launcher's own, never one older than a mod was made with. A bundle with no pin builds on
+the commit of the installed version the build starts from.</p>
+<h3 id="mods-on-the-hook-points">Mods on the hook points</h3>
+<p>A mod that hooks only Rusty Minecraft's native hook points (<code>crates/horizon-client/src/game/native_hooks.rs</code>: empty
+functions the game calls at fixed places, plus helpers, kept stable across releases) can name the version it
+needs instead of pinning: <code>&quot;hooks&quot;: 1</code> in its <code>.hnmod</code>'s <code>horizon-native.json</code>, the <code>NATIVE_HOOKS_API</code> of that
+file when it was made. Hook points are only ever added: each addition raises <code>NATIVE_HOOKS_API</code>, and a mod builds
+on any Rusty Minecraft whose version is the one it needs or a later one. Its <code>horizon</code> is then only the commit it was tested on. The launcher builds it on the commit the other mods
+pin, else on the installed version's commit (the game the player plays), after checking that commit's
+<code>NATIVE_HOOKS_API</code> (read from GitHub) is at least the mod's; when it isn't and nothing pins, it builds on the commit the
+mod was tested on. In its own copy of the mod it sets <code>horizon_revision</code> to the commit it builds on. Rusty Minecraft's
+own native mods (Zoom, FPS counter, Keystrokes, Minimap; horizon-rust/horizon-mods, <code>native/&lt;name&gt;/</code>) are made this way, so any of them build together
+with no re-release for each Nightly.</p>
+<p>API 2 adds the item panel beside container screens and its recipe pages (<code>native_panel_items</code>,
+<code>native_panel_recipes</code>, and the hook <code>native_panel_event</code> for the player's clicks, searches and keys over items), and
+the game's items and recipes (<code>native_recipes</code>, <code>native_known_recipes</code>, <code>native_place_recipe</code>, <code>native_give</code>): what a
+recipe viewer needs.</p>
+<p>API 11 adds <code>GameLevel::native_send_particles</code> on authoritative servers. It sends supported
+vanilla particles to nearby players. Block particles require a valid block state. Item, trail and
+vibration particles are not supported by the current dispatch. Count zero sends one directional
+particle. The return value says whether the call was accepted, not whether any player received it. Bundles that use it need <code>&quot;hooks&quot;: 11</code>.</p>
+<p>API 3 adds authoritative world lifecycle events through <code>native_world_lifecycle</code>: open ready, open failed,
+and final close. Bundles that use these events need <code>&quot;hooks&quot;: 3</code>.</p>
+<p>API 4 adds authoritative server tick events through <code>native_server_tick</code>: start (before any level ticks, like NeoForge's <code>ServerTickEvent.Pre</code>) and end of each non-paused
+server tick, with <code>world_running</code>. A frozen world reports false except during a requested step. Bundles that
+use these events need <code>&quot;hooks&quot;: 4</code>.</p>
+<p>API 8 adds server commands and players: <code>native_register_commands</code> (the commands a mod adds to every player's
+command tree) and <code>native_perform_command</code> (a player's command on the server), with helpers to answer
+(<a href="#server-commands-and-players">Server commands and players</a>). Bundles that use them need <code>&quot;hooks&quot;: 8</code>.</p>
+<p>API 9 adds the acting player's plain items for server mods (count, take, give; <a href="#server-commands-and-players">Server commands and
+players</a>). Bundles that use them need <code>&quot;hooks&quot;: 9</code>.</p>
+<p>API 10 adds server menus: a vanilla chest menu a server mod opens and fills, whose clicks and closing reach the mod
+(<code>native_menu_clicked</code>, <code>native_menu_closed</code>), and <code>native_exchange_items</code>, two players' stacks swapped in one checked
+step (<a href="#server-menus">Server menus</a>). Bundles that use them need <code>&quot;hooks&quot;: 10</code>.</p>
+<p>API 12 adds item tooltips through <code>native_tooltip</code>: the hovered stack, with its components, and its tooltip's
+lines, which a mod can add to, change or take out of, wherever the game shows an item's tooltip. Bundles that use it
+need <code>&quot;hooks&quot;: 12</code>.</p>
+<p>API 13 adds using an item, on the server for every player: <code>native_use_item_on</code> hears a right click with an item on a
+block once the block let it through (<code>ItemStack.useOn</code>), and <code>native_use_item</code> hears the item's own use, in the air or
+after <code>native_use_item_on</code> let it through (<code>Item.use</code>). Each hears a click once. A mod that claims one swings the hand
+instead of the item's use. Bundles that use them need <code>&quot;hooks&quot;: 13</code>.</p>
+<p>API 14 adds breaking and placing a block, on the server for every player: <code>native_destroy_block</code> hears a player break a
+block once the game allowed it (<code>ServerPlayerGameMode.destroyBlock</code>) and may cancel it, which keeps the block and its
+drops; <code>native_place_block</code> hears a block placed from an item (<code>BlockItem.place</code>). To stop a placement, a mod claims
+<code>native_use_item_on</code>, which runs before it. Bundles that use them need <code>&quot;hooks&quot;: 14</code>.</p>
+<p>API 15 adds block entities for a mod's blocks (<code>native_block_entity</code>, <code>native_block_entity_ticks</code>,
+<code>native_block_entity_tick</code>): made when the block is placed, ticked on the server and saved with the chunk. Bundles that use them need <code>&quot;hooks&quot;: 15</code>.</p>
+<p>API 16 adds item slots for those block entities (<code>native_block_entity_container</code>): hoppers, comparators and breaking the
+block use them as they use vanilla's containers, and <code>native_block_entity_tick</code> also gets the slots. Bundles that use them need <code>&quot;hooks&quot;: 16</code>.</p>
+<p>API 17 adds menus for mod containers: the container names one of vanilla's slot-grid or furnace menus, which opens when the block is used,
+and <code>native_block_entity_tick</code> takes the whole block entity, with the data slots the menu shows. Bundles that use them need <code>&quot;hooks&quot;: 17</code>.</p>
+<p>API 18 adds what a machine's tick reaches: <code>native_with_mod_block_entity</code> (change a neighbouring mod block entity, which marks its chunk
+and tells comparators when its items changed) and <code>native_set_block_property</code> (a property of the block's own state, through the level's
+normal update path). Bundles that use them need <code>&quot;hooks&quot;: 18</code>.</p>
+<p>API 19 adds screens a mod draws for its blocks' menus: <code>native_screen</code> lays one out (its height, where each container slot is,
+where the inventory starts; a slot it leaves out is not in the menu, so shift-clicks skip it) and <code>native_screen_draw</code> draws it with the mod's
+own GUI textures (<code>assets/&lt;namespace&gt;/textures/gui</code>, drawn with <code>native_sprite</code>). Bundles that use them need <code>&quot;hooks&quot;: 19</code>.</p>
+<p>API 20 adds buttons, tooltips and item icons on mod screens: <code>native_screen_click</code> and <code>native_screen_tooltip</code> (the client), <code>native_menu_button</code>
+(a button press on the server, on the mod block entity) and the helpers <code>native_item</code>, <code>native_screen_title</code>, <code>native_data</code>, <code>native_block</code>,
+<code>native_block_property</code>, <code>native_insert_item</code> and <code>native_cursor</code>. Bundles that use them need <code>&quot;hooks&quot;: 20</code>.</p>
+<p>API 21 adds what a server mod needs to guard land and move players. <code>native_right_click_block</code> hears a player's right
+click on a block before the block's own use (a chest, a door, a lever) and the item's, and may cancel it: nothing
+happens and the player sees the block as it is. <code>native_acting_player</code> says who acts inside a player's hook (UUID,
+name, level, position, game mode, health); <code>native_run_command</code> runs a command as the server's console (level 4, no
+output), so <code>execute in &lt;dimension&gt; run tp &lt;player&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt;</code> moves a player across levels; <code>native_action_bar</code>
+tells a player why, even inside their own hook; and the players
+<code>native_server_players</code> lists carry their health. Bundles that use them need <code>&quot;hooks&quot;: 21</code>.</p>
+<p>API 22 adds what a server mod needs to keep the world itself out of guarded land. <code>native_block_spread</code> hears a
+fluid flow or fire spread into a block, <code>native_piston_move</code> a piston's push or pull, <code>native_explosion_detonate</code> the
+blocks an explosion is about to break (a mod takes out those it spares), <code>native_fill_bucket</code> a bucket filled or
+emptied, and <code>native_attack_entity</code> a player's blow on an entity (an item frame, an armor stand, an animal, a
+player). Each may cancel, and nothing happens. Bundles that use them need <code>&quot;hooks&quot;: 22</code>.</p>
+<p>API 23 adds <code>native_level_tick_pre</code> and <code>native_level_tick_post</code>, server-side observations around each
+level tick pass. Each receives the dimension ID; neither can cancel the tick. Paused and held passes fire
+neither hook, and an error skips the post hook. Bundles that use them need <code>&quot;hooks&quot;: 23</code>.</p>
+<p>API 24 adds <code>native_set_block</code>, a server-side <code>Game</code> helper that replaces a state in the current dimension through
+<code>Level.setBlock</code>. It accepts vanilla's neighbour and shape flags and returns whether a block changed; a block with a
+block entity gets one. Rusty Minecraft sends every write to players whatever the flags: <code>UPDATE_CLIENTS</code>, <code>UPDATE_INVISIBLE</code>
+and <code>UPDATE_IMMEDIATE</code> change nothing yet. Hooks holding only <code>GameLevel</code> cannot call it yet. Bundles that use it need
+<code>&quot;hooks&quot;: 24</code>.</p>
+<p>API 25 adds <code>GameLevel::native_play_sound</code> for registered vanilla sound events on an authoritative server.
+It queues the sound for nearby players in the level's dimension, including during a guest's turn.
+Pass a <code>SOUND_SOURCES</code> index, position, volume and pitch. The return value says whether the call
+was queued, not whether a player heard it. The server discards unknown sound events when it dispatches
+the queue. Bundles that use it need <code>&quot;hooks&quot;: 25</code>.</p>
+<p>API 26 adds <code>Game::native_config_dir()</code>: the game's shared <code>config/</code> folder beside <code>options.txt</code> (beside
+<code>server.properties</code> on a dedicated server), where a mod names its own files, made when missing. It takes no <code>self</code>, so
+it works from any hook (<a href="mods.html#native-mods">mods.md</a>). Bundles that use it need <code>&quot;hooks&quot;: 26</code>.</p>
+<p>API 27 adds the player-health HUD rows through <code>native_health_hud</code>: every frame the HUD draws them, the
+hook hears the layout's inputs (<code>HealthInputs</code>) and the screen's GUI size, and a mod that answers with
+draws replaces all the rows — armour, hearts, food, air and the heights above the hotbar — for that
+frame. Nothing answered draws Rusty Minecraft's own. Bundles that use it need <code>&quot;hooks&quot;: 27</code>.</p>
+<p>API 28 adds <code>native_block_in_tag</code> and <code>native_item_in_tag</code> for server tick hooks. They read the world's merged block and item tags, including data packs and content mods. An unknown tag returns false. An empty item stack tests the <code>minecraft:air</code> item, as vanilla does. Calls with an inactive or stale tick context return an error. Bundles that use them need <code>&quot;hooks&quot;: 28</code>.</p>
+<p>API 29 adds mixin hook points: the start and end of a few vanilla methods, each a pair of hooks named after the
+method (<code>native_mixin_minecraft_server_tick_server_head</code> and <code>_return</code>; <code>block_behaviour_get_destroy_progress</code>,
+<code>block_get_drops</code>, <code>player_interact_on</code>). Each takes a <code>horizon_java::hooks::Call&lt;R&gt;</code>: at the start, <code>cancel()</code>
+returns from the method at once (with <code>R</code>'s default) and <code>set_return_value(v)</code> returns <code>v</code>; at the end,
+<code>return_value()</code> is what the method returns and <code>set_return_value</code> changes it. Their catalog entries name the
+vanilla method, its class and the end (<code>vanilla</code>, <code>class</code>, <code>at</code>), and Java mods' <code>@Inject</code> at <code>HEAD</code>, <code>RETURN</code> or
+<code>TAIL</code> bind to the same points (<a href="java-mod-runtime.html">java-mod-runtime.md</a>). Bundles that use them need <code>&quot;hooks&quot;: 29</code>.</p>
+<h2 id="what-the-launcher-does">What the launcher does</h2>
+<p>In the window: install a native mod from the Mods page. The first one shows a notice once (the first build downloads
+Rust and can take 20 to 30 minutes; later builds are faster) and turns on Settings → Game → <strong>Native mods
+(experimental)</strong>, which stays off for players who never install one; <code>mods install</code> does the same. Then <strong>Build</strong>. The launcher names the mods, warns in red, and builds only from &quot;I trust these mods: build&quot;; the
+row shows each step, the error if one fails, and the build the instance plays. From the command line:
+<code>horizon-launcher native-build [FOLDER] [--instance NAME] --trust-native-code</code>. FOLDER is a bundle, an unpacked
+<code>.hnmod</code>, or a folder of them; without it, the native mods turned on in the instance. It is not an MCP tool:
+trusting native code is the player's decision, never an agent's.</p>
+<ol>
+<li><strong>Rust.</strong> The launcher's own toolchain (<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/launcher/src/rust_toolchain.rs"><code>rust_toolchain</code></a>): Rust 1.99.1's
+official <code>rustc</code>, <code>cargo</code> and <code>rust-std</code> (and <code>rust-mingw</code> on Windows), each pinned by SHA-256, downloaded once
+from static.rust-lang.org into <code>&lt;launcher data&gt;/rust/</code>, with its own Cargo home <code>&lt;launcher data&gt;/cargo/</code>. No
+rustup, nothing on the system; the player's own Rust is never used. Windows uses the <code>windows-gnu</code> host, which
+links without Visual Studio. <code>rust-mingw</code> only links, so on Windows the toolchain also brings MinGW-w64
+(<code>rust_toolchain::MINGW</code>: WinLibs' GCC 16.2.0 on MinGW-w64 14.0.0, MSVCRT like <code>rust-mingw</code>, one zip pinned by
+SHA-256, its <code>mingw64/</code> without the documentation) on the build's <code>PATH</code>: <code>ring</code> and <code>hidapi</code> compile C,
+and <code>windows-sys</code>' <code>raw-dylib</code> imports need <code>dlltool</code> and the assembler it runs. The linker is the system's on
+macOS (the Command Line Tools: the launcher asks for <code>xcode-select --install</code>) and Linux (<code>cc</code>). On Linux the
+game also builds against the system's ALSA (<code>alsa-sys</code>) and libudev (<code>libudev-sys</code>, <code>hidapi</code>), found with
+<code>pkg-config</code>, whose development files desktop distributions don't install. Before downloading anything the
+launcher checks for <code>cc</code>, the C library's headers (<code>cc</code> compiles an include of <code>stdint.h</code>), <code>pkg-config</code>,
+<code>alsa</code> and <code>libudev</code> and names what is missing, with the install command for the distribution in
+<code>/etc/os-release</code> (Debian, Ubuntu and Mint:
+<code>sudo apt install build-essential pkg-config libasound2-dev libudev-dev</code>). SteamOS has GCC without the C
+library's headers, and a read-only system: native builds don't work there yet.
+<code>horizon-launcher rust status|install|remove</code>.</li>
+<li><strong>horizon-mixins</strong>, at the commit the mods name (their <code>.hnmod</code>'s <code>mixins</code>), else <code>native_mods::MIXINS_REV</code>,
+built once with that cargo (<code>cargo install --locked --git … --rev …</code>) into <code>native/tools/&lt;commit&gt;/</code>.</li>
+<li><strong>The source</strong> of the pinned commit: GitHub's archive of it, once per commit (<code>native/source/&lt;commit&gt;/</code>, about
+63 MB unpacked), with the commit in <code>.horizon-revision</code>. Never the player's own checkout. Links in the
+archive are left out: the tool refuses them and nothing needs them to build.</li>
+<li><strong>Mixins.</strong> The bundles are copied first, so the build and its key use that copy whatever happens to the
+folder meanwhile. <code>horizon-mixins apply</code> stages the modded source; the launcher copies only the files that
+changed into <code>native/stage/</code>, so Cargo, which goes by file times, recompiles only the crates the mods touch.</li>
+<li><strong>Compile</strong>: <code>cargo build --locked --profile release --features horizon-client/mods -p horizon-client</code>, the
+release's own command (game-build.yml), into <code>native/target/</code>. Cargo downloads the locked crates from
+crates.io (Rusty Minecraft has no git dependencies). The log is <code>native/build.log</code>; a failure shows its last lines (a
+horizon-mixins diagnostic in one line).</li>
+<li><strong>Install</strong>: a new version, <code>native-&lt;commit&gt;-&lt;key&gt;</code>, a copy of the starting version's folder (resources
+included, cloned on APFS, Btrfs and ReFS) with the built game in place of its own, and a <code>native-mods.json</code>
+saying which commit, mods, horizon-mixins and Rust made it. The instance the mods are installed in plays it (a
+folder built from the command line, or mods of the default home, go to the <strong>Native mods</strong> instance). That
+instance gets each mod's settings from the default home the first time it plays it (its
+<code>horizon-mods/.horizon-mod-data/&lt;id&gt;/</code> folder and <code>key.&lt;id&gt;.</code> lines of <code>horizon-mods.txt</code>, where earlier versions of
+the mod kept them); nothing it already has is overwritten.</li>
+</ol>
+<h2 id="install-from-github">Install from GitHub</h2>
+<p>An author can ship a native mod without a registry pull request per version: the player installs it from a
+GitHub link, on the Mods page (&quot;Add from GitHub&quot;) or with <code>horizon-launcher mods add-github &lt;url&gt; [--mod ID | --all] [--instance NAME] --trust-native-code</code>. The link is <code>https://github.com/&lt;owner&gt;/&lt;repo&gt;</code>
+(its latest release), <code>.../releases/tag/&lt;tag&gt;</code>, <code>.../tree/&lt;ref&gt;</code> or <code>.../commit/&lt;sha&gt;</code>.</p>
+<ul>
+<li><strong>Resolved to something exact.</strong> GitHub's public API (no sign-in; a rate limit is said plainly, and
+<code>HORIZON_GITHUB_TOKEN</code> raises it) turns the link into a release's <code>.hnmod</code> file or a <strong>commit SHA</strong>, never a
+branch that moves. A release with a <code>.hnmod</code> asset installs that file (its SHA-256 is compared with the one GitHub
+lists). With no release or no such asset, the launcher fetches
+<code>codeload.github.com/&lt;owner&gt;/&lt;repo&gt;/tar.gz/&lt;sha&gt;</code> and looks in it for mods by the rules of
+<code>native-build &lt;folder&gt;</code>: a folder with <code>horizon-mixin.toml</code>, or an unpacked <code>.hnmod</code> (<code>horizon-native.json</code>).
+Several mods: they are listed, and the player picks one or installs all. A source folder must pin the Rusty Minecraft commit
+(<code>[compatibility] horizon_revision</code>); the launcher packs its Rust, TOML and <code>data/</code> files into a <code>.hnmod</code>.
+A release that ships only a content mod (<code>.hmod</code>) says &quot;not supported yet&quot;: installing <code>.hmod</code> files from a link
+is not built.</li>
+<li><strong>Checked like the registry's files.</strong> The <code>.hnmod</code> is read as <code>horizon_mods::index::native::Bundle::read</code> reads a
+registry file (only Rust, TOML and data under <code>mixins/&lt;id&gt;/</code>, size limits, nothing run) before it is installed.</li>
+<li><strong>Said first.</strong> Before anything is downloaded: &quot;not reviewed by the Rusty Minecraft registry; native mods run with full
+access to this computer; read the source&quot;, with a link to the exact commit. The command needs
+<code>--trust-native-code</code>, as <code>native-build</code> does. It is not an MCP tool: trusting native code is the player's
+decision, never an agent's.</li>
+<li><strong>Origin kept.</strong> <code>horizon-native-mods/&lt;id&gt;.origin.json</code> beside the <code>.hnmod</code>: owner/repo, release tag (for a
+release), commit, asset name and the SHA-256 of the installed file. <code>mods list</code> shows &quot;from GitHub: owner/repo @
+tag&quot; (or the commit's first 7 digits).</li>
+<li><strong>Updates.</strong> <code>horizon-launcher mods update-github [ID] [--check]</code> compares a mod from a release with the
+repository's latest release, and a mod from a commit with the head of the default branch; a newer one is
+installed with the same warning and <code>--trust-native-code</code>. <code>mods remove &lt;id&gt;</code> removes it. A mod already
+installed from the registry (or by hand) is never replaced.</li>
+</ul>
+<p>Installing turns Native mods on, as any native mod does; then build as usual.</p>
+<h2 id="cache-and-disk">Cache and disk</h2>
+<p>The key hashes the commit, the horizon-mixins commit, Rust's version, the profile and features, and every file of
+every bundle. The same set on the same commit is never built twice. A change gives a new build, and
+<code>native/target/</code> stays, so a rebuild compiles only <code>horizon-client</code> and what the mods touched.</p>
+<p>Measured 2026-10-28 on the Mac mini (M4 Pro, 14 cores) with Veinminer 0.3.0 on Nightly <code>83f15fa</code>,
+<code>CARGO_BUILD_JOBS=8</code> while other agents' builds ran (upper bounds):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Size, time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rust 1.99.1 (<code>&lt;launcher data&gt;/rust/</code>)</td>
+<td>453 MB; 58 s to download and unpack</td>
+</tr>
+<tr>
+<td>horizon-mixins (<code>native/tools/</code>)</td>
+<td>7 MB; built once in 19 s</td>
+</tr>
+<tr>
+<td>Crates in the launcher's Cargo home (<code>&lt;launcher data&gt;/cargo/</code>)</td>
+<td>289 MB</td>
+</tr>
+<tr>
+<td>Source of one commit, and the stage</td>
+<td>64 MB each</td>
+</tr>
+<tr>
+<td>First build: release profile, the whole game</td>
+<td>9 min 10 s of compiling, 9 min 41 s in all; <code>native/target/</code> 1.5 GB</td>
+</tr>
+<tr>
+<td>Rebuild after a helper's code changed</td>
+<td>2 min 46 s of compiling (only <code>horizon-client</code>), 2 min 53 s in all</td>
+</tr>
+<tr>
+<td>A change horizon-mixins ignores (a comment)</td>
+<td>nothing compiled; 31 s, mostly the version folder's copy</td>
+</tr>
+</tbody>
+</table></div>
+<p>Measured 2026-10-29 on Windows 11 (Ryzen 7 9800X3D, 16 threads), the same mod and Nightly, an empty <code>native/target/</code>
+(horizon-mixins, the source and the crates were already downloaded):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Size, time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rust 1.99.1 and MinGW-w64 (<code>&lt;launcher data&gt;/rust/</code>)</td>
+<td>1.7 GB, MinGW-w64 875 MB of it</td>
+</tr>
+<tr>
+<td>Crates in the launcher's Cargo home</td>
+<td>657 MB</td>
+</tr>
+<tr>
+<td>First build: release profile, the whole game</td>
+<td>6 min 57 s of compiling, 8 min 3 s in all; <code>native/target/</code> 2.0 GB</td>
+</tr>
+</tbody>
+</table></div>
+<p>Measured 2026-10-28 on Linux (an x86_64 server with no Rust of its own), Zoom on Rusty Minecraft <code>1149c92</code>, 3 jobs while CI
+ran: <code>rust install</code> in 11 s (592 MB), the first build in 12 min 9 s. The built game ran Zoom's proof (under <code>xvfb-run</code>:
+the game needs a display even with <code>--offscreen</code>).</p>
+<p>Only the native builds an instance plays are kept (<code>native_mods::prune</code>); <code>native/target/</code> stays for the next one.</p>
+<h2 id="trust">Trust</h2>
+<ul>
+<li><strong>Off until the player installs one.</strong> Settings → Game → Native mods stays off for a player who never installs a
+native mod; the first install shows the notice and turns it on. The command needs <code>--trust-native-code</code>; the window
+shows a warning in red before every build: the mods run with full access to the computer, and their ids and
+versions. The Mods page says who made each one, and &quot;Not made or endorsed by the Rusty Minecraft project&quot; for any mod not
+Rusty Minecraft's own.</li>
+<li><strong>The registry</strong> (horizon-rust/horizon-mods) lists them as their own kind, <code>native-mod</code>, only after a maintainer
+has read the source and the repository they come from. Its entry names the GitHub repository (<code>repo</code>); each
+release of it with a <code>.hnmod</code> asset is a version once the bundle passes the registry's checks, with no further
+review (nothing is built or run by the registry; the player's launcher builds it behind its warning). The <code>.hnmod</code> contains <code>.rs</code> and <code>.toml</code> files and may contain data files under
+<code>mixins/&lt;id&gt;/data/</code>. The launcher checks the bundle without running anything. Native code is trusted.
+The file is pinned by SHA-256 like every registry file, and the version, game and pins are the bundle's own
+<code>horizon-native.json</code>. <code>revoked.toml</code> takes a bad release down.
+A content mod's entry may turn <code>native-mod</code> once (never back): its <code>.hmod</code> versions stay published and
+are checked as <code>.hmod</code>s, the index lists only its <code>.hnmod</code> versions, and the launcher's update keeps the
+player's <code>.hmod</code>; removing the mod removes both.</li>
+<li><strong>Isolation of data.</strong> Native mods run only in the instance built for them, with its own worlds, options and logs.</li>
+<li>What this does not do: sandbox the compiled game. horizon-mixins' checks stop mistakes, not a malicious helper
+(<a href="https://github.com/horizon-rust/horizon-mixins/blob/main/docs/security.md">security notes</a>).</li>
+</ul>
+<h2 id="multiplayer">Multiplayer</h2>
+<ul>
+<li><strong>Single player and LAN host:</strong> the mods run in the host's game and its integrated server, so a server-side
+hook applies to every player of the world.</li>
+<li><strong>Joining a server:</strong> only client-side hooks do anything; the protocol is unchanged.</li>
+<li><strong>Dedicated servers:</strong> native mods are not built yet. Lifecycle hook call sites are ready for when the pipeline builds them (<code>--no-default-features</code>).</li>
+</ul>
+<h2 id="left-to-do">Left to do</h2>
+<ul>
+<li>Rebuild after the mods or the Nightly change (asking first, as it compiles for minutes).</li>
+<li>A prebuilt horizon-mixins from its CI instead of building it on the player's computer.</li>
+</ul>
+<h2 id="named-hook-catalog-draft">Named hook catalog (draft)</h2>
+<p><code>native-hooks.json</code> maps stable hook names and contract versions to the current
+source targets. A contract includes the signature, call timing and behavior.
+Keep an existing contract or add a new version when it changes incompatibly.
+The catalog does not cover helper methods or arbitrary private game code.
+Named injection resolution needs a matching horizon-mixins change; existing raw
+targets and the <code>hooks</code> metadata continue to work as before.</p>
+<h3 id="reading-server-blocks-draft">Reading server blocks (draft)</h3>
+<p>A native server tick hook can call <code>native_server_block</code> with its context, a dimension id and a block position. It returns the block name and state properties from a loaded chunk. It does not load a chunk or open a dimension. Reads outside that hook, from a stale context, from unavailable dimensions or outside the world bounds return an error.</p>
+<h3 id="neighbour-observations-draft">Neighbour observations (draft)</h3>
+<p><code>native_neighbor_changed</code> observes each authoritative server <code>neighborChanged</code> before the block handles it. It supplies the dimension, position, current state ID, changed block ID and moved flag. Resolve IDs with the level's registries during the hook; the hook does not load chunks or change the update queue.</p>
+<h3 id="server-block-changes-draft">Server block changes (draft)</h3>
+<p><code>native_block_changed</code> observes a committed authoritative server <code>Level.setBlock</code> change before block side effects and neighbour updates. It supplies the dimension, position and old and new state IDs. It does not observe chunk loading or direct storage writes that bypass <code>Level.setBlock</code>.</p>
+<h3 id="server-commands-and-players">Server commands and players</h3>
+<p>For mods that run where the world is simulated: a dedicated server, a LAN host, single player's server thread
+(<code>crates/horizon-client/src/game/native_server.rs</code>). The SMP mod of the official server is built on them
+(<a href="smp.html">smp.md</a>).</p>
+<ul>
+<li><strong><code>native_register_commands(commands)</code></strong>: push a <code>NativeCommand</code> per usage, asked once when a world opens to
+players. A usage is words, then arguments <code>&lt;name:kind&gt;</code>, optional ones last in brackets:
+<code>NativeCommand::new(&quot;pay &lt;player:player&gt; &lt;amount:integer&gt;&quot;)</code>, <code>NativeCommand::op(&quot;eco set &lt;player:player&gt; &lt;amount:integer&gt;&quot;, 3)</code> for operators of level 3. Kinds: <code>word</code>, <code>text</code> (the rest of the line, last), <code>integer</code>,
+<code>number</code>, <code>boolean</code>, <code>player</code>, <code>item</code>, <code>block_pos</code>. The usages of one command merge into one tree, which every
+player receives after vanilla's (filtered by their level, as vanilla's is), so their chat box completes and colours
+it. A name vanilla has, or a usage that doesn't parse, is left out with a warning in the log.</li>
+<li><strong><code>native_perform_command(player, command, ran)</code></strong>: a player typed a registered command (without its slash) and
+their level allows it, whether the world allows commands or not. The mod parses the line and sets <code>ran</code>. The
+player's state is swapped in for the call, as for their other actions, so <code>native_player</code> reads them; a
+registered command no mod takes answers as vanilla's unknown command.</li>
+<li>Helpers: <code>native_server_players()</code> (uuid, name, level, dimension, position and game mode of each player on);
+<code>native_tell(uuid, text)</code>, a system line to one player; <code>native_broadcast(text)</code>, to every player and the server's
+log; <code>native_feedback(text)</code>, the command's answer to the player whose command it is; <code>native_world_dir()</code>, the
+open world's folder, where a server mod keeps its data in a folder of its own so the world's backups carry it.</li>
+<li>Items (API 9), of the acting player (inside <code>native_perform_command</code>, whose player is swapped in): <code>native_held()</code>
+(the main hand's item, count, and whether it is plain), <code>native_count_items(item)</code>, <code>native_carried_items()</code>,
+<code>native_take_items(item, count)</code> (the main hand first, then as <code>Inventory.add</code> orders slots),
+<code>native_room_for(item)</code> and <code>native_give_items(item, count)</code> (only where it fits: nothing is dropped). They look at
+the 36 inventory slots and the off hand, never the armour, and only at <strong>plain</strong> stacks: no damage and no
+component (name, enchantment...), so a shop never takes a worn or enchanted item for a new one. Each returns how
+many it counted, took or gave; the player's screen follows as for any change to their inventory.</li>
+<li>API 21: <code>native_acting_player()</code>, the player whose state is swapped in (inside <code>native_perform_command</code>,
+<code>native_right_click_block</code>, <code>native_use_item_on</code>, <code>native_destroy_block</code>...; None elsewhere);
+<code>native_run_command(line)</code>, a command run as the server's console (level 4, no output), only where no player is
+swapped in (<code>native_tick</code>, a menu hook): a teleport to another level (<code>execute in minecraft:the_nether run tp Alex 0 70 0</code>) lands at the next tick's start. <code>native_server_players()</code> and the acting player carry <code>health</code> (0 once dead).
+<code>native_action_bar(uuid, text)</code>, a line over a player's hotbar, which also reaches the acting player inside their
+hook (where <code>native_tell</code> reaches nobody).</li>
+<li><strong><code>native_right_click_block(pos, face, canceled)</code></strong> (API 21): a player's right click on a block, before the block's
+own use and the item's (<code>ServerPlayerGameMode.useItemOn</code>), once per hand. A mod that sets <code>canceled</code> stops both,
+without a swing; the player's client is sent the block back. With <code>native_destroy_block</code> it keeps players out of
+claimed land.</li>
+<li><strong><code>native_block_spread(dimension, kind, from, to, canceled)</code></strong> and <strong><code>native_piston_move(dimension, piston, direction, push, destroy, canceled)</code></strong> (API 22, on <code>GameLevel</code>, like the block observers): a fluid flowing or fire
+spreading (<code>kind</code> <code>fluid</code> or <code>fire</code>) from <code>from</code> into <code>to</code>, and a piston moving blocks once its structure resolved.
+Canceled, the block at <code>to</code> stays as it is, and the piston moves nothing. Fluids ask on every flow: answer from
+memory, fast.</li>
+<li><strong><code>native_explosion_detonate(dimension, center, blocks)</code></strong> (API 22): the positions an explosion is about to break,
+before any is hit; take out the ones to spare. Entities are hurt as before.</li>
+<li><strong><code>native_fill_bucket(stack, pos, canceled)</code></strong> and <strong><code>native_attack_entity(entity, kind, pos, canceled)</code></strong> (API 22):
+a player's bucket at a block, and their blow on an entity, with the acting player swapped in. Canceled, the bucket
+does nothing and the blow does no harm.</li>
+</ul>
+<h3 id="server-menus">Server menus</h3>
+<p>API 10, <code>crates/horizon-client/src/game/native_menus.rs</code>: menus a server mod builds from ordinary items, which a
+stock client shows as a chest (<code>generic_9x1</code> to <code>generic_9x6</code>); nothing is installed on the player's side.</p>
+<ul>
+<li><code>native_open_menu(uuid, rows, title, items)</code> opens one in place of the player's open menu (its window id);
+<code>native_set_menu_items(uuid, items)</code> changes what it shows; <code>native_close_menu(uuid)</code> closes it.</li>
+<li><strong>No click moves anything.</strong> Each reaches <code>native_menu_clicked(uuid, window, slot, button, mode)</code>, and the client
+is sent the menu, its inventory and its cursor as they were. <code>slot</code> counts the menu's own slots first, then the
+player's inventory below it: <code>native_menu_inventory_slot(size, slot)</code> gives the inventory slot (0..9 the hotbar).</li>
+<li><code>native_menu_closed(uuid, window)</code>: the player closed it, another menu opened, or the player left.</li>
+<li><code>native_player_stacks(uuid)</code>: the player's 36 inventory slots, to show copies or offer them.</li>
+<li><code>native_exchange_items(a, a_offer, b, b_offer)</code>: each offer is inventory slots, each with the exact stack it must
+still hold. Both offers leave their slots and go to the other player where they fit whole (onto matching stacks,
+then empty slots), or nothing moves and the error says why (an offer that changed, no room, a player gone or
+dead). A trade on these menus leaves the offered stacks in their owners' inventories until this one step, so
+closing the menu, leaving or dying moves nothing.</li>
+</ul>
+<p>The menu hooks run with no player's state swapped in; <code>native_player_stacks</code> and <code>native_exchange_items</code> refuse a
+player whose state is (inside <code>native_perform_command</code>): call them from a menu hook or <code>native_server_tick</code>.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/native-mods.md"><code>docs/native-mods.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#pinned-to-a-nightly">Pinned to a Nightly</a></li><li class="l3"><a href="#mods-on-the-hook-points">Mods on the hook points</a></li><li class="l2"><a href="#what-the-launcher-does">What the launcher does</a></li><li class="l2"><a href="#install-from-github">Install from GitHub</a></li><li class="l2"><a href="#cache-and-disk">Cache and disk</a></li><li class="l2"><a href="#trust">Trust</a></li><li class="l2"><a href="#multiplayer">Multiplayer</a></li><li class="l2"><a href="#left-to-do">Left to do</a></li><li class="l2"><a href="#named-hook-catalog-draft">Named hook catalog (draft)</a></li><li class="l3"><a href="#reading-server-blocks-draft">Reading server blocks (draft)</a></li><li class="l3"><a href="#neighbour-observations-draft">Neighbour observations (draft)</a></li><li class="l3"><a href="#server-block-changes-draft">Server block changes (draft)</a></li><li class="l3"><a href="#server-commands-and-players">Server commands and players</a></li><li class="l3"><a href="#server-menus">Server menus</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

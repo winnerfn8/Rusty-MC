@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Launcher commands · Rusty Minecraft docs</title>
+<meta name="description" content="Launcher commands: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details open><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html" aria-current="page">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="launcher-commands">Launcher commands</h1>
+<!-- Generated from launcher/src/cli.rs by cli_tools::markdown(); a test fails when this file is out of date. Update it with: HORIZON_WRITE_DOCS=1 cargo test --manifest-path launcher/Cargo.toml the_launcher_reference -->
+<p>Every command of <code>horizon-launcher</code>, and the tool <code>horizon-launcher mcp</code> offers for it. A tool's arguments are the command's, in snake_case. A tool runs the command with <code>--json</code> and returns what it printed. The tools that change the player's things for good need <code>confirm: true</code>. The tools that send something or reach other people say &quot;only when the player asks&quot;. The game's own tools, <code>game_*</code>, are in <a href="horizon-ctl-commands.html">horizon-ctl-commands.md</a>. With No AI on, <code>mcp</code> and <code>agent-config</code> are hidden and refuse; every other command stays. See <a href="agent-control.html#no-ai">agent-control.md</a>.</p>
+<h2 id="horizon-launcher-versions"><code>horizon-launcher versions</code></h2>
+<p>List Rusty Minecraft releases, or the installed versions.</p>
+<pre><code>horizon-launcher versions
+</code></pre>
+<ul>
+<li><code>--installed</code>: Only the versions installed here (no network)</li>
+</ul>
+<p>MCP: <code>versions</code>.</p>
+<h2 id="horizon-launcher-install"><code>horizon-launcher install</code></h2>
+<p>Download and install a release (a tag such as v2026.10.13, or &quot;latest&quot;).</p>
+<pre><code>horizon-launcher install &lt;TAG&gt;
+</code></pre>
+<ul>
+<li><code>TAG</code></li>
+</ul>
+<p>MCP: <code>install</code>.</p>
+<h2 id="horizon-launcher-remove"><code>horizon-launcher remove</code></h2>
+<p>Remove an installed version.</p>
+<pre><code>horizon-launcher remove &lt;TAG&gt;
+</code></pre>
+<ul>
+<li><code>TAG</code></li>
+</ul>
+<p>MCP: <code>remove</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-prepare"><code>horizon-launcher prepare</code></h2>
+<p>Prepare a version's resources from your own Minecraft install, or from Mojang.</p>
+<pre><code>horizon-launcher prepare
+</code></pre>
+<ul>
+<li><code>--minecraft</code>: The game folder of the official launcher, Prism Launcher, MultiMC, the Modrinth App, ATLauncher or GDLauncher (default: the launcher's, then every launcher's default)</li>
+<li><code>--download</code>: Download Minecraft from Mojang for the signed-in account that owns it, instead of using an install</li>
+</ul>
+<p>MCP: <code>prepare</code>.</p>
+<h2 id="horizon-launcher-play"><code>horizon-launcher play</code></h2>
+<p>Start the client (needs a signed-in Microsoft account that owns Minecraft: Java Edition).</p>
+<pre><code>horizon-launcher play
+</code></pre>
+<ul>
+<li><code>--instance</code>: The instance to play (its name or id; default: the selected one). A Java instance starts its Minecraft: Java Edition, downloaded with its Java the first time</li>
+<li><code>--world</code>: Open or create this world (a folder under saves) at once</li>
+<li><code>--creative</code>: Creative mode for a new world</li>
+<li><code>--join</code>: Join a friend's world with its invite code</li>
+<li><code>--server</code>: Join this server at once: an address, or a server of the list by name or position</li>
+<li><code>--arg</code>: An extra argument for the game, passed through as-is (repeatable), for example --server-thread</li>
+</ul>
+<p>MCP: <code>play</code>, then the <code>game_*</code> tools.</p>
+<h2 id="horizon-launcher-server"><code>horizon-launcher server</code></h2>
+<p>Run a dedicated server here; type commands into its console.</p>
+<pre><code>horizon-launcher server
+</code></pre>
+<ul>
+<li><code>--dir</code>: The server's folder (default: the one the launcher uses)</li>
+<li><code>--accept-eula</code>: Agree to the Minecraft EULA (https://aka.ms/MinecraftEULA)</li>
+</ul>
+<p>MCP: <code>server</code>, <code>server_command</code>, <code>server_log</code>, <code>server_stop</code>.</p>
+<h2 id="horizon-launcher-native-build"><code>horizon-launcher native-build</code></h2>
+<p>Native mods (experimental, docs/native-mods.md): compile mixin bundles on the Rusty Minecraft revision they pin, with the launcher's own Rust, as the version the &quot;Native mods&quot; instance plays. Not sandboxed: the mods' code runs with your rights.</p>
+<pre><code>horizon-launcher native-build [FOLDER]
+</code></pre>
+<ul>
+<li><code>FOLDER</code>: A mod folder (horizon-mixin.toml, or an unpacked .hnmod), or a folder of them (default: the native mods installed and turned on in the instance)</li>
+<li><code>--instance</code>: The instance whose installed native mods to build, and which then plays the build (default: the selected one; the game's own home builds into the Native mods instance)</li>
+<li><code>--trust-native-code</code>: You read the mods' source and trust it with full access to this computer</li>
+<li><code>--allow-version-mismatch</code>: Build mods made for different Rusty Minecraft versions together anyway, on the newest of them</li>
+</ul>
+<p>MCP: none: the player's switch.</p>
+<h2 id="horizon-launcher-notes"><code>horizon-launcher notes</code></h2>
+<p>Show a release's patch notes (default: the newest).</p>
+<pre><code>horizon-launcher notes [TAG]
+</code></pre>
+<ul>
+<li><code>TAG</code></li>
+</ul>
+<p>MCP: <code>notes</code>.</p>
+<h2 id="horizon-launcher-links"><code>horizon-launcher links</code></h2>
+<p>Show the Discord, sponsor and website links.</p>
+<pre><code>horizon-launcher links
+</code></pre>
+<p>MCP: <code>links</code>.</p>
+<h2 id="horizon-launcher-account-list"><code>horizon-launcher account list</code></h2>
+<p>The signed-in accounts and which one plays.</p>
+<pre><code>horizon-launcher account list
+</code></pre>
+<p>MCP: <code>account_list</code>.</p>
+<h2 id="horizon-launcher-account-sign-in"><code>horizon-launcher account sign-in</code></h2>
+<p>Sign in with a Microsoft account in your browser (device code). Play needs one that owns Minecraft: Java Edition.</p>
+<pre><code>horizon-launcher account sign-in
+</code></pre>
+<p>MCP: <code>account_sign_in</code>.</p>
+<h2 id="horizon-launcher-account-sign-out"><code>horizon-launcher account sign-out</code></h2>
+<p>Sign out: the account's tokens leave the keychain.</p>
+<pre><code>horizon-launcher account sign-out &lt;WHO&gt;
+</code></pre>
+<ul>
+<li><code>WHO</code>: Its name or UUID</li>
+</ul>
+<p>MCP: <code>account_sign_out</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-account-select"><code>horizon-launcher account select</code></h2>
+<p>Play as this account, or as one of your offline names.</p>
+<pre><code>horizon-launcher account select &lt;WHO&gt;
+</code></pre>
+<ul>
+<li><code>WHO</code></li>
+</ul>
+<p>MCP: <code>account_select</code>.</p>
+<h2 id="horizon-launcher-account-offline"><code>horizon-launcher account offline</code></h2>
+<p>Play offline (LAN, offline-mode servers) beside a signed-in account that owns the game: as NAME (kept to switch back to; 3 to 16 letters, digits or _), or as the name the game made up.</p>
+<pre><code>horizon-launcher account offline [NAME]
+</code></pre>
+<ul>
+<li><code>NAME</code></li>
+</ul>
+<p>MCP: <code>account_offline</code>.</p>
+<h2 id="horizon-launcher-account-forget-offline"><code>horizon-launcher account forget-offline</code></h2>
+<p>Forget one of your offline names; its skin and cape go with it.</p>
+<pre><code>horizon-launcher account forget-offline &lt;NAME&gt;
+</code></pre>
+<ul>
+<li><code>NAME</code></li>
+</ul>
+<p>MCP: <code>account_forget_offline</code>.</p>
+<h2 id="horizon-launcher-account-skin"><code>horizon-launcher account skin</code></h2>
+<p>Show or set an offline name's skin and cape: a 64x64 (or 64x32) skin PNG, a 64x32 cape PNG, the model. Kept by the launcher and given to the game when that name plays.</p>
+<pre><code>horizon-launcher account skin &lt;NAME&gt; [FILE]
+</code></pre>
+<ul>
+<li><code>NAME</code></li>
+<li><code>FILE</code>: The skin's PNG</li>
+<li><code>--model</code>: classic or slim arms</li>
+<li><code>--cape</code>: The cape's PNG</li>
+<li><code>--no-skin</code>: Back to the default skin</li>
+<li><code>--no-cape</code>: Take the cape off</li>
+</ul>
+<p>MCP: <code>account_skin</code>.</p>
+<h2 id="horizon-launcher-settings"><code>horizon-launcher settings</code></h2>
+<p>Show the launcher's settings, or set one (the Settings page): selected-version TAG, minecraft-dir PATH, server-dir PATH (&quot;default&quot; resets a folder), install-new-versions on|off, prune-old-versions on|off (delete old versions after an install, keeping the selected one, the ones instances use and the newest few), keep-versions N (how many of the newest to keep; &quot;default&quot; is 2), opening-animation on|off, proxy http://host:port (&quot;default&quot; removes it), while-playing stay|minimize|hide (what the window does while the game runs), language system|en|fr|ru|de|zh|es|uk|pl (the window's language; system follows the computer's), accent violet|blue|teal|green|amber|red|pink, background PATH (a picture behind Home; &quot;default&quot; shows Rusty Minecraft's landscape).</p>
+<pre><code>horizon-launcher settings [KEY] [VALUE]
+</code></pre>
+<ul>
+<li><code>KEY</code> (selected-version, minecraft-dir, server-dir, install-new-versions, prune-old-versions, keep-versions, opening-animation, proxy, while-playing, language, accent, background)</li>
+<li><code>VALUE</code>: The new value (with KEY)</li>
+</ul>
+<p>MCP: <code>settings</code>.</p>
+<h2 id="horizon-launcher-game-args"><code>horizon-launcher game-args</code></h2>
+<p>Show or set the extra arguments the game starts with (for example --server-thread); quotes group a word with spaces in it.</p>
+<pre><code>horizon-launcher game-args [ARGS]
+</code></pre>
+<ul>
+<li><code>ARGS</code>: Omit to show the current arguments</li>
+</ul>
+<p>MCP: <code>game_args</code>.</p>
+<h2 id="horizon-launcher-share-log"><code>horizon-launcher share-log</code></h2>
+<p>Upload an instance's latest.log to mclo.gs (a paste service for Minecraft logs) and print its link, for a bug report: only when the player asks. The home folder, the user name and the account names are taken out first; the link expires after 90 days unread.</p>
+<pre><code>horizon-launcher share-log
+</code></pre>
+<ul>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+</ul>
+<p>MCP: <code>share_log</code>, only when the player asks.</p>
+<h2 id="horizon-launcher-unshare-log"><code>horizon-launcher unshare-log</code></h2>
+<p>Delete a log shared with share-log: the &quot;<id>:<token>&quot; it printed.</p>
+<pre><code>horizon-launcher unshare-log &lt;SHARED&gt;
+</code></pre>
+<ul>
+<li><code>SHARED</code></li>
+</ul>
+<p>MCP: <code>unshare_log</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-logs"><code>horizon-launcher logs</code></h2>
+<p>Print the end of the game's log (logs/latest.log in the game folder), or its newest crash report.</p>
+<pre><code>horizon-launcher logs
+</code></pre>
+<ul>
+<li><code>--lines</code>: How many lines of latest.log</li>
+<li><code>--crash</code>: The newest crash report instead</li>
+</ul>
+<p>MCP: <code>logs</code>.</p>
+<h2 id="horizon-launcher-update"><code>horizon-launcher update</code></h2>
+<p>Look for a newer Rusty Minecraft release and launcher, and install them.</p>
+<pre><code>horizon-launcher update
+</code></pre>
+<ul>
+<li><code>--check</code>: Only report what is available</li>
+</ul>
+<p>MCP: <code>update</code>.</p>
+<h2 id="horizon-launcher-desktop-entry"><code>horizon-launcher desktop-entry</code></h2>
+<p>Linux: put Rusty Minecraft in the applications menu (an entry and the icon, under $XDG_DATA_HOME), or take it out with --remove.</p>
+<pre><code>horizon-launcher desktop-entry
+</code></pre>
+<ul>
+<li><code>--remove</code>: Remove the entry and the icon, and stop adding them back</li>
+</ul>
+<p>MCP: <code>desktop_entry</code>.</p>
+<h2 id="horizon-launcher-data-status"><code>horizon-launcher data status</code></h2>
+<p>What is allowed, the install ID and how many items wait (the default).</p>
+<pre><code>horizon-launcher data status
+</code></pre>
+<p>MCP: <code>data_status</code>.</p>
+<h2 id="horizon-launcher-data-allow"><code>horizon-launcher data allow</code></h2>
+<p>Turn kinds on: performance, crashes, bugs, benchmarks, or all.</p>
+<pre><code>horizon-launcher data allow &lt;KINDS&gt;...
+</code></pre>
+<ul>
+<li><code>KINDS</code></li>
+</ul>
+<p>MCP: <code>data_allow</code>, only when the player asks.</p>
+<h2 id="horizon-launcher-data-deny"><code>horizon-launcher data deny</code></h2>
+<p>Turn kinds off: performance, crashes, bugs, benchmarks, or all.</p>
+<pre><code>horizon-launcher data deny &lt;KINDS&gt;...
+</code></pre>
+<ul>
+<li><code>KINDS</code></li>
+</ul>
+<p>MCP: <code>data_deny</code>.</p>
+<h2 id="horizon-launcher-data-show"><code>horizon-launcher data show</code></h2>
+<p>Print exactly what would be sent.</p>
+<pre><code>horizon-launcher data show
+</code></pre>
+<p>MCP: <code>data_show</code>.</p>
+<h2 id="horizon-launcher-data-delete"><code>horizon-launcher data delete</code></h2>
+<p>Delete everything sent from here, and what waits, and take a new install ID.</p>
+<pre><code>horizon-launcher data delete
+</code></pre>
+<p>MCP: <code>data_delete</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-data-send"><code>horizon-launcher data send</code></h2>
+<p>Send what is waiting now.</p>
+<pre><code>horizon-launcher data send
+</code></pre>
+<p>MCP: <code>data_send</code>, only when the player asks.</p>
+<h2 id="horizon-launcher-data-bug"><code>horizon-launcher data bug</code></h2>
+<p>Send a bug report you write; it is printed first, as it would leave.</p>
+<pre><code>horizon-launcher data bug &lt;TEXT&gt;
+</code></pre>
+<ul>
+<li><code>TEXT</code></li>
+<li><code>--log</code>: Add the end of the game's log (scrubbed, without chat)</li>
+<li><code>--yes</code>: Send without asking</li>
+</ul>
+<p>MCP: <code>data_bug</code>, only when the player asks.</p>
+<h2 id="horizon-launcher-data-benchmark"><code>horizon-launcher data benchmark</code></h2>
+<p>Upload a benchmark report (docs/benchmark-report.md); it is printed first.</p>
+<pre><code>horizon-launcher data benchmark &lt;FILE&gt;
+</code></pre>
+<ul>
+<li><code>FILE</code></li>
+<li><code>--yes</code></li>
+</ul>
+<p>MCP: <code>data_benchmark</code>, only when the player asks.</p>
+<h2 id="horizon-launcher-instance-list"><code>horizon-launcher instance list</code></h2>
+<p>The instances, each with its game folder (* = the one Play starts).</p>
+<pre><code>horizon-launcher instance list
+</code></pre>
+<p>MCP: <code>instance_list</code>.</p>
+<h2 id="horizon-launcher-instance-create"><code>horizon-launcher instance create</code></h2>
+<p>Make an instance: empty but for your options and name, or a copy of another one's worlds, options and packs.</p>
+<pre><code>horizon-launcher instance create &lt;NAME&gt;
+</code></pre>
+<ul>
+<li><code>NAME</code></li>
+<li><code>--copy</code>: The instance to copy (its name or id)</li>
+<li><code>--minecraft</code>: Make a Minecraft: Java Edition instance of this version (1.21.4, latest or latest-snapshot) instead of a Rusty Minecraft one</li>
+<li><code>--loader</code>: With this mod loader: fabric or quilt</li>
+<li><code>--loader-version</code>: The loader's version (default: its newest stable one)</li>
+</ul>
+<p>MCP: <code>instance_create</code>.</p>
+<h2 id="horizon-launcher-instance-versions"><code>horizon-launcher instance versions</code></h2>
+<p>The versions of Minecraft: Java Edition a Java instance can play, the newest first.</p>
+<pre><code>horizon-launcher instance versions
+</code></pre>
+<ul>
+<li><code>--snapshots</code>: Snapshots too</li>
+<li><code>--old</code>: Old betas and alphas too</li>
+</ul>
+<p>MCP: <code>instance_versions</code>.</p>
+<h2 id="horizon-launcher-instance-java"><code>horizon-launcher instance java</code></h2>
+<p>A Java instance's Java: its own Java home or the automatic pick, memory and JVM arguments.</p>
+<pre><code>horizon-launcher instance java &lt;INSTANCE&gt;
+</code></pre>
+<ul>
+<li><code>INSTANCE</code></li>
+<li><code>--home</code>: A Java home to run it on</li>
+<li><code>--auto</code>: Go back to the Java the version needs, picked or downloaded by the launcher</li>
+<li><code>--memory</code>: The most memory the game may use, in MiB</li>
+<li><code>--args</code>: Extra JVM arguments (one string; &quot;&quot; clears them)</li>
+<li><code>--window</code>: The game window's size, as 1280x720; &quot;default&quot; goes back to the game's own</li>
+</ul>
+<p>MCP: <code>instance_java</code>.</p>
+<h2 id="horizon-launcher-instance-loader"><code>horizon-launcher instance loader</code></h2>
+<p>A Java instance's mod loader: fabric or quilt, or none. --list shows its versions.</p>
+<pre><code>horizon-launcher instance loader &lt;INSTANCE&gt; &lt;LOADER&gt;
+</code></pre>
+<ul>
+<li><code>INSTANCE</code></li>
+<li><code>LOADER</code></li>
+<li><code>--list</code>: List the loader's versions for the instance's Minecraft instead</li>
+</ul>
+<p>MCP: <code>instance_loader</code>.</p>
+<h2 id="horizon-launcher-instance-rename"><code>horizon-launcher instance rename</code></h2>
+<p>Rename an instance (its folder stays).</p>
+<pre><code>horizon-launcher instance rename &lt;INSTANCE&gt; &lt;NAME&gt;
+</code></pre>
+<ul>
+<li><code>INSTANCE</code></li>
+<li><code>NAME</code></li>
+</ul>
+<p>MCP: <code>instance_rename</code>.</p>
+<h2 id="horizon-launcher-instance-delete"><code>horizon-launcher instance delete</code></h2>
+<p>Delete an instance: its folder (worlds, options, packs) goes to the Trash, where you can get it back. Rusty Minecraft's own instance stays.</p>
+<pre><code>horizon-launcher instance delete &lt;INSTANCE&gt;
+</code></pre>
+<ul>
+<li><code>INSTANCE</code></li>
+</ul>
+<p>MCP: <code>instance_delete</code>.</p>
+<h2 id="horizon-launcher-instance-icon"><code>horizon-launcher instance icon</code></h2>
+<p>Set an instance's icon: a block or item name from your prepared files (grass_block), a colour (#3fa7d6), or none.</p>
+<pre><code>horizon-launcher instance icon &lt;INSTANCE&gt; &lt;ICON&gt;
+</code></pre>
+<ul>
+<li><code>INSTANCE</code></li>
+<li><code>ICON</code></li>
+</ul>
+<p>MCP: <code>instance_icon</code>.</p>
+<h2 id="horizon-launcher-instance-group"><code>horizon-launcher instance group</code></h2>
+<p>Put an instance in a sidebar group, or take it out with no group.</p>
+<pre><code>horizon-launcher instance group &lt;INSTANCE&gt; [GROUP]
+</code></pre>
+<ul>
+<li><code>INSTANCE</code></li>
+<li><code>GROUP</code></li>
+</ul>
+<p>MCP: <code>instance_group</code>.</p>
+<h2 id="horizon-launcher-instance-select"><code>horizon-launcher instance select</code></h2>
+<p>Make Play start this instance.</p>
+<pre><code>horizon-launcher instance select &lt;INSTANCE&gt;
+</code></pre>
+<ul>
+<li><code>INSTANCE</code></li>
+</ul>
+<p>MCP: <code>instance_select</code>.</p>
+<h2 id="horizon-launcher-instance-version"><code>horizon-launcher instance version</code></h2>
+<p>Keep an instance on one installed Rusty Minecraft version, or &quot;latest&quot; to follow updates again.</p>
+<pre><code>horizon-launcher instance version &lt;INSTANCE&gt; &lt;VERSION&gt;
+</code></pre>
+<ul>
+<li><code>INSTANCE</code></li>
+</ul>
+<p>MCP: <code>instance_version</code>.</p>
+<h2 id="horizon-launcher-instance-export"><code>horizon-launcher instance export</code></h2>
+<p>Export an instance (or a port) to share: its settings, packs, Rusty Minecraft mods and the worlds named, as a .mrpack (resource packs from Modrinth listed by download) or a zip. Never logs, screenshots or account data; worlds go without their per-player files.</p>
+<pre><code>horizon-launcher instance export [INSTANCE]
+</code></pre>
+<ul>
+<li><code>INSTANCE</code>: The instance (default: the selected one)</li>
+<li><code>--format</code> (mrpack, zip)</li>
+<li><code>--world</code>: A world to put in it (its name or folder); repeat for more</li>
+<li><code>--out</code>: Where to write it (default: &quot;<name>.mrpack&quot; in the current folder)</li>
+</ul>
+<p>MCP: <code>instance_export</code>.</p>
+<h2 id="horizon-launcher-instance-launch"><code>horizon-launcher instance launch</code></h2>
+<p>Show or set what runs around an instance's game: a shell command before it (the game starts only if it succeeds), a wrapper it runs through (<code>nice -n 5</code>), environment variables (&quot;NAME=value NAME2=value&quot;) and a shell command after it exits. An empty value clears one. The game and the commands also get INST_NAME, INST_ID, INST_DIR, INST_MC_DIR and, for a Java instance, INST_JAVA. On Linux, also GameMode, MangoHud and the dedicated graphics card, when the computer has them.</p>
+<pre><code>horizon-launcher instance launch &lt;INSTANCE&gt;
+</code></pre>
+<ul>
+<li><code>INSTANCE</code></li>
+<li><code>--pre-launch</code></li>
+<li><code>--wrapper</code></li>
+<li><code>--post-exit</code></li>
+<li><code>--env</code></li>
+<li><code>--gamemode</code>: Linux: run it through GameMode (gamemoderun), on or off</li>
+<li><code>--mangohud</code>: Linux: MangoHud's overlay, on or off</li>
+<li><code>--dedicated-gpu</code>: Linux: the dedicated graphics card (DRI_PRIME, or NVIDIA's offload), on or off</li>
+</ul>
+<p>MCP: <code>instance_launch</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-instance-shortcut"><code>horizon-launcher instance shortcut</code></h2>
+<p>Put a shortcut on the desktop that plays an instance (<code>play --instance</code>): a .desktop file (also in the applications menu) on Linux, an app on macOS, a .lnk on Windows.</p>
+<pre><code>horizon-launcher instance shortcut [INSTANCE]
+</code></pre>
+<ul>
+<li><code>INSTANCE</code>: The instance (default: the selected one)</li>
+<li><code>--remove</code>: Move the instance's shortcuts to the trash instead</li>
+</ul>
+<p>MCP: <code>instance_shortcut</code>.</p>
+<h2 id="horizon-launcher-instance-import"><code>horizon-launcher instance import</code></h2>
+<p>Import what a file is, as dropping it on the window does: a shared instance (a .mrpack without mod loaders, such as <code>instance export</code> writes, or a game folder zip) becomes a new instance; a Java modpack goes to the Modpacks import; a resource or shader pack into the instance (default: the selected one).</p>
+<pre><code>horizon-launcher instance import &lt;FILE&gt;
+</code></pre>
+<ul>
+<li><code>FILE</code></li>
+<li><code>--instance</code>: The instance a pack goes into</li>
+</ul>
+<p>MCP: <code>instance_import</code>.</p>
+<h2 id="horizon-launcher-instance-others"><code>horizon-launcher instance others</code></h2>
+<p>List the instances other launchers keep (Prism Launcher, MultiMC, the official launcher, the CurseForge app, the Modrinth App), read without changing anything there.</p>
+<pre><code>horizon-launcher instance others
+</code></pre>
+<ul>
+<li><code>--folder</code>: Look in this folder instead: a launcher's folder, its instances/ or one instance</li>
+</ul>
+<p>MCP: <code>instance_others</code>.</p>
+<h2 id="horizon-launcher-instance-copy-from"><code>horizon-launcher instance copy-from</code></h2>
+<p>Copy another launcher's instance into a new Java instance: its Minecraft version and its game folder (worlds, mods, packs, options); the other launcher's copy stays as it is.</p>
+<pre><code>horizon-launcher instance copy-from &lt;NAME&gt;
+</code></pre>
+<ul>
+<li><code>NAME</code>: Its name, as <code>instance others</code> lists it</li>
+<li><code>--folder</code>: Look in this folder instead: a launcher's folder, its instances/ or one instance</li>
+<li><code>--as</code>: The new instance's name (default: the same)</li>
+<li><code>--minecraft</code>: The Minecraft version it plays, when its launcher doesn't say (the CurseForge app, the Modrinth App)</li>
+</ul>
+<p>MCP: <code>instance_copy_from</code>.</p>
+<h2 id="horizon-launcher-worlds-list"><code>horizon-launcher worlds list</code></h2>
+<p>The worlds: name, mode, version, last played and size (the default).</p>
+<pre><code>horizon-launcher worlds list
+</code></pre>
+<ul>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+</ul>
+<p>MCP: <code>worlds_list</code>.</p>
+<h2 id="horizon-launcher-worlds-backup"><code>horizon-launcher worlds backup</code></h2>
+<p>Zip a world into the instance's backups/ folder, as the game's Make Backup does.</p>
+<pre><code>horizon-launcher worlds backup &lt;WORLD&gt;
+</code></pre>
+<ul>
+<li><code>WORLD</code>: Its folder or name</li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>worlds_backup</code>.</p>
+<h2 id="horizon-launcher-worlds-copy"><code>horizon-launcher worlds copy</code></h2>
+<p>Copy a world beside it, as &quot;<name> (1)&quot;.</p>
+<pre><code>horizon-launcher worlds copy &lt;WORLD&gt;
+</code></pre>
+<ul>
+<li><code>WORLD</code></li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>worlds_copy</code>.</p>
+<h2 id="horizon-launcher-worlds-delete"><code>horizon-launcher worlds delete</code></h2>
+<p>Move a world to the system's trash.</p>
+<pre><code>horizon-launcher worlds delete &lt;WORLD&gt;
+</code></pre>
+<ul>
+<li><code>WORLD</code></li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>worlds_delete</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-worlds-datapack-list"><code>horizon-launcher worlds datapack-list</code></h2>
+<p>A world's data packs, and which are on.</p>
+<pre><code>horizon-launcher worlds datapack-list &lt;WORLD&gt;
+</code></pre>
+<ul>
+<li><code>WORLD</code></li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>worlds_datapack_list</code>.</p>
+<h2 id="horizon-launcher-worlds-datapack-add"><code>horizon-launcher worlds datapack-add</code></h2>
+<p>Copy a data pack zip into a world (the game turns it on when the world opens).</p>
+<pre><code>horizon-launcher worlds datapack-add &lt;WORLD&gt; &lt;FILE&gt;
+</code></pre>
+<ul>
+<li><code>WORLD</code></li>
+<li><code>FILE</code></li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>worlds_datapack_add</code>.</p>
+<h2 id="horizon-launcher-worlds-datapack-remove"><code>horizon-launcher worlds datapack-remove</code></h2>
+<p>Move a world's data pack to the system's trash.</p>
+<pre><code>horizon-launcher worlds datapack-remove &lt;WORLD&gt; &lt;PACK&gt;
+</code></pre>
+<ul>
+<li><code>WORLD</code></li>
+<li><code>PACK</code>: Its file name, with or without .zip</li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>worlds_datapack_remove</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-packs-list"><code>horizon-launcher packs list</code></h2>
+<p>The resource and shader packs, and which are on (the default).</p>
+<pre><code>horizon-launcher packs list
+</code></pre>
+<ul>
+<li><code>--kind</code> (resource, shader): Only this kind</li>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+</ul>
+<p>MCP: <code>packs_list</code>.</p>
+<h2 id="horizon-launcher-packs-add"><code>horizon-launcher packs add</code></h2>
+<p>Copy a pack file in: a resource pack .zip, a shader pack .zip or a .hshader.</p>
+<pre><code>horizon-launcher packs add &lt;FILE&gt;
+</code></pre>
+<ul>
+<li><code>FILE</code></li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>packs_add</code>.</p>
+<h2 id="horizon-launcher-packs-on"><code>horizon-launcher packs on</code></h2>
+<p>Turn a pack on (a resource pack goes on top; a shader pack replaces the one that was on).</p>
+<pre><code>horizon-launcher packs on &lt;PACK&gt;
+</code></pre>
+<ul>
+<li><code>PACK</code>: Its file name or title</li>
+<li><code>--kind</code> (resource, shader)</li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>packs_on</code>.</p>
+<h2 id="horizon-launcher-packs-off"><code>horizon-launcher packs off</code></h2>
+<p>Turn a pack off.</p>
+<pre><code>horizon-launcher packs off &lt;PACK&gt;
+</code></pre>
+<ul>
+<li><code>PACK</code></li>
+<li><code>--kind</code> (resource, shader)</li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>packs_off</code>.</p>
+<h2 id="horizon-launcher-packs-remove"><code>horizon-launcher packs remove</code></h2>
+<p>Turn a pack off and move it to the system's trash.</p>
+<pre><code>horizon-launcher packs remove &lt;PACK&gt;
+</code></pre>
+<ul>
+<li><code>PACK</code></li>
+<li><code>--kind</code> (resource, shader)</li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>packs_remove</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-java-list"><code>horizon-launcher java list</code></h2>
+<p>The Java runtimes Rusty Minecraft downloaded from Mojang and the ones installed on this computer.</p>
+<pre><code>horizon-launcher java list
+</code></pre>
+<p>MCP: <code>java_list</code>.</p>
+<h2 id="horizon-launcher-java-install"><code>horizon-launcher java install</code></h2>
+<p>Download Mojang's Java runtime: a major (8, 16, 17, 21, 25) or a component name from a version's JSON (java-runtime-delta).</p>
+<pre><code>horizon-launcher java install &lt;JAVA&gt;
+</code></pre>
+<ul>
+<li><code>JAVA</code></li>
+</ul>
+<p>MCP: <code>java_install</code>.</p>
+<h2 id="horizon-launcher-screenshots-list"><code>horizon-launcher screenshots list</code></h2>
+<p>The screenshots, the newest first, with their files (the default).</p>
+<pre><code>horizon-launcher screenshots list
+</code></pre>
+<ul>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+</ul>
+<p>MCP: <code>screenshots_list</code>.</p>
+<h2 id="horizon-launcher-screenshots-delete"><code>horizon-launcher screenshots delete</code></h2>
+<p>Move a screenshot to the system's trash.</p>
+<pre><code>horizon-launcher screenshots delete &lt;SCREENSHOT&gt;
+</code></pre>
+<ul>
+<li><code>SCREENSHOT</code>: Its file name, with or without .png</li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>screenshots_delete</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-multiplayer-list"><code>horizon-launcher multiplayer list</code></h2>
+<p>The servers of the game's Multiplayer screen (the default).</p>
+<pre><code>horizon-launcher multiplayer list
+</code></pre>
+<ul>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+</ul>
+<p>MCP: <code>multiplayer_list</code>.</p>
+<h2 id="horizon-launcher-multiplayer-add"><code>horizon-launcher multiplayer add</code></h2>
+<p>Add a server to the list.</p>
+<pre><code>horizon-launcher multiplayer add &lt;ADDRESS&gt;
+</code></pre>
+<ul>
+<li><code>ADDRESS</code>: Its address, as in the game's Add Server (host or host:port)</li>
+<li><code>--name</code>: Its name in the list (default: Minecraft Server)</li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>multiplayer_add</code>.</p>
+<h2 id="horizon-launcher-multiplayer-remove"><code>horizon-launcher multiplayer remove</code></h2>
+<p>Remove a server from the list: its position from 1, name or address.</p>
+<pre><code>horizon-launcher multiplayer remove &lt;SERVER&gt;
+</code></pre>
+<ul>
+<li><code>SERVER</code></li>
+<li><code>--instance</code></li>
+</ul>
+<p>MCP: <code>multiplayer_remove</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-modpack-list"><code>horizon-launcher modpack list</code></h2>
+<p>The imported packs and their coverage (the default).</p>
+<pre><code>horizon-launcher modpack list
+</code></pre>
+<p>MCP: <code>modpack_list</code>.</p>
+<h2 id="horizon-launcher-modpack-import"><code>horizon-launcher modpack import</code></h2>
+<p>Import a .mrpack, a CurseForge zip or an instance folder, and write its coverage report.</p>
+<pre><code>horizon-launcher modpack import &lt;PATH&gt;
+</code></pre>
+<ul>
+<li><code>PATH</code></li>
+</ul>
+<p>MCP: <code>modpack_import</code>.</p>
+<h2 id="horizon-launcher-modpack-port"><code>horizon-launcher modpack port</code></h2>
+<p>Get the jars of what this computer can port and carry them over.</p>
+<pre><code>horizon-launcher modpack port &lt;PACK&gt;
+</code></pre>
+<ul>
+<li><code>PACK</code>: The pack's folder name, as list shows it</li>
+<li><code>--from</code>: A folder with your own jars (an installed instance, a downloads folder)</li>
+</ul>
+<p>MCP: <code>modpack_port</code>.</p>
+<h2 id="horizon-launcher-modpack-play"><code>horizon-launcher modpack play</code></h2>
+<p>Play a ported pack as its own profile.</p>
+<pre><code>horizon-launcher modpack play &lt;PACK&gt;
+</code></pre>
+<ul>
+<li><code>PACK</code></li>
+</ul>
+<p>MCP: <code>modpack_play</code>.</p>
+<h2 id="horizon-launcher-modpack-remove"><code>horizon-launcher modpack remove</code></h2>
+<p>Remove an imported pack: its jars, ports and the profile's saves.</p>
+<pre><code>horizon-launcher modpack remove &lt;PACK&gt;
+</code></pre>
+<ul>
+<li><code>PACK</code></li>
+</ul>
+<p>MCP: <code>modpack_remove</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-mods-list"><code>horizon-launcher mods list</code></h2>
+<p>What the browser installed in an instance (the default).</p>
+<pre><code>horizon-launcher mods list
+</code></pre>
+<ul>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+</ul>
+<p>MCP: <code>mods_list</code>.</p>
+<h2 id="horizon-launcher-mods-search"><code>horizon-launcher mods search</code></h2>
+<p>Search for packs Rusty Minecraft loads, or for what a Java instance runs (made for its Minecraft version and loader).</p>
+<pre><code>horizon-launcher mods search [TEXT]...
+</code></pre>
+<ul>
+<li><code>TEXT</code></li>
+<li><code>--kind</code> (mod, resource, modpack, shader, datapack)</li>
+<li><code>--everything</code>: Also what was made for other versions or runs only partly, each marked</li>
+<li><code>--source</code> (modrinth, curseforge, horizon)</li>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+</ul>
+<p>MCP: <code>mods_search</code>.</p>
+<h2 id="horizon-launcher-mods-check"><code>horizon-launcher mods check</code></h2>
+<p>Say how well a Java mod runs in Rusty Minecraft: its jar is downloaded (checksum checked), carried over and read; the answer is kept.</p>
+<pre><code>horizon-launcher mods check &lt;PROJECT&gt;
+</code></pre>
+<ul>
+<li><code>PROJECT</code></li>
+<li><code>--everything</code>: Allow a version made for another Minecraft version (1.21 and later)</li>
+<li><code>--source</code> (modrinth, curseforge, horizon)</li>
+</ul>
+<p>MCP: <code>mods_check</code>.</p>
+<h2 id="horizon-launcher-mods-install"><code>horizon-launcher mods install</code></h2>
+<p>Install a pack and what it needs into an instance, by its id or slug (checksums checked); a Java mod is ported into horizon-mods and turned on (a Java instance gets the jar made for its version and loader in mods/); a modpack is imported as an instance of its own; a data pack goes into the world <code>--world</code> names.</p>
+<pre><code>horizon-launcher mods install &lt;PROJECT&gt;
+</code></pre>
+<ul>
+<li><code>PROJECT</code></li>
+<li><code>--world</code>: Install the project's data pack into this world of the instance (its name or folder)</li>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+<li><code>--everything</code>: Allow a version made for another Minecraft version</li>
+<li><code>--source</code> (modrinth, curseforge, horizon)</li>
+</ul>
+<p>MCP: <code>mods_install</code>.</p>
+<h2 id="horizon-launcher-mods-update"><code>horizon-launcher mods update</code></h2>
+<p>Update what the browser installed (or one pack).</p>
+<pre><code>horizon-launcher mods update [PROJECT]
+</code></pre>
+<ul>
+<li><code>PROJECT</code></li>
+<li><code>--check</code>: Only say what is newer</li>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+</ul>
+<p>MCP: <code>mods_update</code>.</p>
+<h2 id="horizon-launcher-mods-add-github"><code>horizon-launcher mods add-github</code></h2>
+<p>Install a native mod from a GitHub link (docs/native-mods.md, &quot;Install from GitHub&quot;): https://github.com/OWNER/REPO (its latest release, else its default branch), .../releases/tag/TAG, .../tree/REF or .../commit/SHA. Resolved to an exact release file or commit, checked like a registry mod. NOT reviewed by the Rusty Minecraft registry.</p>
+<pre><code>horizon-launcher mods add-github &lt;URL&gt;
+</code></pre>
+<ul>
+<li><code>URL</code></li>
+<li><code>--mod</code>: The mod to install when the link holds several</li>
+<li><code>--all</code>: Install every mod the link holds</li>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+<li><code>--trust-native-code</code>: You read the mod's source (the link printed) and trust it with full access to this computer</li>
+</ul>
+<p>MCP: none: the player's switch.</p>
+<h2 id="horizon-launcher-mods-update-github"><code>horizon-launcher mods update-github</code></h2>
+<p>Look for newer versions of the native mods installed from GitHub (the latest release, or the default branch's head for a mod installed from a commit), and install them.</p>
+<pre><code>horizon-launcher mods update-github [ID]
+</code></pre>
+<ul>
+<li><code>ID</code>: One mod (default: all of them)</li>
+<li><code>--check</code>: Only say what is newer</li>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+<li><code>--trust-native-code</code>: You read the new source and trust it with full access to this computer</li>
+</ul>
+<p>MCP: none: the player's switch.</p>
+<h2 id="horizon-launcher-mods-remove"><code>horizon-launcher mods remove</code></h2>
+<p>Remove a pack the browser installed.</p>
+<pre><code>horizon-launcher mods remove &lt;PROJECT&gt;
+</code></pre>
+<ul>
+<li><code>PROJECT</code></li>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+</ul>
+<p>MCP: <code>mods_remove</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-mods-enable"><code>horizon-launcher mods enable</code></h2>
+<p>Turn on a mod the browser installed (horizon-mods.txt, as the game's Options &gt; Mods does; in a Java instance, its file loses <code>.disabled</code>).</p>
+<pre><code>horizon-launcher mods enable &lt;PROJECT&gt;
+</code></pre>
+<ul>
+<li><code>PROJECT</code></li>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+</ul>
+<p>MCP: <code>mods_enable</code>.</p>
+<h2 id="horizon-launcher-mods-disable"><code>horizon-launcher mods disable</code></h2>
+<p>Turn off a mod the browser installed; it stays installed (in a Java instance, as <code>&lt;file&gt;.disabled</code>).</p>
+<pre><code>horizon-launcher mods disable &lt;PROJECT&gt;
+</code></pre>
+<ul>
+<li><code>PROJECT</code></li>
+<li><code>--instance</code>: The instance (default: the selected one)</li>
+</ul>
+<p>MCP: <code>mods_disable</code>.</p>
+<h2 id="horizon-launcher-rust-status"><code>horizon-launcher rust status</code></h2>
+<p>Whether it is installed, its version and whether this computer can link with it.</p>
+<pre><code>horizon-launcher rust status
+</code></pre>
+<p>MCP: <code>rust_status</code>.</p>
+<h2 id="horizon-launcher-rust-install"><code>horizon-launcher rust install</code></h2>
+<p>Download the pinned toolchain from static.rust-lang.org (once), checked by SHA-256.</p>
+<pre><code>horizon-launcher rust install
+</code></pre>
+<p>MCP: <code>rust_install</code>.</p>
+<h2 id="horizon-launcher-rust-remove"><code>horizon-launcher rust remove</code></h2>
+<p>Delete the toolchain and the native builds' Cargo home.</p>
+<pre><code>horizon-launcher rust remove
+</code></pre>
+<p>MCP: <code>rust_remove</code>.</p>
+<h2 id="horizon-launcher-servers-list"><code>horizon-launcher servers list</code></h2>
+<p>The servers, their folder and whether they run.</p>
+<pre><code>horizon-launcher servers list
+</code></pre>
+<p>MCP: <code>servers_list</code>.</p>
+<h2 id="horizon-launcher-servers-create"><code>horizon-launcher servers create</code></h2>
+<p>Create a server; with no options it is a new world, survival, normal, 10 players, friends only.</p>
+<pre><code>horizon-launcher servers create
+</code></pre>
+<ul>
+<li><code>--name</code></li>
+<li><code>--seed</code>: The new world's seed (default: random)</li>
+<li><code>--copy-world</code>: Start from a copy of this world folder (one of your saves)</li>
+<li><code>--mode</code> (survival, creative, adventure, spectator)</li>
+<li><code>--difficulty</code> (peaceful, easy, normal, hard)</li>
+<li><code>--max-players</code></li>
+<li><code>--open</code>: Let anyone in (no whitelist)</li>
+<li><code>--offline</code>: Do not check players' Minecraft accounts (offline mode: anyone can use any name)</li>
+<li><code>--player</code>: Who may join (repeatable); the first becomes an operator</li>
+<li><code>--accept-eula</code>: Agree to the Minecraft EULA (https://aka.ms/MinecraftEULA)</li>
+</ul>
+<p>MCP: <code>servers_create</code>, only when the player asks.</p>
+<h2 id="horizon-launcher-servers-set-up"><code>horizon-launcher servers set-up</code></h2>
+<p>Copy an installed, prepared version's programs and game files for the servers (again).</p>
+<pre><code>horizon-launcher servers set-up
+</code></pre>
+<p>MCP: <code>servers_set_up</code>.</p>
+<h2 id="horizon-launcher-servers-run"><code>horizon-launcher servers run</code></h2>
+<p>Run a horizon-server command on a server, for example: servers run &quot;My server&quot; -- status.</p>
+<pre><code>horizon-launcher servers run &lt;SERVER&gt; -- &lt;ARGS&gt;...
+</code></pre>
+<ul>
+<li><code>SERVER</code>: The server's name or folder</li>
+<li><code>ARGS</code></li>
+</ul>
+<p>MCP: <code>servers_run</code>.</p>
+<h2 id="horizon-launcher-servers-forget"><code>horizon-launcher servers forget</code></h2>
+<p>Take a server off the list (its folder stays).</p>
+<pre><code>horizon-launcher servers forget &lt;SERVER&gt;
+</code></pre>
+<ul>
+<li><code>SERVER</code></li>
+</ul>
+<p>MCP: <code>servers_forget</code>, needs <code>confirm: true</code>.</p>
+<h2 id="horizon-launcher-mcp"><code>horizon-launcher mcp</code></h2>
+<p>Serve the Model Context Protocol on stdin and stdout, for AI agents (refused while No AI is on).</p>
+<pre><code>horizon-launcher mcp
+</code></pre>
+<p>MCP: none: this command is the MCP server.</p>
+<h2 id="horizon-launcher-agent-config"><code>horizon-launcher agent-config</code></h2>
+<p>How to connect an AI agent (Claude Code, Codex, Cursor, any MCP client) to <code>mcp</code>: the config to paste and the command that adds it (refused while No AI is on).</p>
+<pre><code>horizon-launcher agent-config
+</code></pre>
+<ul>
+<li><code>--client</code> (claude-code, codex, cursor, generic): Only this client</li>
+<li><code>--test</code>: Start the MCP server as a client would and say whether it answered</li>
+</ul>
+<p>MCP: none: it prints how to connect a client to <code>mcp</code>.</p>
+<h2 id="horizon-launcher-no-ai"><code>horizon-launcher no-ai</code></h2>
+<p>Show or set No AI: on hides and turns off every AI feature (the companion, agent control, horizon-ctl and both MCP servers); off, the default, makes them available.</p>
+<pre><code>horizon-launcher no-ai [STATE]
+</code></pre>
+<ul>
+<li><code>STATE</code> (on, off): Omit to show the current state</li>
+</ul>
+<p>MCP: none: the player's switch.</p>
+<h2 id="horizon-launcher-benchmark"><code>horizon-launcher benchmark</code></h2>
+<p>Measure the launcher: starts (the first is the cold one), page switching, idle CPU and memory, the release list fetch; writes a benchmark report to benchmarks/ in its data folder.</p>
+<pre><code>horizon-launcher benchmark
+</code></pre>
+<ul>
+<li><code>--repeats</code>: How many times to start it</li>
+</ul>
+<p>MCP: <code>benchmark</code>.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/launcher-commands.md"><code>docs/launcher-commands.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#horizon-launcher-versions">horizon-launcher versions</a></li><li class="l2"><a href="#horizon-launcher-install">horizon-launcher install</a></li><li class="l2"><a href="#horizon-launcher-remove">horizon-launcher remove</a></li><li class="l2"><a href="#horizon-launcher-prepare">horizon-launcher prepare</a></li><li class="l2"><a href="#horizon-launcher-play">horizon-launcher play</a></li><li class="l2"><a href="#horizon-launcher-server">horizon-launcher server</a></li><li class="l2"><a href="#horizon-launcher-native-build">horizon-launcher native-build</a></li><li class="l2"><a href="#horizon-launcher-notes">horizon-launcher notes</a></li><li class="l2"><a href="#horizon-launcher-links">horizon-launcher links</a></li><li class="l2"><a href="#horizon-launcher-account-list">horizon-launcher account list</a></li><li class="l2"><a href="#horizon-launcher-account-sign-in">horizon-launcher account sign-in</a></li><li class="l2"><a href="#horizon-launcher-account-sign-out">horizon-launcher account sign-out</a></li><li class="l2"><a href="#horizon-launcher-account-select">horizon-launcher account select</a></li><li class="l2"><a href="#horizon-launcher-account-offline">horizon-launcher account offline</a></li><li class="l2"><a href="#horizon-launcher-account-forget-offline">horizon-launcher account forget-offline</a></li><li class="l2"><a href="#horizon-launcher-account-skin">horizon-launcher account skin</a></li><li class="l2"><a href="#horizon-launcher-settings">horizon-launcher settings</a></li><li class="l2"><a href="#horizon-launcher-game-args">horizon-launcher game-args</a></li><li class="l2"><a href="#horizon-launcher-share-log">horizon-launcher share-log</a></li><li class="l2"><a href="#horizon-launcher-unshare-log">horizon-launcher unshare-log</a></li><li class="l2"><a href="#horizon-launcher-logs">horizon-launcher logs</a></li><li class="l2"><a href="#horizon-launcher-update">horizon-launcher update</a></li><li class="l2"><a href="#horizon-launcher-desktop-entry">horizon-launcher desktop-entry</a></li><li class="l2"><a href="#horizon-launcher-data-status">horizon-launcher data status</a></li><li class="l2"><a href="#horizon-launcher-data-allow">horizon-launcher data allow</a></li><li class="l2"><a href="#horizon-launcher-data-deny">horizon-launcher data deny</a></li><li class="l2"><a href="#horizon-launcher-data-show">horizon-launcher data show</a></li><li class="l2"><a href="#horizon-launcher-data-delete">horizon-launcher data delete</a></li><li class="l2"><a href="#horizon-launcher-data-send">horizon-launcher data send</a></li><li class="l2"><a href="#horizon-launcher-data-bug">horizon-launcher data bug</a></li><li class="l2"><a href="#horizon-launcher-data-benchmark">horizon-launcher data benchmark</a></li><li class="l2"><a href="#horizon-launcher-instance-list">horizon-launcher instance list</a></li><li class="l2"><a href="#horizon-launcher-instance-create">horizon-launcher instance create</a></li><li class="l2"><a href="#horizon-launcher-instance-versions">horizon-launcher instance versions</a></li><li class="l2"><a href="#horizon-launcher-instance-java">horizon-launcher instance java</a></li><li class="l2"><a href="#horizon-launcher-instance-loader">horizon-launcher instance loader</a></li><li class="l2"><a href="#horizon-launcher-instance-rename">horizon-launcher instance rename</a></li><li class="l2"><a href="#horizon-launcher-instance-delete">horizon-launcher instance delete</a></li><li class="l2"><a href="#horizon-launcher-instance-icon">horizon-launcher instance icon</a></li><li class="l2"><a href="#horizon-launcher-instance-group">horizon-launcher instance group</a></li><li class="l2"><a href="#horizon-launcher-instance-select">horizon-launcher instance select</a></li><li class="l2"><a href="#horizon-launcher-instance-version">horizon-launcher instance version</a></li><li class="l2"><a href="#horizon-launcher-instance-export">horizon-launcher instance export</a></li><li class="l2"><a href="#horizon-launcher-instance-launch">horizon-launcher instance launch</a></li><li class="l2"><a href="#horizon-launcher-instance-shortcut">horizon-launcher instance shortcut</a></li><li class="l2"><a href="#horizon-launcher-instance-import">horizon-launcher instance import</a></li><li class="l2"><a href="#horizon-launcher-instance-others">horizon-launcher instance others</a></li><li class="l2"><a href="#horizon-launcher-instance-copy-from">horizon-launcher instance copy-from</a></li><li class="l2"><a href="#horizon-launcher-worlds-list">horizon-launcher worlds list</a></li><li class="l2"><a href="#horizon-launcher-worlds-backup">horizon-launcher worlds backup</a></li><li class="l2"><a href="#horizon-launcher-worlds-copy">horizon-launcher worlds copy</a></li><li class="l2"><a href="#horizon-launcher-worlds-delete">horizon-launcher worlds delete</a></li><li class="l2"><a href="#horizon-launcher-worlds-datapack-list">horizon-launcher worlds datapack-list</a></li><li class="l2"><a href="#horizon-launcher-worlds-datapack-add">horizon-launcher worlds datapack-add</a></li><li class="l2"><a href="#horizon-launcher-worlds-datapack-remove">horizon-launcher worlds datapack-remove</a></li><li class="l2"><a href="#horizon-launcher-packs-list">horizon-launcher packs list</a></li><li class="l2"><a href="#horizon-launcher-packs-add">horizon-launcher packs add</a></li><li class="l2"><a href="#horizon-launcher-packs-on">horizon-launcher packs on</a></li><li class="l2"><a href="#horizon-launcher-packs-off">horizon-launcher packs off</a></li><li class="l2"><a href="#horizon-launcher-packs-remove">horizon-launcher packs remove</a></li><li class="l2"><a href="#horizon-launcher-java-list">horizon-launcher java list</a></li><li class="l2"><a href="#horizon-launcher-java-install">horizon-launcher java install</a></li><li class="l2"><a href="#horizon-launcher-screenshots-list">horizon-launcher screenshots list</a></li><li class="l2"><a href="#horizon-launcher-screenshots-delete">horizon-launcher screenshots delete</a></li><li class="l2"><a href="#horizon-launcher-multiplayer-list">horizon-launcher multiplayer list</a></li><li class="l2"><a href="#horizon-launcher-multiplayer-add">horizon-launcher multiplayer add</a></li><li class="l2"><a href="#horizon-launcher-multiplayer-remove">horizon-launcher multiplayer remove</a></li><li class="l2"><a href="#horizon-launcher-modpack-list">horizon-launcher modpack list</a></li><li class="l2"><a href="#horizon-launcher-modpack-import">horizon-launcher modpack import</a></li><li class="l2"><a href="#horizon-launcher-modpack-port">horizon-launcher modpack port</a></li><li class="l2"><a href="#horizon-launcher-modpack-play">horizon-launcher modpack play</a></li><li class="l2"><a href="#horizon-launcher-modpack-remove">horizon-launcher modpack remove</a></li><li class="l2"><a href="#horizon-launcher-mods-list">horizon-launcher mods list</a></li><li class="l2"><a href="#horizon-launcher-mods-search">horizon-launcher mods search</a></li><li class="l2"><a href="#horizon-launcher-mods-check">horizon-launcher mods check</a></li><li class="l2"><a href="#horizon-launcher-mods-install">horizon-launcher mods install</a></li><li class="l2"><a href="#horizon-launcher-mods-update">horizon-launcher mods update</a></li><li class="l2"><a href="#horizon-launcher-mods-add-github">horizon-launcher mods add-github</a></li><li class="l2"><a href="#horizon-launcher-mods-update-github">horizon-launcher mods update-github</a></li><li class="l2"><a href="#horizon-launcher-mods-remove">horizon-launcher mods remove</a></li><li class="l2"><a href="#horizon-launcher-mods-enable">horizon-launcher mods enable</a></li><li class="l2"><a href="#horizon-launcher-mods-disable">horizon-launcher mods disable</a></li><li class="l2"><a href="#horizon-launcher-rust-status">horizon-launcher rust status</a></li><li class="l2"><a href="#horizon-launcher-rust-install">horizon-launcher rust install</a></li><li class="l2"><a href="#horizon-launcher-rust-remove">horizon-launcher rust remove</a></li><li class="l2"><a href="#horizon-launcher-servers-list">horizon-launcher servers list</a></li><li class="l2"><a href="#horizon-launcher-servers-create">horizon-launcher servers create</a></li><li class="l2"><a href="#horizon-launcher-servers-set-up">horizon-launcher servers set-up</a></li><li class="l2"><a href="#horizon-launcher-servers-run">horizon-launcher servers run</a></li><li class="l2"><a href="#horizon-launcher-servers-forget">horizon-launcher servers forget</a></li><li class="l2"><a href="#horizon-launcher-mcp">horizon-launcher mcp</a></li><li class="l2"><a href="#horizon-launcher-agent-config">horizon-launcher agent-config</a></li><li class="l2"><a href="#horizon-launcher-no-ai">horizon-launcher no-ai</a></li><li class="l2"><a href="#horizon-launcher-benchmark">horizon-launcher benchmark</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

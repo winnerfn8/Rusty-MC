@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Play with friends · Rusty Minecraft docs</title>
+<meta name="description" content="Play with friends: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html" aria-current="page">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="play-with-friends">Play with friends</h1>
+<p>A player opens their single-player world to friends with one click and gets an <strong>invite code</strong>.
+Friends paste the code (in game: the title screen's Friends button opens Join a Friend, and Direct
+Connection takes a full code too; or on the launcher's Play page) and join.
+There is no Rusty Minecraft server in the middle and no account: the code itself says where the host is and
+holds the key that encrypts the game between them.</p>
+<p>It is built on Open to LAN: the integrated server (<code>crates/horizon-client/src/lan</code>) listens on a local
+TCP port and speaks the vanilla protocol. Play with friends puts an encrypted tunnel in front of that
+port. Neither the integrated server nor the guest's client changes: the tunnel carries exactly the
+bytes vanilla's protocol would send, between a loopback port on each side.</p>
+<pre><code> guest's game                                                              host's game
+ ┌──────────────┐ 127.0.0.1:A ┌────────────┐   TCP, end-to-end encrypted   ┌────────────┐ 127.0.0.1:LAN ┌──────────────┐
+ │ client       │────────────▶│ guest      │══════════════════════════════▶│ host       │──────────────▶│ integrated   │
+ │ (unchanged)  │             │ tunnel     │  to an address from the code  │ tunnel     │               │ server (LAN) │
+ └──────────────┘             └────────────┘                               └────────────┘               └──────────────┘
+                                     ╲            optional: a relay anyone can run         ╱
+                                      ╲──────────▶ horizon-relay (short codes, fallback) ◀╱
+</code></pre>
+<h2 id="how-it-works">How it works</h2>
+<p><strong>Hosting.</strong> The pause menu's Friends button (vanilla's icon, beside Player Reporting) opens <strong>Play
+with Friends</strong> (<code>friends_screen.rs</code>); its <strong>Start Sharing</strong> opens the world to LAN if it isn't (Open to
+LAN's defaults), then the host's game, on its own:</p>
+<ol>
+<li>listens on its <strong>direct port</strong>, TCP 25580 by default (the same port every time, so a port forwarded
+by hand keeps working; another one if it is taken; <code>HORIZON_FRIENDS_PORT</code> picks it);</li>
+<li>collects this computer's addresses: the LAN address, VPN addresses (Tailscale's <code>100.x</code>, ZeroTier
+and others), IPv6. Container and VM bridges are left out;</li>
+<li>asks the home router to open the direct port for an hour, renewed every half hour and deleted when
+sharing stops: <strong>PCP</strong> (RFC 6887), then <strong>NAT-PMP</strong> (RFC 6886) on the default gateway, then <strong>UPnP
+IGD</strong> (SSDP discovery, SOAP <code>AddPortMapping</code>). A router that only takes permanent UPnP mappings gets
+one, deleted on stop the same way (if the game crashes instead, a timed mapping expires within the
+hour; a permanent one stays until it is removed in the router's settings);</li>
+<li>asks public <strong>STUN</strong> servers for its public IPv4 address (only the address: STUN sees UDP, the game
+is TCP). Defaults: <code>stun.cloudflare.com:3478</code> and <code>stun.l.google.com:19302</code>, two independent
+operators of free STUN at a global scale, so one outage doesn't break discovery. <code>HORIZON_STUN_SERVERS</code>
+(a comma list, or <code>none</code>) changes them;</li>
+<li>builds the <strong>invite code</strong>: the endpoints (the router mapping, the public address on the direct
+port, the interface addresses) and a fresh 80-bit secret, in base32 with a checksum.</li>
+</ol>
+<p><strong>Joining.</strong> The guest's game dials every endpoint in the code at once. The first that answers as a
+Rusty Minecraft host gets the handshake, the others are dropped. On the same LAN, over a VPN, with IPv6, with a
+router that opened the port, or with a forwarded port, that's it: no server took part.</p>
+<p><strong>Codes.</strong> Crockford base32 (<code>0-9 A-Z</code> without <code>I L O U</code>; input ignores case, spaces and dashes and reads
+<code>O</code> as <code>0</code>, <code>I</code>/<code>L</code> as <code>1</code>) in groups of five, with a 16-bit checksum so a typo is caught before
+anything is dialled:</p>
+<ul>
+<li>a home with a router mapping, a LAN address and a tailnet address: 52 symbols
+(<code>2A7KQ-M3XPD-…</code>, 11 groups); with IPv6 too, 79;</li>
+<li>byte layout: version, secret (10 bytes), direct port, endpoints (tag, address, own port when it
+differs), an optional relay entry, the first two bytes of SHA-256 of all that.</li>
+</ul>
+<p>A code lives as long as the host shares: stopping, closing the world or quitting ends it (the direct
+port closes, the router mapping is deleted). Sharing again makes a new secret.</p>
+<h2 id="when-friends-cant-reach-the-host">When friends can't reach the host</h2>
+<p>Play with Friends says what to expect, from what the game found; when friends on the internet can't
+reach the host, its <strong>Troubleshooting...</strong> button (beside Done) opens this section in the browser:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>What the game found</th>
+<th>What the host reads</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The router opened the port</td>
+<td>&quot;Friends anywhere can join: your router opened the port with UPnP (203.0.113.5:25580).&quot;</td>
+</tr>
+<tr>
+<td>This computer has a public address</td>
+<td>&quot;Friends anywhere can join … (TCP port 25580 must not be blocked by a firewall).&quot;</td>
+</tr>
+<tr>
+<td>No router answered</td>
+<td>&quot;Friends on your network or VPN can join. For friends on the internet: turn on UPnP on your router, or forward TCP port 25580 to 192.168.1.20, or use a relay, or a VPN such as Tailscale or ZeroTier (the code already holds your VPN address).&quot;</td>
+</tr>
+<tr>
+<td>The router is behind another NAT (the router's public side is a private or <code>100.64/10</code> address, or STUN sees another address)</td>
+<td>&quot;… your router is itself behind another NAT (your provider's carrier-grade NAT, CGNAT, or a second router), so opening its port isn't enough. Use a relay or a VPN such as Tailscale or ZeroTier.&quot;</td>
+</tr>
+</tbody>
+</table></div>
+<p>The code always holds the public address on the direct port when STUN found it, so <strong>forwarding the
+port by hand</strong> works without a new code. A guest that can't reach any endpoint is told: &quot;Couldn't reach
+your friend's game. Ask them to read the note under their code: they may need UPnP on their router, a
+forwarded port, a relay or a VPN.&quot;</p>
+<h2 id="encryption">Encryption</h2>
+<p>The code's secret never leaves the code. Every session runs a password-authenticated key exchange
+(SPAKE2 over Ed25519, RustCrypto's <code>spake2</code>) keyed by it and bound to a session number, then derives
+per-direction ChaCha20-Poly1305 keys with HKDF-SHA256 from the exchange and two fresh randoms, with a
+key confirmation first. A wrong code, a changed byte, a replayed or reordered frame ends the stream.
+The same exchange runs over relayed sessions, where it matters most: the relay gets nothing to test
+guesses against offline. Online guesses on the direct port face the 80-bit secret; at most 8 openings
+run at once there, and each must finish within 10 seconds however slowly its bytes come.</p>
+<h2 id="privacy-who-sees-what">Privacy: who sees what</h2>
+<ul>
+<li><strong>Friends with the code</strong> see the host's addresses in it (LAN, VPN, public), as with any server
+address. A guest's address is seen by the host, as on any server.</li>
+<li><strong>STUN servers</strong> see the host's public IP address and a 20-byte request, like any website it visits.
+Turn them off with <code>HORIZON_STUN_SERVERS=none</code> (the code then lacks the public address unless the
+router reported it).</li>
+<li><strong>The router</strong> gets a port mapping named &quot;Rusty Minecraft (play with friends)&quot;.</li>
+<li><strong>A relay</strong> (only if one is configured) sees the IP addresses of the host and the guests, the short
+code's first half, when sessions start and end and the size of encrypted frames. It can't see the
+secret, the key or the game (names, chat, the world). It logs counts every five minutes, nothing else.</li>
+<li><strong>Rusty Minecraft</strong> runs no service for it. The game's anonymous &quot;I'm playing&quot; ping says only whether a
+LAN or friends world is open, never its address, code or name (<a href="telemetry.html">telemetry.md</a>).</li>
+</ul>
+<h2 id="identity">Identity</h2>
+<p>Like LAN, and like vanilla's <code>IntegratedServer</code>: a host signed in with a Microsoft account runs the world
+in online mode, so each guest signs in through Mojang's session servers and arrives with their own
+UUID, skin and cape. A host playing under an offline name runs it in offline mode, where a guest joins
+with the name their game uses. Either way the host's own profile is reserved. Every tunnelled guest
+reaches the integrated server from <code>127.0.0.1</code>.</p>
+<h2 id="relays-optional">Relays (optional)</h2>
+<p>For networks nothing can reach (CGNAT on both sides, no VPN), a <strong>relay</strong> carries the session: one small
+binary, <code>horizon-relay</code>, that anyone can run on their own PC, a VPS, a Raspberry Pi or a free tier.
+There is no default relay. With one configured:</p>
+<ul>
+<li>the host also registers there and gets a <strong>short code</strong> (<code>K7QM-3XPD</code>: a 4-symbol nameplate the relay
+allocates, a 4-symbol secret it never sees), and the full code names the relay and carries the short
+code, so guests with the full code fall back to the relay without any setting;</li>
+<li>guests with only the short code need the relay's address (on the Join a friend page);</li>
+<li>a relayed session first races direct connections both ways (candidates exchanged encrypted, TCP
+simultaneous open from the direct port), and stays on the relay only if none connects.</li>
+</ul>
+<p>Configuring it: the <strong>Relay</strong> field on the Join a friend page (saved to <code>horizon.txt</code> as
+<code>friendsRelay:host:port</code>, used for hosting too), or <code>HORIZON_RELAY_URL</code>.</p>
+<h3 id="running-your-own-relay">Running your own relay</h3>
+<p>The relay needs one TCP port reachable by your friends and almost nothing else (a few MB of memory, no
+disk). Relayed players cost what the game sends: a join is a few MB, play is about 10–50 KB/s, flying
+over new terrain up to a few hundred KB/s (capped per session).</p>
+<p><strong>From a release or source</strong> (any OS with Rust):</p>
+<pre><code>cargo build --release -p horizon-relay
+PORT=7000 ./target/release/horizon-relay
+</code></pre>
+<p><strong>With Docker</strong> (build context: the repository root):</p>
+<pre><code>docker build -f crates/horizon-relay/Dockerfile -t horizon-relay .
+docker run -d --restart unless-stopped -p 7000:7000 horizon-relay
+</code></pre>
+<p><strong>As a service</strong> (Linux, including a Raspberry Pi): copy the binary to <code>/usr/local/bin/horizon-relay</code>,
+<code>crates/horizon-relay/horizon-relay.service</code> to <code>/etc/systemd/system/</code>, then
+<code>systemctl enable --now horizon-relay</code>.</p>
+<p>Then forward TCP port 7000 on your router to that machine (or run it on a VPS with a public address),
+check <code>curl http://&lt;address&gt;:7000/health</code> from outside, and give friends <code>&lt;address&gt;:7000</code>. <code>GET /whoami</code>
+shows the address the relay sees for you: behind a proxy that hides client addresses (some hosting
+platforms' TCP proxies), set <code>RELAY_PER_ADDRESS_LIMITS=0</code>. Run <strong>one</strong> instance per address: codes live
+in its memory.</p>
+<p>Settings, all optional:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PORT</code></td>
+<td>7000</td>
+<td>the TCP port (also answers <code>GET /health</code> and <code>GET /whoami</code>)</td>
+</tr>
+<tr>
+<td><code>RELAY_BIND</code></td>
+<td>all addresses</td>
+<td>listen on one address only (e.g. a tailnet address)</td>
+</tr>
+<tr>
+<td><code>RELAY_MAX_HOSTS</code></td>
+<td>1000</td>
+<td>short codes at once</td>
+</tr>
+<tr>
+<td><code>RELAY_MAX_BRIDGES</code></td>
+<td>200</td>
+<td>relayed streams at once</td>
+</tr>
+<tr>
+<td><code>RELAY_MAX_PENDING_PER_HOST</code></td>
+<td>8</td>
+<td>guests joining one host at the same time</td>
+</tr>
+<tr>
+<td><code>RELAY_MAX_CONNECTIONS</code></td>
+<td>4096</td>
+<td>connections open at once, of every kind (more are closed unanswered)</td>
+</tr>
+<tr>
+<td><code>RELAY_SESSION_KBPS</code></td>
+<td>1024</td>
+<td>KiB/s each way per relayed stream</td>
+</tr>
+<tr>
+<td><code>RELAY_TOTAL_MBPS</code></td>
+<td>100</td>
+<td>Mbit/s for everything relayed</td>
+</tr>
+<tr>
+<td><code>RELAY_GLOBAL_UNKNOWN_PER_MIN</code></td>
+<td>120</td>
+<td>unknown short codes a minute, all clients together</td>
+</tr>
+<tr>
+<td><code>RELAY_PER_ADDRESS_LIMITS</code></td>
+<td>1</td>
+<td>per-address rate limits (see below)</td>
+</tr>
+<tr>
+<td><code>RELAY_PROXY_PROTOCOL</code></td>
+<td>0</td>
+<td>read the client address from a PROXY protocol v1 line</td>
+</tr>
+</tbody>
+</table></div>
+<p>Fixed limits: per client address (IPv6 by /64), 6 host registrations a minute (burst 3), 12 joins a
+minute (burst 6), 5 unknown short codes in 10 minutes block joins for 10 minutes; a relayed stream idle
+for 120 s is closed (the game's keep-alive sends every 15 s); the first line must be complete within 10 s;
+hosts answer pings within 60 s; five wrong secrets on a short code and the host retires it for a new one.</p>
+<h3 id="the-relay-protocol">The relay protocol</h3>
+<p>One TCP port. The first line of each connection is a JSON object (at most 4 KiB, within 10 seconds); a
+connection starting with <code>GET </code> gets an HTTP answer instead.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>From</th>
+<th>Line</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host</td>
+<td><code>{&quot;op&quot;:&quot;host&quot;,&quot;v&quot;:1,&quot;protocol&quot;:P,&quot;game&quot;:&quot;26.3&quot;}</code></td>
+<td>register; answer <code>{&quot;op&quot;:&quot;registered&quot;,&quot;nameplate&quot;:&quot;K7QM&quot;,&quot;token&quot;:T,&quot;observed&quot;:&quot;ip:port&quot;}</code></td>
+</tr>
+<tr>
+<td>guest</td>
+<td><code>{&quot;op&quot;:&quot;join&quot;,&quot;v&quot;:1,&quot;nameplate&quot;:&quot;K7QM&quot;,&quot;protocol&quot;:P,&quot;game&quot;:&quot;26.3&quot;}</code></td>
+<td>resolve; the relay announces the session to the host and waits for its attach, then answers <code>{&quot;op&quot;:&quot;bridged&quot;,&quot;session&quot;:S,&quot;observed&quot;:…}</code> or <code>{&quot;op&quot;:&quot;error&quot;,&quot;code&quot;:…}</code></td>
+</tr>
+<tr>
+<td>relay → host</td>
+<td><code>{&quot;op&quot;:&quot;join&quot;,&quot;session&quot;:S}</code></td>
+<td>open a new connection and attach</td>
+</tr>
+<tr>
+<td>host</td>
+<td><code>{&quot;op&quot;:&quot;attach&quot;,&quot;v&quot;:1,&quot;session&quot;:S,&quot;token&quot;:T}</code></td>
+<td>paired with the guest; both get <code>bridged</code>, then raw bytes</td>
+</tr>
+<tr>
+<td>relay ↔ host</td>
+<td><code>{&quot;op&quot;:&quot;ping&quot;}</code> / <code>{&quot;op&quot;:&quot;pong&quot;}</code></td>
+<td>every 20 s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Errors: <code>unknown_code</code>, <code>ended</code> (kept 15 minutes after a host leaves), <code>version_mismatch</code> (with the
+host's version), <code>host_unreachable</code>, <code>full</code>, <code>rate_limited</code>, <code>bad_request</code>.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li><strong>&quot;Friends on your network or VPN can join&quot;</strong>: turn on UPnP (sometimes &quot;UPnP IGD&quot; or &quot;NAT-PMP&quot;) in
+the router's settings and share again; or forward TCP port 25580 (the panel shows the port and your
+LAN address) to this computer; or install Tailscale or ZeroTier on both computers (the code already
+holds the VPN address); or run a relay.</li>
+<li><strong>CGNAT / a second router</strong>: port forwarding on your own router can't help. Use a VPN or a relay (on a
+machine with a public address, e.g. a VPS).</li>
+<li><strong>&quot;Couldn't reach your friend's game&quot;</strong> (guest): the host's note under the code says why. A firewall
+on the host computer can also block the direct port: allow <code>horizon-client</code> on private and public
+networks (Windows asks the first time; on macOS answer &quot;Allow&quot; when asked whether Rusty Minecraft may accept
+incoming network connections).</li>
+<li><strong>&quot;The code has a typo&quot;</strong>: copy it again; codes are only letters and digits in groups of five.</li>
+<li><strong>&quot;This short code works through your friend's relay&quot;</strong>: enter the relay's address under Join a
+friend, or ask for the full code.</li>
+<li><strong>&quot;Your friend plays Minecraft X; you have Y&quot;</strong>: both need the same game version.</li>
+</ul>
+<h2 id="testing">Testing</h2>
+<ul>
+<li>Unit tests (<code>horizon-friends</code>): code format (round trips, every single-symbol typo caught, versions),
+STUN against a mock server, PCP / NAT-PMP against a mock router (map, renew, delete; NAT-PMP when PCP
+is unsupported), UPnP against a mock IGD (description, chunked replies, <code>AddPortMapping</code>, permanent-only
+leases (725), taken ports (718), <code>DeletePortMapping</code>), the verdicts and endpoint order, gateway
+parsing for Linux, macOS and Windows, the key exchange and frames (wrong secret, tampering), the direct
+race.</li>
+<li><code>crates/horizon-relay/tests/tunnel.rs</code>: the code alone with no server (1 MiB, two guests at once); a
+self-hosted relay with the short code (relayed, then its direct race); dead endpoints falling back to
+the relay named in the code; wrong secrets (full and short codes, the short code retired after five);
+unknown and ended codes, version mismatch, rate limits, bandwidth caps, <code>/health</code>.</li>
+<li><code>tools/test_friends.py</code>: real games: a host Rusty Minecraft sharing a world and a guest Rusty Minecraft joining over
+plain LAN (<code>--baseline</code>), with the <strong>code alone</strong> (no relay running), and through a <strong>locally run
+relay</strong> with the short code; chat, movement and blocks both ways, then the ended invite.</li>
+<li>Two machines over a tailnet with the code alone (<code>--role host</code> on one, <code>--role guest --code …</code> on the
+other).</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/play-with-friends.md"><code>docs/play-with-friends.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#how-it-works">How it works</a></li><li class="l2"><a href="#when-friends-cant-reach-the-host">When friends can&#x27;t reach the host</a></li><li class="l2"><a href="#encryption">Encryption</a></li><li class="l2"><a href="#privacy-who-sees-what">Privacy: who sees what</a></li><li class="l2"><a href="#identity">Identity</a></li><li class="l2"><a href="#relays-optional">Relays (optional)</a></li><li class="l3"><a href="#running-your-own-relay">Running your own relay</a></li><li class="l3"><a href="#the-relay-protocol">The relay protocol</a></li><li class="l2"><a href="#troubleshooting">Troubleshooting</a></li><li class="l2"><a href="#testing">Testing</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

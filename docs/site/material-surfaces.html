@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seeded material surfaces · Rusty Minecraft docs</title>
+<meta name="description" content="Seeded material surfaces: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details open><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html" aria-current="page">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="seeded-material-surfaces">Seeded material surfaces</h1>
+<p>Rusty Minecraft implements the pinned Java Edition <strong>26.3</strong> material system's terracotta
+band generation, band lookup, surface depth and secondary surface-noise query.
+These primitives now feed the <a href="#chunk-surface-stage">chunk surface stage</a>.</p>
+<p><code>ClayBands</code> generates all 192 entries from the supplied clay-band random stream.
+It preserves orange placement, colored-band widths and overwrites, white/gray
+adjacency checks and conditional random draws. <code>MaterialSurface</code> derives that
+stream from the world's root positional factory using <code>minecraft:clay_bands</code>.
+Its surface-depth query uses a fresh position-derived random stream.</p>
+<p>Band lookup rounds the float noise offset with Java's tie and saturation rules,
+then uses wrapped integer addition and signed remainder. A negative final index
+returns <code>None</code>, corresponding to vanilla's array-index failure. Surface-depth
+arithmetic promotes the sampled float to double before applying coefficients and
+truncating to an integer. Secondary noise similarly retains the float-to-double
+conversion.</p>
+<p>Run:</p>
+<pre><code class="language-sh">python3 tools/test_material_surface_parity.py
+</code></pre>
+<p>The <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-material-surface-2026-10-06/scoped-parity.json">local report</a>
+records <strong>122,988 matching output lines per reference JAR</strong>, covering <strong>277 fixtures</strong>
+and <strong>5,263 surface-query positions</strong>. The original Java transport invokes actual
+<code>MaterialSystem</code> methods and its real constructor. Comparisons include both random
+algorithms, direct and derived streams, preconsumed random inputs, every band
+entry, subsequent random draws, real bundled noise definitions and constant-noise
+overrides for rounding boundaries, infinities, NaNs and extreme coordinates.</p>
+<p>Reference artifacts and noise resources are authenticated, source/fixture changes
+invalidate the report, and raw inputs/outputs stay private under <code>.local</code>. CI
+includes this comparison on its configured platforms; the local result does not
+establish remote outcomes. Subsequent suites cover rule binding, biome-specific
+extensions and chunk surface application.</p>
+<p><a href="vertical-anchors.html">Vertical anchors</a>, used by material conditions, now have a
+separate differential implementation and codec comparison.</p>
+<p><a href="material-conditions.html">Numeric material conditions</a> now evaluate surface inputs
+with worker-owned caches. <a href="material-rule-libraries.html">Bundled rule libraries</a>
+bind the pinned material definitions and their ore-density samplers.</p>
+<h2 id="biome-specific-column-extensions">Biome-specific column extensions</h2>
+<p><code>MaterialExtensions</code> implements eroded-badlands pillars and frozen-ocean icebergs.
+It preserves noise coordinate arithmetic, temperature-dependent melting, seeded
+random draw order, repeated column reads and property-independent block identity.
+The column provider controls out-of-height reads and write clipping; failed calls
+retain earlier writes. Each extension call is bounded to 1,048,576 iterations.</p>
+<p>Run <code>python3 tools/test_material_extension_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-material-extension-2026-10-06/scoped-parity.json">local extension report</a>
+records <strong>233,100 matching lines per JAR</strong> across <strong>410 fixtures</strong> and <strong>3,920
+extension calls</strong>. It compares ordered noise/read/write traces and complete
+columns, including both random modes, all 67 biome climates, actual seeded noises,
+constant threshold/nonfinite inputs, air/water variants and provider failures.
+The chunk surface stage integrates these extensions with heightmaps and fluid
+postprocessing.</p>
+<h2 id="chunk-surface-stage">Chunk surface stage</h2>
+<p><code>build_surface</code> traverses columns in vanilla X/Z order and scans down each column,
+maintaining stone-depth and water-level counters. It applies bound material rules,
+eroded-badlands pillars and frozen-ocean icebergs. Writes update both world-generation
+heightmaps and append fluid-postprocessing offsets in order, including duplicates.
+Generation bounds clip writes while scans retain the chunk's full height. The
+worker returns its density context to the caller on success and typed failure;
+previous writes remain visible after failure.</p>
+<p>Run <code>python3 tools/test_material_stage_parity.py</code>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-material-stage-2026-10-06/scoped-parity.json">local stage report</a>
+records <strong>6,733,382 matching output lines per reference JAR</strong>, covering <strong>79 fixtures</strong>,
+<strong>42 terrain fills</strong>, <strong>42 procedural carving passes</strong>, <strong>106 surface builds</strong> and <strong>21,757,952 block values</strong>. The reference invokes actual
+<code>MaterialSystem.buildSurface</code> on vanilla <code>ProtoChunk</code> instances. Comparisons include
+complete sections, packed heightmaps, ordered postprocessing and biome queries.
+Fixtures exercise both random modes, the bundled rule registries, real seeded
+noises, empty and populated chunks, cavities, nondefault solids, clipped writes,
+primed and lazy heightmaps, and repeated builds sharing density contexts.
+Generated fixtures run actual <code>NoiseBasedChunkGenerator.doFill</code> followed by surface
+application on the same native noise chunk. Rust shares a compiler and worker
+context across both stages. All seven bundled terrain routers and aquifer
+configurations are tested with multiple seeds and distant positive/negative
+coordinates, comparing full chunk state before and after surface application.</p>
+<p>Synthetic initial chunks use a supplied block-position biome resolver. Generated
+terrain fixtures first generate a 3×3 biome neighborhood through actual
+<code>ChunkGenerator.doCreateBiomes</code>, using multi-noise presets or the End source.
+The comparison checks <strong>378 biome chunks</strong> and <strong>400,896 biome cells</strong>, then
+performs seeded <code>BiomeManager</code> lookups against those stored neighbor biomes.
+Both block and quart lookup traces are compared. Rust imports independently
+authenticated preset tables; their builders remain separate work.
+Generated fixtures additionally select and run biome carvers across the 17×17
+origin neighborhood, comparing uncached biome queries and the complete terrain
+state after procedural carving. They then apply explicit masks twice as a stress
+check. See <a href="carving.html#biome-selected-neighboring-carvers">carving integration</a>.
+The neighborhood decodes its source JSON through the registry-bound biome-source
+catalog and uses the shared resolved-source worker API. Block air/fluid metadata
+is imported from both authenticated JARs. Native preset builders, full inline biome
+codecs, feature/structure stages, nonempty blending, lighting
+and complete generated worlds
+remain pending. A separate Rust test verifies that successful builds, eager binding
+failures and late biome-provider failures preserve density caches and world fields,
+and that late failure retains prior chunk writes and fluid offsets.
+CI includes the stage gate; remote results have not been observed.</p>
+<h2 id="surface-material-beneath-carved-blocks">Surface material beneath carved blocks</h2>
+<p><code>top_material</code> binds a fresh one-cell material context at the supplied position,
+using clamped neighboring heightmap gradients and one stone block above and below.
+Submerged queries set water height to Y+1; dry queries use the vanilla sentinel.
+Possible-biome restrictions are omitted, as in vanilla's method. The returned
+state is left for the carving stage to apply. Both successful and failed queries
+retain the caller's density context; the query itself does not change blocks.</p>
+<p>The surface-stage comparison includes <strong>7,584 top-material queries</strong> against
+actual <code>MaterialSystem.topMaterial</code>, at column edges and interiors, around sea
+level and immediately outside vertical bounds, in both dry and submerged contexts.
+The latest combined report records <strong>6,733,382 matching lines per JAR</strong>. Unit tests
+also check failure-state retention and the omission of possible-biome shortcuts.</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/material-surfaces.md"><code>docs/material-surfaces.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#biome-specific-column-extensions">Biome-specific column extensions</a></li><li class="l2"><a href="#chunk-surface-stage">Chunk surface stage</a></li><li class="l2"><a href="#surface-material-beneath-carved-blocks">Surface material beneath carved blocks</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

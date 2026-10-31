@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A server&#x27;s levels: one per dimension · Rusty Minecraft docs</title>
+<meta name="description" content="A server&#x27;s levels: one per dimension: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details open><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html" aria-current="page">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="a-servers-levels-one-per-dimension">A server's levels: one per dimension</h1>
+<p>Vanilla's <code>MinecraftServer</code> holds a <code>ServerLevel</code> per dimension, and each player is in one of them.
+Rusty Minecraft's server does the same. That covers the dedicated server and single player's server thread
+(<code>Game::serving</code>, the default since #1114). So a LAN world's host and each guest can be in different
+dimensions at the same time.</p>
+<h2 id="how-the-single-level-game-maps-onto-vanillas-levels">How the single-level <code>Game</code> maps onto vanilla's levels</h2>
+<p>The game's tick code reads one level: the one held in <code>Game</code>'s own fields (the world, its streaming
+and save, block ticks, entities, block entities and their per-level queues). <code>game/levels.rs</code> keeps
+the other dimensions' levels as <code>Parked</code> values and swaps one into place (<code>enter_level</code>). The swap is
+<code>mem::swap</code> of each per-level field, so the tick code runs unchanged, one level at a time.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Vanilla</th>
+<th>Rusty Minecraft</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MinecraftServer.levels</code></td>
+<td>the level in place plus <code>Levels::parked</code></td>
+</tr>
+<tr>
+<td><code>MinecraftServer.tickChildren</code>, every level</td>
+<td><code>tick_server</code>: each level with a player in it, in Overworld, Nether, End order. The first pass reads the network and runs the shared parts (clock, weather, functions, autosave).</td>
+</tr>
+<tr>
+<td><code>ServerLevel.players</code></td>
+<td><code>Hub::here</code>: the guests whose <code>dimension</code> is the level in place</td>
+</tr>
+<tr>
+<td><code>ServerPlayer.teleport</code> into another level</td>
+<td><code>server_travel.rs</code>: a Respawn packet, then the teleport once the destination has loaded (portals and <code>execute in … tp</code>). An End gateway teleports within the End.</td>
+</tr>
+<tr>
+<td><code>PlayerList.respawn</code></td>
+<td><code>guest_respawn</code>: into the respawn point's level, the Overworld unless the player has an anchor or a <code>spawnpoint</code> elsewhere (<code>Guest::respawn_elsewhere</code>), resolved through its block once that level has loaded</td>
+</tr>
+<tr>
+<td><code>ServerLevel.noPlayersEmptyTime</code>, chunk unloading</td>
+<td><code>close_idle_levels</code>: a level other than the Overworld with nobody in it for 300 ticks is saved and closed</td>
+</tr>
+<tr>
+<td><code>CommandSourceStack.getLevel</code></td>
+<td><code>with_source</code> puts the source's level in place for a command (<code>execute in</code>, <code>execute at</code> a player in another level)</td>
+</tr>
+<tr>
+<td>the levels' shared <code>LevelData</code></td>
+<td>not swapped: game time, day time, weather, game rules, scoreboard, maps, entity ids (<code>next_entity</code>, unique across levels)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The packets of a guest are read in its own level's pass (<code>Hub::tick_level</code>), so its actions and
+commands run with its level in place.</p>
+<p>The window's own game (<code>--in-frame</code>, <code>--no-server-thread</code>, <code>HORIZON_SERVER_THREAD=0</code>, and the command
+harness) keeps one level, which follows its player (<code>enter_dimension</code>). LAN guests of a world run that way
+stay in the host's dimension. <strong>That mode is deprecated: never use it, it will be removed soon.</strong> It gets no
+multi-level work and no compatibility.</p>
+<h2 id="one-code-path-for-both">One code path for both</h2>
+<p>The dedicated server and the server thread are the same code. Each <code>Game</code> has an explicit
+<code>ExecutionRole</code>: <code>Client</code>, <code>IntegratedServer</code> or <code>DedicatedServer</code>, selected before construction in
+<code>Options.execution_role</code>. Startup, world loading and opening other dimensions use that role. Only
+clients mesh chunks and show loading progress; a client can still run its simulation in-frame, which is deprecated and will be removed.
+Connecting or disconnecting changes <code>remote</code>, independently of the execution role.</p>
+<p>The server thread has a hub without a host player. The window joins it through memory as one
+more player. It still sets <code>options.dedicated</code> for gameplay checks outside the role migration's
+startup/world-loading scope. Everything above serves both servers, and <code>server_dimension_players</code>
+(vanilla clients on Rusty Minecraft's dedicated server) and <code>lan_e2e --server-thread</code> (Rusty Minecraft clients on the
+server thread) check it from the two sides.</p>
+<h2 id="cost-of-an-extra-level">Cost of an extra level</h2>
+<p>Measured on the Mac mini (M4 Pro) at render distance 12, on 2026-10-22. The host and a guest each
+played a fresh world on the server thread. RSS is the host's whole process, window included. Tick time
+is <code>/tick query</code>'s average over 100 ticks.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Where the players are</th>
+<th>Average tick</th>
+<th>P95</th>
+<th>Host RSS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>both in the Overworld</td>
+<td>1.0 ms</td>
+<td>1.3 ms</td>
+<td>1194 MB</td>
+</tr>
+<tr>
+<td>guest in the Nether (two levels tick)</td>
+<td>2.2 ms</td>
+<td>2.9 ms</td>
+<td>1238 MB</td>
+</tr>
+<tr>
+<td>guest in the End (the Nether still parked)</td>
+<td>0.9 ms</td>
+<td>1.1 ms</td>
+<td>1324 MB</td>
+</tr>
+<tr>
+<td>both back, the Nether and End closed after 300 idle ticks</td>
+<td>0.8 ms</td>
+<td>0.9 ms</td>
+<td>1335 MB</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>A level costs only while a player is in it: its chunks around that player, their entities, and the
+tick. With nobody outside the Overworld, <code>tick_server</code> runs one pass, as before.</li>
+<li>A closed level's memory goes back to the allocator, not always to the system.</li>
+<li>Entering a level the first time opens its region files and streaming (<code>open_level</code>). That cost
+comes once, before the player's chunks load.</li>
+</ul>
+<h2 id="saving">Saving</h2>
+<p><code>save_game</code> saves the level in place, then every parked level (<code>save_parked_levels</code>). Each level has
+its own region folder, as in vanilla (<code>DIM-1</code>, <code>DIM1</code>). A level closed for being idle is saved first.
+Each player's saved data holds its dimension (<code>Dimension</code>). A guest who leaves in
+the Nether, or whose host saves and quits, joins again in the Nether where it was.</p>
+<h2 id="whats-checked">What's checked</h2>
+<p><code>python3 tools/lan_e2e.py --server-thread --check portals --check levels</code>:</p>
+<ul>
+<li><code>portals</code>: the guest goes to the Nether through a portal while the host stays. The host then goes
+to the End while the guest is in the Nether, so three levels run at once, and both come back.</li>
+<li><code>levels</code>, with the host and the guest each in a level of its own:
+<ul>
+<li><code>execute in the_nether run tp</code> moves the guest alone. From the Nether, <code>execute in overworld</code> and
+<code>execute at</code> the host change and test blocks in the host's level.</li>
+<li>Mobs and armour stands fall in two levels at once, and every entity id is unique across the
+levels.</li>
+<li>The guest leaves in the Nether and joins again there.</li>
+<li>The guest dies in the Nether and respawns in the Overworld. With a <code>spawnpoint</code> and then a
+respawn anchor set in the Nether, it respawns there, and the anchor loses a charge.</li>
+<li>The host takes a Nether portal alone.</li>
+<li>The guest takes an End portal, an End gateway and then the exit portal alone.</li>
+<li>The host saves, quits and opens the world again with the guest in the Nether, and the guest
+joins again there.</li>
+</ul>
+</li>
+</ul>
+<h2 id="not-done-yet">Not done yet</h2>
+<ul>
+<li><strong>End credits for server players.</strong> The first exit from the End should show a player the credits
+(<code>EndPortalBlock.entityInside</code>, <code>seenCredits</code>). The client's WinScreen is #338.</li>
+<li><strong>Entities through portals between levels.</strong> Mobs, items and minecarts that enter a portal on a
+server, and portal tickets (<code>TeleportTransition.PLACE_PORTAL_TICKET</code>), are not handled.</li>
+<li><strong>Unlimited selectors.</strong> <code>@e</code> without a distance or volume reads only the source's level. Vanilla's
+reads every level.</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/server-levels.md"><code>docs/server-levels.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#how-the-single-level-game-maps-onto-vanillas-levels">How the single-level Game maps onto vanilla&#x27;s levels</a></li><li class="l2"><a href="#one-code-path-for-both">One code path for both</a></li><li class="l2"><a href="#cost-of-an-extra-level">Cost of an extra level</a></li><li class="l2"><a href="#saving">Saving</a></li><li class="l2"><a href="#whats-checked">What&#x27;s checked</a></li><li class="l2"><a href="#not-done-yet">Not done yet</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

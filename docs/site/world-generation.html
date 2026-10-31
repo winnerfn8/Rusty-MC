@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World generation · Rusty Minecraft docs</title>
+<meta name="description" content="World generation: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="repo/README.html">Rusty Minecraft</a></li><li><a href="java-mod-translation.html">Java mod translation</a></li><li><a href="java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="repo/launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="website.html">The documentation website</a></li><li><a href="repo/ROADMAP.html">Horizon roadmap</a></li><li><a href="repo/roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="repo/AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="architecture.html">Architecture: feature → files → checks</a></li><li><a href="native-client.html">Rusty Minecraft native client</a></li><li><a href="hosting.html">Host a server</a></li><li><a href="anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="server-next.html">The next server: design</a></li><li><a href="smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="owners.html">For server owners: server.properties to server.toml</a></li><li><a href="agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="graphics.html">Graphics: settings and performance</a></li><li><a href="benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="extras.html">Rusty Minecraft extras</a></li><li><a href="shaders.html">Rusty Minecraft shader packs</a></li><li><a href="mods.html">Rusty Minecraft mods</a></li><li><a href="native-mods.html">Native mods (experimental)</a></li><li><a href="native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="versioning.html">Versioning</a></li><li><a href="resource-packs.html">Resource packs: what works</a></li><li><a href="telemetry.html">Opt-in data collection</a></li><li><a href="benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="api/README.html">Rusty Minecraft APIs</a></li><li><a href="api/stability.html">API stability and versioning</a></li><li><a href="play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="parity-workflow.html">Parity workflow</a></li><li><a href="parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="parity/meshing.html">Section meshing parity</a></li><li><a href="port-ledger.html">Port ledger</a></li><li><a href="version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="research-lab.html">Decompilation and Rust research lab</a></li><li><a href="decompilation-status.html">Local decompilation status</a></li></ul></details><details open><summary>Architecture: world generation</summary><ul><li><a href="world-generation.html" aria-current="page">World generation</a></li><li><a href="world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="pregeneration.html">Pregeneration: /pregen</a></li><li><a href="noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="density-functions.html">Compiled density evaluation</a></li><li><a href="structure-density.html">Structure terrain-adaptation density</a></li><li><a href="terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="biome-lookup.html">Biome lookup</a></li><li><a href="biome-temperatures.html">Biome temperatures</a></li><li><a href="material-surfaces.html">Seeded material surfaces</a></li><li><a href="material-conditions.html">Numeric material conditions</a></li><li><a href="material-rule-libraries.html">Material-rule libraries</a></li><li><a href="vertical-anchors.html">Vertical anchors</a></li><li><a href="value-providers.html">World-generation value providers</a></li><li><a href="carving.html">Carving</a></li><li><a href="heightmaps.html">Heightmaps</a></li><li><a href="feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="world-data.html">Rusty Minecraft world data</a></li><li><a href="block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="api/agent-control.html">Agent control API</a></li><li><a href="api/data-formats.html">Data formats</a></li><li><a href="api/launch-reference.html">Launch API reference</a></li><li><a href="api/launch.html">Launch API</a></li><li><a href="api/launcher.html">Launcher API</a></li><li><a href="api/mod-index.html">The registry index and .hpack</a></li><li><a href="api/server-reference.html">Server reference</a></li><li><a href="api/server.html">Server API</a></li><li><a href="api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="repo/benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="repo/benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="repo/benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="repo/benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="repo/benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="repo/benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="repo/benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="repo/benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="repo/launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="repo/CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="repo/THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="repo/roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="repo/crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="repo/crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="repo/crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="repo/crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="repo/crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="repo/crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="repo/crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="repo/crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="repo/packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="repo/tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="controllers.html">Controllers</a></li><li><a href="design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="design/compositor.html">Offscreen frame compositor</a></li><li><a href="horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="known-issues.html">Known issues</a></li><li><a href="launcher-commands.html">Launcher commands</a></li><li><a href="launcher-preparation.html">Launcher resource preparation</a></li><li><a href="media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="release-flow.html">Release flow</a></li><li><a href="reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="save-batch-entities.html">Block entity save batches</a></li><li><a href="security.html">Security</a></li><li><a href="server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="world-generation">World generation</h1>
+<p>Rusty Minecraft targets the repository-pinned Minecraft Java Edition <strong>26.3</strong>.
+<code>horizon_world::worldgen::decode_noise</code> implements its direct normal-noise JSON
+codec. <code>DensityRegistry</code> decodes named density definitions and <code>NoiseRouter</code>
+loads the eight router roots against the same graph. <code>AquiferConfig</code> binds the six
+aquifer density roots, and <code>NoiseBasedAquifer</code> implements underground fluid and
+pressure selection. Complete terrain generation remains pending.</p>
+<p>The decoder reads numeric tokens directly from <code>serde_json::value::RawValue</code>.
+This preserves decimal precision and the sign of integer <code>-0</code>, avoiding a
+double-precision intermediate before float density decoding. Integer
+fields retain Gson's truncation toward zero and wrapping to the low 32 bits,
+including decimal and exponent forms.</p>
+<p>Noise definitions require a base octave in <code>[-32,32]</code>. Defaults are one octave,
+unit base amplitude, enabled normalization and an empty amplitude-modifier list.
+Octave counts range from 1 to 32. Nonempty modifier lists must contain exactly
+that many values. Amplitude bounds retain vanilla's floating-point comparator
+ordering: negative zero is below the modifier lower bound of positive zero.
+Normalization accepts booleans or the string <code>&quot;legacy&quot;</code>. Null optional fields
+use their defaults; unknown keys are ignored and duplicate keys retain the last
+value.</p>
+<p>The API accepts strict JSON. Gson's additional permissive syntax is outside this
+decoder's scope. Construction failures return typed errors; comparison checks
+classification and values rather than Java exception messages.</p>
+<p>After preparing the pinned artifacts, run:</p>
+<pre><code class="language-sh">python3 tools/test_worldgen_parity.py
+cargo test --workspace
+cargo clippy --workspace --all-targets -- -D warnings
+</code></pre>
+<p>The original Java transport uses vanilla's actual <code>NormalNoise.DIRECT_CODEC</code>,
+then its normal and legacy Nether initializers. The suite compares every bundled
+noise resource, six world seeds, both random streams and both initialization
+paths. Additional cases check codec defaults, normalization modes, field bounds,
+invalid types, nulls, duplicate/unknown keys, decimal integer conversion, signed
+zero and synthetic parameters. Comparisons include octave metadata,
+normalization/range bits, scalar noise and parent random state after success or
+failure. Raw registry contents and outputs remain private under <code>.local</code>.</p>
+<p>The density loader resolves forward references into distinct immutable named
+holders. Numeric and object roots retain direct-value semantics. Its graph is
+loaded atomically, with typed errors for missing references and cycles. It
+implements the bundled function kinds, including nested splines, shifted noise,
+interval selection, rounding, surface searches and context-bound fields. Graph
+nesting and interval branches are bounded at 256; inline noise holders remain
+pending. These bounds are explicit limits of the Rust API.</p>
+<p>The registry comparison decodes all <strong>55 bundled density definitions</strong> using
+vanilla's actual registry-aware codecs and the <strong>64 bundled noise resources</strong>.
+It compares ranges, axis dependencies, compilation failures, cache allocation,
+seeded scalar values and repeated strided volumes in raw and optimized modes.
+Density roots are checked through one compiler per seed and mode. Nonempty
+blending and structure fields are outside these fixtures.</p>
+<p>The local run produced <strong>961,693 matching output lines per reference JAR</strong>. The
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/rust-worldgen-2026-10-06/scoped-parity.json">metadata report</a> records
+source hashes, reference identities and resource digests. The runner authenticates
+both artifacts, verifies that their registry resources agree, removes stale success
+reports and rejects source or fixture changes during validation. CI includes the suite on
+its configured platforms; the recorded local run does not establish remote
+results or gameplay parity.</p>
+<p>The router loader requires all eight fields in vanilla declaration order. It
+retains named holder identity and compiles every field through one shared cache
+namespace. Failed router decoding leaves the registry graph intact. All seven
+bundled preset routers now match the pinned JARs across six seeds,
+both random algorithms and raw/optimized compilation. Single-layer surface
+volumes and invalid multilayer surface requests are both checked. This API
+decodes the router
+object. The vertical <code>NoiseSettings</code> and optional <code>aquifers</code> members are also decoded;
+complete generator settings and material configuration remain pending.</p>
+<p><code>NoiseSettings</code> in 26.3 contains only minimum Y and height. Its JSON fields are
+bounded to <code>[-2032,2031]</code> and <code>[0,4064]</code>. The guard checks the wrapped upper limit
+first, then height alignment and minimum alignment to 16. The runtime create
+helper applies those guards without the JSON field bounds. Height-accessor
+clamping retains wrapped arithmetic, unaligned results and negative heights for
+disjoint ranges. The suite compares bundled noise members, runtime and codec
+construction, integer conversion and extreme accessor bounds.</p>
+<p>Climate sampling converts quart positions to block coordinates with wrapped
+32-bit shifts, evaluates all six fields in order with the same context, and
+quantizes using float multiplication followed by Java's saturating long cast.
+The suite compares vanilla's actual climate sampler binding and 4,116 quantization
+fixtures covering random float bits, subnormals, NaNs, infinities and saturation.
+The climate parameter decoder accepts scalar intervals, two-element lists and
+objects with <code>min</code>/<code>max</code> fields. Endpoints use directly parsed floats in <code>[-2,2]</code>,
+with Java float comparator ordering before quantization. Parameter points require
+all six coordinates and an offset in <code>[0,1]</code>; negative-zero offsets fail that
+lower bound. Codec comparisons include precision-sensitive decimals, missing
+fields, invalid types and duplicate keys.</p>
+<p>The immutable climate search tree now reproduces vanilla's stable construction
+order, 19-child default, wrapped interval distance and squared fitness, pruning,
+and previous-result tie handling. A searcher owns its previous leaf and borrows
+one index, preventing cache reuse across unrelated indices. Indexed and brute
+lookup intentionally retain their respective tie behavior. The suite compares
+all supported branching values 2..32, sizes around branch powers, duplicate
+entries, a 65,536-entry tree and extreme signed-long ranges/targets. The entry
+bound and typed failures are explicit Rust API limits.</p>
+<p><code>MultiNoiseBiomeSource</code> resolves biome identifiers through scalar climate sampling
+and prepared quart volumes. Bulk preparation evaluates six fields in declaration
+order and retains their float buffers; each query quantizes those stored values.
+Scalar and bulk queries share one previous-result state, so their query order
+retains vanilla's tie behavior. The bounded API rejects coordinates outside a
+prepared volume.</p>
+<p>The runner exports built-in parameter tables independently from both authenticated
+JARs, requires them to agree and keeps them private. These contain 7,594 Overworld
+entries covering 56 biome identifiers and five Nether entries. Rust loads the
+quantized tables using a Rusty Minecraft import format. This is an import of built-in
+data; the preset builders and vanilla biome codecs remain pending. The reference
+uses actual <code>MultiNoiseBiomeSource</code> resolvers with keyed registration holders.
+These checks resolve identities without evaluating biome properties or gameplay.
+Both tables are exercised against every router, including cross-preset fixtures;
+this does not establish End biome-source behavior.</p>
+<p>The report records table and fixture digests. Source or private fixture changes
+during a comparison invalidate its success report.</p>
+<p>The global fluid picker and disabled-aquifer path are now implemented. Lava
+selection uses Y below <code>min(-54, sea_level)</code>; other positions use the default
+fluid status. Fluid status lookup returns its state only below its level.
+Disabled aquifers use the default solid block for positive density;
+nonpositive or NaN density calls the picker, and this path never schedules fluid
+updates. The reference comparison uses the actual global picker lambda and
+<code>Aquifer.createDisabled</code>, counting picker calls and checking default state
+identities. Regular-mode fixtures cover sea-level cutoffs, extreme coordinates,
+subnormal density, signed zeros, NaNs and infinities. Developer fluid-disable
+behavior is outside this corpus.</p>
+<p>The noise-based aquifer implementation retains the six-field configuration's
+binding order, seeded positional cell generation, nearest-cell ties, pressure
+barriers, surface sampling, fluid levels and update scheduling. One context is
+shared across all density roots. Cell locations and statuses belong to each
+chunk aquifer; surface values are snapped to quart coordinates and cached.
+Global fluid statuses use exact state identity where vanilla does, while lava,
+water and air predicates classify blocks, including nondefault liquid states,
+cave air and void air. Dry cells use the version's <code>WAY_BELOW_MIN_Y</code> value
+<code>-32512</code>; this differs from the global developer-disable status's <code>-4064</code>.</p>
+<p>The Rust API limits grids to 16,777,216 cells and constructor surface volumes to
+2,097,152 samples, checks array bounds and returns typed errors. It preserves
+wrapped grid indexing within that domain, including vanilla's final-index
+aliasing. Allocation failures and invalid oversized grids are outside the
+comparison corpus. Read-only cache inspection does not populate caches.</p>
+<p>The noise-based comparison uses actual vanilla configuration decoding and aquifer
+construction. It checks fluid states, scheduling flags, sampler call order and
+values, global picker calls and final location/status/surface caches. Fixtures
+include all bundled aquifer configurations, both seeded random factories,
+strided volume extents, repeated/reversed queries, nonfinite density/sampler
+values, malformed roots and injected failures followed by retries. The runner
+requires every injected failure to occur. Developer fluid-disable behavior is
+outside these regular-mode checks. This does not validate complete generated
+chunks or the registry-backed block classification adapter independently.</p>
+<p><code>TagDefinitions</code> decodes tag entries and files, applies resource-stack replacement,
+and resolves required and optional dependencies before building ordered, deduplicated
+memberships. Missing required references omit the affected tag while unrelated tags
+remain available. Lookup order and required flags retain the pinned runtime's hash
+bucket and dependency traversal behavior. A valid JSON resource that fails its tag
+codec can introduce an empty tag; invalid replacement leaves earlier entries intact.</p>
+<p>The comparison checks all <strong>300 bundled block-tag files</strong> against <strong>1,286 block
+identifiers</strong> exported independently from both JARs. Synthetic fixtures cover
+replacement, malformed files, missing references, cycles, duplicate members and
+lookup order. The API is bounded to 8,192 definitions and dependency depth 256;
+Java hash-tree buckets and pathological self-recursive dependency searches remain
+unsupported. These checks cover tag loading, not the gameplay behavior of members.</p>
+<p>The separate <a href="heightmaps.html">heightmap implementation and comparison</a> now checks
+all six types, packed data, updates and priming against actual vanilla chunks.</p>
+<p>The <a href="terrain-filling.html">noise-fill stage</a> now integrates final density, aquifers,
+registry-backed sections, world-generation heightmaps and fluid postprocessing.
+Complete terrain still requires material and surface rules, nonempty world fields,
+biome/feature/structure placement and complete generated-chunk validation. No rendering, frame-rate or complete gameplay claim follows from
+these decoder checks.</p>
+<p>Subsequent <a href="biome-lookup.html">biome lookup and chunk suites</a> now validate fuzzy
+block-to-quart selection, section-atomic biome fills and multi-noise chunk
+assignment through actual <code>ChunkGenerator.doCreateBiomes</code>. The original report
+above remains a record of its narrower tested source snapshot.</p>
+<h2 id="whole-chunk-differential-harness">Whole-chunk differential harness</h2>
+<p><code>tools/test_chunk_generation_parity.py</code> generates chunks in actual vanilla classes (<code>VanillaChunkGenerationOracle</code>: structure starts and
+references, biomes, noise, surface, carvers, then biome decoration and structure pieces through real <code>WorldGenRegion</code>s) and with
+<code>crates/horizon-world/examples/probe/chunk_dump.rs</code>, and compares every block state, quart biome and block entity (canonical NBT) of each target
+chunk, and the scheduled block and fluid ticks each proto chunk carries into the live world. Cases are terrain sites for several seeds
+across the overworld, Nether and End, plus rectangles around every structure kind found by scanning the seed. <code>--phase structures</code>
+isolates terrain plus structure pieces, <code>--phase terrain</code> stops before features. <code>HORIZON_ORDER</code> (a file of <code>x z</code> lines) makes both sides
+decorate in that order instead of row-major.</p>
+<h3 id="data-packs">Data packs</h3>
+<p>A world's enabled data packs (<code>&lt;world&gt;/datapacks</code>, in <code>datapacks.json</code>'s order) change its generation as vanilla's registries do:
+<code>worldgen::overrides</code> maps each pack file to the bundle it joins (noises, density functions, noise settings, material rules and
+conditions, carvers, configured and placed features, structures, structure sets, template pools, processor lists, biomes, level stems), a
+higher pack's file for an id replacing a lower one's, and its block, fluid and biome tag files to the tag bundles in pack order.
+<code>GeneratorData::load_with</code> reads the bundles with them; the client caches the result per set of pack entries
+(<code>vanillagen::shared_data_with</code>). What Rusty Minecraft leaves out is logged: a pack's new biomes (the game has no id, colours or sounds for them;
+their tag entries and climate points go with them) and folders the generator does not read. A pack's dimension types set each level's
+height (<a href="world-height.html">world-height.md</a>); noise settings taller than the level generate only inside it, as <code>clampToHeightAccessor</code>. Sapling growth and bone
+meal still place vanilla's features.</p>
+<p><code>tools/test_datapack_worldgen_parity.py</code> runs the whole-chunk harness with <code>HORIZON_DATAPACKS=tools/fixtures/datapacks</code> on both sides
+(the oracle selects every pack of the folder after vanilla through vanilla's own pack repository): its pack overrides a noise, a density
+function, the overworld noise settings (sea level 70, no aquifers, a new final density with a new noise added), a placed feature and a
+biome tag. Every site must match vanilla with the pack and differ from Rusty Minecraft without it.</p>
+<p>Packs must be written for 26.3: its worldgen formats differ from 26.2's (density functions take <code>left</code>/<code>right</code>, <code>gradient</code> replaces
+<code>y_clamped_gradient</code>, noises take <code>base_octave</code>/<code>octave_count</code>, block states are strings, surface rules became the <code>material_rule</code> and
+<code>material_condition</code> registries, configured features lost <code>config</code>). Vanilla 26.3 refuses a 26.2 worldgen pack as Rusty Minecraft does.</p>
+<h3 id="decoration-order">Decoration order</h3>
+<p>Biome decoration is order dependent: a chunk's features write into its eight neighbours, so a tree, ore blob, sculk patch or geode placed
+first changes where the next chunk's features fit (and how many random draws they take), and a neighbour's geode can cut through a
+stronghold room or leave it whole. Vanilla decorates on one <code>worldgen</code> executor in the order its chunk scheduler produces around a player:
+loading tickets ring by ring in fastutil hash order, four in flight, FULL tasks decorating their 3x3 squares x-outer, z-inner by ticket
+level. Two vanilla servers decorating around a player teleported to the same spot agree on all but about 6% of the overlapping chunk pairs
+(measured from JFR <code>minecraft.ChunkGeneration</code> events) and a few hundred blocks.</p>
+<p><code>worldgen::decoration_order</code> replays that scheduler for a standing player and the game's streamer decorates in its order (a chunk waits
+only for lower-ranked chunks within two of it, so distant chunks still decorate in parallel). Fed vanilla's recorded order, the oracle
+reproduces a vanilla server's world exactly; the model itself swaps as many pairs as a second vanilla run does.</p>
+<p><code>tools/test_decorated_region_parity.py</code> decorates a 13x13-chunk area around each site in that order on both sides and compares everything
+the whole-chunk harness compares: the two reported sites on seed 1891623539983467248 (an old-growth taiga at 204 -239, a stronghold with
+sculk and a geode at 4870 401), eleven tree-heavy biomes (taigas, dark forest, birch, jungles, savanna, cherry grove, mangrove swamp, pale
+garden) and the nearest mineshaft, village, ancient city and trial chambers of two seeds: 21 sites, 3,549 chunks, 0 differences.</p>
+<p>Result on seed 12345 (overworld 42 sites / 372 chunks, Nether, End): structure pieces 0 differences on all 35 overworld structure sites; full
+generation 4 differing chunks (3 blocks, 1 block entity) out of 372; Nether and End terrain sites 0 differences.</p>
+<p>Harness normalisations (not generation differences): sections above the noise height (Nether roof, End sky) are all air in vanilla and
+absent in Rusty Minecraft; structure templates keep their stored NBT integer width; a vanilla block entity left as a <code>DUMMY</code> default is equal to no
+Rusty Minecraft entry; <code>LootTableSeed</code> without a <code>LootTable</code> and a vault's default reward table are ignored.</p>
+<p>Remaining known differences: a handful of single blocks near structure pieces in full generation (abandoned camps, shipwreck, villages) that
+need per-feature tracing, and tree features only through <code>tools/test_tree_feature_parity.py</code> (8,898 fixtures, all equal).</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/docs/world-generation.md"><code>docs/world-generation.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#whole-chunk-differential-harness">Whole-chunk differential harness</a></li><li class="l3"><a href="#data-packs">Data packs</a></li><li class="l3"><a href="#decoration-order">Decoration order</a></li></ul></nav>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

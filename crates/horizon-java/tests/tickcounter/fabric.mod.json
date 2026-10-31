@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "tickcounter",
+  "version": "1.0.0",
+  "name": "Tick Counter",
+  "license": "MIT",
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "~26.3",
+    "fabric-api": "*"
+  },
+  "mixins": [
+    "tickcounter.mixins.json"
+  ],
+  "entrypoints": {
+    "main": [
+      "dev.example.tickcounter.TickCounter"
+    ]
+  }
+}

@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rusty Minecraft: a map for agents · Rusty Minecraft docs</title>
+<meta name="description" content="Rusty Minecraft: a map for agents: Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="README.html">Rusty Minecraft</a></li><li><a href="../java-mod-translation.html">Java mod translation</a></li><li><a href="../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../website.html">The documentation website</a></li><li><a href="ROADMAP.html">Horizon roadmap</a></li><li><a href="roadmap/README.html">The roadmap</a></li></ul></details><details open><summary>Build and run</summary><ul><li><a href="AGENTS.html" aria-current="page">Rusty Minecraft: a map for agents</a></li><li><a href="../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../native-client.html">Rusty Minecraft native client</a></li><li><a href="../hosting.html">Host a server</a></li><li><a href="../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../server-next.html">The next server: design</a></li><li><a href="../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../graphics.html">Graphics: settings and performance</a></li><li><a href="../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../extras.html">Rusty Minecraft extras</a></li><li><a href="../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../mods.html">Rusty Minecraft mods</a></li><li><a href="../native-mods.html">Native mods (experimental)</a></li><li><a href="../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../versioning.html">Versioning</a></li><li><a href="../resource-packs.html">Resource packs: what works</a></li><li><a href="../telemetry.html">Opt-in data collection</a></li><li><a href="../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="../api/README.html">Rusty Minecraft APIs</a></li><li><a href="../api/stability.html">API stability and versioning</a></li><li><a href="../play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../parity-workflow.html">Parity workflow</a></li><li><a href="../parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="../parity/meshing.html">Section meshing parity</a></li><li><a href="../port-ledger.html">Port ledger</a></li><li><a href="../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../world-generation.html">World generation</a></li><li><a href="../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../density-functions.html">Compiled density evaluation</a></li><li><a href="../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../biome-lookup.html">Biome lookup</a></li><li><a href="../biome-temperatures.html">Biome temperatures</a></li><li><a href="../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../material-conditions.html">Numeric material conditions</a></li><li><a href="../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../vertical-anchors.html">Vertical anchors</a></li><li><a href="../value-providers.html">World-generation value providers</a></li><li><a href="../carving.html">Carving</a></li><li><a href="../heightmaps.html">Heightmaps</a></li><li><a href="../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../world-data.html">Rusty Minecraft world data</a></li><li><a href="../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="../api/agent-control.html">Agent control API</a></li><li><a href="../api/data-formats.html">Data formats</a></li><li><a href="../api/launch-reference.html">Launch API reference</a></li><li><a href="../api/launch.html">Launch API</a></li><li><a href="../api/launcher.html">Launcher API</a></li><li><a href="../api/mod-index.html">The registry index and .hpack</a></li><li><a href="../api/server-reference.html">Server reference</a></li><li><a href="../api/server.html">Server API</a></li><li><a href="../api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="../api/shaders.html">Shader API</a></li></ul></details><details><summary>Benchmarks and performance</summary><ul><li><a href="benchmarks/entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="benchmarks/model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="benchmarks/perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="benchmarks/server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="benchmarks/server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="benchmarks/server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="benchmarks/server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="benchmarks/server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../controllers.html">Controllers</a></li><li><a href="../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../known-issues.html">Known issues</a></li><li><a href="../launcher-commands.html">Launcher commands</a></li><li><a href="../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../release-flow.html">Release flow</a></li><li><a href="../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../save-batch-entities.html">Block entity save batches</a></li><li><a href="../security.html">Security</a></li><li><a href="../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="rusty-minecraft-a-map-for-agents">Rusty Minecraft: a map for agents</h1>
+<p>Minecraft: Java Edition 26.3 rewritten in Rust (wgpu): a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a>
+(MIT) that keeps its code, crate names (<code>horizon-*</code>), file names and environment variables (<code>HORIZON_*</code>). Vanilla is the specification wherever it has the
+feature. Read <a href="CONTRIBUTING.html">CONTRIBUTING.md</a> once; this page tells you where things are.
+Feature → files → harness for the most-changed areas: <a href="../architecture.html">docs/architecture.md</a>.</p>
+<h2 id="rules-that-bite">Rules that bite</h2>
+<ul>
+<li><strong>Never commit Mojang's files</strong>: game jars, assets, decompiled source, prepared resources (<code>.local/</code>).
+<code>tools/check_public_tree.py</code> rejects them; <code>git config core.hooksPath .githooks</code> runs it on commit.</li>
+<li><strong>Keep your runs away from real player data.</strong> Any game or launcher you start gets fresh <code>mktemp -d</code>
+folders in <code>HORIZON_HOME</code> (the game's data), <code>HORIZON_LAUNCHER_HOME</code>, <code>XDG_DATA_HOME</code> and
+<code>XDG_CONFIG_HOME</code>, plus <code>HORIZON_LAUNCHER_NO_SELF_UPDATE=1</code> and <code>HORIZON_NO_AUDIO=1</code>, and, for the
+launcher, <code>HORIZON_LAUNCHER_TRASH</code>, <code>HORIZON_LAUNCHER_CLIPBOARD</code> and <code>HORIZON_LAUNCHER_DESKTOP</code> pointing into the scratch home. Never write to
+<code>~/.local/share/{applications,horizon,horizon-launcher}</code> or <code>~/.local/bin</code>.</li>
+<li><strong>Mark what an agent posts.</strong> A PR body starts with a line naming the person whose agent opened it and
+the tool: <code>&gt; 🤖 Opened by &lt;login&gt;'s AI agent (&lt;tool, model&gt;), not by &lt;login&gt; personally.</code>, where <code>&lt;login&gt;</code>
+is the GitHub account the PR is opened from (<code>gh api user --jq .login</code>). Issues say &quot;Filed by&quot;, reviews
+&quot;Review by&quot;. Every comment starts with <code>🤖 Agent:</code>. Write only as the person you work for: the lines on
+this page that name Ludovic are for his own agents (account <code>ludovic111</code>), never for anyone else's.</li>
+<li><strong>Attribution.</strong> Commits end with a <code>Co-Authored-By:</code> line for the agent that wrote them, and PR bodies
+with that agent's own &quot;Generated with&quot; line. Example, Ludovic's agents (Claude Code on <code>ludovic111</code>):
+first line <code>&gt; 🤖 Opened by Ludovic's AI agent (Claude), not by Ludovic himself.</code>, commits
+<code>Co-Authored-By: Claude &lt;model&gt; &lt;noreply@anthropic.com&gt;</code>, last line
+<code>🤖 Generated with [Claude Code](https://claude.com/claude-code)</code>.</li>
+<li>Everything players run is Rust, with one exception: the optional Java layer for Java mods
+(<code>crates/horizon-java</code>, <a href="../java-mod-runtime.html">docs/java-mod-runtime.md</a>) embeds a JVM through JNI. It is behind the
+<code>java-mods</code> cargo feature, off by default (Settings &gt; Java mods &gt; Run their code), and runs on a Java the player
+already has, never a bundled one. Otherwise Python/Java only for dev tools and harness drivers in <code>tools/</code>.</li>
+<li>Rusty Minecraft-only features follow <a href="../design-system.html">docs/design-system.md</a> and are off by default where
+they would change the vanilla look.</li>
+<li>Small PRs (&lt; ~500 lines). Labels: <code>feature</code> (players get something new), <code>skip-release</code> (they see no
+change), none for a fix. Agents never add <code>release-now</code>: the maintainer decides it. Merges ship in batches of 5, or after
+6 hours (<a href="../release-flow.html">docs/release-flow.md</a>).</li>
+<li>Contributors first: <code>gh pr list --state open --search &lt;area&gt;</code> before you start; never duplicate theirs.</li>
+<li><strong>Claim before you start</strong>: comment <code>/claim</code> on the issue (no issue yet: open one, then claim it). An assigned
+issue is taken: pick another. <code>/unclaim</code> when you stop; a claim with no open PR linking it is released after 5 days.</li>
+</ul>
+<h2 id="crates">Crates</h2>
+<p>Game workspace (root <code>Cargo.toml</code>); <code>launcher/</code> and <code>crates/horizon-telemetry-server</code> are separate workspaces.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Crate</th>
+<th>Owns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>horizon-client</code></td>
+<td>The game: a lib (<code>src/lib.rs</code>, ~100 flat modules: gameplay, networking, title screens) and the bin (<code>src/main.rs</code> → <code>game.rs</code> + <code>game/</code>), plus <code>horizon-ctl</code> (<code>src/bin/horizon-ctl/</code>). Also the dedicated server (<code>--dedicated</code>)</td>
+</tr>
+<tr>
+<td><code>horizon-items</code></td>
+<td>Blocks and items below gameplay: <code>blocks.rs</code> (block facts), <code>items.rs</code>, <code>item_data.rs</code> (components), <code>enchant.rs</code>, <code>cooldowns.rs</code>, <code>bundle.rs</code>, <code>item_nbt.rs</code>. Re-exported as <code>horizon_client::items</code>...</td>
+</tr>
+<tr>
+<td><code>horizon-command</code></td>
+<td>Command parsing (Brigadier): the vanilla tree, argument types, selectors, suggestions, the tree's network form. Re-exported as <code>horizon_client::command</code></td>
+</tr>
+<tr>
+<td><code>horizon-client-core</code></td>
+<td>The client lib's bottom layer: <code>text.rs</code>, <code>lang.rs</code>, <code>snbt.rs</code>, <code>nbt_path.rs</code>, <code>component.rs</code>, <code>scoreboard.rs</code>, <code>bossbar.rs</code>, <code>gamerules.rs</code>, <code>block_entity_nbt.rs</code>, registry/particle/sound tables. Re-exported under the old paths (<code>horizon_client::text</code>...)</td>
+</tr>
+<tr>
+<td><code>horizon-client-input</code></td>
+<td>Key bindings and key names, toggle keys, mouse options, controller settings and glyphs, the clipboard, window options (<code>keybinds.rs</code>, <code>gamepad.rs</code>, <code>mouse.rs</code>, <code>window.rs</code>...). Re-exported under the old paths</td>
+</tr>
+<tr>
+<td><code>horizon-client-render</code></td>
+<td>The client's world data, rendering and screens (chunks, meshing, light, streaming, <code>gfx</code>, HUD, menus, settings): ~80 modules that horizon-client re-exports under the same paths. Nothing in it reaches gameplay</td>
+</tr>
+<tr>
+<td><code>horizon-world</code></td>
+<td>Vanilla world data with no gameplay loop: NBT, regions, chunks, <code>datafix/</code>, <code>worldgen/</code>, <code>level/</code> (server-side block behaviour, ticks, redstone), entity physics, items, effects, food, damage</td>
+</tr>
+<tr>
+<td><code>horizon-core</code></td>
+<td>Simulation primitives: Java <code>Random</code>s, <code>jmath</code> (HotSpot-exact <code>Math</code>), positions, noise, density, paletted storage, <code>version.rs</code> (the pinned version)</td>
+</tr>
+<tr>
+<td><code>horizon-protocol</code></td>
+<td>Network protocol 777: codecs, framing, encryption, <code>packets/{handshake,status,login,configuration,play}.rs</code>, <code>entity_data.rs</code></td>
+</tr>
+<tr>
+<td><code>horizon-assets</code></td>
+<td>Resource decoding: block-state and item models, baking, atlases</td>
+</tr>
+<tr>
+<td><code>horizon-prepare</code></td>
+<td>Builds <code>.local/horizon-client/26.3</code> from the player's own Minecraft install (runs the Java exporters)</td>
+</tr>
+<tr>
+<td><code>horizon-server</code></td>
+<td><code>horizon-server</code>: <code>server.toml</code>, CLI, supervisor of the headless game (<a href="../hosting.html">docs/hosting.md</a>)</td>
+</tr>
+<tr>
+<td><code>horizon-server-files</code></td>
+<td><code>server.properties</code>, eula, ops/whitelist/bans, usercache</td>
+</tr>
+<tr>
+<td><code>horizon-anticheat</code></td>
+<td>The dedicated server's anticheat, off by default: <code>[anticheat]</code> settings, violation levels, the checks' rules; the hub runs them (<code>lan/anticheat.rs</code>) (<a href="../anticheat.html">docs/anticheat.md</a>)</td>
+</tr>
+<tr>
+<td><code>horizon-friends</code>, <code>horizon-relay</code></td>
+<td>Play with Friends: invite codes, encrypted tunnel, the relay (<a href="../play-with-friends.html">docs/play-with-friends.md</a>)</td>
+</tr>
+<tr>
+<td><code>horizon-mods</code>, <code>cargo-horizon-mod</code></td>
+<td>Content mods (<code>.hmod</code>: manifest, content fence, no code), the registry index and <code>.hpack</code>, and <code>cargo horizon-mod</code> (<code>new</code>, <code>build</code>, <code>run</code>, <code>check</code>, <code>registry</code>) (<a href="../mods.html">docs/mods.md</a>). Code mods are native, built by the launcher (<a href="../native-mods.html">docs/native-mods.md</a>)</td>
+</tr>
+<tr>
+<td><code>horizon-port-pack</code></td>
+<td>Porting Java modpacks (<a href="../modpacks.html">docs/modpacks.md</a>), and the Java mod translation layer (<code>translate.rs</code>: jars in the game folder become content mods at start; launcher <code>java_mods.rs</code> is its Settings section) (<a href="../java-mod-translation.html">docs/java-mod-translation.md</a>); <code>mixins.rs</code> reads a jar's mixins and libraries for the verdicts</td>
+</tr>
+<tr>
+<td><code>horizon-java</code></td>
+<td>Java mods' code (<a href="../java-mod-runtime.html">docs/java-mod-runtime.md</a>): the hook points' runtime side and the game as a <code>Host</code> (<code>hooks.rs</code>), the player's Java (<code>locate.rs</code>), mixin class rewriting (<code>classfile.rs</code>), Fabric API's Rust side (<code>fabric.rs</code>), and behind the <code>jvm</code> feature (the game's <code>java-mods</code>) the embedded JVM (<code>jvm/</code>) with the Java API layer (<code>java/net/minecraft/</code>, vanilla's names, written from public docs) and Fabric's facade (<code>java/net/fabricmc/</code>); <code>api.txt</code> lists that API for the verdicts</td>
+</tr>
+<tr>
+<td><code>horizon-shader-api</code></td>
+<td>Rusty Minecraft's own WGSL shader packs (<a href="../api/shaders.html">docs/api/shaders.md</a>): <code>horizon-shaders.toml</code>, the <code>.hshader</code> package; shared by the game, the launcher and the registry</td>
+</tr>
+<tr>
+<td><code>horizon-shaders</code></td>
+<td>Shader packs (the <code>shaders/</code> folder format), rebuilt clean-room from a written spec of the format; no wgpu</td>
+</tr>
+<tr>
+<td><code>horizon-theme</code></td>
+<td>Design tokens and fonts for the launcher, the game's own menus and the website</td>
+</tr>
+<tr>
+<td><code>horizon-telemetry</code>, <code>horizon-telemetry-server</code>, <code>horizon-bench</code></td>
+<td>Opt-in data collection, its ingest server, the benchmark report format</td>
+</tr>
+<tr>
+<td><code>horizon-dualsense</code>, <code>horizon-threads</code>, <code>horizon-release-sign</code>, <code>horizon-bots</code>, <code>xtask</code></td>
+<td>DualSense output, thread priorities, signed release checksums, load-test bots, repo tasks</td>
+</tr>
+<tr>
+<td><code>launcher/</code></td>
+<td>GPUI launcher: <code>main.rs</code> (UI), <code>backend.rs</code> (installs, updates), <code>cli.rs</code>, <code>mcp.rs</code>, <code>*_page.rs</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Other top-level folders: <code>tools/</code> (harnesses and dev scripts), <code>tests/</code> (Python unit tests: <code>python3 -m unittest discover -s tests</code>), <code>mods/horizon/src/test/java/dev/horizonlab/parity/</code> (Java oracles),
+<code>docs/</code>, <code>.github/workflows/</code>. The website (playhorizon.dev) is the private horizon-rust/horizon-site: its build
+reads <code>README.md</code>, <code>launcher/links.json</code>, <code>docs/api/</code>, <code>roadmap/roadmap.json</code> and <code>crates/horizon-theme/tokens.css</code> from main.</p>
+<h2 id="build-and-test-fast">Build and test fast</h2>
+<pre><code class="language-sh">python3 tools/pr_ready.py                  # the self-check: fmt, clippy -D warnings, touched crates' tests, harnesses; paste its block in the PR
+python3 tools/pr_ready.py --quick          # same without harnesses
+cargo test -p horizon-client --lib --bins --tests   # skips the 104 examples (pr_ready does this); `--doc` separately
+cargo test -p horizon-client --lib mod_content::tests:: -- --ignored   # the 5 slow content-root tests, #[ignore]d; pr_ready runs them when mod content, assets, blocks or items change
+cargo build --profile fast -p horizon-client        # optimized, quick to link: use it to play or run lan_e2e
+python3 tools/parity.py --changed origin/main       # the harnesses your branch can affect (CI's parity job)
+python3 tools/parity.py --changed-files paths.txt --list   # which harnesses cover these files, without running them
+python3 tools/parity.py mob_ai sculk       # named harnesses
+python3 tools/lan_e2e.py --check chest     # two real games over LAN (server-thread host)
+python3 tools/agent_control_e2e.py         # horizon-ctl / MCP end to end
+</code></pre>
+<ul>
+<li>Harnesses and the game need the vanilla data in <code>.local/</code> (<code>minecraft/</code>, <code>horizon-client/26.3</code>, <code>datagen/</code>,
+<code>tools/</code>): see <a href="../parity-workflow.html">docs/parity-workflow.md</a>. Without it, pr_ready lists the
+harnesses for CI.</li>
+<li>A harness = <code>tools/test_&lt;name&gt;_parity.py</code> (324 of them) + a Java oracle (<code>mods/horizon/src/test/java/dev/horizonlab/parity/Vanilla*Oracle.java</code>)
+<ul>
+<li>a Rust probe: <code>crates/&lt;crate&gt;/examples/&lt;name&gt;_{probe,fixture}.rs</code> (horizon-world 175, horizon-client 104),
+or the game binary with a fixture env var (<code>game/dispense_fixture.rs</code>, <code>game/sculk_fixture.rs</code>,
+<code>game/command_harness.rs</code>, <code>game/net_harness.rs</code>). Copy a nearby harness for a new one.</li>
+</ul>
+</li>
+<li>Probes build into <code>.local/parity-target/</code>; harnesses find binaries via <code>lab.cargo_target()</code>, never <code>target/</code>.</li>
+<li>What a change reruns (of 329 harnesses, measured 2026-10-23): a file of the game binary (<code>game.rs</code>, <code>game/</code>)
+~25, a file of the client lib ~103, of <code>horizon-world</code> ~103–109, of <code>horizon-core</code> ~119. Plan for it.</li>
+<li>Rust integration tests: <code>crates/horizon-client/tests/</code> (<code>lan_bot.rs</code>, <code>generation_saves.rs</code>, <code>streaming_meshes.rs</code>).</li>
+<li>Linux needs <code>libasound2-dev libudev-dev</code>; <code>--no-default-features</code> drops audio and controllers (the server build).</li>
+<li>Run and drive the game (starts the <code>horizon-client</code> beside <code>horizon-ctl</code>; other arguments go to the game):
+<code>target/fast/horizon-ctl --socket $PWD/ctl.sock launch --world W --creative --offscreen --wait --resources $PWD/.local/horizon-client/26.3</code>,
+then <code>horizon-ctl --socket … state|keys|turn|command|screenshot|quit</code>
+(<a href="../horizon-ctl-commands.html">docs/horizon-ctl-commands.md</a>).</li>
+</ul>
+<h2 id="vanilla-reference">Vanilla reference</h2>
+<ul>
+<li>Start parity work from the port ledger, not grep: <code>python3 tools/port_ledger.py issue N</code> (or <code>where Class.method</code>, <code>what file:line</code>), and <code>check --base origin/main</code> before the PR. How:
+<a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/.claude/skills/vanilla-parity/SKILL.md">.claude/skills/vanilla-parity/SKILL.md</a>, <a href="../port-ledger.html">docs/port-ledger.md</a>.</li>
+<li>Decompiled sources: <code>.local/minecraft/26.3/sources/{client,server}/</code> (<code>python3 tools/lab.py decompile</code>).</li>
+<li>Bytecode queries (callers through lambdas, every overload):
+<code>python3 tools/rea_vanilla.py method net.minecraft.world.level.block.DispenserBlock dispenseFrom</code>
+(<a href="../decompilation-status.html">docs/decompilation-status.md</a>).</li>
+<li>A harness runs the oracle against the real 26.3 jars and the Rust probe on the same inputs, then compares
+their JSON. Oracle runs are cached by <code>tools/parity_shim.py</code>; <code>--fresh</code> reruns them.</li>
+<li>Mirror vanilla's <code>Math</code> calls with <code>horizon_core::jmath</code>, and vanilla's RNG with <code>horizon_core::random</code>:
+random draws must happen in vanilla's order.</li>
+</ul>
+<h2 id="horizon-client-where-things-live">horizon-client: where things live</h2>
+<p><code>L:</code> = lib (<code>crates/horizon-client/src/</code>, or <code>crates/horizon-client-render/src/</code> for the modules that crate holds, under
+the same <code>horizon_client::&lt;module&gt;</code> paths), <code>G:</code> = bin (<code>crates/horizon-client/src/game/</code>). The lib can't see
+<code>Game</code>; bin code reaches the lib as <code>horizon_client::&lt;module&gt;</code>.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Subsystem</th>
+<th>Files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Game loop, tick, frame</td>
+<td><code>game.rs</code>: <code>fn run</code>, <code>impl ApplicationHandler for Game</code> (<code>window_event</code>, <code>about_to_wait</code>), <code>fn tick</code>, <code>fn tick_world</code>, <code>fn render</code>; L: <code>clock.rs</code>, <code>spans.rs</code>; <code>horizon-client-input/src/window.rs</code></td>
+</tr>
+<tr>
+<td>Rendering</td>
+<td>L: <code>gfx.rs</code> (<code>Renderer::new</code>, <code>Renderer::render</code>), <code>gfx/</code> (cull, occlusion, translucency, upload, timing, lod, weather, stars, end_sky), <code>*.wgsl</code>, <code>particles.rs</code>, <code>block_entity_render.rs</code>, <code>item_render.rs</code>, <code>fog.rs</code>, <code>clouds.rs</code>, <code>camera.rs</code>, <code>first_person.rs</code>; G: <code>render_tick.rs</code>, <code>item_draw.rs</code></td>
+</tr>
+<tr>
+<td>Chunks, streaming, light</td>
+<td>L: <code>streaming.rs</code> (worker pool: generate, light, mesh), <code>world.rs</code>, <code>chunk.rs</code>, <code>chunk_map.rs</code>, <code>light.rs</code>, <code>mesher.rs</code> + <code>mesher/</code>, <code>vanillagen.rs</code> (binds horizon-world's generator), <code>lod.rs</code> + <code>lod/</code>, <code>ticket_levels.rs</code>; G: <code>world_loading.rs</code>, <code>postprocess.rs</code>; game.rs <code>fn update_world</code></td>
+</tr>
+<tr>
+<td>World generation</td>
+<td><code>crates/horizon-world/src/worldgen/</code> (<code>generator*.rs</code>, <code>feature_graph.rs</code>, <code>structure/</code>, <code>carver/</code>)</td>
+</tr>
+<tr>
+<td>Block behaviour</td>
+<td><code>crates/horizon-world/src/level/</code> (<code>mod.rs</code>, <code>tick.rs</code>, <code>hooks.rs</code>, <code>redstone.rs</code>, <code>place.rs</code>, <code>interact.rs</code>); game.rs <code>fn tick_blocks</code>, <code>fn process_level_events</code></td>
+</tr>
+<tr>
+<td>Mobs</td>
+<td>L: <code>mobs.rs</code> (types), <code>mobs/</code> (<code>ai.rs</code>, <code>goals.rs</code>, <code>brain.rs</code>, <code>*_brain.rs</code>, <code>nav.rs</code>, <code>path.rs</code>, <code>species.rs</code>, <code>spawning.rs</code>, <code>render.rs</code>, <code>anim.rs</code>); G: <code>creatures.rs</code> (ticking, spawning, mob events), one file per mob family (<code>dragon.rs</code>, <code>wither.rs</code>, <code>villagers.rs</code>, <code>piglins.rs</code>, <code>golems.rs</code>...), <code>natural_spawning.rs</code></td>
+</tr>
+<tr>
+<td>Other entities</td>
+<td>L: <code>entities.rs</code>, <code>projectiles.rs</code>, <code>arrows.rs</code>; G: <code>boats.rs</code>, <code>minecarts.rs</code>, <code>mounts.rs</code>, <code>armor_stands.rs</code>, <code>paintings.rs</code>, <code>frames.rs</code>, <code>fireworks.rs</code>, <code>tnt.rs</code>, <code>explosion.rs</code></td>
+</tr>
+<tr>
+<td>Player actions</td>
+<td>game.rs (<code>fn use_hand</code>, <code>fn use_item</code>, <code>fn attack</code>, <code>fn tick_mining</code>, <code>fn break_block</code>); G: <code>hand.rs</code>, <code>combat.rs</code>, <code>consume.rs</code>, <code>potions.rs</code>, <code>shield.rs</code>, <code>crossbow.rs</code>, <code>trident.rs</code>, <code>fishing.rs</code>; L: <code>motion.rs</code> + <code>motion/</code> (movement), <code>collisions.rs</code>; crate <code>horizon-items</code>: <code>items.rs</code>, <code>item_data.rs</code>, <code>enchant.rs</code>, <code>blocks.rs</code></td>
+</tr>
+<tr>
+<td>Inventory and containers</td>
+<td>L: <code>menu.rs</code> (<code>AbstractContainerMenu.clicked</code>), <code>container_screen.rs</code>, <code>containers.rs</code>, <code>creative.rs</code>, <code>crafting.rs</code>, <code>recipe_book*.rs</code>, <code>stations.rs</code>, <code>merchant.rs</code>; game.rs <code>fn menu_ops</code>, <code>fn click_inventory</code>; G: <code>stations.rs</code>, <code>trading.rs</code>, <code>recipe_book.rs</code>, <code>machines.rs</code></td>
+</tr>
+<tr>
+<td>Commands</td>
+<td>parse: crate <code>horizon-command</code> (<code>args.rs</code>, <code>selector.rs</code>, <code>tree_*.rs</code>, <code>vanilla.rs</code>); run: G: <code>commands.rs</code> (dispatch) + <code>commands/*.rs</code> (<code>admin</code>, <code>execute</code>, <code>items</code>, <code>players</code>, <code>world_cmds</code>...); L: <code>scoreboard_cmd.rs</code>, <code>data_cmd.rs</code>; <code>horizon-client-core</code>: <code>nbt_path.rs</code>, <code>scoreboard.rs</code>; G: <code>functions.rs</code>, <code>command_blocks.rs</code></td>
+</tr>
+<tr>
+<td>UI screens</td>
+<td><code>Screen</code> enum in game.rs; L: <code>title.rs</code> + <code>title/</code>, <code>options_ui.rs</code>, <code>multiplayer.rs</code>, <code>pack_screen.rs</code>, <code>graphics_ui.rs</code>, <code>screen_draw.rs</code>, <code>ui.rs</code> (widgets), <code>hud.rs</code>, <code>hud_layout.rs</code>, <code>hud_overlays.rs</code>, <code>chat.rs</code>, <code>tab_list.rs</code>; G: <code>startup_menu.rs</code>, <code>screens.rs</code> (pause, death), <code>options.rs</code>, <code>lan_screen.rs</code>, <code>chat.rs</code>, <code>sign_edit.rs</code>, <code>books.rs</code></td>
+</tr>
+<tr>
+<td>Multiplayer client</td>
+<td>L: <code>net.rs</code> (network thread); G: <code>remote.rs</code> (<code>fn handle_packet</code>, <code>fn tick_remote</code>), <code>remote_*.rs</code> (mob data, objects, projectiles, vehicles, stations)</td>
+</tr>
+<tr>
+<td>LAN host / server side</td>
+<td>L: <code>lan/</code> (<code>conn.rs</code> handshake + login threads, <code>hub.rs</code> + <code>hub/</code> play state, <code>chunks.rs</code>, <code>entity.rs</code>, <code>tracking.rs</code>, <code>guest.rs</code>, <code>playerdata.rs</code>); G: <code>lan.rs</code> (<code>LanHost</code>), <code>lan_actions.rs</code> (<code>fn as_guest</code>, <code>fn tick_guests</code>), <code>lan_*.rs</code> per feature, <code>lan_entities.rs</code> (tracked entities)</td>
+</tr>
+<tr>
+<td>Integrated server</td>
+<td>G: <code>integrated.rs</code> (the server thread), <code>levels.rs</code> (one level per dimension, <code>fn tick_server</code>), <code>server_travel.rs</code></td>
+</tr>
+<tr>
+<td>Dedicated server</td>
+<td>G: <code>dedicated.rs</code>, <code>dedicated/status.rs</code>; crates <code>horizon-server-files</code>, <code>horizon-server</code>, <code>horizon-anticheat</code> (L: <code>lan/anticheat.rs</code>)</td>
+</tr>
+<tr>
+<td>Save and load</td>
+<td>L: <code>save.rs</code> (level.dat, regions, playerdata), <code>entity_nbt.rs</code>, <code>options_file.rs</code>; <code>horizon-client-core/src/block_entity_nbt.rs</code>; G: <code>saving.rs</code>, <code>persist.rs</code> (entities); <code>crates/horizon-world/src/{region.rs,nbt.rs,datafix/}</code></td>
+</tr>
+<tr>
+<td>Input</td>
+<td>game.rs <code>fn window_event</code>, <code>fn key_pressed</code>, <code>fn play_mouse</code>; crate <code>horizon-client-input</code> (<code>keybinds.rs</code>, <code>keymapping.rs</code>, <code>key_names.rs</code>, <code>mouse.rs</code>, <code>input.rs</code>, <code>interaction_input.rs</code>, <code>gamepad.rs</code>, <code>clipboard.rs</code>); L: <code>osk.rs</code>; G: <code>pad.rs</code>, <code>pad_menu.rs</code></td>
+</tr>
+<tr>
+<td>Audio</td>
+<td>L: <code>audio.rs</code> (mixer), <code>sound_engine.rs</code>, <code>sound_events.rs</code>, <code>music.rs</code>, <code>ambience.rs</code>; G: <code>music.rs</code>, <code>subtitle_hud.rs</code></td>
+</tr>
+<tr>
+<td>Resource packs</td>
+<td>L: <code>packs.rs</code> + <code>packs/</code>, <code>pack_screen.rs</code>, <code>atlas_sources.rs</code>, <code>sprites.rs</code>, <code>mipmap.rs</code>, <code>model_library.rs</code>, <code>font.rs</code>; <code>horizon-client-core/src/lang.rs</code>; crate <code>horizon-assets</code>; G: <code>packs.rs</code></td>
+</tr>
+<tr>
+<td>Agent control</td>
+<td>L: <code>control.rs</code> (socket), <code>bin/horizon-ctl/</code>; G: <code>control.rs</code>, <code>agent.rs</code>, <code>events.rs</code>, <code>ui_control.rs</code> (<a href="../agent-control.html">docs/agent-control.md</a>)</td>
+</tr>
+<tr>
+<td>Mods</td>
+<td>crate <code>horizon-mods</code>; G: <code>mods.rs</code>; L: <code>mod_content.rs</code>, <code>mod_list.rs</code></td>
+</tr>
+<tr>
+<td>Rusty Minecraft extras, settings</td>
+<td>L: <code>extras.rs</code>, <code>graphics.rs</code>, <code>settings.rs</code>, <code>minimap.rs</code>; G: <code>extras.rs</code>, <code>tweaks.rs</code>, <code>options.rs</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="how-game-is-organised">How <code>Game</code> is organised</h2>
+<ul>
+<li><code>struct Game</code> (game.rs, ~290 fields) holds everything. Its methods are spread over ~180 files: game.rs keeps
+the core (tick, render, input, inventory, world open/close) and each <code>game/&lt;feature&gt;.rs</code> adds an
+<code>impl Game&lt;'_&gt;</code> block for one feature, with its own state types. Fields are private to the bin.</li>
+<li>Find a feature's code: <code>grep -rn &quot;fn tick_&lt;thing&gt;\|fn &lt;verb&gt;_&lt;thing&gt;&quot; crates/horizon-client/src/game*</code>;
+the file is usually <code>game/&lt;thing&gt;s.rs</code>. Who calls it: grep the name in game.rs's <code>fn tick</code> / <code>fn tick_world</code>.</li>
+<li>Fields that say which mode runs: <code>remote</code> (this window is a client of a server: multiplayer, LAN guest, or
+single player on its server thread), <code>lan</code> (<code>LanHost</code>: this world is open to the network), <code>integrated</code>
+(the window's own server thread), <code>serving</code> (this <code>Game</code> <em>is</em> that server thread), <code>options.dedicated</code>.
+<code>fn tick</code> returns <code>tick_remote()</code> when <code>remote</code> is set; nothing else of the local simulation runs.</li>
+<li>A server's players run through the same gameplay code as the local player: <code>as_guest</code> swaps the guest's
+state (position, inventory, mode, mining, item use) into <code>Game</code> for one call (<code>game/lan_actions.rs</code>), and
+<code>levels.rs</code> swaps whole dimensions in the same way. Changes reach clients through the block log, level
+events and the entity tracker (<code>lan/tracking.rs</code>, <code>game/lan_entities.rs</code>).</li>
+<li>Shared read-only data: <code>Resources</code> (<code>res</code>: blocks, items, recipes, mob types, biomes) and <code>PackResources</code>
+(<code>pack</code>), both in game.rs.</li>
+</ul>
+<h2 id="the-two-single-player-paths">The two single-player paths</h2>
+<ol>
+<li><strong>Server thread (default since #1514):</strong> <code>game/integrated.rs</code> runs a second <code>Game</code> (<code>serving</code>) on a
+&quot;Server thread&quot; with one level per dimension; the window joins it as a client through memory (<code>remote</code>),
+exactly as a LAN guest or a dedicated server's player does. This is what players run. Open
+<code>[server-thread]</code> issues list the gaps left.</li>
+<li><strong>In-frame (<code>--in-frame</code>, <code>--no-server-thread</code> or <code>HORIZON_SERVER_THREAD=0</code>): DEPRECATED, never use it, it
+will be removed soon.</strong> The window's <code>Game</code> ticks the world itself, one level that follows the player
+(<code>fn enter_dimension</code>). Compatibility does not matter: don't add features or fixes for it, don't write new
+tests against it, and move code off it when you touch it. The deterministic rule fixtures still run on it
+until they are ported.</li>
+</ol>
+<p>LAN guests and dedicated servers always use the server code, so a fix there serves both. Test the server
+thread when you touch player-facing gameplay:</p>
+<pre><code class="language-sh">cargo run --profile fast -p horizon-client -- --resources .local/horizon-client/26.3 --world T               # server thread
+python3 tools/lan_e2e.py --check &lt;name&gt;                  # host on its server thread, guest is a server client
+python3 tools/parity.py dedicated_server server_entities server_player_damage
+</code></pre>
+<h2 id="docs-worth-knowing">Docs worth knowing</h2>
+<p><a href="../parity-workflow.html">docs/parity-workflow.md</a> (runner, gate, shards, scopes) ·
+<a href="../native-client.html">docs/native-client.md</a> (options, controls, horizon-ctl) ·
+<a href="../server-levels.html">docs/server-levels.md</a> (levels per dimension) ·
+<a href="../rust-parity.html">docs/rust-parity.md</a> (what is ported) · <a href="../known-issues.html">docs/known-issues.md</a> ·
+<a href="../release-flow.html">docs/release-flow.md</a> · <a href="../../index.html">docs/README.md</a> (index).</p>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/AGENTS.md"><code>AGENTS.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#rules-that-bite">Rules that bite</a></li><li class="l2"><a href="#crates">Crates</a></li><li class="l2"><a href="#build-and-test-fast">Build and test fast</a></li><li class="l2"><a href="#vanilla-reference">Vanilla reference</a></li><li class="l2"><a href="#horizon-client-where-things-live">horizon-client: where things live</a></li><li class="l2"><a href="#how-game-is-organised">How Game is organised</a></li><li class="l2"><a href="#the-two-single-player-paths">The two single-player paths</a></li><li class="l2"><a href="#docs-worth-knowing">Docs worth knowing</a></li></ul></nav>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

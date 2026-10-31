@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17) · Rusty Minecraft docs</title>
+<meta name="description" content="Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17): Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../assets/tokens.css">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../../../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="../../README.html">Rusty Minecraft</a></li><li><a href="../../../java-mod-translation.html">Java mod translation</a></li><li><a href="../../../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="../../launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../../../website.html">The documentation website</a></li><li><a href="../../ROADMAP.html">Horizon roadmap</a></li><li><a href="../../roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="../../AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../../../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../../../native-client.html">Rusty Minecraft native client</a></li><li><a href="../../../hosting.html">Host a server</a></li><li><a href="../../../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../../../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../../../server-next.html">The next server: design</a></li><li><a href="../../../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../../../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../../../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../../../graphics.html">Graphics: settings and performance</a></li><li><a href="../../../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../../../extras.html">Rusty Minecraft extras</a></li><li><a href="../../../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../../../mods.html">Rusty Minecraft mods</a></li><li><a href="../../../native-mods.html">Native mods (experimental)</a></li><li><a href="../../../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../../../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../../../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../../../versioning.html">Versioning</a></li><li><a href="../../../resource-packs.html">Resource packs: what works</a></li><li><a href="../../../telemetry.html">Opt-in data collection</a></li><li><a href="../../../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="../../../api/README.html">Rusty Minecraft APIs</a></li><li><a href="../../../api/stability.html">API stability and versioning</a></li><li><a href="../../../play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="../../../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../../../parity-workflow.html">Parity workflow</a></li><li><a href="../../../parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="../../../parity/meshing.html">Section meshing parity</a></li><li><a href="../../../port-ledger.html">Port ledger</a></li><li><a href="../../../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../../../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../../../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../../../world-generation.html">World generation</a></li><li><a href="../../../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../../../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../../../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../../../density-functions.html">Compiled density evaluation</a></li><li><a href="../../../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../../../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../../../biome-lookup.html">Biome lookup</a></li><li><a href="../../../biome-temperatures.html">Biome temperatures</a></li><li><a href="../../../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../../../material-conditions.html">Numeric material conditions</a></li><li><a href="../../../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../../../vertical-anchors.html">Vertical anchors</a></li><li><a href="../../../value-providers.html">World-generation value providers</a></li><li><a href="../../../carving.html">Carving</a></li><li><a href="../../../heightmaps.html">Heightmaps</a></li><li><a href="../../../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../../../world-data.html">Rusty Minecraft world data</a></li><li><a href="../../../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../../../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../../../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../../../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../../../profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="../../../api/agent-control.html">Agent control API</a></li><li><a href="../../../api/data-formats.html">Data formats</a></li><li><a href="../../../api/launch-reference.html">Launch API reference</a></li><li><a href="../../../api/launch.html">Launch API</a></li><li><a href="../../../api/launcher.html">Launcher API</a></li><li><a href="../../../api/mod-index.html">The registry index and .hpack</a></li><li><a href="../../../api/server-reference.html">Server reference</a></li><li><a href="../../../api/server.html">Server API</a></li><li><a href="../../../api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="../../../api/shaders.html">Shader API</a></li></ul></details><details open><summary>Benchmarks and performance</summary><ul><li><a href="../entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="../model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="../perf/windows-9800x3d-5080-2026-10-29.html">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="../server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="../server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="README.html" aria-current="page">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="../server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="../server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../../../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../../../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../../../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../../../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../../../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../../../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../../../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../../../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../../../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../../../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../../../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="../../launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="../../CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="../../THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="../../roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="../../crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="../../crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="../../crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="../../crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="../../crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="../../crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="../../crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="../../crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="../../crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="../../packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="../../tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../../../controllers.html">Controllers</a></li><li><a href="../../../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../../../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../../../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../../../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../../../known-issues.html">Known issues</a></li><li><a href="../../../launcher-commands.html">Launcher commands</a></li><li><a href="../../../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../../../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../../../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../../../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../../../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../../../release-flow.html">Release flow</a></li><li><a href="../../../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../../../save-batch-entities.html">Block entity save batches</a></li><li><a href="../../../security.html">Security</a></li><li><a href="../../../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../../../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="horizons-server-against-vanilla-263-equal-work-2026-10-17">Horizon's server against vanilla 26.3, equal work (2026-10-17)</h1>
+<p>The same bots on Horizon's dedicated server and on vanilla 26.3's, one server at a time, on the same
+machine, with the work each server does made the same before the numbers are compared. This replaces the
+first run in docs/server.md section 9, where the work wasn't equal.</p>
+<h2 id="what-was-made-equal">What was made equal</h2>
+<p>The first run (PR #556) had three differences that made the comparison unfair. Each is fixed in the code
+that ran here:</p>
+<ul>
+<li><strong>Refused moves.</strong> Vanilla pulls a player back when a move is too fast (&quot;moved too quickly&quot;) or ends
+inside a block (&quot;moved wrongly&quot;). Horizon now runs both checks the way vanilla does (PR #586), so a bot
+that flies too fast is pulled back on both servers.</li>
+<li><strong>Chunk sending.</strong> Vanilla paces chunks by the client's acknowledgements (PlayerChunkSender: one
+unacknowledged batch at first, then ten, each at most the client's desired chunks per tick). Horizon used
+to send twice as many per batch; it now paces them the same way (PR #586), and the bots acknowledge
+batches and ask for a rate the way vanilla's client does, so both servers send at the pace the client
+asks for. Chunks sent again while the bot still held
+them (<code>resent</code>) are counted: 0 on both servers in every run.</li>
+<li><strong>Movement gated on chunks.</strong> A bot doesn't move while the chunk it stands in hasn't arrived (vanilla's
+client waits the same way), so a slower server isn't asked to teleport bots into terrain it hasn't sent.</li>
+</ul>
+<p>One difference isn't in Horizon yet: vanilla 26.3's locator bar (waypoints), which costs vanilla O(players²)
+work per move. Every vanilla run here sets <code>gamerule locator_bar false</code>, so neither server does it.</p>
+<h2 id="method">Method</h2>
+<p><code>tools/server_bench.py</code> runs each configuration on a fresh server:</p>
+<ul>
+<li>the same <code>server.properties</code> on both (seed 12345, view and simulation distance 10, offline, creative,
+difficulty easy, <code>sync-chunk-writes=true</code>), and <code>gamerule respawn_radius 0</code>;</li>
+<li>the server waits for <code>Done</code>, the bots join one a second, a 60-second warm-up, then 300 seconds of
+measurement;</li>
+<li>MSPT (average, P50, P95, P99) comes from each server's own <code>/tick query</code>, asked every 5 seconds on the
+console, so both measure themselves the same way (vanilla's ServerTickRateManager numbers, which Horizon
+reproduces); TPS is 20 while the average fits in 50 ms, else 1000 / MSPT;</li>
+<li>RSS and CPU are the server's whole process tree, once a second (100 % is one core);</li>
+<li>chunk counts come from the bots: chunks received per second, chunks no bot had before (new terrain), and
+pull-backs (position packets that move a bot back).</li>
+</ul>
+<p>The bots are <code>horizon-bots</code> (creative, flying 24 blocks above spawn, 20 moves a second):</p>
+<ul>
+<li><code>walk</code>: flies to random points within 48 blocks of spawn at sprint speed (5.6 blocks a second);</li>
+<li><code>explore</code>: flies straight outwards, by default at about 22 blocks a second, as fast as the server sends
+chunks.</li>
+</ul>
+<p>Machine: the ThinkPad (Intel Core i7-7500U, 2 cores / 4 threads, 32 GB, NixOS), servers under <code>nice -n 19</code>
+because it also runs other services; vanilla on OpenJDK 25.0.4.1 with a 4 GB heap (<code>-Xms4g -Xmx4g</code>). The
+bots ran on the Mac mini and reached the ThinkPad over the tailnet, so they took none of the server's CPU.</p>
+<p>What ran: Horizon from <code>origin/main</code> at bf851bfe with #586 (move checks and chunk pacing), the bots and
+<code>server_bench.py</code> from this PR, #623 (sections encoded once, its first commit) and #649 (a tick's packets
+handed to each connection together). The ThinkPad copy wasn't a git checkout, so the JSON reports have an
+empty <code>commit</code>. Vanilla: the pinned 26.3 server jar.</p>
+<h2 id="results">Results</h2>
+<p>MSPT is the average milliseconds per tick (50 is the limit for 20 TPS); P95 is the 95th percentile. CPU is
+the whole process tree. &quot;New chunks/s&quot; are chunks no bot had before.</p>
+<h3 id="walk-the-same-work-on-both-servers">Walk (the same work on both servers)</h3>
+<div class="table"><table>
+<thead>
+<tr>
+<th style="text-align:right">Bots</th>
+<th>Server</th>
+<th style="text-align:right">MSPT</th>
+<th style="text-align:right">P95</th>
+<th style="text-align:right">TPS</th>
+<th style="text-align:right">RSS</th>
+<th style="text-align:right">CPU</th>
+<th style="text-align:right">Chunks/s</th>
+<th style="text-align:right">New chunks/s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Horizon</td>
+<td style="text-align:right">5.5</td>
+<td style="text-align:right">12.1</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">1.37 GB</td>
+<td style="text-align:right">57 %</td>
+<td style="text-align:right">9</td>
+<td style="text-align:right">0.3</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td>Vanilla</td>
+<td style="text-align:right">18.3</td>
+<td style="text-align:right">27.3</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">3.35 GB</td>
+<td style="text-align:right">66 %</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">0.3</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Horizon</td>
+<td style="text-align:right">11.5</td>
+<td style="text-align:right">22.1</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">1.41 GB</td>
+<td style="text-align:right">124 %</td>
+<td style="text-align:right">94</td>
+<td style="text-align:right">2.4</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Vanilla</td>
+<td style="text-align:right">16.8</td>
+<td style="text-align:right">30.5</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">3.41 GB</td>
+<td style="text-align:right">84 %</td>
+<td style="text-align:right">100</td>
+<td style="text-align:right">2.8</td>
+</tr>
+<tr>
+<td style="text-align:right">25</td>
+<td>Horizon</td>
+<td style="text-align:right">20.7</td>
+<td style="text-align:right">40.4</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">1.45 GB</td>
+<td style="text-align:right">170 %</td>
+<td style="text-align:right">236</td>
+<td style="text-align:right">5.7</td>
+</tr>
+<tr>
+<td style="text-align:right">25</td>
+<td>Vanilla</td>
+<td style="text-align:right">16.0</td>
+<td style="text-align:right">26.4</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">3.47 GB</td>
+<td style="text-align:right">115 %</td>
+<td style="text-align:right">252</td>
+<td style="text-align:right">6.7</td>
+</tr>
+<tr>
+<td style="text-align:right">50</td>
+<td>Horizon</td>
+<td style="text-align:right">31.4</td>
+<td style="text-align:right">79.0</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">1.52 GB</td>
+<td style="text-align:right">173 %</td>
+<td style="text-align:right">451</td>
+<td style="text-align:right">10.3</td>
+</tr>
+<tr>
+<td style="text-align:right">50</td>
+<td>Vanilla</td>
+<td style="text-align:right">20.5</td>
+<td style="text-align:right">29.7</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">3.55 GB</td>
+<td style="text-align:right">194 %</td>
+<td style="text-align:right">502</td>
+<td style="text-align:right">12.2</td>
+</tr>
+<tr>
+<td style="text-align:right">100</td>
+<td>Horizon</td>
+<td style="text-align:right">114.5</td>
+<td style="text-align:right">256.2</td>
+<td style="text-align:right">8.7</td>
+<td style="text-align:right">1.33 GB</td>
+<td style="text-align:right">181 %</td>
+<td style="text-align:right">484</td>
+<td style="text-align:right">30.8</td>
+</tr>
+<tr>
+<td style="text-align:right">100</td>
+<td>Vanilla</td>
+<td style="text-align:right">stopped by its watchdog</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table></div>
+<p>Both servers sent the same chunks (about 10 a second per bot, the churn of flying around) and sent none
+twice. Vanilla pulled back a few bots for moving too quickly when a tick ran long (5 to 33 per run);
+Horizon none. At 100 bots vanilla's watchdog stopped the server (a tick ran over 60 s, in
+<code>ChunkMap$TrackedEntity.updatePlayer</code>); Horizon kept running at 8.7 TPS.</p>
+<h3 id="explore-at-a-rate-both-servers-keep-up-with-equal-work">Explore at a rate both servers keep up with (equal work)</h3>
+<p>The bots fly outwards at 0.8 blocks a second (<code>--explore-speed 0.8</code>), slow enough that neither server makes
+them wait for terrain, so both generate and send the same new chunks.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th style="text-align:right">Bots</th>
+<th>Server</th>
+<th style="text-align:right">MSPT</th>
+<th style="text-align:right">P95</th>
+<th style="text-align:right">TPS</th>
+<th style="text-align:right">RSS</th>
+<th style="text-align:right">CPU</th>
+<th style="text-align:right">Chunks/s</th>
+<th style="text-align:right">New chunks/s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Horizon</td>
+<td style="text-align:right">4.0</td>
+<td style="text-align:right">6.6</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">1.36 GB</td>
+<td style="text-align:right">25 %</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1.3</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td>Vanilla</td>
+<td style="text-align:right">18.1</td>
+<td style="text-align:right">27.1</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">3.32 GB</td>
+<td style="text-align:right">73 %</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1.4</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Horizon</td>
+<td style="text-align:right">13.5</td>
+<td style="text-align:right">24.8</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">1.64 GB</td>
+<td style="text-align:right">89 %</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">11.8</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Vanilla</td>
+<td style="text-align:right">29.2</td>
+<td style="text-align:right">43.0</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">3.52 GB</td>
+<td style="text-align:right">143 %</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">11.9</td>
+</tr>
+<tr>
+<td style="text-align:right">25</td>
+<td>Horizon</td>
+<td style="text-align:right">20.2</td>
+<td style="text-align:right">36.8</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">1.74 GB</td>
+<td style="text-align:right">121 %</td>
+<td style="text-align:right">32</td>
+<td style="text-align:right">28.9</td>
+</tr>
+<tr>
+<td style="text-align:right">25</td>
+<td>Vanilla</td>
+<td style="text-align:right">37.0</td>
+<td style="text-align:right">49.4</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">3.73 GB</td>
+<td style="text-align:right">169 %</td>
+<td style="text-align:right">32</td>
+<td style="text-align:right">28.9</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="explore-as-fast-as-each-server-sends-chunks-not-equal-work">Explore as fast as each server sends chunks (not equal work)</h3>
+<p>The default 22 blocks a second is faster than either server can generate, so each server sets the pace and
+a faster server is given more work: from 10 bots Horizon generated 1.5 to 2 times vanilla's new chunks a
+second. Read it as throughput, not as a like-for-like tick time.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th style="text-align:right">Bots</th>
+<th>Server</th>
+<th style="text-align:right">MSPT</th>
+<th style="text-align:right">P95</th>
+<th style="text-align:right">TPS</th>
+<th style="text-align:right">RSS</th>
+<th style="text-align:right">CPU</th>
+<th style="text-align:right">Chunks/s</th>
+<th style="text-align:right">New chunks/s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Horizon</td>
+<td style="text-align:right">10.6</td>
+<td style="text-align:right">24.6</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">1.34 GB</td>
+<td style="text-align:right">322 %</td>
+<td style="text-align:right">39</td>
+<td style="text-align:right">34.6</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td>Vanilla</td>
+<td style="text-align:right">9.9</td>
+<td style="text-align:right">21.3</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">3.48 GB</td>
+<td style="text-align:right">245 %</td>
+<td style="text-align:right">36</td>
+<td style="text-align:right">33.4</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Horizon</td>
+<td style="text-align:right">30.4</td>
+<td style="text-align:right">52.3</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">2.18 GB</td>
+<td style="text-align:right">345 %</td>
+<td style="text-align:right">47</td>
+<td style="text-align:right">46.7</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Vanilla</td>
+<td style="text-align:right">17.0</td>
+<td style="text-align:right">29.6</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">4.04 GB</td>
+<td style="text-align:right">242 %</td>
+<td style="text-align:right">22</td>
+<td style="text-align:right">22.4</td>
+</tr>
+<tr>
+<td style="text-align:right">25</td>
+<td>Horizon</td>
+<td style="text-align:right">50.7</td>
+<td style="text-align:right">89.3</td>
+<td style="text-align:right">19.7</td>
+<td style="text-align:right">2.30 GB</td>
+<td style="text-align:right">286 %</td>
+<td style="text-align:right">50</td>
+<td style="text-align:right">49.7</td>
+</tr>
+<tr>
+<td style="text-align:right">25</td>
+<td>Vanilla</td>
+<td style="text-align:right">24.2</td>
+<td style="text-align:right">36.5</td>
+<td style="text-align:right">20.0</td>
+<td style="text-align:right">4.40 GB</td>
+<td style="text-align:right">320 %</td>
+<td style="text-align:right">34</td>
+<td style="text-align:right">33.7</td>
+</tr>
+<tr>
+<td style="text-align:right">50</td>
+<td>Horizon</td>
+<td style="text-align:right">50.7</td>
+<td style="text-align:right">102.7</td>
+<td style="text-align:right">19.7</td>
+<td style="text-align:right">1.72 GB</td>
+<td style="text-align:right">213 %</td>
+<td style="text-align:right">97</td>
+<td style="text-align:right">96.5</td>
+</tr>
+<tr>
+<td style="text-align:right">50</td>
+<td>Vanilla</td>
+<td style="text-align:right">stopped by its watchdog</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">100</td>
+<td>Horizon</td>
+<td style="text-align:right">92.9</td>
+<td style="text-align:right">139.6</td>
+<td style="text-align:right">10.8</td>
+<td style="text-align:right">1.70 GB</td>
+<td style="text-align:right">322 %</td>
+<td style="text-align:right">114</td>
+<td style="text-align:right">113.6</td>
+</tr>
+<tr>
+<td style="text-align:right">100</td>
+<td>Vanilla</td>
+<td style="text-align:right">stopped by its watchdog</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table></div>
+<p>Vanilla's watchdog stopped it at 50 bots (in <code>ClientboundLightUpdatePacketData</code>, copying light for a chunk
+packet) and at 100 (in <code>Entity.move</code> from a move packet).</p>
+<h2 id="findings">Findings</h2>
+<ul>
+<li>Horizon's RSS is 1.9 to 2.6 times smaller in every run, and it starts in 11 s against vanilla's 15 s.
+Vanilla's heap is fixed at 4 GB (<code>-Xms4g</code>), so part of its RSS is that setting rather than need.</li>
+<li>With 1 bot Horizon's tick is 3.3 times shorter walking and 4.5 times shorter exploring at equal work;
+at 10 bots it is still shorter in both.</li>
+<li>At equal exploring work Horizon's tick is about half of vanilla's at 10 and 25 bots.</li>
+<li>When the bots only fly around spawn (<code>walk</code>), vanilla's tick hardly grows with players (16 to 20 ms from
+1 to 50 bots) while Horizon's grows by about 0.5 ms per bot, so vanilla is ahead from about 20 bots: 16.0
+against 20.7 ms at 25 and 20.5 against 31.4 ms at 50. Both keep 20 TPS up to 50.</li>
+<li>With 100 bots vanilla's watchdog stops it in every pass, and Horizon keeps running at 9 to 11 TPS.</li>
+</ul>
+<h3 id="where-horizons-walk-tick-goes-at-25-bots">Where Horizon's walk tick goes at 25 bots</h3>
+<p>Profiled on the ThinkPad with <code>perf</code> (the server thread, 20 s, self time):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th style="text-align:right">Share</th>
+<th>What</th>
+<th>Whose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">18 %</td>
+<td><code>Streaming::update</code>: every tick it walks all loaded columns and proto chunks and tests each against every player's area (unloading, dropping protos, finishing and decoration candidates), so the cost grows with players times chunks</td>
+<td>streaming / engine tick</td>
+</tr>
+<tr>
+<td style="text-align:right">20 %</td>
+<td><code>PalettedContainer::get</code> and <code>World::block</code>, mostly from block entity ticks: on the Mac profile <code>tick_hoppers</code> looks up the block under every block entity in the loaded world each tick and compares names as strings, and spawners rebuild their display id</td>
+<td>engine tick</td>
+</tr>
+<tr>
+<td style="text-align:right">8 %</td>
+<td><code>light_data</code> when a chunk is sent: the light layers were built twice per chunk; a follow-up commit on #623 builds them once and keeps each section's packed layers</td>
+<td>server (this work)</td>
+</tr>
+<tr>
+<td style="text-align:right">7 %</td>
+<td>encoding chunk sections and heightmaps for the chunks each bot newly sees</td>
+<td>server</td>
+</tr>
+<tr>
+<td style="text-align:right">4 %</td>
+<td><code>Hub::tick</code> (moves, tracking)</td>
+<td>server</td>
+</tr>
+<tr>
+<td style="text-align:right">2 %</td>
+<td>the moved-wrongly collision check</td>
+<td>server</td>
+</tr>
+</tbody>
+</table></div>
+<p>The first two grow with the number of players but aren't specific to the server: they are the
+engine's tick and streaming, reported to perf-server-2. Before #623 and #649, encoding every chunk section
+once per player and waking each connection's writer thread once per packet cost more than everything above
+(at 50 walking bots the tick was 281 ms; see the earlier runs).</p>
+<h2 id="earlier-runs-same-machine-and-method">Earlier runs (same machine and method)</h2>
+<ul>
+<li><code>run-1-before-chunk-cache.json</code>: before #623, with vanilla's locator bar on. Horizon's walk tick was
+27.5, 40.7, 281 and 467 ms at 10, 25, 50 and 100 bots, and vanilla's 33.2 ms at 50 (the locator bar).</li>
+<li><code>run-2-chunk-cache.json</code>: Horizon with #623 only: 13.2, 23.5, 31.4 and 84.4 ms walking at 10 to 100
+bots.</li>
+</ul>
+<h2 id="files">Files</h2>
+<ul>
+<li><code>horizon.json</code>, <code>vanilla.json</code>: the walk and explore passes (vanilla with <code>locator_bar=false</code>).</li>
+<li><code>explore-equal-rate.json</code>: the explore pass at 0.8 blocks a second, both servers.</li>
+<li><code>run-1-before-chunk-cache.json</code>, <code>run-2-chunk-cache.json</code>: the earlier runs.</li>
+</ul>
+<p>To run it again (bots on another machine reached at <code>--connect</code>):</p>
+<pre><code>cargo build --release -p horizon-client --bin horizon-client -p horizon-server -p horizon-bots
+python3 tools/server_bench.py --servers horizon,vanilla --bots 1,10,25,50,100 --behaviour walk,explore \
+    --gamerule locator_bar=false --nice 19 --bots-via 'ssh macmini' --bots-bin /path/to/horizon-bots \
+    --connect &lt;this machine's address&gt; --out results.json
+python3 tools/server_bench.py --servers horizon,vanilla --bots 1,10,25 --behaviour explore \
+    --explore-speed 0.8 --gamerule locator_bar=false --nice 19 ... --out explore-equal-rate.json
+</code></pre>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/server-equal-work-2026-10-17/README.md"><code>benchmarks/server-equal-work-2026-10-17/README.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#what-was-made-equal">What was made equal</a></li><li class="l2"><a href="#method">Method</a></li><li class="l2"><a href="#results">Results</a></li><li class="l3"><a href="#walk-the-same-work-on-both-servers">Walk (the same work on both servers)</a></li><li class="l3"><a href="#explore-at-a-rate-both-servers-keep-up-with-equal-work">Explore at a rate both servers keep up with (equal work)</a></li><li class="l3"><a href="#explore-as-fast-as-each-server-sends-chunks-not-equal-work">Explore as fast as each server sends chunks (not equal work)</a></li><li class="l2"><a href="#findings">Findings</a></li><li class="l3"><a href="#where-horizons-walk-tick-goes-at-25-bots">Where Horizon&#x27;s walk tick goes at 25 bots</a></li><li class="l2"><a href="#earlier-runs-same-machine-and-method">Earlier runs (same machine and method)</a></li><li class="l2"><a href="#files">Files</a></li></ul></nav>
+</div>
+<script src="../../../assets/site.js"></script>
+</body>
+</html>

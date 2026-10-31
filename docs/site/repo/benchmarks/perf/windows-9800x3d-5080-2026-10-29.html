@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30) · Rusty Minecraft docs</title>
+<meta name="description" content="Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30): Rusty Minecraft, Minecraft: Java Edition 26.3 rewritten in Rust, a fork of Horizon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../assets/tokens.css">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body data-root="../../../..">
+<header class="bar">
+  <button class="menu" aria-label="Pages" aria-expanded="false" aria-controls="side">☰</button>
+  <a class="brand" href="../../../../index.html"><span class="mark" aria-hidden="true"></span>Rusty Minecraft <span>docs</span></a>
+  <div class="search"><input type="search" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><ul class="results" hidden></ul></div>
+  <button class="theme" aria-label="Switch light and dark">◐</button>
+  <a class="repo" href="https://github.com/winnerfn8/Rusty-Minecraft">GitHub</a>
+</header>
+<div class="layout">
+<aside id="side" class="side"><details><summary>Start here</summary><ul><li><a href="../../README.html">Rusty Minecraft</a></li><li><a href="../../../java-mod-translation.html">Java mod translation</a></li><li><a href="../../../java-mod-runtime.html">Java mods&#x27; code: mixins and the Java layer</a></li><li><a href="../../launcher/README.html">Rusty Minecraft launcher</a></li><li><a href="../../../website.html">The documentation website</a></li><li><a href="../../ROADMAP.html">Horizon roadmap</a></li><li><a href="../../roadmap/README.html">The roadmap</a></li></ul></details><details><summary>Build and run</summary><ul><li><a href="../../AGENTS.html">Rusty Minecraft: a map for agents</a></li><li><a href="../../../architecture.html">Architecture: feature → files → checks</a></li><li><a href="../../../native-client.html">Rusty Minecraft native client</a></li><li><a href="../../../hosting.html">Host a server</a></li><li><a href="../../../anticheat.html">The dedicated server&#x27;s anticheat</a></li><li><a href="../../../server.html">Hosting a Rusty Minecraft server: design</a></li><li><a href="../../../server-next.html">The next server: design</a></li><li><a href="../../../smp.html">Survival multiplayer (SMP): the official server&#x27;s mod</a></li><li><a href="../../../owners.html">For server owners: server.properties to server.toml</a></li><li><a href="../../../agent-control.html">Agent control: driving the launcher and the game</a></li><li><a href="../../../graphics.html">Graphics: settings and performance</a></li><li><a href="../../../benchmark.html">Benchmark: Rusty Minecraft vs vanilla 26.3</a></li><li><a href="../../../extras.html">Rusty Minecraft extras</a></li><li><a href="../../../shaders.html">Rusty Minecraft shader packs</a></li><li><a href="../../../mods.html">Rusty Minecraft mods</a></li><li><a href="../../../native-mods.html">Native mods (experimental)</a></li><li><a href="../../../native-hooks-neoforge.html">Native hook points, modelled on NeoForge 26.3 (proposal)</a></li><li><a href="../../../datapack-upgrade.html">Upgrading a 26.2 data pack to 26.3</a></li><li><a href="../../../modpacks.html">Modpacks: porting any pack to Rusty Minecraft</a></li><li><a href="../../../versioning.html">Versioning</a></li><li><a href="../../../resource-packs.html">Resource packs: what works</a></li><li><a href="../../../telemetry.html">Opt-in data collection</a></li><li><a href="../../../benchmark-report.html">Benchmark report format (version 1)</a></li><li><a href="../../../api/README.html">Rusty Minecraft APIs</a></li><li><a href="../../../api/stability.html">API stability and versioning</a></li><li><a href="../../../play-with-friends.html">Play with friends</a></li></ul></details><details><summary>Parity</summary><ul><li><a href="../../../rust-parity.html">Rusty Minecraft Rust rewrite status</a></li><li><a href="../../../parity-workflow.html">Parity workflow</a></li><li><a href="../../../parity/blocks.html">Block behaviours and ticking: parity status</a></li><li><a href="../../../parity/meshing.html">Section meshing parity</a></li><li><a href="../../../port-ledger.html">Port ledger</a></li><li><a href="../../../version-ports.html">Version ports: from a new Minecraft release to Rusty Minecraft</a></li><li><a href="../../../research-lab.html">Decompilation and Rust research lab</a></li><li><a href="../../../decompilation-status.html">Local decompilation status</a></li></ul></details><details><summary>Architecture: world generation</summary><ul><li><a href="../../../world-generation.html">World generation</a></li><li><a href="../../../world-height.html">World height: each level&#x27;s shape from its dimension type</a></li><li><a href="../../../pregeneration.html">Pregeneration: /pregen</a></li><li><a href="../../../noise-generation.html">Rusty Minecraft noise-generation scope</a></li><li><a href="../../../density-functions.html">Compiled density evaluation</a></li><li><a href="../../../structure-density.html">Structure terrain-adaptation density</a></li><li><a href="../../../terrain-filling.html">Noise-stage terrain filling</a></li><li><a href="../../../biome-lookup.html">Biome lookup</a></li><li><a href="../../../biome-temperatures.html">Biome temperatures</a></li><li><a href="../../../material-surfaces.html">Seeded material surfaces</a></li><li><a href="../../../material-conditions.html">Numeric material conditions</a></li><li><a href="../../../material-rule-libraries.html">Material-rule libraries</a></li><li><a href="../../../vertical-anchors.html">Vertical anchors</a></li><li><a href="../../../value-providers.html">World-generation value providers</a></li><li><a href="../../../carving.html">Carving</a></li><li><a href="../../../heightmaps.html">Heightmaps</a></li><li><a href="../../../feature-placement.html">Feature placement</a></li></ul></details><details><summary>Architecture: world data and simulation</summary><ul><li><a href="../../../world-data.html">Rusty Minecraft world data</a></li><li><a href="../../../block-state-codecs.html">Block-state JSON codecs</a></li><li><a href="../../../scheduled-ticks.html">Rusty Minecraft scheduled ticks</a></li><li><a href="../../../collision-geometry.html">Rusty Minecraft collision geometry</a></li><li><a href="../../../face-visibility.html">Neighboring model-face visibility</a></li></ul></details><details><summary>Java comparison profiling</summary><ul><li><a href="../../../profiling.html">Find the next bottleneck</a></li></ul></details><details><summary>API reference</summary><ul><li><a href="../../../api/agent-control.html">Agent control API</a></li><li><a href="../../../api/data-formats.html">Data formats</a></li><li><a href="../../../api/launch-reference.html">Launch API reference</a></li><li><a href="../../../api/launch.html">Launch API</a></li><li><a href="../../../api/launcher.html">Launcher API</a></li><li><a href="../../../api/mod-index.html">The registry index and .hpack</a></li><li><a href="../../../api/server-reference.html">Server reference</a></li><li><a href="../../../api/server.html">Server API</a></li><li><a href="../../../api/shaders-reference.html">Shader API reference (0.1)</a></li><li><a href="../../../api/shaders.html">Shader API</a></li></ul></details><details open><summary>Benchmarks and performance</summary><ul><li><a href="../entity-model-document-2026-10-14/README.html">Entity model document loading</a></li><li><a href="../model-state-parse-2026-10-14.html">Reuse parsed model states</a></li><li><a href="windows-9800x3d-5080-2026-10-29.html" aria-current="page">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</a></li><li><a href="../server-2026-10-17/README.html">Dedicated server against vanilla 26.3, with bots (2026-10-17)</a></li><li><a href="../server-equal-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots, equal work (2026-10-18)</a></li><li><a href="../server-equal-work-2026-10-17/README.html">Horizon&#x27;s server against vanilla 26.3, equal work (2026-10-17)</a></li><li><a href="../server-four-way-2026-10-19/README.html">Horizon&#x27;s server against vanilla 26.3, Paper and Fabric + Lithium: mixed bots, equal work (2026-10-19)</a></li><li><a href="../server-mixed-2026-10-18/README.html">Horizon&#x27;s server against vanilla 26.3: mixed bots (2026-10-18)</a></li><li><a href="../../../animated-sprite-mips-benchmark.html">Animated sprite mip cache</a></li><li><a href="../../../generation-scan-benchmark.html">Generation scan gate benchmark</a></li><li><a href="../../../noise-aquifer-benchmark.html">Bulk density and noise generation benchmark</a></li><li><a href="../../../performance/lighting-worker-results.html">Lighting worker result packaging</a></li><li><a href="../../../performance/paletted-container-access-results.html">Paletted container access</a></li><li><a href="../../../performance/startup-stage-3.html">Progressive world resources (#712)</a></li><li><a href="../../../portal-scan-benchmark.html">Nether-portal section-scan benchmark</a></li><li><a href="../../../random-tick-eligibility-benchmark.html">Random-tick eligibility benchmark</a></li><li><a href="../../../shared-model-library-benchmark.html">Shared model library benchmark</a></li><li><a href="../../../surface-generation-benchmark.html">Constant surface-rule specialization benchmark</a></li><li><a href="../../../visibility-benchmark.html">Section visibility shortcuts</a></li><li><a href="../../launcher/benchmarks/release-loading.html">Shared startup release response</a></li></ul></details><details><summary>Project</summary><ul><li><a href="../../CONTRIBUTING.html">Contributing to Rusty Minecraft</a></li><li><a href="../../THIRD_PARTY_NOTICES.html">Third-party notices</a></li><li><a href="../../roadmap/journal/2026-43.html">Single player becomes a server, servers send their packs</a></li></ul></details><details><summary>Crates, launcher and tools</summary><ul><li><a href="../../crates/horizon-java/java/README.html">The Java layer&#x27;s own classes</a></li><li><a href="../../crates/horizon-java/tests/tickcounter/README.html">Tick counter: the Java layer&#x27;s test mod</a></li><li><a href="../../crates/horizon-mod-registry/README.html">horizon-mod-registry</a></li><li><a href="../../crates/horizon-shader-api/packs/golden_hour/README.html">Golden Hour</a></li><li><a href="../../crates/horizon-shader-api/tests/samples/schema-1/README.html">README.md</a></li><li><a href="../../crates/horizon-shaders/tests/packs/post-test/README.html">post-test</a></li><li><a href="../../crates/horizon-shaders/tests/packs/terrain-test/README.html">terrain-test</a></li><li><a href="../../crates/horizon-telemetry-server/README.html">horizon-telemetry-server</a></li><li><a href="../../crates/horizon-telemetry-server/tests/fixtures/benchmarks/README.html">Benchmark summary fixtures</a></li><li><a href="../../packaging/macos/README.html">The macOS launcher: Horizon.app in a .dmg</a></li><li><a href="../../tools/benchmark-deps/README.html">Java comparison dependencies</a></li></ul></details><details><summary>More</summary><ul><li><a href="../../../controllers.html">Controllers</a></li><li><a href="../../../design-system.html">Rusty Minecraft&#x27;s design system</a></li><li><a href="../../../design/compositor.html">Offscreen frame compositor</a></li><li><a href="../../../horizon-ctl-commands.html">horizon-ctl commands</a></li><li><a href="../../../how-horizon-is-built.html">How Rusty Minecraft is built</a></li><li><a href="../../../known-issues.html">Known issues</a></li><li><a href="../../../launcher-commands.html">Launcher commands</a></li><li><a href="../../../launcher-preparation.html">Launcher resource preparation</a></li><li><a href="../../../media/brand/README.html">Rusty Minecraft&#x27;s mark and icons</a></li><li><a href="../../../microsoft-account.html">Microsoft account sign-in and online-mode play</a></li><li><a href="../../../mod-browser.html">The launcher&#x27;s mod browser</a></li><li><a href="../../../prepare-performance.html">Resource preparation and filesystem work</a></li><li><a href="../../../release-flow.html">Release flow</a></li><li><a href="../../../reuse-pack-overlays.html">Reusing resource-pack overlays</a></li><li><a href="../../../save-batch-entities.html">Block entity save batches</a></li><li><a href="../../../security.html">Security</a></li><li><a href="../../../server-levels.html">A server&#x27;s levels: one per dimension</a></li><li><a href="../../../windows-allocators.html">Windows allocator experiments</a></li></ul></details></aside>
+<main>
+<article class="doc">
+<h1 id="horizon-v0297-vs-vanilla-263-on-windows-11-ryzen-7-9800x3d--rtx-5080-2026-10-29-rd-8-and-32-rerun-2026-10-30">Horizon v0.2.97 vs vanilla 26.3 on Windows 11: Ryzen 7 9800X3D + RTX 5080 (2026-10-29, RD 8 and 32 rerun 2026-10-30)</h1>
+<p>The first <code>tools/perf_bench.py</code> run on Windows (<a href="../../../benchmark.html">docs/benchmark.md</a>): Horizon, vanilla 26.3 and
+vanilla with performance mods, render distances 8, 16 and 32, 1280x720, three games each, every game from a fresh
+world. The reports are the <code>*-win-9800x3d-5080-rd*.json</code> files next to this page.</p>
+<pre><code class="language-sh">python tools/perf_bench.py --table horizon-win-9800x3d-5080 vanilla-win-9800x3d-5080 vanilla-mods-win-9800x3d-5080
+</code></pre>
+<h2 id="setup">Setup</h2>
+<ul>
+<li><strong>Machine:</strong> AMD Ryzen 7 9800X3D (8 cores, 16 threads), 94 GB RAM (DDR5, EXPO off), NVIDIA GeForce RTX 5080
+(driver 617.42), Windows 11 Pro 26200, Balanced power plan, desktop. One 1920x1080 120 Hz display. The game windows
+were on the desktop of an unlocked session.</li>
+<li><strong>Horizon:</strong> release v0.2.97 as the launcher installs it (<code>--build %APPDATA%\horizon-launcher\versions\v0.2.97</code>,
+<code>--resources</code> its <code>.local\horizon-client\26.3</code>), Vulkan.</li>
+<li><strong>Vanilla:</strong> the 26.3 client jar with Fabric Loader 0.19.5 and the driver mod, Java 25.0.5 (Temurin), <code>-Xmx2G</code>
+with the launcher's G1 flags and the manifest's <code>-XX:StackShadowPages=32</code>, OpenGL 3.3.</li>
+<li><strong>Vanilla + mods:</strong> the same with Sodium mc26.3-0.9.2, Lithium mc26.3-0.26.2, FerriteCore 9.0.0 and
+ImmediatelyFast 1.17.1 (<code>tools/benchmark-deps/mods.lock.json</code>).</li>
+<li><strong>Commands:</strong> <code>python tools/perf_bench.py --game &lt;game&gt; --label &lt;game&gt;-win-9800x3d-5080 --distances &lt;d&gt; --sizes 1280x720 --repeats 3</code> (plus <code>--build</code> and <code>--resources</code> for Horizon), with the games taking turns at
+each distance.</li>
+<li><strong>Memory</strong> is the working set on Windows (what Task Manager shows), sampled from outside the process. Horizon's
+GPU figure is its own Vulkan allocator total. <code>nvidia-smi</code> gives no per-process figure under WDDM, so vanilla has
+none.</li>
+</ul>
+<h2 id="load">Load</h2>
+<p>Windows has no load average, so the reports have no <code>load_avg_1m</code>. Every game ran on an otherwise idle machine:</p>
+<ul>
+<li><strong>RD 8 and RD 32</strong> (rerun on 2026-10-30, after the first pass had builds running alongside): a script started each
+game only once no <code>rustc</code>, <code>cargo</code>, <code>link</code> (or other compiler) process and no other game (<code>horizon-client</code>, <code>java</code>,
+<code>javaw</code>, Minecraft) was running, and the machine's CPU load had stayed under 15 % in every 5-second sample for
+30 seconds. During each game it sampled every 2 seconds the machine's CPU load and the CPU of everything outside the
+benchmark's own processes. A game during which a compiler or another game ran, or other processes used over 15 % of
+the machine for 10 seconds, was discarded and run again: two of the 20 games were (vanilla + mods at RD 32, a
+build started during one, background processes during the other).</li>
+<li><strong>RD 16</strong> (2026-10-29): no <code>rustc</code>, <code>cargo</code> or <code>link</code> process at any point, the load logged every 5 seconds.</li>
+</ul>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Game</th>
+<th>RD</th>
+<th>Mean / max CPU load (machine, the game included)</th>
+<th>Other processes' CPU, mean / max</th>
+<th>Compiler processes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Horizon</td>
+<td>8</td>
+<td>18 % / 49 %</td>
+<td>6 % / 12 %</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Vanilla</td>
+<td>8</td>
+<td>28 % / 75 %</td>
+<td>7 % / 20 %</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Vanilla + mods</td>
+<td>8</td>
+<td>30 % / 81 %</td>
+<td>7 % / 20 %</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Horizon</td>
+<td>16</td>
+<td>29 % / 80 %</td>
+<td>–</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Vanilla</td>
+<td>16</td>
+<td>41 % / 91 %</td>
+<td>–</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Vanilla + mods</td>
+<td>16</td>
+<td>51 % / 90 %</td>
+<td>–</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Horizon</td>
+<td>32</td>
+<td>36 % / 100 %</td>
+<td>5 % / 15 %</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Vanilla</td>
+<td>32</td>
+<td>39 % / 73 %</td>
+<td>6 % / 18 %</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Vanilla + mods</td>
+<td>32</td>
+<td>42 % / 88 %</td>
+<td>6 % / 21 %</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></div>
+<p>&quot;Other processes&quot; is the machine's load minus the benchmark's own processes (the game and <code>perf_bench.py</code>), in
+2-second samples. Most of it is the system's share of the game's own drawing (the graphics driver and the
+compositor), which no process of the benchmark is charged for; the desktop apps left open (a browser, chat apps)
+briefly reached 5 % at most. RD 16's load was logged from outside every 5 seconds, so it has no such split, and its mean includes the time between
+games. Compared with the first pass, the idle RD 8 runs give Horizon about 10 % higher averages and about 50 % higher
+1% lows, and vanilla up to 10 % higher averages.</p>
+<h2 id="results">Results</h2>
+<p>Mean of 3 games ± 95% confidence interval. FPS over the 12-second flight at 16 blocks/s (average / 1% low /
+0.1% low):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>RD</th>
+<th>scene</th>
+<th>Horizon v0.2.97</th>
+<th>Vanilla 26.3</th>
+<th>Vanilla + mods</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>forest</td>
+<td>3495 ±276 / 1295 ±397 / 859 ±298</td>
+<td>2457 ±836 / 625 ±224 / 252 ±52</td>
+<td>2425 ±65 / 733 ±30 / 250 ±22</td>
+</tr>
+<tr>
+<td>8</td>
+<td>mountain</td>
+<td>3376 ±67 / 1384 ±168 / 850 ±256</td>
+<td>2605 ±811 / 700 ±218 / 264 ±71</td>
+<td>2538 ±167 / 760 ±34 / 241 ±44</td>
+</tr>
+<tr>
+<td>8</td>
+<td>ocean</td>
+<td>3346 ±147 / 1358 ±237 / 912 ±235</td>
+<td>2470 ±828 / 689 ±241 / 286 ±53</td>
+<td>2432 ±82 / 764 ±37 / 262 ±37</td>
+</tr>
+<tr>
+<td>8</td>
+<td>village</td>
+<td>2942 ±197 / 1271 ±146 / 839 ±94</td>
+<td>2217 ±112 / 545 ±37 / 215 ±14</td>
+<td>2104 ±101 / 577 ±84 / 196 ±47</td>
+</tr>
+<tr>
+<td>16</td>
+<td>forest</td>
+<td>2424 ±138 / 709 ±165 / 401 ±100</td>
+<td>1912 ±324 / 402 ±89 / 149 ±25</td>
+<td>1746 ±32 / 461 ±27 / 179 ±9</td>
+</tr>
+<tr>
+<td>16</td>
+<td>mountain</td>
+<td>1961 ±99 / 537 ±96 / 297 ±75</td>
+<td>1653 ±153 / 332 ±27 / 113 ±8</td>
+<td>1500 ±55 / 408 ±40 / 140 ±10</td>
+</tr>
+<tr>
+<td>16</td>
+<td>ocean</td>
+<td>2201 ±183 / 554 ±251 / 325 ±326</td>
+<td>1861 ±289 / 446 ±142 / 165 ±29</td>
+<td>1815 ±119 / 514 ±142 / 192 ±58</td>
+</tr>
+<tr>
+<td>16</td>
+<td>village</td>
+<td>1712 ±192 / 593 ±80 / 358 ±69</td>
+<td>1218 ±65 / 318 ±16 / 127 ±5</td>
+<td>1282 ±162 / 343 ±25 / 132 ±12</td>
+</tr>
+<tr>
+<td>32</td>
+<td>forest</td>
+<td>1389 ±70 / 504 ±33 / 330 ±118</td>
+<td>1203 ±51 / 228 ±13 / 108 ±12</td>
+<td>929 ±8 / 313 ±41 / 129 ±32</td>
+</tr>
+<tr>
+<td>32</td>
+<td>mountain</td>
+<td>1086 ±34 / 258 ±78 / 108 ±37</td>
+<td>815 ±61 / 55 ±13 / 8 ±3</td>
+<td>645 ±10 / 166 ±12 / 86 ±21</td>
+</tr>
+<tr>
+<td>32</td>
+<td>ocean</td>
+<td>1189 ±27 / 155 ±9 / 68 ±8</td>
+<td>1223 ±33 / 236 ±17 / 99 ±21</td>
+<td>1017 ±14 / 325 ±38 / 117 ±28</td>
+</tr>
+<tr>
+<td>32</td>
+<td>village</td>
+<td>1164 ±9 / 416 ±39 / 216 ±86</td>
+<td>882 ±48 / 184 ±12 / 83 ±17</td>
+<td>926 ±17 / 250 ±5 / 93 ±11</td>
+</tr>
+</tbody>
+</table></div>
+<p>Startup, loading and memory (means of 3 games):</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>RD</th>
+<th></th>
+<th>Horizon v0.2.97</th>
+<th>Vanilla 26.3</th>
+<th>Vanilla + mods</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>start to title / in-world</td>
+<td>3.0 s / 6.1 s</td>
+<td>7.7 s / 13.9 s</td>
+<td>11.1 s / 17.6 s</td>
+</tr>
+<tr>
+<td>8</td>
+<td>mean scene load</td>
+<td>1.3 s</td>
+<td>4.0 s</td>
+<td>3.6 s</td>
+</tr>
+<tr>
+<td>8</td>
+<td>working set, steady / peak</td>
+<td>1082 / 1172 MB</td>
+<td>1913 / 2120 MB</td>
+<td>1904 / 2053 MB</td>
+</tr>
+<tr>
+<td>16</td>
+<td>start to title / in-world</td>
+<td>3.2 s / 7.2 s</td>
+<td>7.7 s / 19.9 s</td>
+<td>10.8 s / 23.5 s</td>
+</tr>
+<tr>
+<td>16</td>
+<td>mean scene load</td>
+<td>2.4 s</td>
+<td>9.2 s</td>
+<td>9.0 s</td>
+</tr>
+<tr>
+<td>16</td>
+<td>working set, steady / peak</td>
+<td>1236 / 1459 MB</td>
+<td>2300 / 2540 MB</td>
+<td>2327 / 2496 MB</td>
+</tr>
+<tr>
+<td>32</td>
+<td>start to title / in-world</td>
+<td>2.9 s / 10.5 s</td>
+<td>7.5 s / 35.4 s</td>
+<td>11.0 s / 39.2 s</td>
+</tr>
+<tr>
+<td>32</td>
+<td>mean scene load</td>
+<td>5.7 s</td>
+<td>21.1 s</td>
+<td>19.9 s</td>
+</tr>
+<tr>
+<td>32</td>
+<td>working set, steady / peak</td>
+<td>1730 / 2045 MB</td>
+<td>2799 / 2892 MB</td>
+<td>2895 / 2965 MB</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="what-it-shows">What it shows</h2>
+<ul>
+<li>At RD 8 and 16, Horizon's average FPS is 18–42 % above vanilla's in every scene. Its 1% lows are 1.2–2.3 times
+vanilla's and its 0.1% lows 2.0–3.9 times. On this CPU and GPU the performance mods leave vanilla's averages
+level or slightly lower, and raise its 1% lows by 6–23 %.</li>
+<li>At RD 32, Horizon's average is 15–33 % above vanilla's over the forest, the mountain and the village, with 1% lows
+2.2–4.7 times vanilla's. Over the ocean its average is level with vanilla's, but its lows are lower than vanilla's
+and the modded client's (155 vs 236 and 325 FPS 1% low, 68 vs 99 and 117 FPS 0.1% low), on an idle machine too.
+That scene is worth a closer look.</li>
+<li>Horizon reaches the title screen 2.4–2.6 times faster than vanilla (3.4–3.8 times faster than the modded client)
+and loads a scene's chunks 3–4 times faster. Its steady working set is 38–46 % smaller.</li>
+<li>Each game uses its own graphics API: Horizon Vulkan, vanilla OpenGL. That difference is part of what's compared.</li>
+</ul>
+
+<footer class="source">From <a href="https://github.com/winnerfn8/Rusty-Minecraft/blob/HEAD/benchmarks/perf/windows-9800x3d-5080-2026-10-29.md"><code>benchmarks/perf/windows-9800x3d-5080-2026-10-29.md</code></a>. Rusty Minecraft is a fork of <a href="https://github.com/horizon-rust/horizon">Horizon</a> (MIT).</footer>
+</article>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li class="l2"><a href="#setup">Setup</a></li><li class="l2"><a href="#load">Load</a></li><li class="l2"><a href="#results">Results</a></li><li class="l2"><a href="#what-it-shows">What it shows</a></li></ul></nav>
+</div>
+<script src="../../../assets/site.js"></script>
+</body>
+</html>
