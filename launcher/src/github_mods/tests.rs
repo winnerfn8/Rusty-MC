@@ -308,7 +308,7 @@ fn an_unpacked_hnmod_keeps_its_pins_and_hook_points_and_ships_only_sources() {
     );
     assert!(find_mods(&root)
         .unwrap_err()
-        .contains("pins Rusty Minecraft"));
+        .contains("pins Rusty MC"));
     let _ = fs::remove_dir_all(root);
 }
 

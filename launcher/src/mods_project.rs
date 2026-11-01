@@ -1,4 +1,4 @@
-//! The Mods page's project page, search filters and project icons (`horizon_launcher::browser`:
+//! The Mods page's project page, search filters and project icons (`rusty_mc_launcher::browser`:
 //! `details` for the data, `images` for the icons and gallery). Drawn only with the launcher's
 //! shared components, so a restyle of those restyles this.
 //!
@@ -12,7 +12,7 @@
 use super::mods_page::{Checking, Event};
 use super::*;
 use gpui::img;
-use horizon_launcher::browser::{
+use rusty_mc_launcher::browser::{
     self,
     details::{Details, Environment, Filters, Sort, Tags},
     images, java, Kind as PackKind, Project, SourceId, Support, Version,

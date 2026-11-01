@@ -2,7 +2,7 @@
 name = "horizon-theme"
 version = "0.1.0"
 edition = "2021"
-license = "MIT"
+license-file.workspace = true
 description = "Horizon's design tokens, fonts and icons, shared by the launcher, the website and the game's menus"
 
 [dependencies]

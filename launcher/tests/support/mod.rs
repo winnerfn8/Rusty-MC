@@ -1,4 +1,4 @@
-use horizon_launcher::process;
+use rusty_mc_launcher::process;
 use std::{
     fs,
     path::{Path, PathBuf},

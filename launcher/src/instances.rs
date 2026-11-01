@@ -256,8 +256,8 @@ impl Instance {
         match &self.java {
             None => Ok(()),
             Some(java) => Err(format!(
-                "{} plays Minecraft {} (Java Edition), not Rusty Minecraft: Play starts it, without a \
-                 Rusty Minecraft version.",
+                "{} plays Minecraft {} (Java Edition), not Rusty MC: Play starts it, without a \
+                 Rusty MC version.",
                 self.name, java.minecraft
             )),
         }
@@ -270,7 +270,7 @@ impl Instance {
         match (requested, &self.version) {
             (None, Some(pinned)) => backend::resolve_version(Some(pinned)).map_err(|_| {
                 format!(
-                    "{} plays {pinned}, which is not installed: install it, or horizon-launcher \
+                    "{} plays {pinned}, which is not installed: install it, or rusty-mc-launcher \
                      instance version \"{}\" latest",
                     self.name, self.name
                 )
@@ -290,7 +290,7 @@ fn list_in(game_home: &Path, data: &Path) -> Vec<Instance> {
     let mut store = Store::load(data);
     let mut found = vec![(
         DEFAULT.to_string(),
-        "Rusty Minecraft".to_string(),
+        "Rusty MC".to_string(),
         Kind::Default,
         game_home.to_path_buf(),
         game_home.to_path_buf(),
@@ -371,7 +371,7 @@ fn find_in(all: &[Instance], query: &str) -> Result<Instance, String> {
         .or_else(|| all.iter().find(|i| i.name.eq_ignore_ascii_case(q)))
         .or_else(|| all.iter().find(|i| bare(&i.id) == q))
         .cloned()
-        .ok_or_else(|| format!("No instance {q}: horizon-launcher instance list shows them"))
+        .ok_or_else(|| format!("No instance {q}: rusty-mc-launcher instance list shows them"))
 }
 
 /// Moves an instance's folder to the Trash (where the player can get it back, worlds and all)

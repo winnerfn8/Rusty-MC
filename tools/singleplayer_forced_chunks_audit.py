@@ -46,7 +46,7 @@ def run(bin_dir, resources, in_frame):
         for stage in range(3):
             # Every process gets fresh homes; copy only this fixture's saved world.
             env = lab.game_env({k: v for k, v in os.environ.items() if k not in (
-                'HORIZON_HOME', 'HORIZON_LAUNCHER_HOME', 'XDG_DATA_HOME', 'XDG_CONFIG_HOME')})
+                'HORIZON_HOME', 'RUSTY_MC_LAUNCHER_HOME', 'XDG_DATA_HOME', 'XDG_CONFIG_HOME')})
             home = Path(env['HORIZON_HOME'])
             if previous is not None:
                 shutil.copytree(previous, home / 'saves')

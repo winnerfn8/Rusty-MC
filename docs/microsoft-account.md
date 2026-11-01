@@ -72,7 +72,7 @@ Decided 2026-10-27 (Ludovic, after a modder's suggestion): like other launchers,
 launcher starts the game only while an account in it owns Java Edition. Offline play stays
 possible; the launcher just doesn't offer it on its own.
 
-- **Play needs an owner.** Every Play (Home, instances and packs, `horizon-launcher play`,
+- **Play needs an owner.** Every Play (Home, instances and packs, `rusty-mc-launcher play`,
   `modpack play`, the MCP's `play`) asks `account::launch` first. It asks the Minecraft services
   again for each account, the selected one first, until one owns the game: the token renewal
   (below) if due, then entitlements and profile. Without an owner the game doesn't start and Play
@@ -97,7 +97,7 @@ possible; the launcher just doesn't offer it on its own.
 
 Decided 2026-10-27. This is the only exception to "Rusty Minecraft never downloads the game", and it
 applies only on the player's machine, for an account the owner gate just asked about. The
-launcher's "Download and prepare" (`horizon-launcher prepare --download`) fetches the pinned
+launcher's "Download and prepare" (`rusty-mc-launcher prepare --download`) fetches the pinned
 version straight from Mojang (`launcher/src/mojang.rs`): the version file, the client jar,
 libraries, the asset index and the assets, each checked against the size and sha1 Mojang lists.
 They go to `minecraft/` in the launcher's data folder, and the preparation runs as usual. The
@@ -134,7 +134,7 @@ one is selected. "Sign out" deletes the account's secrets from the keychain.
 - No keychain available (a Linux box without a Secret Service, a locked keychain): sign-in still
   works for the session but nothing is saved, and the launcher says "No keychain available: you will
   have to sign in again next time" (it never falls back to a plain file).
-- Tokens never appear in logs, errors, `horizon-launcher` CLI output, MCP results or crash reports.
+- Tokens never appear in logs, errors, `rusty-mc-launcher` CLI output, MCP results or crash reports.
   Requests are logged by endpoint name only.
 
 ## Handing the session to the game

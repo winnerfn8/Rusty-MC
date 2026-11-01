@@ -3,8 +3,8 @@
 //! Horizon's violet) in Bricolage Grotesque, with Geist Mono for paths and codes (all bundled, SIL
 //! Open Font License). Screens not rebuilt yet draw the Blocks parts in the night's colours.
 use gpui::{rgb, Hsla, WindowAppearance};
-use horizon_launcher::backend::Appearance;
-use horizon_launcher::themes::Accent;
+use rusty_mc_launcher::backend::Appearance;
+use rusty_mc_launcher::themes::Accent;
 use horizon_theme as tokens;
 use std::time::Duration;
 
@@ -80,10 +80,10 @@ fn c(hex: u32) -> Hsla {
 }
 
 /// Whether the launcher is pinned dark (`Some(true)`) or light, or follows the system (`None`):
-/// `HORIZON_LAUNCHER_APPEARANCE=light` or `dark` (for screenshots and tests), else the player's
+/// `RUSTY_MC_LAUNCHER_APPEARANCE=light` or `dark` (for screenshots and tests), else the player's
 /// choice in Settings.
 pub fn pinned_dark(choice: Appearance) -> Option<bool> {
-    match std::env::var("HORIZON_LAUNCHER_APPEARANCE").as_deref() {
+    match std::env::var("RUSTY_MC_LAUNCHER_APPEARANCE").as_deref() {
         Ok("light") => Some(false),
         Ok("dark") => Some(true),
         _ => match choice {

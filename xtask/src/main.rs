@@ -24,12 +24,13 @@ use std::process::{Command, ExitCode};
 const USAGE: &str = "usage: cargo run -p xtask -- package BINARY OUTDIR | package-server ENGINE OUTDIR | tokens | icons";
 
 /// What the release folder takes from the repository at HEAD, as `git archive` writes it.
-const ARCHIVED: [&str; 5] = [
+const ARCHIVED: [&str; 6] = [
     "tools",
     "mods/horizon/src/test/java",
     "crates/horizon-prepare",
     "research-lock.json",
     "LICENSE",
+    "LICENSE-HORIZON-MIT",
 ];
 
 /// The programs that sit beside the client: horizon-ctl, the command line and MCP server that

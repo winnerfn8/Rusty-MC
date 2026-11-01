@@ -62,12 +62,12 @@ use gpui::{
     FontWeight, Hsla, KeyBinding, KeyDownEvent, Menu, MenuItem, MouseDownEvent, PathPromptOptions,
     Pixels, Point, SharedString, Stateful, Subscription, Window, WindowBounds, WindowOptions,
 };
-use horizon_launcher::account::{self, Accounts, SignIn, SignInState};
-use horizon_launcher::backend::{self, Job, Msg, Release, Running, Settings, Updates};
-use horizon_launcher::i18n::{self, tr, trf};
-use horizon_launcher::instances;
-use horizon_launcher::native_mods;
-use horizon_launcher::telemetry;
+use rusty_mc_launcher::account::{self, Accounts, SignIn, SignInState};
+use rusty_mc_launcher::backend::{self, Job, Msg, Release, Running, Settings, Updates};
+use rusty_mc_launcher::i18n::{self, tr, trf};
+use rusty_mc_launcher::instances;
+use rusty_mc_launcher::native_mods;
+use rusty_mc_launcher::telemetry;
 use scrollbar::Scrollbar;
 use std::borrow::Cow;
 use std::collections::VecDeque;
@@ -89,13 +89,13 @@ enum Page {
 }
 
 impl Page {
-    /// `HORIZON_LAUNCHER_PAGE=mods` (or `modpacks`, `resourcepacks`, `shaders`, `servers`, `versions`, `notes`,
+    /// `RUSTY_MC_LAUNCHER_PAGE=mods` (or `modpacks`, `resourcepacks`, `shaders`, `servers`, `versions`, `notes`,
     /// `settings`) opens on that page, for screenshots; Home otherwise (`getting-ready`: Home
     /// preparing, `home::getting_ready_preview`; `sign-in`: the owner gate's sheet with a
     /// made-up code, `owner_page::sign_in_preview`; `new-instance`: Home with the New instance
     /// dialog open on Modded; `edit-instance`: the selected one's Edit dialog; `worlds`, `packs`...: Home on that tab, `HomeTab::from_env`).
     fn from_env() -> Page {
-        match std::env::var("HORIZON_LAUNCHER_PAGE").as_deref() {
+        match std::env::var("RUSTY_MC_LAUNCHER_PAGE").as_deref() {
             Ok("mods" | "modpacks" | "resourcepacks" | "shaders" | "datapacks") => Page::Mods,
             Ok("servers") => Page::Servers,
             Ok("versions") => Page::Versions,
@@ -262,7 +262,7 @@ struct Launcher {
     /// The instance the running game plays and when it started: its play time grows on exit.
     client_run: Option<(String, Instant)>,
     /// The running game's instance variables, for its post-exit command.
-    client_vars: horizon_launcher::launch::Vars,
+    client_vars: rusty_mc_launcher::launch::Vars,
     /// Settings' Game arguments field: the line, whether it has focus, and its focus handle.
     args_input: line_edit::LineEdit,
     args_focused: bool,
@@ -297,13 +297,13 @@ struct Launcher {
     /// Settings' Java mods: the selected instance's jars and their translation (`java_mods.rs`).
     java_mods: java_mods::JavaMods,
     play_pressed: Option<Instant>,
-    /// `horizon-launcher benchmark` started this window to measure it.
+    /// `rusty-mc-launcher benchmark` started this window to measure it.
     bench: Option<perf::Bench>,
     /// The Modpacks page: the imported packs (read when the page first opens), the one shown,
     /// the report's filter, and the pipeline step running now with its log.
-    packs: Vec<horizon_launcher::modpacks::Imported>,
+    packs: Vec<rusty_mc_launcher::modpacks::Imported>,
     /// Modpacks installed from Horizon's registry, each its own profile.
-    registry_packs: Vec<horizon_launcher::browser::horizon::pack::Installed>,
+    registry_packs: Vec<rusty_mc_launcher::browser::horizon::pack::Installed>,
     packs_loaded: Option<Instant>,
     pack_open: Option<String>,
     pack_filter: Option<horizon_port_pack::report::Status>,
@@ -334,7 +334,7 @@ struct Launcher {
     /// The name the game made up for an offline player (`horizon-player.txt`), for the top bar.
     offline_name: Option<String>,
     /// The player's servers, for the sidebar until the Servers page has read them.
-    side_servers: Vec<horizon_launcher::servers::Entry>,
+    side_servers: Vec<rusty_mc_launcher::servers::Entry>,
     /// The pixel art made for this window (`art.rs`), and pictures downloaded by URL.
     sky: sky::Sky,
     /// When the sky next asks for a frame, and the timer that will draw it.
@@ -392,14 +392,14 @@ impl Launcher {
         }
         // Release builds on Linux put their entry back in the applications menu when there is
         // none or it starts a program that is gone (a moved or deleted binary), never over one
-        // that works; `HORIZON_LAUNCHER_DESKTOP_ENTRY=1` does it in a development build.
+        // that works; `RUSTY_MC_LAUNCHER_DESKTOP_ENTRY=1` does it in a development build.
         if cfg!(target_os = "linux")
             && settings.desktop_entry()
             && (!cfg!(debug_assertions)
-                || std::env::var_os("HORIZON_LAUNCHER_DESKTOP_ENTRY").is_some())
+                || std::env::var_os("RUSTY_MC_LAUNCHER_DESKTOP_ENTRY").is_some())
         {
             std::thread::spawn(|| {
-                let _ = horizon_launcher::desktop::repair(backend::exe_path());
+                let _ = rusty_mc_launcher::desktop::repair(backend::exe_path());
             });
         }
         let installed = backend::installed();
@@ -533,7 +533,7 @@ impl Launcher {
             aside: while_playing::Aside::new(window.window_handle()),
             shortcuts: Default::default(),
             offline_name: offline_name(),
-            side_servers: horizon_launcher::servers::list(),
+            side_servers: rusty_mc_launcher::servers::list(),
             sky: sky::Sky::default(),
             sky_wake: None,
             scale: window.scale_factor(),
@@ -563,12 +563,12 @@ impl Launcher {
             this.preparing = true;
             this.play_when_prepared = this.selected().cloned();
         }
-        // `HORIZON_LAUNCHER_PAGE=new-instance`: the dialog open on Modded, for screenshots.
-        if std::env::var("HORIZON_LAUNCHER_PAGE").as_deref() == Ok("new-instance") {
+        // `RUSTY_MC_LAUNCHER_PAGE=new-instance`: the dialog open on Modded, for screenshots.
+        if std::env::var("RUSTY_MC_LAUNCHER_PAGE").as_deref() == Ok("new-instance") {
             this.open_instance_dialog(None);
             this.pick_kind(new_instance::NewKind::Modded, cx);
         }
-        if std::env::var("HORIZON_LAUNCHER_PAGE").as_deref() == Ok("edit-instance") {
+        if std::env::var("RUSTY_MC_LAUNCHER_PAGE").as_deref() == Ok("edit-instance") {
             this.open_instance_dialog(this.selected_instance().cloned());
         }
         // What the game and the launcher kept, if the player allows it and there is a server.
@@ -679,7 +679,7 @@ impl Launcher {
                     .cloned()
             });
         let Some(base) = base else {
-            self.native_error = Some(tr("Install Rusty Minecraft first.").into());
+            self.native_error = Some(tr("Install Rusty MC first.").into());
             return;
         };
         let folder = match self.native_mods_to_build() {
@@ -820,7 +820,7 @@ impl Launcher {
                                     .find(|i| i.work == work)
                                     .map(|i| i.id);
                                 let applied =
-                                    horizon_launcher::modpacks::apply_profile(&mut cmd, &work);
+                                    rusty_mc_launcher::modpacks::apply_profile(&mut cmd, &work);
                                 (applied, id)
                             }
                             None => {
@@ -852,7 +852,7 @@ impl Launcher {
                             .unwrap_or_default();
                         cmd.envs(self.client_vars.iter().map(|(k, v)| (k, v)));
                         let launch = instance.map(|i| i.launch).unwrap_or_default();
-                        let cmd = horizon_launcher::launch::wrap(cmd, &launch);
+                        let cmd = rusty_mc_launcher::launch::wrap(cmd, &launch);
                         self.client_home = cmd.get_current_dir().map(|d| d.to_path_buf());
                         match backend::spawn(Job::Client, cmd, self.tx.clone()) {
                             Ok(r) => {
@@ -1021,7 +1021,7 @@ impl Launcher {
                                 }
                                 if let Some(i) = instances::list().into_iter().find(|i| i.id == id)
                                 {
-                                    horizon_launcher::launch::run_after_exit(
+                                    rusty_mc_launcher::launch::run_after_exit(
                                         &i.launch, &i.home, &vars,
                                     );
                                 }
@@ -1035,7 +1035,7 @@ impl Launcher {
                                 .and_then(|since| backend::crash_report_since(&home, since));
                             if error.is_some() && report.is_none() && self.switched_to_dx12() {
                                 self.client_error = Some(
-                                    "Rusty Minecraft's Vulkan renderer crashed while starting on this \
+                                    "Rusty MC's Vulkan renderer crashed while starting on this \
                                      graphics card, so the game now uses DirectX 12. Press Play \
                                      to start it again. Video Settings > Graphics API switches \
                                      back."
@@ -1118,7 +1118,7 @@ impl Launcher {
             match backend::switch_to_dx12(&home) {
                 Ok(changed) => switched |= changed,
                 Err(e) => {
-                    eprintln!("Rusty Minecraft launcher: could not switch to DirectX 12: {e}")
+                    eprintln!("Rusty MC launcher: could not switch to DirectX 12: {e}")
                 }
             }
         }
@@ -1185,7 +1185,7 @@ impl Launcher {
         let Some(tag) = self.selected().cloned() else {
             return;
         };
-        horizon_launcher::mojang::CANCEL.store(false, Ordering::Relaxed);
+        rusty_mc_launcher::mojang::CANCEL.store(false, Ordering::Relaxed);
         let minecraft = self
             .settings
             .minecraft_dir
@@ -1280,7 +1280,7 @@ impl Launcher {
             let cmd = backend::java_game(&instance, server.as_deref(), &log).map(|mut cmd| {
                 let vars = instance.vars(cmd.get_program());
                 cmd.envs(vars.iter().map(|(k, v)| (k, v)));
-                (horizon_launcher::launch::wrap(cmd, &instance.launch), vars)
+                (rusty_mc_launcher::launch::wrap(cmd, &instance.launch), vars)
             });
             let _ = tx.send(Msg::JavaGame(instance.id, instance.home, cmd));
         });
@@ -1472,7 +1472,7 @@ fn version_tag(tag: &str) -> Div {
         .line_height(px(28.))
         .font_weight(FontWeight::MEDIUM)
         .child(
-            horizon_launcher::nightly::label(tag)
+            rusty_mc_launcher::nightly::label(tag)
                 .unwrap_or_else(|| tag.trim_start_matches('v').to_string()),
         )
 }
@@ -1593,10 +1593,10 @@ fn button(
     keyboard(track_hover(base, id), &t).active(|s| s.opacity(theme::PRESSED).top(px(1.)))
 }
 
-/// Copies to the clipboard, or into `HORIZON_LAUNCHER_CLIPBOARD` when a test run sets it
-/// (`horizon_launcher::desktop_seams`).
+/// Copies to the clipboard, or into `RUSTY_MC_LAUNCHER_CLIPBOARD` when a test run sets it
+/// (`rusty_mc_launcher::desktop_seams`).
 fn copy_to_clipboard(cx: &mut App, item: gpui::ClipboardItem) {
-    if let Some(file) = horizon_launcher::desktop_seams::clipboard_file() {
+    if let Some(file) = rusty_mc_launcher::desktop_seams::clipboard_file() {
         let bytes = match item.entries().first() {
             Some(gpui::ClipboardEntry::Image(image)) => image.bytes.clone(),
             _ => item.text().unwrap_or_default().into_bytes(),
@@ -2296,7 +2296,7 @@ impl Launcher {
                 .child(
                     shell::text(theme::night::TITLE, shell::c(n.ink))
                         .font_family(theme::DISPLAY_FONT)
-                        .child("Rusty Minecraft"),
+                        .child("Rusty MC"),
                 )
         });
         shell::sidebar_plate(&t)
@@ -2325,7 +2325,7 @@ impl Launcher {
         // "Nightly · ba6344a", a release's tag: the menu lists the full tags.
         let label = self.selected().map_or_else(
             || "No version".into(),
-            |tag| horizon_launcher::nightly::label(tag).unwrap_or_else(|| tag.clone()),
+            |tag| rusty_mc_launcher::nightly::label(tag).unwrap_or_else(|| tag.clone()),
         );
         // As tall as Play: "Version" over the tag, and a chevron.
         let n = t.night;
@@ -2511,7 +2511,7 @@ impl Launcher {
                 &[("version", &version)],
             ),
             Some(true) => trf(
-                "Not prepared. Rusty Minecraft can download Minecraft {version} from Mojang for your account, or use your own install.",
+                "Not prepared. Rusty MC can download Minecraft {version} from Mojang for your account, or use your own install.",
                 &[("version", &version)],
             ),
             Some(false) => trf(
@@ -2587,7 +2587,7 @@ impl Launcher {
             || {
                 div()
                     .child(if owner {
-                        tr("None needed: Rusty Minecraft downloads Minecraft from Mojang for your account.")
+                        tr("None needed: Rusty MC downloads Minecraft from Mojang for your account.")
                     } else {
                         tr("Not found. Choose the folder where your launcher keeps Minecraft.")
                     })
@@ -2837,7 +2837,7 @@ impl Launcher {
             .child(
                 text(theme::HEADING)
                     .text_color(t.ink)
-                    .child(tr("Rusty Minecraft crashed")),
+                    .child(tr("Rusty MC crashed")),
             );
         if !crash.summary.is_empty() {
             body = body.child(div().text_color(t.ink_soft).child(crash.summary));
@@ -2900,16 +2900,16 @@ impl Launcher {
                 cx.notify();
             },
         ));
-        // Linux: the launcher's entry in the applications menu (`horizon_launcher::desktop`).
+        // Linux: the launcher's entry in the applications menu (`rusty_mc_launcher::desktop`).
         let menu_entry = switch("desktop-entry", self.settings.desktop_entry(), &t).on_click(
             cx.listener(|this, _: &ClickEvent, _, cx| {
                 let on = !this.settings.desktop_entry();
                 this.settings.desktop_entry = Some(on);
                 this.settings.save();
                 let _ = if on {
-                    horizon_launcher::desktop::install(backend::exe_path()).map(|_| ())
+                    rusty_mc_launcher::desktop::install(backend::exe_path()).map(|_| ())
                 } else {
-                    horizon_launcher::desktop::remove()
+                    rusty_mc_launcher::desktop::remove()
                 };
                 cx.notify();
             }),
@@ -3084,7 +3084,7 @@ impl Launcher {
                     .child(group("AI", "terminal"))
                     .child(self.no_ai_row(n + 6, cx))
                     .child(group("About", "info-box"))
-                    .child(index_row(n + 7, "Rusty Minecraft", Some(plain(&horizon)), horizon_action, &t))
+                    .child(index_row(n + 7, "Rusty MC", Some(plain(&horizon)), horizon_action, &t))
                     .child(index_row(
                         n + 8,
                         tr("Launcher"),
@@ -3123,7 +3123,7 @@ impl Launcher {
                             n + 11,
                             tr("Applications menu"),
                             Some(plain(if self.settings.desktop_entry() {
-                                "Rusty Minecraft and its icon are in your desktop's menu."
+                                "Rusty MC and its icon are in your desktop's menu."
                             } else {
                                 "Not in your desktop's menu."
                             })),
@@ -3257,7 +3257,7 @@ impl Launcher {
             .mt(px(8.))
             .p(px(12.))
             .bg(t.well)
-            .child(div().text_color(t.danger).child(tr("These mods were made for different Rusty Minecraft versions").to_string()))
+            .child(div().text_color(t.danger).child(tr("These mods were made for different Rusty MC versions").to_string()))
             .child(list.to_owned())
             .child(tr("They often still work together. If the build fails, install versions made for the same Nightly.").to_string())
             .child(
@@ -3387,7 +3387,7 @@ impl Launcher {
         // A half-typed address is no reason to complain; one left behind is.
         let detail = match (
             focused,
-            horizon_launcher::proxy::refuse(self.proxy_input.text()),
+            rusty_mc_launcher::proxy::refuse(self.proxy_input.text()),
         ) {
             (false, Some(why)) => div().text_color(t.danger).child(why).into_any_element(),
             _ => div()
@@ -3407,7 +3407,7 @@ impl Launcher {
         let value = self.proxy_input.text().trim().to_owned();
         self.settings.proxy = (!value.is_empty()).then_some(value);
         self.settings.save();
-        horizon_launcher::proxy::announce(self.settings.proxy.clone());
+        rusty_mc_launcher::proxy::announce(self.settings.proxy.clone());
     }
 
     /// Settings' Microsoft accounts: who is signed in and plays, the sign-in with its code. The
@@ -3503,7 +3503,7 @@ impl Launcher {
             Some(SignInState::Done(Ok(a))) => div().child(format!("Signed in as {}.", a.name)),
             Some(SignInState::Done(Err(e))) => div().text_color(t.danger).child(e.clone()),
             None if self.accounts.accounts.is_empty() => div().child(tr(
-                "Rusty Minecraft needs a Microsoft account that owns Minecraft: Java Edition, like other launchers. It also plays online servers with your name and skin.",
+                "Rusty MC needs a Microsoft account that owns Minecraft: Java Edition, like other launchers. It also plays online servers with your name and skin.",
             )),
             None => div().child(tr("Add another account.")),
         };
@@ -3866,7 +3866,7 @@ impl Launcher {
                                 .child("Support the work below"),
                         )
                         .child(text(theme::UI).text_color(t.muted).child(
-                            "Rusty Minecraft is built in the open. Sponsors fund the next release.",
+                            "Rusty MC is built in the open. Sponsors fund the next release.",
                         )),
                 )
                 .child(
@@ -4251,7 +4251,7 @@ impl Launcher {
         (reveal, held.as_secs_f32())
     }
 
-    /// `horizon-launcher benchmark`: scroll the page a little on every frame, back to the top at
+    /// `rusty-mc-launcher benchmark`: scroll the page a little on every frame, back to the top at
     /// the bottom, so the frame times measure scrolling.
     fn bench_scroll(&mut self, window: &mut Window) {
         let handle = &self.content_scroll.handle;
@@ -4287,7 +4287,7 @@ impl Launcher {
     }
 }
 
-actions!(horizon_launcher, [Quit, CloseWindow]);
+actions!(rusty_mc_launcher, [Quit, CloseWindow]);
 
 /// What closing the last window does: stop the servers this launcher started, send the telemetry,
 /// exit. A game that is running keeps running. Cmd+Q goes through here too.
@@ -4315,8 +4315,8 @@ fn key_bindings() -> Vec<KeyBinding> {
 fn menus() -> Vec<Menu> {
     vec![
         Menu {
-            name: "Rusty Minecraft Launcher".into(),
-            items: vec![MenuItem::action("Quit Rusty Minecraft Launcher", Quit)],
+            name: "Rusty MC Launcher".into(),
+            items: vec![MenuItem::action("Quit Rusty MC Launcher", Quit)],
         },
         Menu {
             name: "Window".into(),
@@ -4334,7 +4334,7 @@ fn main() {
     backend::exe_path();
     // What the launcher downloads goes through the player's proxy, if they set one: the parts
     // that build their own agents (`horizon-port-pack`) are told before anything starts.
-    horizon_launcher::proxy::announce(horizon_launcher::backend::Settings::load().proxy);
+    rusty_mc_launcher::proxy::announce(rusty_mc_launcher::backend::Settings::load().proxy);
     if let Some(code) = cli::run() {
         std::process::exit(code);
     }
@@ -4371,7 +4371,7 @@ fn main() {
                     titlebar: Some(titlebar::options()),
                     #[cfg(target_os = "linux")]
                     window_decorations: Some(gpui::WindowDecorations::Client),
-                    app_id: Some("horizon-launcher".into()),
+                    app_id: Some("rusty-mc-launcher".into()),
                     ..Default::default()
                 },
                 |window, cx| cx.new(|cx| Launcher::new(window, cx)),
@@ -4491,10 +4491,10 @@ mod tests {
     #[test]
     fn the_app_menu_has_quit() {
         let menus = super::menus();
-        assert_eq!(menus[0].name, "Rusty Minecraft Launcher");
+        assert_eq!(menus[0].name, "Rusty MC Launcher");
         assert!(matches!(
             &menus[0].items[0],
-            gpui::MenuItem::Action { name, .. } if name == "Quit Rusty Minecraft Launcher"
+            gpui::MenuItem::Action { name, .. } if name == "Quit Rusty MC Launcher"
         ));
     }
 

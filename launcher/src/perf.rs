@@ -4,7 +4,7 @@
 //! `benchmarks/` of the launcher's data folder, a local log the player can attach to an issue;
 //! nothing leaves the machine (an upload needs the telemetry consent).
 //!
-//! `horizon-launcher benchmark` measures the same things on purpose: several starts (the first is
+//! `rusty-mc-launcher benchmark` measures the same things on purpose: several starts (the first is
 //! the cold one), page switching, repeated release list fetches, idle CPU.
 
 use std::collections::BTreeMap;
@@ -23,7 +23,7 @@ pub fn process_started() -> Instant {
 
 /// Frames further apart than this are the UI resting, not UI frame times.
 const IDLE_GAP: Duration = Duration::from_millis(250);
-pub use horizon_launcher::backend::GAME_FIRST_FRAME;
+pub use rusty_mc_launcher::backend::GAME_FIRST_FRAME;
 
 pub struct Perf {
     report: Report,
@@ -34,7 +34,7 @@ pub struct Perf {
     ui_frames: Vec<f32>,
     saved: Instant,
     dirty: bool,
-    /// Off for the windows `horizon-launcher benchmark` starts: they report to it instead.
+    /// Off for the windows `rusty-mc-launcher benchmark` starts: they report to it instead.
     log: bool,
     /// Machine probes run after the first frame, never while opening the window.
     hardware: Option<Receiver<Machine>>,
@@ -199,7 +199,7 @@ impl Drop for Perf {
     }
 }
 
-/// What a window started by `horizon-launcher benchmark` does next (`Launcher::drain`, every 80 ms).
+/// What a window started by `rusty-mc-launcher benchmark` does next (`Launcher::drain`, every 80 ms).
 pub enum Step {
     Wait,
     /// Show this page (an index into `Page::ALL`, wrapping).
@@ -213,7 +213,7 @@ const SWITCHING: Duration = Duration::from_secs(4);
 const SCROLLING: Duration = Duration::from_secs(3);
 const IDLE: Duration = Duration::from_secs(3);
 /// The environment variable that makes a launcher window measure itself into the file it names.
-const BENCH_ENV: &str = "HORIZON_LAUNCHER_BENCH";
+const BENCH_ENV: &str = "RUSTY_MC_LAUNCHER_BENCH";
 
 /// A launcher window measuring itself: after its first frame it switches pages every tick for
 /// a few seconds (each switch animates, so the UI draws continuously), scrolls the longest list
@@ -305,7 +305,7 @@ impl Bench {
     }
 }
 
-/// `horizon-launcher benchmark`: starts the launcher `repeats` times (the first start is the cold
+/// `rusty-mc-launcher benchmark`: starts the launcher `repeats` times (the first start is the cold
 /// one), each switching pages then resting, times the release list fetch, and writes one report.
 pub fn benchmark(repeats: usize) -> Result<PathBuf, String> {
     let exe = std::env::current_exe().map_err(|e| e.to_string())?;
@@ -316,7 +316,7 @@ pub fn benchmark(repeats: usize) -> Result<PathBuf, String> {
     report.conditions.load_avg_1m = horizon_bench::load_average();
     let (mut starts, mut rss, mut cpu) = (Vec::new(), Vec::new(), Vec::new());
     let scratch =
-        std::env::temp_dir().join(format!("horizon-launcher-bench-{}", std::process::id()));
+        std::env::temp_dir().join(format!("rusty-mc-launcher-bench-{}", std::process::id()));
     for repeat in 0..repeats {
         let _ = std::fs::remove_file(&scratch);
         let spawned = std::time::SystemTime::now();
@@ -417,7 +417,7 @@ pub fn benchmark(repeats: usize) -> Result<PathBuf, String> {
 
 fn app() -> App {
     App {
-        name: "horizon-launcher".into(),
+        name: "rusty-mc-launcher".into(),
         version: crate::backend::VERSION.into(),
         ..App::default()
     }

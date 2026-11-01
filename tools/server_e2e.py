@@ -177,9 +177,9 @@ def run(bins, out, checks):
     server = Server(['java', '-Xmx2g', f'-Dlog4j.configurationFile={work / "log4j2.xml"}', '-cp', classpath,
                      'net.minecraft.server.Main', 'nogui'], directory, 'vanilla')
     game = Game('client', bins / 'horizon-ctl', lab.RESOURCES.resolve())
-    for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'HORIZON_LAUNCHER_HOME'):
+    for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'RUSTY_MC_LAUNCHER_HOME'):
         game.d.env[key] = str(game.work / key.lower())
-    game.d.env['HORIZON_LAUNCHER_NO_SELF_UPDATE'] = '1'
+    game.d.env['RUSTY_MC_LAUNCHER_NO_SELF_UPDATE'] = '1'
     results = {}
     try:
         server.wait_for(r'Done \(')

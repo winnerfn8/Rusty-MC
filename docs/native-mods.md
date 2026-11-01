@@ -154,7 +154,7 @@ In the window: install a native mod from the Mods page. The first one shows a no
 Rust and can take 20 to 30 minutes; later builds are faster) and turns on Settings → Game → **Native mods
 (experimental)**, which stays off for players who never install one; `mods install` does the same. Then **Build**. The launcher names the mods, warns in red, and builds only from "I trust these mods: build"; the
 row shows each step, the error if one fails, and the build the instance plays. From the command line:
-`horizon-launcher native-build [FOLDER] [--instance NAME] --trust-native-code`. FOLDER is a bundle, an unpacked
+`rusty-mc-launcher native-build [FOLDER] [--instance NAME] --trust-native-code`. FOLDER is a bundle, an unpacked
 `.hnmod`, or a folder of them; without it, the native mods turned on in the instance. It is not an MCP tool:
 trusting native code is the player's decision, never an agent's.
 
@@ -174,7 +174,7 @@ trusting native code is the player's decision, never an agent's.
    `/etc/os-release` (Debian, Ubuntu and Mint:
    `sudo apt install build-essential pkg-config libasound2-dev libudev-dev`). SteamOS has GCC without the C
    library's headers, and a read-only system: native builds don't work there yet.
-   `horizon-launcher rust status|install|remove`.
+   `rusty-mc-launcher rust status|install|remove`.
 2. **horizon-mixins**, at the commit the mods name (their `.hnmod`'s `mixins`), else `native_mods::MIXINS_REV`,
    built once with that cargo (`cargo install --locked --git … --rev …`) into `native/tools/<commit>/`.
 3. **The source** of the pinned commit: GitHub's archive of it, once per commit (`native/source/<commit>/`, about
@@ -198,7 +198,7 @@ trusting native code is the player's decision, never an agent's.
 ## Install from GitHub
 
 An author can ship a native mod without a registry pull request per version: the player installs it from a
-GitHub link, on the Mods page ("Add from GitHub") or with `horizon-launcher mods add-github <url>
+GitHub link, on the Mods page ("Add from GitHub") or with `rusty-mc-launcher mods add-github <url>
 [--mod ID | --all] [--instance NAME] --trust-native-code`. The link is `https://github.com/<owner>/<repo>`
 (its latest release), `.../releases/tag/<tag>`, `.../tree/<ref>` or `.../commit/<sha>`.
 
@@ -221,7 +221,7 @@ GitHub link, on the Mods page ("Add from GitHub") or with `horizon-launcher mods
 - **Origin kept.** `horizon-native-mods/<id>.origin.json` beside the `.hnmod`: owner/repo, release tag (for a
   release), commit, asset name and the SHA-256 of the installed file. `mods list` shows "from GitHub: owner/repo @
   tag" (or the commit's first 7 digits).
-- **Updates.** `horizon-launcher mods update-github [ID] [--check]` compares a mod from a release with the
+- **Updates.** `rusty-mc-launcher mods update-github [ID] [--check]` compares a mod from a release with the
   repository's latest release, and a mod from a commit with the head of the default branch; a newer one is
   installed with the same warning and `--trust-native-code`. `mods remove <id>` removes it. A mod already
   installed from the registry (or by hand) is never replaced.

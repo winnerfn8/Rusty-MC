@@ -2,7 +2,7 @@
 //! (docs/agent-control.md): the selected version's `horizon-ctl mcp` runs as a child, its tools
 //! are offered as `game_<name>`, and calls go to it unchanged. `play` starts the game
 //! with the control socket that child talks to.
-use horizon_launcher::backend;
+use rusty_mc_launcher::backend;
 use serde_json::{json, Value};
 use std::io::{BufRead, BufReader, Write};
 use std::path::PathBuf;
@@ -61,7 +61,7 @@ impl GameTools {
         if !ctl.exists() {
             return Err(format!("{tag} has no {CTL}"));
         }
-        let mut child = horizon_launcher::process::command(&ctl)
+        let mut child = rusty_mc_launcher::process::command(&ctl)
             .arg("--socket")
             .arg(socket_path())
             .arg("mcp")
@@ -82,7 +82,7 @@ impl GameTools {
         tools.rpc(
             "initialize",
             json!({ "protocolVersion": crate::mcp::PROTOCOL, "capabilities": {},
-                    "clientInfo": { "name": "horizon-launcher", "version": backend::VERSION } }),
+                    "clientInfo": { "name": "rusty-mc-launcher", "version": backend::VERSION } }),
         )?;
         tools.send(&json!({ "jsonrpc": "2.0", "method": "notifications/initialized" }))?;
         let listed = tools.rpc("tools/list", json!({}))?;

@@ -1,5 +1,12 @@
 # Third-party notices
 
+## Horizon
+
+Rusty Minecraft is a fork of [Horizon](https://github.com/horizon-rust/horizon) by Ludovic Marie and the
+Horizon contributors, which is licensed under the MIT license (`LICENSE-HORIZON-MIT`). Nearly all of the game,
+the launcher and the tools come from it. That notice has to stay with every copy of the parts that come from
+Horizon. The [Rusty Minecraft License](LICENSE) covers only what this fork added.
+
 ## wgpu-hal
 
 `third_party/wgpu-hal` is [wgpu-hal](https://github.com/gfx-rs/wgpu) 30.0.1 by the gfx-rs

@@ -1,9 +1,9 @@
-//! The selected instance's resource packs and shader packs on Home (`horizon_launcher::packs`):
+//! The selected instance's resource packs and shader packs on Home (`rusty_mc_launcher::packs`):
 //! each turned on or off with one click, Remove (to the trash, after a confirmation), and
 //! Add (a file picker) or a .zip or .hshader dropped anywhere on the section.
 use super::*;
 use gpui::{ExternalPaths, Image, ImageFormat};
-use horizon_launcher::packs::{self, Kind as PackKind, Pack};
+use rusty_mc_launcher::packs::{self, Kind as PackKind, Pack};
 use std::path::PathBuf;
 use std::sync::Arc;
 

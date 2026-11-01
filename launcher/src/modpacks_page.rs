@@ -1,8 +1,8 @@
 //! Imported modpacks, on the Mods page's Modpacks tab: import a pack, read its coverage report,
-//! port what this computer can and play it as its own profile (`horizon_launcher::modpacks`).
+//! port what this computer can and play it as its own profile (`rusty_mc_launcher::modpacks`).
 use super::*;
-use horizon_launcher::browser::horizon::pack as horizon_pack;
-use horizon_launcher::modpacks::{self, Imported};
+use rusty_mc_launcher::browser::horizon::pack as horizon_pack;
+use rusty_mc_launcher::modpacks::{self, Imported};
 use horizon_port_pack::report::Status;
 use std::path::PathBuf;
 
@@ -171,7 +171,7 @@ impl Launcher {
             .child(pick("import-folder", "Import an instance folder…", true))
             .child(text(theme::CAPTION).w_full().text_color(t.muted).child(
                 ".mrpack (Modrinth), .zip (CurseForge), or a Prism, MultiMC or CurseForge instance. \
-                 Rusty Minecraft ports what it can on this computer, from your own downloads, and plays \
+                 Rusty MC ports what it can on this computer, from your own downloads, and plays \
                  the pack as its own profile. Nothing is uploaded or shared.",
             ));
         let mut page = div()
@@ -283,7 +283,7 @@ impl Launcher {
                     )),
                 );
             let detail = format!(
-                "{} from Rusty Minecraft's registry, its own profile: {}",
+                "{} from Rusty MC's registry, its own profile: {}",
                 p.version,
                 p.mods.join(", ")
             );
@@ -449,7 +449,7 @@ impl Launcher {
             notes.push(format!("Left off: {line}."));
         }
         if !can_play {
-            notes.push("Playing needs a prepared Rusty Minecraft version (Play page).".into());
+            notes.push("Playing needs a prepared Rusty MC version (Play page).".into());
         }
         let mut rows: Vec<&horizon_port_pack::report::Row> = p
             .rows

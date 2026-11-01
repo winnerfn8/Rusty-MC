@@ -62,8 +62,8 @@ def block(lists: list[dict]) -> str:
     parts = "; ".join(f"{l['area']} [{l['open']}](https://github.com/{REPO}/issues/{l['number']})"
                       for l in sorted(lists, key=lambda l: -l["open"]))
     return (f"**Player-visible gaps: {still} open** of the {total} the [port ledger](tools/port_ledger.py) found, "
-            "reading every vanilla 26.3 method against Horizon's code: vanilla behaviour a player would notice that "
-            f"Horizon doesn't have yet. By area: {parts}. This number goes down as gaps close "
+            "reading every vanilla 26.3 method against Rusty MC's code: vanilla behaviour a player would notice that "
+            f"Rusty MC doesn't have yet. By area: {parts}. This number goes down as gaps close "
             "(`tools/parity_gaps.py`); the harness results below say that what is tested matches.")
 
 

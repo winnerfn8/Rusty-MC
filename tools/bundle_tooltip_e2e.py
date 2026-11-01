@@ -48,7 +48,7 @@ def main():
     output.mkdir(parents=True, exist_ok=True)
     output = output.resolve()
     homes = {}
-    for key in ("HORIZON_HOME", "HORIZON_LAUNCHER_HOME", "XDG_DATA_HOME", "XDG_CONFIG_HOME"):
+    for key in ("HORIZON_HOME", "RUSTY_MC_LAUNCHER_HOME", "XDG_DATA_HOME", "XDG_CONFIG_HOME"):
         directory = output / key
         directory.mkdir(exist_ok=True)
         homes[key] = directory

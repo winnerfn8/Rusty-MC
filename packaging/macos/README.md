@@ -2,16 +2,16 @@
 
 `package.sh BINARY VERSION OUTDIR` (run by `.github/workflows/launcher.yml` on macOS) makes:
 
-- `Horizon.app`: `Contents/MacOS/horizon-launcher`, `Contents/Info.plist` (this folder's, bundle
+- `Horizon.app`: `Contents/MacOS/rusty-mc-launcher`, `Contents/Info.plist` (this folder's, bundle
   id `dev.horizon.launcher`, macOS 11 or later), `Contents/Resources/horizon.icns`
   (`packaging/icons`, from `cargo run -p xtask -- icons`).
-- `horizon-launcher-macos-arm64.dmg`: the installer. Opening it shows the app and a link to
+- `rusty-mc-launcher-macos-arm64.dmg`: the installer. Opening it shows the app and a link to
   Applications over `background.png` / `background@2x.png` (drawn from `background.html`); the
   player drags one onto the other. Built by [dmgbuild](https://github.com/dmgbuild/dmgbuild),
   which writes the Finder layout without a GUI session.
-- `horizon-launcher-macos-arm64.zip`: the same app, zipped with `ditto`. The launcher updates
+- `rusty-mc-launcher-macos-arm64.zip`: the same app, zipped with `ditto`. The launcher updates
   itself from this: inside Horizon.app it replaces the whole bundle (copied beside it, then
-  swapped in by renaming, then restarted); a bare `horizon-launcher` binary, as launchers before
+  swapped in by renaming, then restarted); a bare `rusty-mc-launcher` binary, as launchers before
   the app shipped, finds the binary inside the zip and replaces only itself.
 
 ## Signing and notarization
@@ -70,7 +70,7 @@ Signing by hand, as the workflow does:
 export MACOS_SIGN_IDENTITY="Developer ID Application: Ludovic Marie (YYJU63HSD4)"
 export MACOS_SIGN_KEYCHAIN=~/Library/Keychains/horizon-signing.keychain-db MACOS_NOTARY_PROFILE=horizon-notary
 packaging/macos/keychain.sh unlock
-packaging/macos/package.sh target/release/horizon-launcher 0.0.0 out
+packaging/macos/package.sh target/release/rusty-mc-launcher 0.0.0 out
 packaging/macos/keychain.sh lock
 ```
 

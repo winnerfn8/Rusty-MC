@@ -1,8 +1,8 @@
 //! Who plays: the top bar's quick switch (a menu under the account chip) and Settings' offline
-//! names (`horizon_launcher::account::Accounts::offline`).
+//! names (`rusty_mc_launcher::account::Accounts::offline`).
 use super::servers_page::Field;
 use super::*;
-use horizon_launcher::account::Player;
+use rusty_mc_launcher::account::Player;
 
 impl Launcher {
     /// The chip's two lines: the name that plays, and how.
@@ -191,7 +191,7 @@ impl Launcher {
                     cx.listener(move |this, _: &ClickEvent, _, cx| {
                         let mut accounts = Accounts::load();
                         if accounts
-                            .remove_offline(&forget, &horizon_launcher::skins::dir())
+                            .remove_offline(&forget, &rusty_mc_launcher::skins::dir())
                             .is_ok()
                             && accounts.save().is_ok()
                         {

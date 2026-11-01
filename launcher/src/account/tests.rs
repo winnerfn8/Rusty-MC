@@ -754,7 +754,7 @@ fn credential_manager_error_8_says_the_store_is_full() {
 
 #[test]
 fn session_files_are_private_and_complete() {
-    let dir = std::env::temp_dir().join(format!("horizon-launcher-session-{}", std::process::id()));
+    let dir = std::env::temp_dir().join(format!("rusty-mc-launcher-session-{}", std::process::id()));
     let account = Account {
         uuid: UUID.into(),
         name: "Notch".into(),

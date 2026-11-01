@@ -28,7 +28,7 @@ def run(mode, bins, resources):
  with tempfile.TemporaryDirectory(prefix='vehicle-proof-') as tmp:
   work=Path(tmp); previous=None
   for stage in range(3):
-   env=lab.game_env({k:v for k,v in os.environ.items() if k not in ('HORIZON_HOME','HORIZON_LAUNCHER_HOME','XDG_DATA_HOME','XDG_CONFIG_HOME')})
+   env=lab.game_env({k:v for k,v in os.environ.items() if k not in ('HORIZON_HOME','RUSTY_MC_LAUNCHER_HOME','XDG_DATA_HOME','XDG_CONFIG_HOME')})
    home=Path(env['HORIZON_HOME'])
    if previous:shutil.copytree(previous,home/'saves')
    sock=work/f'{stage}.sock';cli=Cli(bins/'horizon-ctl',sock,home,env)

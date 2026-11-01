@@ -1,9 +1,9 @@
-//! Instances in the window (`horizon_launcher::instances`): the sidebar's list, by group, and the
+//! Instances in the window (`rusty_mc_launcher::instances`): the sidebar's list, by group, and the
 //! dialog that makes one (empty, or a copy of the selected one) or changes its name, group and
 //! icon.
 use super::*;
 use gpui::RenderImage;
-use horizon_launcher::instances::{self, Icon, Instance, Kind as InstanceKind};
+use rusty_mc_launcher::instances::{self, Icon, Instance, Kind as InstanceKind};
 use servers_page::Field;
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -218,7 +218,7 @@ impl Launcher {
                         summary.map_or_else(|| tr("Modpack").into(), |p| p.summary()),
                     )
                 }
-                InstanceKind::Pack => (false, tr("From Rusty Minecraft's registry").into()),
+                InstanceKind::Pack => (false, tr("From Rusty MC's registry").into()),
             };
             // Java instances have nothing of Horizon's to prepare: no state square.
             let state = (matches!(i.kind, InstanceKind::Default | InstanceKind::Own)
@@ -339,7 +339,7 @@ impl Launcher {
                 instances::set_picture(
                     &instance.home,
                     png.as_deref(),
-                    &horizon_launcher::desktop_seams::to_trash,
+                    &rusty_mc_launcher::desktop_seams::to_trash,
                 )?;
             }
             Ok(instance)
@@ -389,7 +389,7 @@ impl Launcher {
         let n = t.night;
         let from = self
             .selected_instance()
-            .map_or_else(|| "Rusty Minecraft".into(), |i| i.name.clone());
+            .map_or_else(|| "Rusty MC".into(), |i| i.name.clone());
         let row = |label: &'static str, control: AnyElement| {
             div()
                 .flex()

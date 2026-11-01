@@ -97,9 +97,9 @@ def run(bins, level, out):
     command = [bins / f'horizon-client{EXE}', '--resources', lab.RESOURCES, '--dedicated', '--nogui']
     server = Server(command, folder, out / f'server-{level}.log')
     game = Game(f'opal{level}', bins / 'horizon-ctl', lab.RESOURCES.resolve())
-    for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'HORIZON_LAUNCHER_HOME'):
+    for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'RUSTY_MC_LAUNCHER_HOME'):
         game.d.env[key] = str(game.work / key.lower())
-    game.d.env['HORIZON_LAUNCHER_NO_SELF_UPDATE'] = '1'
+    game.d.env['RUSTY_MC_LAUNCHER_NO_SELF_UPDATE'] = '1'
     bots = []
     failed = []
     try:

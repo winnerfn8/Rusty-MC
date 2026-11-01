@@ -58,20 +58,20 @@ def sets_audio_by_hand(tree):
 class GameEnvTests(unittest.TestCase):
     def test_gives_every_game_scratch_folders(self):
         with mock.patch.dict(os.environ, {}, clear=False):
-            for key in ("HORIZON_HOME", "HORIZON_LAUNCHER_HOME", "XDG_DATA_HOME", "XDG_CONFIG_HOME"):
+            for key in ("HORIZON_HOME", "RUSTY_MC_LAUNCHER_HOME", "XDG_DATA_HOME", "XDG_CONFIG_HOME"):
                 os.environ.pop(key, None)
             first, second = lab.game_env(), lab.game_env()
         self.assertEqual(first["HORIZON_NO_AUDIO"], "1")
-        self.assertEqual(first["HORIZON_LAUNCHER_NO_SELF_UPDATE"], "1")
-        for key in ("HORIZON_HOME", "HORIZON_LAUNCHER_HOME", "XDG_DATA_HOME", "XDG_CONFIG_HOME"):
+        self.assertEqual(first["RUSTY_MC_LAUNCHER_NO_SELF_UPDATE"], "1")
+        for key in ("HORIZON_HOME", "RUSTY_MC_LAUNCHER_HOME", "XDG_DATA_HOME", "XDG_CONFIG_HOME"):
             self.assertTrue(Path(first[key]).is_dir(), key)
             self.assertNotEqual(first[key], second[key], key)
 
     def test_keeps_the_callers_folders(self):
         with tempfile.TemporaryDirectory() as temp:
-            env = lab.game_env({"PATH": "x", "HORIZON_HOME": "/from/base"}, HORIZON_LAUNCHER_HOME=Path(temp), A=1)
+            env = lab.game_env({"PATH": "x", "HORIZON_HOME": "/from/base"}, RUSTY_MC_LAUNCHER_HOME=Path(temp), A=1)
         self.assertEqual(env["HORIZON_HOME"], "/from/base")
-        self.assertEqual(env["HORIZON_LAUNCHER_HOME"], temp)
+        self.assertEqual(env["RUSTY_MC_LAUNCHER_HOME"], temp)
         self.assertEqual((env["PATH"], env["A"]), ("x", "1"))
 
     def test_does_not_touch_the_process_environment(self):

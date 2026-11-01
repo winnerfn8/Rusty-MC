@@ -190,12 +190,12 @@ pub fn game_files_ready() -> bool {
 pub fn can_host(tag: &str) -> Result<(), String> {
     if !backend::version_dir(tag).join(PROGRAM).is_file() {
         return Err(format!(
-            "Rusty Minecraft {tag} has no server program. Install a newer version on the Versions page."
+            "Rusty MC {tag} has no server program. Install a newer version on the Versions page."
         ));
     }
     if !backend::is_prepared(tag) {
         return Err(format!(
-            "Rusty Minecraft {tag} isn't prepared yet: press Prepare on the Play page (it uses your own Minecraft {})",
+            "Rusty MC {tag} isn't prepared yet: press Prepare on the Play page (it uses your own Minecraft {})",
             backend::game_version(tag)
         ));
     }
@@ -639,11 +639,11 @@ pub fn create(spec: &NewServer, tag: Option<&str>, log: &dyn Fn(String)) -> Resu
     if program().is_none() || !game_files_ready() {
         let tag = tag.ok_or_else(|| {
             Problem::plain(
-                "Install a Rusty Minecraft version first (Versions page), then prepare it.",
+                "Install a Rusty MC version first (Versions page), then prepare it.",
             )
         })?;
         log(format!(
-            "Setting up the server programs from Rusty Minecraft {tag}"
+            "Setting up the server programs from Rusty MC {tag}"
         ));
         set_up(tag).map_err(|e| {
             if e.contains("prepared") {

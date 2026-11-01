@@ -2,7 +2,7 @@
 name = "horizon-relay"
 version = "0.1.0"
 edition.workspace = true
-license.workspace = true
+license-file.workspace = true
 rust-version.workspace = true
 description = "Play with friends' relay: hands out invite codes, introduces hosts and guests, relays the encrypted stream when a direct connection fails"
 

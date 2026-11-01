@@ -42,7 +42,7 @@ def main():
     output.mkdir(parents=True, exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix="game-", dir=output))
     homes = {}
-    for key in ("HORIZON_HOME", "HORIZON_LAUNCHER_HOME", "XDG_DATA_HOME", "XDG_CONFIG_HOME"):
+    for key in ("HORIZON_HOME", "RUSTY_MC_LAUNCHER_HOME", "XDG_DATA_HOME", "XDG_CONFIG_HOME"):
         homes[key] = work / key
         homes[key].mkdir()
     env = lab.game_env(**homes, HORIZON_TELEMETRY_URL="off")

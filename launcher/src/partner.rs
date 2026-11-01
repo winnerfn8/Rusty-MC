@@ -42,7 +42,7 @@ pub fn banner(id: &'static str, width: f32, t: &Theme) -> Stateful<Div> {
             crate::text(crate::theme::MICRO)
                 .text_color(t.muted)
                 .group_hover(id, move |s| s.text_color(t.ink))
-                .child(horizon_launcher::i18n::tr("PARTNER")),
+                .child(rusty_mc_launcher::i18n::tr("PARTNER")),
         )
         .child(
             div().relative().group_hover(id, |s| s.top(px(-2.))).child(
@@ -96,8 +96,8 @@ pub const TALL_HEIGHT: f32 = 410.;
 /// "Your Minecraft server, 24/7 online." with "24/7 online" in Sculk's cyan, in the launcher's
 /// language.
 fn headline() -> StyledText {
-    let online = horizon_launcher::i18n::tr("24/7 online");
-    let line = horizon_launcher::i18n::tr("Your Minecraft server, {online}.");
+    let online = rusty_mc_launcher::i18n::tr("24/7 online");
+    let line = rusty_mc_launcher::i18n::tr("Your Minecraft server, {online}.");
     let (before, after) = line.split_once("{online}").unwrap_or((line, ""));
     let text = format!("{before}{online}{after}");
     let lit = before.len()..before.len() + online.len();
@@ -136,7 +136,7 @@ fn code_chip(size: f32, height: f32) -> Div {
         .child(
             div()
                 .text_color(rgb(CYAN))
-                .child(horizon_launcher::i18n::tr("15% off")),
+                .child(rusty_mc_launcher::i18n::tr("15% off")),
         )
 }
 
@@ -156,7 +156,7 @@ pub fn card(id: &'static str, width: f32, compact: bool, t: &Theme) -> Stateful<
     let label = crate::text(crate::theme::MICRO)
         .text_color(t.muted)
         .group_hover(id, move |s| s.text_color(t.ink))
-        .child(horizon_launcher::i18n::tr("PARTNER"));
+        .child(rusty_mc_launcher::i18n::tr("PARTNER"));
     let face = div()
         .relative()
         .flex()
@@ -228,7 +228,7 @@ pub fn card(id: &'static str, width: f32, compact: bool, t: &Theme) -> Stateful<
             .text_color(rgb(ON_CYAN))
             .text_size(px(14.))
             .font_weight(FontWeight::SEMIBOLD)
-            .child(horizon_launcher::i18n::tr("Get my server"));
+            .child(rusty_mc_launcher::i18n::tr("Get my server"));
         // The art stands out of the card's top; the text starts over its faded foot.
         face.mt(px(ART_TOP))
             .flex_col()
@@ -263,7 +263,7 @@ pub fn card(id: &'static str, width: f32, compact: bool, t: &Theme) -> Stateful<
                             .text_size(px(13.))
                             .line_height(px(18.))
                             .text_color(rgb(GREY))
-                            .child(horizon_launcher::i18n::tr("Ready in under a minute")),
+                            .child(rusty_mc_launcher::i18n::tr("Ready in under a minute")),
                     )
                     .child(div().mt(px(16.)).child(button))
                     .child(div().mt(px(8.)).flex().child(code_chip(12., 30.).flex_1())),

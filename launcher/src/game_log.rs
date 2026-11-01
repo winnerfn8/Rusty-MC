@@ -7,9 +7,9 @@
 //! account names.
 use std::path::Path;
 
-/// mclo.gs's API; `HORIZON_LAUNCHER_PASTE_URL` points it elsewhere for tests.
+/// mclo.gs's API; `RUSTY_MC_LAUNCHER_PASTE_URL` points it elsewhere for tests.
 const API: &str = "https://api.mclo.gs/1";
-const PASTE_ENV: &str = "HORIZON_LAUNCHER_PASTE_URL";
+const PASTE_ENV: &str = "RUSTY_MC_LAUNCHER_PASTE_URL";
 /// mclo.gs keeps at most 25,000 lines and 10 MiB: the end of a longer log is sent.
 const MAX_LINES: usize = 25_000;
 const MAX_BYTES: usize = 10 << 20;
@@ -124,7 +124,7 @@ pub struct Shared {
 
 /// Uploads `text` (already [`private`]) and returns its link.
 pub fn share(text: &str) -> Result<Shared, String> {
-    let body = serde_json::json!({ "content": fit(text), "source": "Rusty Minecraft launcher" });
+    let body = serde_json::json!({ "content": fit(text), "source": "Rusty MC launcher" });
     let answer: serde_json::Value = ureq::post(&format!("{}/log", api()))
         .send_json(body)
         .map_err(|e| format!("mclo.gs didn't take the log: {e}"))?

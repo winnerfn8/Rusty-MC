@@ -1,6 +1,6 @@
 # Launcher API
 
-What a player's agent, a script or a pack maker can do with `horizon-launcher`: install and run versions, manage
+What a player's agent, a script or a pack maker can do with `rusty-mc-launcher`: install and run versions, manage
 accounts, settings, mods, modpacks and hosted servers, from a terminal or over MCP. The launcher itself:
 [launcher/README.md](../../launcher/README.md).
 
@@ -18,10 +18,10 @@ the MCP server is off.
 
 ## Guide
 
-1. `horizon-launcher versions`, `horizon-launcher install latest`, `horizon-launcher play`.
-2. Modpacks: `horizon-launcher modpack import <file>`, then `modpack port` and `modpack play`
+1. `rusty-mc-launcher versions`, `rusty-mc-launcher install latest`, `rusty-mc-launcher play`.
+2. Modpacks: `rusty-mc-launcher modpack import <file>`, then `modpack port` and `modpack play`
    ([modpacks.md](../modpacks.md)).
-3. For an agent: `horizon-launcher agent-config` prints how to connect a client to `horizon-launcher mcp`.
+3. For an agent: `rusty-mc-launcher agent-config` prints how to connect a client to `rusty-mc-launcher mcp`.
 
 ## Reference
 
@@ -31,9 +31,9 @@ and its MCP tool.
 ## Examples
 
 ```sh
-horizon-launcher versions --installed --json
-horizon-launcher mods search minimap --kind mod --json
-horizon-launcher servers create --name "Weekend" --player Alex --json
+rusty-mc-launcher versions --installed --json
+rusty-mc-launcher mods search minimap --kind mod --json
+rusty-mc-launcher servers create --name "Weekend" --player Alex --json
 ```
 
 ## Stability

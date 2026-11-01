@@ -167,7 +167,7 @@ impl Coverage {
     /// "Runs its 12 functions, 1 predicate. Not read yet: 40 worldgen, 3 recipes."
     pub fn summary(&self) -> String {
         let runs = match self.read.is_empty() {
-            true => "Nothing in it runs in Rusty Minecraft yet.".to_string(),
+            true => "Nothing in it runs in Rusty MC yet.".to_string(),
             false => format!("Runs its {}.", counts(&self.read)),
         };
         match self.unread.is_empty() {

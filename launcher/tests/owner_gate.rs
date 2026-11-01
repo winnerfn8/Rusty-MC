@@ -1,5 +1,5 @@
 //! The owner gate from the outside: with no account that owns Minecraft: Java Edition in the
-//! launcher, neither `horizon-launcher play` nor the MCP server's play starts the game.
+//! launcher, neither `rusty-mc-launcher play` nor the MCP server's play starts the game.
 use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::process::{Command, Output, Stdio};
@@ -24,13 +24,13 @@ fn home(name: &str) -> PathBuf {
 }
 
 fn launcher(root: &Path, args: &[&str]) -> Command {
-    let mut cmd = Command::new(env!("CARGO_BIN_EXE_horizon-launcher"));
+    let mut cmd = Command::new(env!("CARGO_BIN_EXE_rusty-mc-launcher"));
     cmd.args(args)
         .env("HORIZON_HOME", root.join("game"))
-        .env("HORIZON_LAUNCHER_HOME", root.join("launcher"))
+        .env("RUSTY_MC_LAUNCHER_HOME", root.join("launcher"))
         .env("XDG_DATA_HOME", root.join("data"))
         .env("XDG_CONFIG_HOME", root.join("config"))
-        .env("HORIZON_LAUNCHER_NO_SELF_UPDATE", "1")
+        .env("RUSTY_MC_LAUNCHER_NO_SELF_UPDATE", "1")
         .env("HORIZON_NO_AUDIO", "1")
         .env("HORIZON_TELEMETRY_URL", "off")
         // Memory only: the test never reads the player's keychain.
@@ -50,7 +50,7 @@ fn the_cli_refuses_to_play_without_an_owner() {
     let said = text(&out);
     assert!(!out.status.success(), "{said}");
     assert!(said.contains(REFUSED), "{said}");
-    assert!(said.contains("horizon-launcher account sign-in"), "{said}");
+    assert!(said.contains("rusty-mc-launcher account sign-in"), "{said}");
     // Nothing of the game ran, and the offline name is still there.
     assert!(!root.join("game/sessions").exists());
     let accounts = std::fs::read_to_string(root.join("launcher/accounts.json")).unwrap();

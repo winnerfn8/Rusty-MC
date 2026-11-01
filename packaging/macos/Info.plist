@@ -8,7 +8,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Rusty Minecraft</string>
 	<key>CFBundleExecutable</key>
-	<string>horizon-launcher</string>
+	<string>rusty-mc-launcher</string>
 	<key>CFBundleIconFile</key>
 	<string>horizon</string>
 	<key>CFBundleIdentifier</key>

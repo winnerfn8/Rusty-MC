@@ -101,7 +101,7 @@ pub fn check_project(
         .ok_or_else(|| match versions.iter().find_map(|v| v.blocked.clone()) {
             Some(why) => format!("{} can't be downloaded from here: {why}", project.title),
             None => format!(
-                "{} has no Fabric, NeoForge or Forge version Rusty Minecraft can port.",
+                "{} has no Fabric, NeoForge or Forge version Rusty MC can port.",
                 project.title
             ),
         })?;
@@ -205,7 +205,7 @@ impl Job<'_> {
         })?;
         if check.verdict == Verdict::No {
             return Err(format!(
-                "{} doesn't run in Rusty Minecraft: {}",
+                "{} doesn't run in Rusty MC: {}",
                 project.title, check.summary
             ));
         }

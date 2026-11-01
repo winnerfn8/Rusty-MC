@@ -2,7 +2,7 @@
 name = "horizon-java"
 version = "0.1.0"
 edition.workspace = true
-license.workspace = true
+license-file.workspace = true
 rust-version = "1.85"
 description = "Java mods' code: the mixin hook points' runtime side, and the optional embedded JVM that runs a mod's injections (docs/java-mod-runtime.md)"
 

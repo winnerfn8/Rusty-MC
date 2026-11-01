@@ -50,7 +50,7 @@ pub(super) fn agent(url: &str) -> ureq::Agent {
     horizon_port_pack::net::keep("browser", spec.as_deref(), |proxy| {
         let builder = ureq::AgentBuilder::new()
             .user_agent(&format!(
-                "horizon-rust/horizon horizon-launcher/{} (github.com/horizon-rust/horizon)",
+                "winnerfn8/Rusty-MC rusty-mc-launcher/{} (github.com/winnerfn8/Rusty-MC)",
                 crate::backend::VERSION
             ))
             .timeout_connect(std::time::Duration::from_secs(15))
@@ -66,7 +66,7 @@ pub(super) fn agent(url: &str) -> ureq::Agent {
 pub fn refuse(file: &FileRef) -> Option<String> {
     if !HOSTS.iter().any(|h| file.url.starts_with(h)) && !github_release_asset(&file.url) {
         return Some(format!(
-            "{} isn't on Modrinth's, CurseForge's or Rusty Minecraft's file servers, or a GitHub release.",
+            "{} isn't on Modrinth's, CurseForge's or Rusty MC's file servers, or a GitHub release.",
             file.url
         ));
     }

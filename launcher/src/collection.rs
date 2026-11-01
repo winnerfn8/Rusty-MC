@@ -1,7 +1,7 @@
 //! Data collection in the window: the question asked once (and again when what is collected
-//! changes), and its section in Settings. Everything goes through `horizon_launcher::telemetry`.
+//! changes), and its section in Settings. Everything goes through `rusty_mc_launcher::telemetry`.
 use super::*;
-use horizon_launcher::telemetry;
+use rusty_mc_launcher::telemetry;
 use horizon_telemetry::{Choices, Consent, Kind as DataKind};
 
 /// What the window keeps about data collection.
@@ -185,10 +185,10 @@ impl Launcher {
             .child(
                 text(theme::HEADING)
                     .text_color(t.ink)
-                    .child("Help make Rusty Minecraft faster and steadier?"),
+                    .child("Help make Rusty MC faster and steadier?"),
             )
             .child(text(theme::UI).text_color(t.muted).child(
-                "Rusty Minecraft can send a few things to its developers. Each switch is off until you turn it on, and Settings can change it any time.",
+                "Rusty MC can send a few things to its developers. Each switch is off until you turn it on, and Settings can change it any time.",
             ))
             .child(
                 div()

@@ -1,10 +1,10 @@
 //! "Add from GitHub" on the Mods page: a link to a repository, release, tag, branch or commit,
-//! resolved to an exact release file or commit (`horizon_launcher::github_mods`), shown with the
+//! resolved to an exact release file or commit (`rusty_mc_launcher::github_mods`), shown with the
 //! plain warning and a link to the exact source, and installed only after the player says they
 //! trust it. Mods installed that way list where they came from, with "Check for updates".
 use super::line_edit::{self, Key, LineEdit};
 use super::*;
-use horizon_launcher::github_mods::{self, Origin, Packed, Resolved};
+use rusty_mc_launcher::github_mods::{self, Origin, Packed, Resolved};
 use std::path::{Path, PathBuf};
 
 enum Event {
@@ -324,7 +324,7 @@ impl Launcher {
             .p(px(16.))
             .text_size(px(theme::UI.px))
             .text_color(t.ink)
-            .child(caps(tr("Not reviewed by the Rusty Minecraft registry")).text_color(t.danger))
+            .child(caps(tr("Not reviewed by the Rusty MC registry")).text_color(t.danger))
             .child(what)
             .child(
                 tr("Native mods run with full access to this computer. Read the source before you install it."),

@@ -1,5 +1,5 @@
 //! The night look's specimen: its type and colours drawn by the launcher itself, over the sky's
-//! stops, for checking the tokens in the real renderer (`HORIZON_LAUNCHER_PAGE=specimen`; not a
+//! stops, for checking the tokens in the real renderer (`RUSTY_MC_LAUNCHER_PAGE=specimen`; not a
 //! page players reach).
 use crate::blocks::icon;
 use crate::plate::{alpha, cut, plate};
@@ -11,7 +11,7 @@ use std::sync::LazyLock;
 /// Whether the launcher was opened on the specimen.
 pub fn wanted() -> bool {
     static WANTED: LazyLock<bool> =
-        LazyLock::new(|| std::env::var("HORIZON_LAUNCHER_PAGE").as_deref() == Ok("specimen"));
+        LazyLock::new(|| std::env::var("RUSTY_MC_LAUNCHER_PAGE").as_deref() == Ok("specimen"));
     *WANTED
 }
 

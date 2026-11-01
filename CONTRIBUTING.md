@@ -51,7 +51,8 @@ The pre-push hook checks the full history reachable from the branches and tags b
 
 ## Only original code, or code whose license allows it
 
-Rusty Minecraft is MIT. Its code is written from Minecraft 26.3 itself and from public documentation. Since 30 October 2026
+Rusty Minecraft's own work is under the [Rusty Minecraft License](LICENSE) (source-available, no public redistribution), and what
+comes from Horizon is MIT. A contribution you send is licensed under the Rusty Minecraft License (section 5 of it). Its code is written from Minecraft 26.3 itself and from public documentation. Since 30 October 2026
 another project's source may also be read and used, **only when that project's license allows it**:
 
 - **Allowed:** MIT, MIT-0, BSD-2-Clause, BSD-3-Clause, 0BSD, ISC, zlib, Apache-2.0, Unlicense, and the CC0-1.0

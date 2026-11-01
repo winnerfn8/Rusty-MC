@@ -5,8 +5,8 @@
 use super::*;
 use crate::plate::alpha;
 use crate::shell::{c, Action};
-use horizon_launcher::loaders::{self, Kind as Loader};
-use horizon_launcher::minecraft_versions::{Kind as VersionKind, Versions};
+use rusty_mc_launcher::loaders::{self, Kind as Loader};
+use rusty_mc_launcher::minecraft_versions::{Kind as VersionKind, Versions};
 use servers_page::Field;
 use theme::night;
 
@@ -111,7 +111,7 @@ impl Launcher {
         self.instances.versions = VersionList::Loading;
         let task = cx
             .background_executor()
-            .spawn(async { horizon_launcher::minecraft_versions::load() });
+            .spawn(async { rusty_mc_launcher::minecraft_versions::load() });
         cx.spawn(async move |this, cx| {
             let list = task.await;
             let _ = this.update(cx, |this, cx| {
@@ -136,7 +136,7 @@ impl Launcher {
         let now = self.instances.dialog.as_ref().map(|d| d.java.kind);
         div().flex().gap(px(4.)).children(
             [
-                (NewKind::Horizon, "Rusty Minecraft"),
+                (NewKind::Horizon, "Rusty MC"),
                 (NewKind::Vanilla, "Vanilla"),
                 (NewKind::Modded, "Modded"),
             ]

@@ -1,6 +1,6 @@
-//! Settings' accent colour and Home background rows (`horizon_launcher::themes`).
+//! Settings' accent colour and Home background rows (`rusty_mc_launcher::themes`).
 use super::*;
-use horizon_launcher::themes::{self, Accent};
+use rusty_mc_launcher::themes::{self, Accent};
 use std::path::PathBuf;
 
 /// Each accent's swatch, in points.
@@ -66,7 +66,7 @@ impl Launcher {
             Some(
                 div()
                     .child(tr(
-                        "Rusty Minecraft's violet by default. Every colour keeps text as easy to read.",
+                        "Rusty MC's violet by default. Every colour keeps text as easy to read.",
                     ))
                     .into_any_element(),
             ),
@@ -137,7 +137,7 @@ impl Launcher {
         let said = if custom {
             tr("Your picture, behind Home, cropped to fill it.")
         } else {
-            tr("Rusty Minecraft's landscape. Pick a PNG, JPEG or WebP picture of your own.")
+            tr("Rusty MC's landscape. Pick a PNG, JPEG or WebP picture of your own.")
         };
         let detail = div().flex().flex_col().child(said.to_string()).children(
             self.background_error

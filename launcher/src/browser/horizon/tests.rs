@@ -21,7 +21,7 @@ fn sample() -> Index {
 
 fn scratch(name: &str) -> PathBuf {
     let dir = std::env::temp_dir().join(format!(
-        "horizon-launcher-registry-{name}-{}",
+        "rusty-mc-launcher-registry-{name}-{}",
         std::process::id()
     ));
     let _ = fs::remove_dir_all(&dir);
@@ -65,7 +65,7 @@ fn native_registry_entries_are_mods_that_say_they_run_native_code() {
 #[test]
 fn only_horizons_own_projects_go_without_the_not_endorsed_line() {
     let mut p = sample().projects[0].clone();
-    p.authors = vec!["Rusty Minecraft".into()];
+    p.authors = vec!["Rusty MC".into()];
     p.source = "https://github.com/horizon-rust/horizon-mod-zoom".into();
     assert!(official(&p));
     p.source = "https://github.com/someone/horizon-mod-zoom".into();
@@ -296,7 +296,7 @@ fn versions_for_a_newer_horizon_are_not_installed() {
     let e = newest(&index, p, Some(0)).unwrap_err();
     assert_eq!(
         e,
-        "Coordinates HUD needs a newer Rusty Minecraft than the game you play: update it first."
+        "Coordinates HUD needs a newer Rusty MC than the game you play: update it first."
     );
     assert!(newest(&index, p, Some(1)).is_ok());
     assert!(newest(&index, p, None).is_ok());

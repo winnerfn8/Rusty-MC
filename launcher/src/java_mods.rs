@@ -165,7 +165,7 @@ impl Launcher {
 
     /// Moves a jar to the trash; the translation that follows uninstalls its mod.
     fn remove_java_mod(&mut self, home: PathBuf, jar: String, cx: &mut Context<Self>) {
-        match horizon_launcher::desktop_seams::to_trash(&home.join(&jar)) {
+        match rusty_mc_launcher::desktop_seams::to_trash(&home.join(&jar)) {
             Ok(()) => self.translate_java_mods(home, Vec::new(), cx),
             Err(e) => {
                 self.java_mods.note = Some(Err(format!("{jar}: {e}")));
@@ -228,7 +228,7 @@ impl Launcher {
             }))
             .child(text(theme::HEADING).text_color(t.ink).child(tr("Java mods")))
             .child(text(theme::UI).max_w(px(600.)).text_color(t.muted).child(tr(
-                "Fabric, Quilt, NeoForge and Forge mod jars become Rusty Minecraft mods: their blocks, items, recipes, loot, worldgen and textures carry over. Their Java code doesn't run, so machines, new mobs and other behaviour are left out.",
+                "Fabric, Quilt, NeoForge and Forge mod jars become Rusty MC mods: their blocks, items, recipes, loot, worldgen and textures carry over. Their Java code doesn't run, so machines, new mobs and other behaviour are left out.",
             )))
             .child(list)
             .children(note)

@@ -1,10 +1,10 @@
 //! Home's Console tab: the game's output of this run as it comes, with a search, Follow (keep the
-//! newest line in view), Copy, and Share log (`horizon_launcher::game_log`): an upload to mclo.gs
+//! newest line in view), Copy, and Share log (`rusty_mc_launcher::game_log`): an upload to mclo.gs
 //! that happens only after the player confirms, without their home folder or names.
 use super::servers_page::Field;
 use super::*;
 use gpui::{ClipboardItem, ScrollHandle};
-use horizon_launcher::game_log::{self, Shared};
+use rusty_mc_launcher::game_log::{self, Shared};
 
 pub(super) struct Console {
     follow: bool,

@@ -53,7 +53,7 @@ pub fn refuse(spec: &str) -> Option<String> {
     }
     if horizon_port_pack::net::socks(spec) {
         return Some(format!(
-            "{} is a SOCKS proxy; Rusty Minecraft downloads through an HTTP proxy, such as the \
+            "{} is a SOCKS proxy; Rusty MC downloads through an HTTP proxy, such as the \
              http:// address your proxy app also listens on.",
             horizon_port_pack::net::redacted(spec)
         ));
@@ -140,7 +140,7 @@ mod tests {
         assert!(refuse("socks5://127.0.0.1:7891").is_some());
     }
 
-    /// The reason is shown under the field and printed by `horizon-launcher settings set`.
+    /// The reason is shown under the field and printed by `rusty-mc-launcher settings set`.
     #[test]
     fn a_refused_address_keeps_its_credentials_to_itself() {
         let why = refuse("socks5://user:secret@127.0.0.1:7891").unwrap();

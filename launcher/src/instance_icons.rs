@@ -4,8 +4,8 @@
 //! is the last resort. Each is decoded once per size and kept in `Instances::icons`.
 use super::*;
 use gpui::RenderImage;
-use horizon_launcher::browser::images;
-use horizon_launcher::instances::{self, Instance, Kind as InstanceKind};
+use rusty_mc_launcher::browser::images;
+use rusty_mc_launcher::instances::{self, Instance, Kind as InstanceKind};
 use std::sync::Arc;
 
 /// Quilt's mini icon (CC0) and NeoForge's (CC BY 4.0), from their own art repositories: see

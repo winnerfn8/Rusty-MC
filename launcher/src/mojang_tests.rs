@@ -228,7 +228,7 @@ fn a_file_that_is_not_the_pinned_one_stops_the_download() {
     .unwrap_err();
     assert!(
         error.starts_with(
-            "https://piston-data.mojang.com/client.jar is not the one Rusty Minecraft pins"
+            "https://piston-data.mojang.com/client.jar is not the one Rusty MC pins"
         ),
         "{error}"
     );

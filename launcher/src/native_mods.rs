@@ -177,7 +177,7 @@ pub(crate) fn bundle_in(dir: &Path) -> Result<Option<Bundle>, String> {
     let found = bundle(&dir.join("mixins").join(&id), field("mixins"))?;
     match (&found.horizon, field("horizon")) {
         (Some(pinned), Some(native)) if *pinned != native => Err(format!(
-            "{id}: {NATIVE_MANIFEST} pins Rusty Minecraft {native}, its {MANIFEST} {pinned}."
+            "{id}: {NATIVE_MANIFEST} pins Rusty MC {native}, its {MANIFEST} {pinned}."
         )),
         (_, native) => Ok(Some(Bundle {
             horizon: found.horizon.clone().or(native),
@@ -336,7 +336,7 @@ fn ask_github(repo: &str, revision: &str) -> Result<String, String> {
 
 /// How [`build`] starts its error when mods pin other Horizon revisions than the one it would
 /// use and the player hasn't agreed to try (`anyway`); the rest lists them.
-pub const MISMATCH: &str = "Made for other Rusty Minecraft versions: ";
+pub const MISMATCH: &str = "Made for other Rusty MC versions: ";
 
 /// Each pinned mod whose Horizon revision isn't `revision`, as `id → pin`, and the build's.
 fn mismatch(mods: &[Bundle], revision: &str) -> Option<String> {
@@ -396,7 +396,7 @@ fn with_hooks(
     let tested: Vec<Bundle> = hooked.iter().map(|b| (*b).clone()).collect();
     let fallback = agreed(
         &tested,
-        "Rusty Minecraft",
+        "Rusty MC",
         |b| b.horizon.as_ref(),
         || Err(String::new()),
     );
@@ -410,7 +410,7 @@ fn with_hooks(
         .map(|b| format!("{} (hook points v{})", b.id, b.hooks.unwrap_or_default()))
         .collect();
     Err(format!(
-        "Rusty Minecraft {} doesn't have the native hook points these mods use: {}. Update Rusty Minecraft or the mods.",
+        "Rusty MC {} doesn't have the native hook points these mods use: {}. Update Rusty MC or the mods.",
         &pinned[..pinned.len().min(7)],
         list.join(", ")
     ))
@@ -534,7 +534,7 @@ impl Step {
             ),
             Self::Tool => "Building horizon-mixins (once)".into(),
             Self::Source(revision) => {
-                format!("Downloading Rusty Minecraft's source at {}", &revision[..7])
+                format!("Downloading Rusty MC's source at {}", &revision[..7])
             }
             Self::Mixins => "Applying the mixins".into(),
             Self::Compile(n, name) => format!("Compiling the game: {n} crates, now {name}"),
@@ -753,7 +753,7 @@ pub fn build(
     let free = pins.iter().all(|b| b.horizon.is_none());
     let pinned = newest(
         &pins,
-        "Rusty Minecraft",
+        "Rusty MC",
         |b| b.horizon.as_ref(),
         || revision_of(base),
         None,
@@ -773,7 +773,7 @@ pub fn build(
     // Said with a failure: a mod made for another revision may not apply or compile on this one.
     let blame = |e: String| {
         match &other {
-        Some(list) => format!("{e}\n\nSome mods were made for other Rusty Minecraft versions ({list}), which may be why. Install versions made for the same Nightly."),
+        Some(list) => format!("{e}\n\nSome mods were made for other Rusty MC versions ({list}), which may be why. Install versions made for the same Nightly."),
         None => e,
     }
     };
@@ -1048,8 +1048,8 @@ mod tests {
     fn a_canonical_windows_path_loses_only_a_drives_verbatim_prefix() {
         let plain = |p: &str| plain(PathBuf::from(p));
         assert_eq!(
-            plain(r"\\?\C:\Users\me\AppData\Roaming\horizon-launcher\native"),
-            PathBuf::from(r"C:\Users\me\AppData\Roaming\horizon-launcher\native")
+            plain(r"\\?\C:\Users\me\AppData\Roaming\rusty-mc-launcher\native"),
+            PathBuf::from(r"C:\Users\me\AppData\Roaming\rusty-mc-launcher\native")
         );
         // A share has no drive form to fall back to; other paths have no prefix.
         assert_eq!(
@@ -1057,8 +1057,8 @@ mod tests {
             PathBuf::from(r"\\?\UNC\server\share\native")
         );
         assert_eq!(
-            plain("/home/me/.local/share/horizon-launcher/native"),
-            PathBuf::from("/home/me/.local/share/horizon-launcher/native")
+            plain("/home/me/.local/share/rusty-mc-launcher/native"),
+            PathBuf::from("/home/me/.local/share/rusty-mc-launcher/native")
         );
     }
 
@@ -1207,20 +1207,20 @@ mod tests {
             pinned("b", None),
             pinned("c", Some(A)),
         ];
-        assert_eq!(agreed(&same, "Rusty Minecraft", get, never).unwrap(), A);
+        assert_eq!(agreed(&same, "Rusty MC", get, never).unwrap(), A);
         let none = [pinned("a", None)];
         assert_eq!(
-            agreed(&none, "Rusty Minecraft", get, || Ok(B.into())).unwrap(),
+            agreed(&none, "Rusty MC", get, || Ok(B.into())).unwrap(),
             B
         );
         let split = [pinned("veinminer", Some(A)), pinned("minimap", Some(B))];
-        let err = agreed(&split, "Rusty Minecraft", get, never).unwrap_err();
+        let err = agreed(&split, "Rusty MC", get, never).unwrap_err();
         assert!(
             err.contains("veinminer → aaaaaaa") && err.contains("minimap → bbbbbbb"),
             "{err}"
         );
         let bad = [pinned("a", Some("nightly"))];
-        assert!(agreed(&bad, "Rusty Minecraft", get, never).is_err());
+        assert!(agreed(&bad, "Rusty MC", get, never).is_err());
     }
 
     #[test]
@@ -1256,7 +1256,7 @@ mod tests {
             pinned("zoom", None, None),
         ];
         assert_eq!(
-            newest(&split, "Rusty Minecraft", horizon, never, None, date).unwrap(),
+            newest(&split, "Rusty MC", horizon, never, None, date).unwrap(),
             B
         );
         // horizon-mixins: never older than a pin, and the launcher's own when it is newer.
@@ -1273,11 +1273,11 @@ mod tests {
         let no_date = |_: &str| -> Result<String, String> { panic!("no date needed") };
         let same = [pinned("a", Some(A), None), pinned("b", Some(A), None)];
         assert_eq!(
-            newest(&same, "Rusty Minecraft", horizon, never, None, no_date).unwrap(),
+            newest(&same, "Rusty MC", horizon, never, None, no_date).unwrap(),
             A
         );
         let offline = |_: &str| -> Result<String, String> { Err("offline".into()) };
-        let err = newest(&split, "Rusty Minecraft", horizon, never, None, offline).unwrap_err();
+        let err = newest(&split, "Rusty MC", horizon, never, None, offline).unwrap_err();
         assert!(err.contains("offline"), "{err}");
         // What the player is shown: each mod made for another revision, and the build's.
         assert_eq!(
@@ -1442,10 +1442,10 @@ mod tests {
 
     #[test]
     fn tool_errors_read_in_one_line() {
-        let err = "{\n  \"code\": \"E_REVISION\",\n  \"message\": \"requires exact Rusty Minecraft revision a\",\n  \"file\": \"m.toml\"\n}";
+        let err = "{\n  \"code\": \"E_REVISION\",\n  \"message\": \"requires exact Rusty MC revision a\",\n  \"file\": \"m.toml\"\n}";
         assert_eq!(
             diagnostic(err).as_deref(),
-            Some("E_REVISION: requires exact Rusty Minecraft revision a (m.toml)")
+            Some("E_REVISION: requires exact Rusty MC revision a (m.toml)")
         );
     }
 

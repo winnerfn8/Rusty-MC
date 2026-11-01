@@ -20,7 +20,7 @@ use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 
 /// What a player is told before a mod from GitHub is installed.
-pub const WARNING: &str = "Not reviewed by the Rusty Minecraft registry. Native mods run with full access to this computer. Read the source first.";
+pub const WARNING: &str = "Not reviewed by the Rusty MC registry. Native mods run with full access to this computer. Read the source first.";
 
 /// The most a release asset or a mod's archive may be.
 const MAX_ASSET: u64 = 64 << 20;
@@ -473,7 +473,7 @@ fn walk_files(root: &Path, dir: &Path, out: &mut Vec<(String, PathBuf)>) -> Resu
 pub fn pack(bundle: &Bundle) -> Result<Vec<u8>, String> {
     let horizon = bundle.horizon.clone().filter(|h| format::revision(h)).ok_or_else(|| {
         format!(
-            "{} has no [compatibility] horizon_revision (40 hex digits): add the Rusty Minecraft commit it was made for.",
+            "{} has no [compatibility] horizon_revision (40 hex digits): add the Rusty MC commit it was made for.",
             bundle.id
         )
     })?;

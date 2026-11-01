@@ -1,5 +1,5 @@
 //! A shortcut on the desktop that plays one instance: it runs
-//! `horizon-launcher play --instance <id>`, so the game starts without the launcher's window.
+//! `rusty-mc-launcher play --instance <id>`, so the game starts without the launcher's window.
 //!
 //! - Linux: `<name> (Horizon).desktop` on the desktop (executable, and marked trusted with `gio`
 //!   where it exists, so GNOME starts it), and the same entry in the applications menu
@@ -10,7 +10,7 @@
 //!   lays it out, to the launcher's `.exe` with Horizon's icon.
 //!
 //! Each shortcut names its instance's id inside it, so removing finds it after a rename.
-//! `HORIZON_LAUNCHER_DESKTOP` points the desktop folder elsewhere, for tests.
+//! `RUSTY_MC_LAUNCHER_DESKTOP` points the desktop folder elsewhere, for tests.
 //!
 //! [MS-SHLLINK]: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-shllink/
 use crate::desktop;
@@ -18,7 +18,7 @@ use crate::desktop_seams;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-pub const DESKTOP_ENV: &str = "HORIZON_LAUNCHER_DESKTOP";
+pub const DESKTOP_ENV: &str = "RUSTY_MC_LAUNCHER_DESKTOP";
 const MAC_ICON: &[u8] = include_bytes!("../../packaging/icons/horizon.icns");
 /// The key a Linux shortcut names its instance with.
 const INSTANCE_KEY: &str = "X-Horizon-Instance";
@@ -53,7 +53,7 @@ impl System {
     }
 }
 
-/// The desktop folder: `HORIZON_LAUNCHER_DESKTOP`, else the system's.
+/// The desktop folder: `RUSTY_MC_LAUNCHER_DESKTOP`, else the system's.
 pub fn desktop_dir() -> Option<PathBuf> {
     std::env::var_os(DESKTOP_ENV)
         .filter(|v| !v.is_empty())
@@ -74,7 +74,7 @@ pub fn file_name(name: &str, system: System) -> String {
         .collect();
     let clean = clean.trim().trim_matches('.');
     let clean = if clean.is_empty() { "Instance" } else { clean };
-    format!("{clean} (Rusty Minecraft).{}", system.extension())
+    format!("{clean} (Rusty MC).{}", system.extension())
 }
 
 /// The id as a file name or bundle id part: letters, digits and `-`.
@@ -91,7 +91,7 @@ pub fn desktop_entry(exe: &Path, id: &str, name: &str) -> String {
         "[Desktop Entry]\n\
          Type=Application\n\
          Name={name}\n\
-         Comment=Play {name} in Rusty Minecraft\n\
+         Comment=Play {name} in Rusty MC\n\
          Exec={} play --instance {}\n\
          TryExec={}\n\
          Icon=horizon\n\
@@ -148,7 +148,7 @@ pub fn mac_app(exe: &Path, id: &str, name: &str) -> Vec<(&'static str, Vec<u8>, 
         xml(id),
     );
     let script = format!(
-        "#!/bin/sh\n# Plays the Rusty Minecraft instance {}.\nexec {} play --instance {}\n",
+        "#!/bin/sh\n# Plays the Rusty MC instance {}.\nexec {} play --instance {}\n",
         name.replace('\n', " "),
         sh_quote(&exe.to_string_lossy()),
         sh_quote(id),
@@ -328,7 +328,7 @@ pub fn make_in(
             &lnk(
                 &exe.to_string_lossy(),
                 &windows_args(id),
-                &format!("Play {name} in Rusty Minecraft"),
+                &format!("Play {name} in Rusty MC"),
             ),
             false,
         )?,

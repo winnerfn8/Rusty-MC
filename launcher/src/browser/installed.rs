@@ -132,7 +132,7 @@ fn add(
     }
     if let Support::No(why) = project.support() {
         return Err(format!(
-            "{} doesn't run in Rusty Minecraft: {why}",
+            "{} doesn't run in Rusty MC: {why}",
             project.title
         ));
     }
@@ -140,13 +140,13 @@ fn add(
     let Some(version) = pick(project.kind, &versions, everything).cloned() else {
         return Err(match versions.iter().find_map(|v| v.blocked.clone()) {
             Some(why) => format!("{} can't be installed from here: {why}", project.title),
-            None => format!("{} has no version Rusty Minecraft runs.", project.title),
+            None => format!("{} has no version Rusty MC runs.", project.title),
         });
     };
     for id in &version.required {
         let needed = source.project(id).map_err(|_| {
             format!(
-                "{} needs {id} on {}, which isn't a pack Rusty Minecraft loads (a Java mod?).",
+                "{} needs {id} on {}, which isn't a pack Rusty MC loads (a Java mod?).",
                 project.title,
                 source.id().label()
             )
@@ -358,7 +358,7 @@ pub fn install_datapack(
     })?;
     let file = version.file().expect("pick keeps versions with a file");
     let folder = std::env::temp_dir().join(format!(
-        "horizon-launcher-datapack-{}-{}",
+        "rusty-mc-launcher-datapack-{}-{}",
         std::process::id(),
         version.id
     ));
@@ -366,8 +366,8 @@ pub fn install_datapack(
         let coverage = crate::datapacks::coverage(&zip)?;
         if coverage.read.is_empty() {
             return Err(format!(
-                "{} would change nothing in Rusty Minecraft yet: it has no functions, predicates or item \
-                 modifiers, and Rusty Minecraft doesn't read its {} yet.",
+                "{} would change nothing in Rusty MC yet: it has no functions, predicates or item \
+                 modifiers, and Rusty MC doesn't read its {} yet.",
                 project.title,
                 coverage.not_read()
             ));

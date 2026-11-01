@@ -172,7 +172,7 @@ fn index(name: &str, linked: &[&Linked]) -> serde_json::Value {
         "game": "minecraft",
         "versionId": "1",
         "name": name,
-        "summary": format!("{name}, exported from Rusty Minecraft."),
+        "summary": format!("{name}, exported from Rusty MC."),
         "files": files,
         "dependencies": { "minecraft": GAME },
     })

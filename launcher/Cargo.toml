@@ -1,9 +1,9 @@
 [package]
-name = "horizon-launcher"
+name = "rusty-mc-launcher"
 version = "0.2.0"
 edition = "2021"
-license = "MIT"
-description = "Downloads, prepares and starts Horizon builds"
+license-file = "../LICENSE"
+description = "Downloads, prepares and starts Rusty MC builds"
 
 [workspace]
 

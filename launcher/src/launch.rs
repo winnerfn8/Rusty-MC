@@ -60,9 +60,9 @@ pub struct Found {
     pub nvidia: bool,
 }
 
-/// `HORIZON_LAUNCHER_LINUX_TOOLS=gamemode,mangohud,gpu,nvidia`: what [`Found::here`] says is
+/// `RUSTY_MC_LAUNCHER_LINUX_TOOLS=gamemode,mangohud,gpu,nvidia`: what [`Found::here`] says is
 /// installed, on any system (for tests and screenshots).
-pub const TOOLS_ENV: &str = "HORIZON_LAUNCHER_LINUX_TOOLS";
+pub const TOOLS_ENV: &str = "RUSTY_MC_LAUNCHER_LINUX_TOOLS";
 
 fn on_path(program: &str) -> bool {
     std::env::var_os("PATH").is_some_and(|path| {

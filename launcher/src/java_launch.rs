@@ -408,7 +408,7 @@ pub fn command(version: &Value, launch: &Launch) -> Result<Command, String> {
                 .collect::<Vec<_>>()
                 .join(separator),
         ),
-        ("launcher_name", "horizon-launcher".into()),
+        ("launcher_name", "rusty-mc-launcher".into()),
         (
             "resolution_width",
             launch.window.map(|w| w.0.to_string()).unwrap_or_default(),

@@ -243,9 +243,9 @@ Light); `tokens.css` carries them as `--night-*`. The game's menus don't use it.
   unfocused; the interface moves only to show cause and effect (a row arrives where it was added,
   progress fills). Reduced motion: nothing moves. The launcher's sky (`launcher/src/sky.rs`) moves
   in whole texels on a half-second beat, so it asks for two frames a second at most;
-  `HORIZON_LAUNCHER_MOTION=off` stills it, `always` keeps it moving unfocused (for recordings).
+  `RUSTY_MC_LAUNCHER_MOTION=off` stills it, `always` keeps it moving unfocused (for recordings).
 - **Copy says what happens** ("Downloads 26.3 and Java 21, about 600 MB"), never praises.
-- The specimen (`HORIZON_LAUNCHER_PAGE=specimen horizon-launcher`) draws the type and colours in the
+- The specimen (`RUSTY_MC_LAUNCHER_PAGE=specimen rusty-mc-launcher`) draws the type and colours in the
   launcher itself.
 - **The frame** (`launcher/src/shell.rs`): the sidebar is one plate from the window's top to its
   bottom (the wordmark, instances by group, servers, the launcher's version); the top bar over the
@@ -260,7 +260,7 @@ Light); `tokens.css` carries them as `--night-*`. The game's menus don't use it.
   While it gets ready, Play names it ("Getting ready… 34%") beside Cancel, and below sit the
   bar, what is happening with the time left, and the steps (game files, Java, sounds, prepare,
   play), the current one lit, those done ticked: steps, never the log
-  (`HORIZON_LAUNCHER_PAGE=getting-ready` shows it for screenshots, nothing runs).
+  (`RUSTY_MC_LAUNCHER_PAGE=getting-ready` shows it for screenshots, nothing runs).
 - **Instance icons** (`launcher/src/instance_icons.rs`): the sidebar's rows, Home's hero (beside
   the name) and the instance dialog show the same icon. Its own picture first (`icon.png` in its
   game folder: one the player chose with Choose image…, scaled to 128 pixels, or its modpack's
@@ -273,14 +273,14 @@ Light); `tokens.css` carries them as `--night-*`. The game's menus don't use it.
   instead of one long page: Overview (what Play needs: the instance, the game or its resources,
   the account), Worlds, Multiplayer, Packs, then Screenshots and Console once they have something.
   A tab names how many it holds ("Worlds 3"); its own buttons (Add server, Open folder) sit at the
-  strip's end, where a list's header would put them (`HORIZON_LAUNCHER_PAGE=worlds`, `packs`...
+  strip's end, where a list's header would put them (`RUSTY_MC_LAUNCHER_PAGE=worlds`, `packs`...
   opens one for screenshots).
 - **The Mods tab** (`launcher/src/instance_mods.rs`): the instance's mods on one nearly opaque
   card, its loader in the header ("Fabric mods", "Rusty Minecraft mods") beside a filter. A row is the
   mod's own icon (Modrinth's, else its jar's, else a glyph), its name and version, where it comes from (Modrinth,
   "needed by another mod", or a local file by name), an update as an amber pill when the browser
   found one, and a switch (a Java jar turned off is renamed `.disabled`). Update all and Add mods
-  sit at the strip's end (`HORIZON_LAUNCHER_PAGE=instance-mods`).
+  sit at the strip's end (`RUSTY_MC_LAUNCHER_PAGE=instance-mods`).
 - **Sign in with Microsoft** (`launcher/src/microsoft.rs`): every button that signs in is
   Microsoft's own, drawn as Microsoft publishes it: 41 pixels tall, its four-square symbol, the text
   semibold at 15 pixels, `#2F2F2F` with white text at night, white with `#5E5E5E` text and a
@@ -289,7 +289,7 @@ Light); `tokens.css` carries them as `--night-*`. The game's menus don't use it.
 - **The sign-in sheet** (`launcher/src/owner_page.rs`, the owner gate): an opaque plate over the
   dimmed launcher, never instead of it. It says why (the account that owns Java Edition, no install
   needed), the code in mono on a raised box with Copy, and Open link as the main action; the window
-  goes on by itself once Microsoft answers (`HORIZON_LAUNCHER_PAGE=sign-in` shows it with a made-up
+  goes on by itself once Microsoft answers (`RUSTY_MC_LAUNCHER_PAGE=sign-in` shows it with a made-up
   code for screenshots).
 - **New instance** (`launcher/src/new_instance.rs`): an opaque plate over the dimmed launcher,
   tabs for the kind (Rusty Minecraft, Vanilla, Modded). A Java kind lists Mojang's versions (search,

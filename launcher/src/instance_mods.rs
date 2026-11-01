@@ -10,7 +10,7 @@
 use super::*;
 use crate::plate::alpha;
 use crate::shell::{c, Action};
-use horizon_launcher::browser::{
+use rusty_mc_launcher::browser::{
     horizon, images, installed, java, modrinth, Kind as PackKind, SourceId,
 };
 use servers_page::Field;
@@ -311,7 +311,7 @@ impl Launcher {
             .map(|j| j.loader.as_ref().map(|l| l.kind.name()));
         let title = match loader {
             Some(Some(loader)) => trf("{loader} mods", &[("loader", loader)]),
-            _ => tr("Rusty Minecraft mods").to_string(),
+            _ => tr("Rusty MC mods").to_string(),
         };
         let filter = self
             .servers

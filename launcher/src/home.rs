@@ -28,15 +28,15 @@ impl Launcher {
             if tag.is_empty() {
                 "Minecraft"
             } else {
-                "Rusty Minecraft"
+                "Rusty MC"
             },
             |i| i.name.as_str(),
         );
         let mut what = vec![format!("Minecraft: Java Edition {game}")];
         if !tag.is_empty() {
             what.push(format!(
-                "Rusty Minecraft {}",
-                horizon_launcher::nightly::label(tag)
+                "Rusty MC {}",
+                rusty_mc_launcher::nightly::label(tag)
                     .unwrap_or_else(|| tag.trim_start_matches('v').to_string())
             ));
         }
@@ -187,7 +187,7 @@ impl Launcher {
                     action("download-cancel", Action::Quiet, &t)
                         .child(label(tr("Cancel").to_string()))
                         .on_click(|_, _, _| {
-                            horizon_launcher::mojang::CANCEL.store(true, Ordering::Relaxed)
+                            rusty_mc_launcher::mojang::CANCEL.store(true, Ordering::Relaxed)
                         })
                 }));
         }
@@ -281,7 +281,7 @@ impl Launcher {
                         .relative()
                         .font_weight(FontWeight::BOLD)
                         .child(
-                            horizon_launcher::nightly::label(tag)
+                            rusty_mc_launcher::nightly::label(tag)
                                 .unwrap_or_else(|| tag.trim_start_matches('v').to_string()),
                         ),
                 )
@@ -380,7 +380,7 @@ impl Launcher {
         if getting_ready_preview() {
             return Some(Duration::from_secs(70));
         }
-        let Some((done, total)) = horizon_launcher::mojang::progress() else {
+        let Some((done, total)) = rusty_mc_launcher::mojang::progress() else {
             self.download_seen = None;
             return None;
         };
@@ -498,17 +498,17 @@ impl Launcher {
     }
 }
 
-/// `HORIZON_LAUNCHER_PAGE=getting-ready` opens Home as if Play had been pressed on a version that
+/// `RUSTY_MC_LAUNCHER_PAGE=getting-ready` opens Home as if Play had been pressed on a version that
 /// downloads from Mojang, a third of the way through: for screenshots, nothing runs.
 pub(super) fn getting_ready_preview() -> bool {
     static PREVIEW: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
     *PREVIEW
-        .get_or_init(|| std::env::var("HORIZON_LAUNCHER_PAGE").as_deref() == Ok("getting-ready"))
+        .get_or_init(|| std::env::var("RUSTY_MC_LAUNCHER_PAGE").as_deref() == Ok("getting-ready"))
 }
 
 /// The download under way, files done of how many.
 fn download_progress() -> Option<(usize, usize)> {
-    horizon_launcher::mojang::progress().or_else(|| getting_ready_preview().then_some((1754, 5160)))
+    rusty_mc_launcher::mojang::progress().or_else(|| getting_ready_preview().then_some((1754, 5160)))
 }
 
 /// The time `total - done` files take at the pace of `done - from` in `spent`: none for the

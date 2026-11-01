@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Rusty MC
+GenericName=Game launcher
+Comment=Install, prepare and play Rusty MC, Minecraft: Java Edition 26.3 rewritten in Rust
+Exec=rusty-mc-launcher
+Icon=horizon
+Terminal=false
+Categories=Game;
+StartupWMClass=rusty-mc-launcher

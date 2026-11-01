@@ -81,7 +81,7 @@ fn install_in(
 ) -> Result<Installed, String> {
     let p = index
         .project(id)
-        .ok_or_else(|| format!("{id} isn't in Rusty Minecraft's registry."))?;
+        .ok_or_else(|| format!("{id} isn't in Rusty MC's registry."))?;
     if p.kind != idx::Kind::Modpack {
         return Err(format!("{} is a {}, not a modpack.", p.name, p.kind.name()));
     }
@@ -241,7 +241,7 @@ mod tests {
 
     fn scratch(name: &str) -> PathBuf {
         let dir = std::env::temp_dir().join(format!(
-            "horizon-launcher-hpack-{name}-{}",
+            "rusty-mc-launcher-hpack-{name}-{}",
             std::process::id()
         ));
         let _ = fs::remove_dir_all(&dir);

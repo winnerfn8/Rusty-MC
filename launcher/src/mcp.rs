@@ -1,12 +1,12 @@
-//! `horizon-launcher mcp`: the Model Context Protocol over stdin and stdout (JSON-RPC 2.0, one
+//! `rusty-mc-launcher mcp`: the Model Context Protocol over stdin and stdout (JSON-RPC 2.0, one
 //! message per line), so AI agents can install, prepare and run Horizon. Every tool goes through
 //! `backend`. A server started here lives as long as the session. The running game's own tools
 //! come from its `horizon-ctl` as `game_*` (game_tools.rs).
 use crate::cli_tools;
 use crate::game_tools::{self, GameTools};
-use horizon_launcher::account::{self, Accounts, SignIn, SignInState};
-use horizon_launcher::backend::{self, Job, Logged};
-use horizon_launcher::instances;
+use rusty_mc_launcher::account::{self, Accounts, SignIn, SignInState};
+use rusty_mc_launcher::backend::{self, Job, Logged};
+use rusty_mc_launcher::instances;
 use serde_json::{json, Value};
 use std::io::{BufRead, Write};
 use std::path::PathBuf;
@@ -28,7 +28,7 @@ fn session_tools() -> Value {
     let version = json!({ "type": "string", "description": "An installed version tag such as v2026.10.13. Default: the selected version (play: the instance's own first)." });
     let none = json!({ "type": "object", "properties": {} });
     json!([
-        { "name": "play", "description": "Start the Rusty Minecraft client (a game window on the player's screen) under agent control: the game_* tools then play it. Returns once it has started; game_wait_ready waits for the world. CLI: horizon-launcher play",
+        { "name": "play", "description": "Start the Rusty MC client (a game window on the player's screen) under agent control: the game_* tools then play it. Returns once it has started; game_wait_ready waits for the world. CLI: rusty-mc-launcher play",
           "inputSchema": { "type": "object", "properties": { "version": version,
             "instance": { "type": "string", "description": "The instance to play, by name or id (instance_list). Default: the selected one." },
             "world": { "type": "string", "description": "Open or create this world (a folder under saves) at once." },
@@ -37,15 +37,15 @@ fn session_tools() -> Value {
             "server": { "type": "string", "description": "Join this server at once: an address, or a server of the instance's list (multiplayer_list) by name or position. Only when the player asks." },
             "offscreen": { "type": "boolean", "description": "Render without showing a window (game_screenshot still works)." },
             "arg": { "type": "array", "items": { "type": "string" }, "description": "Extra game arguments, passed through as-is (for example \"--server-thread\")." } } } },
-        { "name": "server", "description": "Start a Rusty Minecraft dedicated server. It runs until server_stop or the end of this MCP session. Requires agreeing to the Minecraft EULA. CLI: horizon-launcher server",
+        { "name": "server", "description": "Start a Rusty MC dedicated server. It runs until server_stop or the end of this MCP session. Requires agreeing to the Minecraft EULA. CLI: rusty-mc-launcher server",
           "inputSchema": { "type": "object", "properties": { "version": version, "dir": { "type": "string", "description": "The server's folder. Default: the launcher's server folder." }, "accept_eula": { "type": "boolean", "description": "Agree to the Minecraft EULA (https://aka.ms/MinecraftEULA) on the player's behalf. Only with their consent." } } } },
         { "name": "server_command", "description": "Send a console command to the server started with server (for example \"list\" or \"say hello\"), and return the lines it printed in reply.",
           "inputSchema": { "type": "object", "properties": { "command": { "type": "string" } }, "required": ["command"] } },
         { "name": "server_log", "description": "The most recent lines of the server's console.",
           "inputSchema": { "type": "object", "properties": { "lines": { "type": "integer", "minimum": 1, "maximum": 2000, "description": "How many lines (default 50)." } } } },
         { "name": "server_stop", "description": "Stop the server started with server cleanly (it saves the world), killing it if it does not stop within 30 seconds.", "inputSchema": none },
-        { "name": "account_list", "description": "The Microsoft accounts signed in to the launcher (names and UUIDs, never tokens), which one the game plays as (none = offline), and how a sign-in started with account_sign_in is going. CLI: horizon-launcher account list", "inputSchema": none },
-        { "name": "account_sign_in", "description": "Start signing in a Microsoft account: returns a link and a code the player enters in their browser. The sign-in finishes in the background; check it with account_list. Only when the player asks to sign in. CLI: horizon-launcher account sign-in", "inputSchema": none },
+        { "name": "account_list", "description": "The Microsoft accounts signed in to the launcher (names and UUIDs, never tokens), which one the game plays as (none = offline), and how a sign-in started with account_sign_in is going. CLI: rusty-mc-launcher account list", "inputSchema": none },
+        { "name": "account_sign_in", "description": "Start signing in a Microsoft account: returns a link and a code the player enters in their browser. The sign-in finishes in the background; check it with account_list. Only when the player asks to sign in. CLI: rusty-mc-launcher account sign-in", "inputSchema": none },
     ])
 }
 
@@ -89,8 +89,8 @@ impl Session {
                     backend::join_friend(&mut cmd, code)?;
                 }
                 if let Some(server) = arg_str(args, "server") {
-                    let list = horizon_launcher::server_list::List::load(&instance.home);
-                    let ip = horizon_launcher::server_list::find(&list, server)
+                    let list = rusty_mc_launcher::server_list::List::load(&instance.home);
+                    let ip = rusty_mc_launcher::server_list::find(&list, server)
                         .map_or_else(|_| server.to_string(), |(_, s)| s.ip);
                     cmd.arg("--server").arg(ip);
                 }
@@ -260,8 +260,8 @@ impl Session {
             "initialize" => Ok(json!({
                 "protocolVersion": params.get("protocolVersion").and_then(Value::as_str).unwrap_or(PROTOCOL),
                 "capabilities": { "tools": {} },
-                "serverInfo": { "name": "horizon-launcher", "version": backend::VERSION },
-                "instructions": "Manage Rusty Minecraft, a Rust reimplementation of Minecraft Java Edition: install versions, prepare them from the player's own Minecraft, start the client or a dedicated server. Every tool is a horizon-launcher CLI command of the same name (mods_search is horizon-launcher mods search). Once play started the game, the game_* tools play it: game_state, game_ui (every widget of the open screen), game_click, game_goto, game_screenshot...",
+                "serverInfo": { "name": "rusty-mc-launcher", "version": backend::VERSION },
+                "instructions": "Manage Rusty MC, a Rust reimplementation of Minecraft Java Edition: install versions, prepare them from the player's own Minecraft, start the client or a dedicated server. Every tool is a rusty-mc-launcher CLI command of the same name (mods_search is rusty-mc-launcher mods search). Once play started the game, the game_* tools play it: game_state, game_ui (every widget of the open screen), game_click, game_goto, game_screenshot...",
             })),
             "ping" => Ok(json!({})),
             "tools/list" => {

@@ -1,9 +1,9 @@
-//! Files dropped anywhere on the window (`horizon_launcher::import`): a shared instance becomes
+//! Files dropped anywhere on the window (`rusty_mc_launcher::import`): a shared instance becomes
 //! a new instance, a Java modpack goes to the Modpacks import, a resource or shader pack into
 //! the selected instance. The Packs section and the world rows take their own drops first.
 use super::*;
 use gpui::ExternalPaths;
-use horizon_launcher::import::{self, Dropped};
+use rusty_mc_launcher::import::{self, Dropped};
 use std::path::PathBuf;
 
 #[derive(Default)]
@@ -26,7 +26,7 @@ impl Launcher {
                 Ok(Dropped::Instance) => self.import_instance(file, cx),
                 Ok(Dropped::Modpack) => {
                     self.show_modpack(None);
-                    self.pack_job(move |log| horizon_launcher::modpacks::import(&file, log));
+                    self.pack_job(move |log| rusty_mc_launcher::modpacks::import(&file, log));
                     self.importing.note = Some(Ok(format!(
                         "{name} is a Java modpack: importing it on the Modpacks page."
                     )));
@@ -36,7 +36,7 @@ impl Launcher {
                         continue;
                     };
                     self.importing.note =
-                        Some(horizon_launcher::packs::add(&i.home, &file).map(|p| {
+                        Some(rusty_mc_launcher::packs::add(&i.home, &file).map(|p| {
                             format!(
                                 "Added {} to {}'s packs: switch it on under Packs.",
                                 p.title, i.name

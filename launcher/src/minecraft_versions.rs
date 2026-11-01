@@ -80,7 +80,7 @@ impl Versions {
             id => id,
         };
         self.all.iter().find(|v| v.id == id).ok_or_else(|| {
-            format!("Minecraft has no version {name:?}. `horizon-launcher instance versions` lists them.")
+            format!("Minecraft has no version {name:?}. `rusty-mc-launcher instance versions` lists them.")
         })
     }
 

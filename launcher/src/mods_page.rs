@@ -2,15 +2,15 @@
 //! Modrinth for resource packs (a Java instance's mods too), see where each comes
 //! from and how well it runs (a Java mod's jar is checked first; a Horizon mod says whether it is
 //! signed and what it may do), install it with its checksum checked, turn Horizon mods on and
-//! off, and update or remove what was installed (`horizon_launcher::browser`). Imported modpacks
+//! off, and update or remove what was installed (`rusty_mc_launcher::browser`). Imported modpacks
 //! are listed on its Modpacks tab.
 use super::line_edit::{self, Key, LineEdit};
 use super::*;
-use horizon_launcher::browser::{
+use rusty_mc_launcher::browser::{
     self, horizon, installed, java, java_instance, Kind as PackKind, Project, Query, SourceId,
     Support,
 };
-use horizon_launcher::modpacks;
+use rusty_mc_launcher::modpacks;
 use horizon_port_pack::check::Check;
 use java_instance::Target;
 use std::collections::HashMap;
@@ -32,7 +32,7 @@ const CHECKING: usize = 2;
 /// The sources to pick from on the Resource packs and Modpacks tabs; CurseForge is shown beside them as coming soon.
 const SOURCES: [(SourceId, &str); 2] = [
     (SourceId::Modrinth, "Modrinth"),
-    (SourceId::Horizon, "Rusty Minecraft"),
+    (SourceId::Horizon, "Rusty MC"),
 ];
 const PAGE: usize = 20;
 
@@ -120,7 +120,7 @@ impl Mods {
     /// Reads the instance's worlds again; the world picked for data packs stays when it is
     /// still there, else the last played.
     fn read_worlds(&mut self) {
-        self.worlds = horizon_launcher::worlds::list(&self.home())
+        self.worlds = rusty_mc_launcher::worlds::list(&self.home())
             .into_iter()
             .map(|w| (w.path, w.name))
             .collect();
@@ -140,7 +140,7 @@ impl Mods {
 
     pub(super) fn new(cx: &mut App) -> Self {
         let (tx, rx) = channel();
-        let page = std::env::var("HORIZON_LAUNCHER_PAGE");
+        let page = std::env::var("RUSTY_MC_LAUNCHER_PAGE");
         let kind = match page.as_deref() {
             Ok("modpacks") => PackKind::Modpack,
             Ok("resourcepacks") => PackKind::ResourcePack,
@@ -367,10 +367,10 @@ impl Launcher {
             self.settings.native_mods_noticed = true;
             self.settings.save();
         }
-        // `HORIZON_LAUNCHER_PROJECT=<slug>` (with `HORIZON_LAUNCHER_PAGE=mods`): opens that
+        // `RUSTY_MC_LAUNCHER_PROJECT=<slug>` (with `RUSTY_MC_LAUNCHER_PAGE=mods`): opens that
         // project's page once a search finds it, for screenshots.
         if self.mods.browse.open.is_none() {
-            if let Ok(want) = std::env::var("HORIZON_LAUNCHER_PROJECT") {
+            if let Ok(want) = std::env::var("RUSTY_MC_LAUNCHER_PROJECT") {
                 if let Some(p) = self
                     .mods
                     .results
@@ -378,7 +378,7 @@ impl Launcher {
                     .find(|p| p.id == want || p.slug == want)
                     .cloned()
                 {
-                    std::env::remove_var("HORIZON_LAUNCHER_PROJECT");
+                    std::env::remove_var("RUSTY_MC_LAUNCHER_PROJECT");
                     self.mods_open(p);
                 }
             }
@@ -731,7 +731,7 @@ impl Launcher {
                     if modpack && p.source == SourceId::Horizon {
                         let pack = horizon::pack::install(&p.id, &progress)?;
                         if let Some(url) = &p.icon {
-                            horizon_launcher::instances::adopt_icon(
+                            rusty_mc_launcher::instances::adopt_icon(
                                 &horizon::pack::home(&pack.work),
                                 url,
                             );
@@ -752,7 +752,7 @@ impl Launcher {
                         let log = |line: String| progress(&line, 1.);
                         let pack = modpacks::import_and_port(&file, resources.as_deref(), &log)?;
                         if let Some(url) = &p.icon {
-                            horizon_launcher::instances::adopt_icon(
+                            rusty_mc_launcher::instances::adopt_icon(
                                 &modpacks::profile_home(&pack.work),
                                 url,
                             );
@@ -878,7 +878,7 @@ impl Launcher {
         }
         let header = page_header(
             "Mods",
-            "Mods and shader packs made for Rusty Minecraft from its own reviewed registry, and \
+            "Mods and shader packs made for Rusty MC from its own reviewed registry, and \
              resource packs from Modrinth. Each file is checked against its source's checksum \
              before it reaches your game folder.",
             &t,
@@ -1344,11 +1344,11 @@ impl Launcher {
                     &t,
                 );
             } else if m.source == SourceId::Horizon {
-                tr("Nothing in Rusty Minecraft's registry matches yet.")
+                tr("Nothing in Rusty MC's registry matches yet.")
             } else if m.everything {
                 tr("Nothing found.")
             } else {
-                tr("Nothing found that runs in Rusty Minecraft. Show everything lists the rest.")
+                tr("Nothing found that runs in Rusty MC. Show everything lists the rest.")
             };
             return centered(line, &t);
         }

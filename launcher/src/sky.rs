@@ -192,8 +192,8 @@ const STAR_LEVELS: [f32; 4] = [0.95, 0.6, 0.3, 0.6];
 const STAR_PERIODS: [f32; 4] = [4., 6., 8., 10.];
 
 /// How the sky moves: not at all under the system's reduced motion (macOS) or with
-/// `HORIZON_LAUNCHER_MOTION=off`; while the window is in front (and 10 s after); or always, with
-/// `HORIZON_LAUNCHER_MOTION=always`, for recordings.
+/// `RUSTY_MC_LAUNCHER_MOTION=off`; while the window is in front (and 10 s after); or always, with
+/// `RUSTY_MC_LAUNCHER_MOTION=always`, for recordings.
 #[derive(Clone, Copy, PartialEq)]
 enum Motion {
     Still,
@@ -203,7 +203,7 @@ enum Motion {
 
 fn motion() -> Motion {
     static MOTION: LazyLock<Motion> = LazyLock::new(|| {
-        match std::env::var("HORIZON_LAUNCHER_MOTION").as_deref() {
+        match std::env::var("RUSTY_MC_LAUNCHER_MOTION").as_deref() {
             Ok("off" | "reduced") => return Motion::Still,
             Ok("always") => return Motion::Always,
             Ok("full") => return Motion::InFront,

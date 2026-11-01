@@ -1,8 +1,8 @@
 //! Export… on Home's Instance row: the selected instance as a `.mrpack` or a `.zip`, with the
 //! worlds the player switches on, written to the launcher's `exports/` folder
-//! (`horizon_launcher::export`).
+//! (`rusty_mc_launcher::export`).
 use super::*;
-use horizon_launcher::export::{self, Format};
+use rusty_mc_launcher::export::{self, Format};
 use std::path::PathBuf;
 
 pub(super) struct ExportPanel {
@@ -24,7 +24,7 @@ impl Launcher {
         let Some(i) = self.selected_instance() else {
             return;
         };
-        let worlds = horizon_launcher::worlds::list(&i.home)
+        let worlds = rusty_mc_launcher::worlds::list(&i.home)
             .into_iter()
             .map(|w| (w.folder, w.name, false))
             .collect();
@@ -194,7 +194,7 @@ impl Launcher {
                 .child(caps("Worlds").text_color(t.muted))
                 .child(worlds)
                 .child(text(theme::CAPTION).text_color(t.muted).child(
-                    "Settings, packs and Rusty Minecraft mods go in; logs, screenshots, backups and \
+                    "Settings, packs and Rusty MC mods go in; logs, screenshots, backups and \
                          your account never do. Worlds go without their per-player files.",
                 ))
                 .child(

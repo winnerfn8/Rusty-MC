@@ -1,10 +1,10 @@
 //! The Servers page's "Friends over the internet" panel: Tailscale on this computer, the address friends
 //! type, inviting a friend to this one computer, and keeping shared friends to the server's port
-//! (`horizon_launcher::tailscale`). Signing in is always the player's, in Tailscale's own app or page;
+//! (`rusty_mc_launcher::tailscale`). Signing in is always the player's, in Tailscale's own app or page;
 //! the launcher reads `tailscale status` and, with the player's own access token, calls the API.
 use super::servers_page::Field;
 use super::*;
-use horizon_launcher::tailscale::{self, Api, Invite, Reach, State};
+use rusty_mc_launcher::tailscale::{self, Api, Invite, Reach, State};
 use serde_json::Value;
 
 /// How often Tailscale's state is read while the panel shows.
@@ -345,7 +345,7 @@ impl Launcher {
                 panel = panel
                     .child(text(theme::UI).text_color(t.ink).child(
                         "Tailscale is installed. Sign in with your own account in Tailscale \
-                         (Rusty Minecraft never sees it), then come back here.",
+                         (Rusty MC never sees it), then come back here.",
                     ))
                     .when(cfg!(target_os = "linux"), |d| {
                         d.child(line(format!(
@@ -404,7 +404,7 @@ impl Launcher {
                 .child(self.invite_section(&ip, port, cx)),
         );
         panel = panel.child(line(
-            "Rusty Minecraft never turns on Funnel: the server isn't put on the public internet, only \
+            "Rusty MC never turns on Funnel: the server isn't put on the public internet, only \
              shared with the people you invite."
                 .into(),
         ));
@@ -673,7 +673,7 @@ impl Launcher {
                     let snippet = tailscale::snippet(ip, port);
                     safety = safety
                         .child(text(theme::UI).text_color(t.ink).child(
-                            "Your access controls are your own, so Rusty Minecraft leaves them alone. To \
+                            "Your access controls are your own, so Rusty MC leaves them alone. To \
                              keep shared friends to Minecraft, add this rule in the admin console:",
                         ))
                         .child(

@@ -1,22 +1,106 @@
-MIT License
+Rusty Minecraft License, version 1.0
 
-Copyright (c) 2026 Ludovic Marie and the Horizon contributors
-Copyright (c) 2026 the Rusty Minecraft contributors
+Copyright (c) 2026 the Rusty Minecraft contributors. All rights reserved, except as granted below.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This is a source-available license. It is not an open-source license.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. WHAT THIS LICENSE COVERS
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+This license covers Rusty Minecraft's own work: every file, line, asset and document in this
+repository that is not listed in 1(a) or 1(b). Call that "Rusty Minecraft".
+
+(a) Horizon. Rusty Minecraft is a fork of Horizon (https://github.com/horizon-rust/horizon) by
+    Ludovic Marie and the Horizon contributors. What comes from Horizon stays under the MIT License
+    in LICENSE-HORIZON-MIT, and this license does not take that away. Where one file mixes
+    Horizon's work with Rusty Minecraft's, MIT covers Horizon's part and this license covers the rest.
+
+(b) Third-party components. Anything that came from someone else keeps its own license, as
+    THIRD_PARTY_NOTICES.md and the license files and headers next to it say (wgpu-hal, fonts, icons,
+    shaders ported from other projects, dependencies and so on).
+
+2. WHAT YOU MAY DO
+
+You may do anything with Rusty Minecraft, free of charge, except what section 3 forbids. In
+particular, you may:
+
+(a) run it, for any purpose, including commercial use, servers and events;
+(b) read, study, copy and modify it, for yourself;
+(c) build it from source and use the result;
+(d) share it privately: give copies, modified or not, to people you choose one by one or in a closed
+    group (friends, a team, a clan, a school, a company), as long as each recipient gets this license
+    with it and is bound by it, and you do not make it available to the general public;
+(e) make and publish things made with or for Rusty Minecraft, which are yours: content mods, native
+    mods, data packs, resource packs, shader packs, modpacks that do not contain Rusty Minecraft
+    itself, worlds, maps, servers, tools that talk to it, screenshots, videos, streams, reviews,
+    guides and articles;
+(f) link to the official repository and describe or show the project in public;
+(g) send your changes to the official repository (section 5).
+
+3. THE ONE RESTRICTION: NO PUBLIC REDISTRIBUTION
+
+You may not publicly distribute or publicly make available Rusty Minecraft, in any form:
+
+(a) not as Rusty Minecraft itself, whether unmodified or modified, as source, as a build or as a
+    package;
+(b) not as a fork, port, rebuild, mirror, repackaging, renamed copy or other derivative of it,
+    including a copy with a few changes, a different name or a different launcher;
+(c) not a substantial part of it (a crate, a module, the launcher, the game's source tree or its
+    assets), apart from short excerpts for discussion, review or teaching.
+
+"Publicly" means to the general public or to an open-ended audience: a public repository or public
+fork on any code host, a public release or download page, a mod-hosting or file-sharing site, a
+package registry, a torrent, a public file link, an app store, a public chat or forum attachment, or a
+product you sell or give away to anyone who asks. Sharing under section 2(d) is not public.
+
+Not being able to host it publicly does not stop you from selling or giving away what you make with
+it under section 2(e).
+
+The copyright holders can publish Rusty Minecraft however they like. This section binds everyone
+else.
+
+4. KEEP THE NOTICES
+
+Every copy you make under section 2(d) must keep this license, LICENSE-HORIZON-MIT,
+THIRD_PARTY_NOTICES.md and all copyright and license notices in the files.
+
+5. CONTRIBUTIONS
+
+If you submit a change to the official repository (a pull request, a patch or an issue with code),
+you promise it is yours to give, or that its license allows it (see CONTRIBUTING.md), and you license
+it under this license. You also grant the Rusty Minecraft maintainers a perpetual, worldwide,
+royalty-free right to publish it and distribute it publicly as part of the official project, under
+this license or a later one.
+
+To prepare a contribution you may keep a fork on a code host that exists only to propose changes to
+the official repository. Delete it, or make it private, once the change is merged or abandoned. It
+may not be presented or offered as a version of the project of its own.
+
+6. TERMINATION
+
+If you break section 3, your rights under this license end. They come back if you stop and take down
+every public copy within 30 days of being told, unless you broke section 3 on purpose or did it
+before. Copies you shared privately under section 2(d) stay licensed to their recipients, as long as
+they follow this license.
+
+7. MINECRAFT
+
+Rusty Minecraft contains no Minecraft code, assets or data, and this license grants no right to any.
+Minecraft is a trademark of Mojang Synergies AB. Its code and assets belong to Mojang and Microsoft
+and are covered by the Minecraft EULA. You need your own legally obtained copy of Minecraft: Java
+Edition. Rusty Minecraft is not an official Minecraft product and is not approved by or associated
+with Mojang or Microsoft. This license grants no right to the names or logos of Minecraft, Horizon or
+any third party.
+
+8. NO WARRANTY, LIMITED LIABILITY
+
+RUSTY MINECRAFT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH RUSTY MINECRAFT OR THE USE OR OTHER DEALINGS IN IT.
+
+9. THE REST
+
+If a part of this license is unenforceable where you live, the rest still applies. Anything not
+granted here is reserved. Versions of Rusty Minecraft that were already released under the MIT
+License stay under it for the people who received them.

@@ -155,7 +155,7 @@ HORIZON_SHARED_SOURCE=$source
 HORIZON_NO_AUDIO=1
 HORIZON_NO_HEARTBEAT=1
 HORIZON_TELEMETRY_URL=off
-HORIZON_LAUNCHER_NO_SELF_UPDATE=1
+RUSTY_MC_LAUNCHER_NO_SELF_UPDATE=1
 EOF
     [ -n "$platform_env" ] && echo "$platform_env"
     command -v vscreen > /dev/null && echo "VSCREEN=ci-horizon"

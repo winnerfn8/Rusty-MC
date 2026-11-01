@@ -51,7 +51,7 @@ def run(bin_dir, resources, in_frame):
     with tempfile.TemporaryDirectory(prefix='hz-end-gateway-') as scratch:
         work = Path(scratch)
         env = lab.game_env({k: v for k, v in os.environ.items() if k not in (
-            'HORIZON_HOME', 'HORIZON_LAUNCHER_HOME', 'XDG_DATA_HOME', 'XDG_CONFIG_HOME')})
+            'HORIZON_HOME', 'RUSTY_MC_LAUNCHER_HOME', 'XDG_DATA_HOME', 'XDG_CONFIG_HOME')})
         home = Path(env['HORIZON_HOME'])
         socket = work / 'game.sock'
         cli = Cli(bin_dir / 'horizon-ctl', socket, home, env)

@@ -79,11 +79,11 @@ def game_env(base=None, **extra):
     env = dict(os.environ if base is None else base)
     env.update({key: str(value) for key, value in extra.items()})
     env["HORIZON_NO_AUDIO"] = "1"
-    env["HORIZON_LAUNCHER_NO_SELF_UPDATE"] = "1"
+    env["RUSTY_MC_LAUNCHER_NO_SELF_UPDATE"] = "1"
     # Never a real Discord's Rich Presence; tools/discord_presence_e2e.py points the game at a fake one.
     if not env.get("HORIZON_DISCORD_IPC_DIR"):
         env["HORIZON_NO_DISCORD"] = "1"
-    for key, prefix in (("HORIZON_HOME", "horizon-home-"), ("HORIZON_LAUNCHER_HOME", "horizon-launcher-home-"),
+    for key, prefix in (("HORIZON_HOME", "horizon-home-"), ("RUSTY_MC_LAUNCHER_HOME", "rusty-mc-launcher-home-"),
                         ("XDG_DATA_HOME", "horizon-xdg-data-"), ("XDG_CONFIG_HOME", "horizon-xdg-config-")):
         if not env.get(key):
             env[key] = _scratch_dir(prefix)

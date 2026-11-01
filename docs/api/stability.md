@@ -95,7 +95,7 @@ Deprecations and breaking changes are in bold. The release notes of the game rel
 | The game's own control-socket commands outside `horizon-ctl`'s table (test hooks) | experimental | |
 | `horizon-server` commands, `server.toml` | stable | `horizon-server --version` |
 | Server control API | stable | `/api/v1` |
-| `horizon-launcher` commands and MCP tools | preview | none yet (unversioned) |
+| `rusty-mc-launcher` commands and MCP tools | preview | none yet (unversioned) |
 | Launch API: `horizon-client`'s launch options, session JSON, exit codes | experimental | 0.1.0, `horizon-client --launch-api` |
 | Benchmark report | stable | `"version": 1` |
 | Telemetry batch and consent | stable | `"schema": 1`, consent `2` |

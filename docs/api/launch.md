@@ -1,7 +1,7 @@
 # Launch API
 
 What another launcher (Prism Launcher, MultiMC, ATLauncher, Modrinth App, HMCL or your own) needs to start Rusty Minecraft:
-the options `horizon-client` takes, how it hands over an account, and how it ends. `horizon-launcher` is the
+the options `horizon-client` takes, how it hands over an account, and how it ends. `rusty-mc-launcher` is the
 reference implementation. Proposed in horizon-rust/horizon#3545.
 
 ## Overview
@@ -17,7 +17,7 @@ reference implementation. Proposed in horizon-rust/horizon#3545.
 
 1. Start Rusty Minecraft only for a player signed in with a Microsoft account that owns Minecraft: Java Edition, and
    hand over that account's session (`--session-stdin`, or `--session-file`), never on the command line. This
-   is the same owner gate `horizon-launcher` applies before every start. Rusty Minecraft never downloads Mojang's
+   is the same owner gate `rusty-mc-launcher` applies before every start. Rusty Minecraft never downloads Mojang's
    files; a launcher that does downloads them only for that owner.
 2. Ask the build what it takes: `horizon-client --launch-api` prints JSON with `launch_api` (the version) and
    `options`. Pass only options it lists: any other is refused with exit code 2.

@@ -23,7 +23,7 @@ statuses against what vanilla's client sends (ServerPackManager):
   python3 tools/server_pack_e2e.py                                   # vanilla's server
   python3 tools/server_pack_e2e.py --horizon-server target/release/horizon-client
 
-Every game and server here runs in fresh temporary folders (HORIZON_HOME, HORIZON_LAUNCHER_HOME, XDG_*), with no
+Every game and server here runs in fresh temporary folders (HORIZON_HOME, RUSTY_MC_LAUNCHER_HOME, XDG_*), with no
 audio and no self-update. Needs .local (the vanilla jars and prepared resources) and a built horizon-client and
 horizon-ctl (--bin DIR, default target/fast).
 """
@@ -206,7 +206,7 @@ class Game:
         self.home = work / 'home'
         for d in ('home', 'launcher', 'data', 'config'):
             (work / d).mkdir(parents=True)
-        self.env = lab.game_env(HORIZON_HOME=self.home, HORIZON_LAUNCHER_HOME=work / 'launcher',
+        self.env = lab.game_env(HORIZON_HOME=self.home, RUSTY_MC_LAUNCHER_HOME=work / 'launcher',
                                 XDG_DATA_HOME=work / 'data', XDG_CONFIG_HOME=work / 'config', HORIZON_TELEMETRY_URL='off')
         self.base = [str(bins / 'horizon-ctl'), '--socket', str(work / 'c.sock')]
         self.log = work / 'c.log'
@@ -338,7 +338,7 @@ class Run:
         work = Path(tempfile.mkdtemp(prefix='hz-server-packs-'))
         print(f'scratch: {work}')
         # The servers too get scratch homes (the game sets its own below).
-        for var, sub in (('HORIZON_HOME', 'home'), ('HORIZON_LAUNCHER_HOME', 'launcher'), ('XDG_DATA_HOME', 'data'),
+        for var, sub in (('HORIZON_HOME', 'home'), ('RUSTY_MC_LAUNCHER_HOME', 'launcher'), ('XDG_DATA_HOME', 'data'),
                          ('XDG_CONFIG_HOME', 'config')):
             (work / 'servers' / sub).mkdir(parents=True)
             os.environ[var] = str(work / 'servers' / sub)

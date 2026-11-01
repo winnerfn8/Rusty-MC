@@ -358,7 +358,7 @@ fn fetch_file(fetch: Fetch, file: &File) -> Result<Vec<u8>, String> {
     match sha1_hex(&body) {
         actual if actual == file.sha1 => Ok(body),
         actual => Err(format!(
-            "is not the one Rusty Minecraft pins (sha1 {actual})"
+            "is not the one Rusty MC pins (sha1 {actual})"
         )),
     }
 }
