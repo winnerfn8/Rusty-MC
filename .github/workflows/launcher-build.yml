@@ -1,0 +1,52 @@
+name: launcher build
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    name: build ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: windows
+            os: windows-latest
+            asset: rusty-mc-launcher-windows-x64.zip
+            binary: rusty-mc-launcher.exe
+            rustflags: -C target-feature=+crt-static   # no VCRUNTIME140.dll needed
+          - name: macos
+            os: macos-latest
+            asset: rusty-mc-launcher-macos-arm64.zip
+            binary: rusty-mc-launcher
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    env:
+      RUSTFLAGS: ${{ matrix.rustflags }}
+      HORIZON_MSA_CLIENT_ID: ${{ vars.HORIZON_MSA_CLIENT_ID }}   # optional, see below
+    defaults:
+      run:
+        working-directory: launcher
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: false }
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: launcher }
+      - name: Metal shaders (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          xcrun metal --version >/dev/null 2>&1 || xcodebuild -downloadComponent MetalToolchain || true
+          xcrun metal --version >/dev/null 2>&1 || echo "LAUNCHER_FEATURES=gpui/runtime_shaders" >> "$GITHUB_ENV"
+      - run: cargo build --release --locked ${LAUNCHER_FEATURES:+--features "$LAUNCHER_FEATURES"}
+      - run: target/release/${{ matrix.binary }} --version
+      - name: Package
+        run: |
+          mkdir -p dist out && cp target/release/${{ matrix.binary }} dist/ && cd dist
+          if [[ "$RUNNER_OS" == Windows ]]; then 7z a ../out/${{ matrix.asset }} ${{ matrix.binary }}
+          else zip ../out/${{ matrix.asset }} ${{ matrix.binary }}; fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset }}
+          path: launcher/out/*
